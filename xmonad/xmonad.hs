@@ -15,8 +15,8 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , modMask = mod4Mask     -- Rebind Mod to the Windows key
-        , terminal = "sakura"
+        , modMask = mod1Mask     -- mod4=winkey mod3=ralt mod1=alt
+        , terminal = "konsole"   -- "sakura"
         , normalBorderColor  = "#333333"
         , focusedBorderColor = "#cd8b00"
         } `additionalKeys`

@@ -4,28 +4,39 @@
 call plug#begin('/home/shovel/.config/nvim/plugged')
 
 Plug 'scrooloose/syntastic'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'scrooloose/nerdcommenter'
 Plug 'kien/ctrlp.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'scrooloose/nerdcommenter'
+Plug 'editorconfig/editorconfig-vim'
+
+" pligins I don't use
+" Plug 'terryma/vim-expand-region'
+" Plug 'scrooloose/nerdtree'
+" Plug 'Valloric/YouCompleteMe'
 
 " languages
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'carlitux/deoplete-ternjs'
 Plug 'pangloss/vim-javascript'
+Plug 'ternjs/tern_for_vim' " needs 'npm i' inside of the cloned repo
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'leafgarland/typescript-vim'
 Plug 'dag/vim-fish'
+Plug 'gutenye/json5.vim'
+Plug 'mattn/emmet-vim'
 
 " colors
 Plug 'joshdick/onedark.vim'
 Plug 'sjl/badwolf'
+" other nice colorschemes: obsidian tomorrow-night-bright monokai
 
-" Plug 'terryma/vim-expand-region'
-" Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " generol
@@ -40,6 +51,7 @@ syntax on
 colorscheme onedark
 
 " colors for nunjucks
+au BufRead,BufNewFile *.njk setfiletype jinja
 au BufRead,BufNewFile *.nj setfiletype jinja
 
 " keys
@@ -48,8 +60,9 @@ nnoremap <c-s> :w<Return>
 nnoremap <F2> :w<Return>
 nnoremap <Leader>q :copen<Return>
 nnoremap <Leader>Q :cclose<Return>
+nnoremap <Leader>d :TernDef<Return>
 
-" syntactic
+" syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -60,8 +73,17 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " js style
-let g:syntastic_javascript_checkers = ['standard'] " requires npm -g i standard
-" TODO make it exclusively for a project
+let g:syntastic_javascript_eslint_exec = 'eslint'
+let g:syntastic_javascript_flow_exe = 'flow'
+let g:syntastic_javascript_checkers = ['eslint', 'flow'] " requires them to be installed
+
+
+" other plugins
+let g:deoplete#enable_at_startup = 1
+let NERDSpaceDelims=1
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+
 set smartindent
 set expandtab
 set softtabstop=2
