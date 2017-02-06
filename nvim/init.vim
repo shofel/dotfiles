@@ -3,7 +3,6 @@
 " plugins
 call plug#begin('/home/shovel/.config/nvim/plugged')
 
-Plug 'scrooloose/syntastic'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -13,24 +12,29 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'scrooloose/nerdcommenter'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'dag/vim-fish'
 
-" pligins I don't use
-" Plug 'terryma/vim-expand-region'
-" Plug 'scrooloose/nerdtree'
-" Plug 'Valloric/YouCompleteMe'
+" trying right now
+Plug 'tommcdo/vim-exchange'
 
-" languages
+" javascript
 " Plug 'Shougo/deoplete.nvim'
 " Plug 'carlitux/deoplete-ternjs'
-Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim' " needs 'npm i' inside of the cloned repo
-Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'dag/vim-fish'
 Plug 'gutenye/json5.vim'
+
+" html and templates
+Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
+
+" Clojure
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-sexp'
 
 " colors
 Plug 'joshdick/onedark.vim'
@@ -39,14 +43,16 @@ Plug 'sjl/badwolf'
 
 call plug#end()
 
-" generol
-set number
+" general
+set number " see also vim-numbertoggle plugin
 set hidden
+set list
 set nobackup
 set noswapfile
 
 " colors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0 " block cursor always
 syntax on
 colorscheme onedark
 
@@ -56,8 +62,19 @@ au BufRead,BufNewFile *.nj setfiletype jinja
 
 " keys
 let mapleader="\<SPACE>"
+" esc
+inoremap <Leader>' <Esc>
+vnoremap <Leader>' <Esc>
+inoremap <Esc> <nop>
+vnoremap <Esc> <nop>
+" ctrl-s
 nnoremap <c-s> :w<Return>
-nnoremap <F2> :w<Return>
+nnoremap <Leader>s :w<Return>
+inoremap <c-s> <c-o>:w<Return>
+" edit .vimrc
+nnoremap <Leader>ev :e $MYVIMRC<Return>
+nnoremap <Leader>sv :source $MYVIMRC<Return>
+" quickfix window
 nnoremap <Leader>q :copen<Return>
 nnoremap <Leader>Q :cclose<Return>
 nnoremap <Leader>d :TernDef<Return>
@@ -74,8 +91,12 @@ let g:syntastic_check_on_wq = 0
 
 " js style
 let g:syntastic_javascript_eslint_exec = 'eslint'
-let g:syntastic_javascript_flow_exe = 'flow'
+let g:syntastic_javascript_flow_exec = 'flow'
 let g:syntastic_javascript_checkers = ['eslint', 'flow'] " requires them to be installed
+
+" js syntax
+" let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
 
 
 " other plugins
@@ -89,10 +110,12 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 
-" search
+" search and replace
 set ignorecase
 set smartcase
+set nohlsearch
 set incsearch
+set inccommand=nosplit
 
 " The Silver Searcher
 " @see https://robots.thoughtbot.com/faster-grepping-in-vim
