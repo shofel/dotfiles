@@ -1,0 +1,3 @@
+- .xsessionrc fails when some packages are not installed
+- neovim fails for sure due to no package manager
+- git glabal config file
