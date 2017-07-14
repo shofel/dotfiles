@@ -1,7 +1,7 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
 " plugins {{{
-call plug#begin('/home/shovel/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
@@ -35,7 +35,8 @@ Plug 'mattn/emmet-vim'
 
 " Clojure
 Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-sexp'
+Plug 'bhurlow/vim-parinfer'
+" Plug 'guns/vim-sexp'
 
 " colors
 Plug 'joshdick/onedark.vim'
@@ -71,6 +72,7 @@ augroup initvim
   autocmd BufWritePre * StripWhitespace
   autocmd BufRead,BufNewFile *.njk setfiletype jinja
   autocmd BufRead,BufNewFile *.nj setfiletype jinja
+  autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
 augroup END
 " }}}
 
