@@ -1,0 +1,32 @@
+;; vim: set ft=lisp:
+
+;; TODO: unbind all the keys first
+
+(in-package :stumpwm)
+
+(set-prefix-key (kbd "C-SPC"))
+
+(setf *message-window-gravity* :center)
+(setf *input-window-gravity* :center)
+
+;; Don't focus with mouse to encourage more keyboard usage.
+(setf *mouse-focus-policy* :ignore) ; :ignore :sloppy :click
+
+;; Define the volume control and mute keys.
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec pactl set-sink-volume 0 -5%")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pactl set-sink-volume 0 +5%")
+(define-key *top-map* (kbd "XF86AudioMute") "exec pactl set-sink-mute 0 toggle")
+
+;; Create groups.
+(run-commands "grename browse"
+              "gnewbg hack"
+              "gnewbg 3"
+              "gnewbg 4"
+              "gnewbg chat")
+
+;; Here be the rules for windows placement.
+;; Hint: use 'show-window-properties' command while debugging this.
+
+;; Run the apps.
+;; Turned off while debugging the config.
+;; (run-commands "exec firefox")

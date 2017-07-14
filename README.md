@@ -12,7 +12,7 @@ sudo apt update
 sudo apt install \
   xclip git \
   qterminal firacode fish neovim \
-  xmonad xmobar stalonetray # TODO: change to StumpWM
+  stumpwm
 ```
 
 Set default terminal
@@ -24,4 +24,5 @@ Symlink the dotfiles
 ``` sh
 # TODO: add the rest of them
 ln -sf $PWD/qterminal.org/qterminal.ini ~/.config/qterminal.org/qterminal.ini
+ln -sf $PWD/stumpwm/config ~/.config/stumpwm/config
 ```
