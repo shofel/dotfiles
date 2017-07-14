@@ -10,11 +10,18 @@ Install packages
 ``` sh
 sudo apt update
 sudo apt install \
-  xclip git fish qterminal neovim \
-  xmonad xmobar stalonetray
+  xclip git \
+  qterminal firacode fish neovim \
+  xmonad xmobar stalonetray # TODO: change to StumpWM
 ```
 
 Set default terminal
 ```
 sudo update-alternatives --set x-terminal-emulator /usr/bin/qterminal
+```
+
+Symlink the dotfiles
+``` sh
+# TODO: add the rest of them
+ln -sf $PWD/qterminal.org/qterminal.ini ~/.config/qterminal.org/qterminal.ini
 ```
