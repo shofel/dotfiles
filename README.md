@@ -10,6 +10,11 @@ Install packages
 ``` sh
 sudo apt update
 sudo apt install \
-  xclip git fish konsole neovim \
+  xclip git fish qterminal neovim \
   xmonad xmobar stalonetray
+```
+
+Set default terminal
+```
+sudo update-alternatives --set x-terminal-emulator /usr/bin/qterminal
 ```
