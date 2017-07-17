@@ -1,3 +1,4 @@
+# Defined in - @ line 2
 function brightness
-	echo $argv | sudo tee /sys/class/backlight/radeon_bl0/brightness
+	echo $argv | sudo tee /sys/class/backlight/*/brightness
 end
