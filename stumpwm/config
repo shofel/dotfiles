@@ -17,6 +17,11 @@
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pactl set-sink-volume 0 +5%")
 (define-key *top-map* (kbd "XF86AudioMute") "exec pactl set-sink-mute 0 toggle")
 
+;; Set keyboard options and switch layouts
+;; FIX this takes effet only after ':loadrc'
+(run-shell-command "setxkbmap -option ctrl:nocaps")
+(run-shell-command "setxkbmap us -variant dvorak")
+
 ;; Create groups.
 (run-commands "grename browse"
               "gnewbg hack"
