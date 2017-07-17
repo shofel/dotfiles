@@ -33,10 +33,10 @@ Plug 'gutenye/json5.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
 
-" Clojure
+" Clojure and Lisps
 Plug 'guns/vim-clojure-static'
 Plug 'bhurlow/vim-parinfer'
-" Plug 'guns/vim-sexp'
+Plug 'tpope/vim-fireplace'
 
 " colors
 Plug 'joshdick/onedark.vim'
@@ -73,6 +73,7 @@ augroup initvim
   autocmd BufRead,BufNewFile *.njk setfiletype jinja
   autocmd BufRead,BufNewFile *.nj setfiletype jinja
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
+  autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
 augroup END
 " }}}
 
