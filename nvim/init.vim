@@ -1,5 +1,4 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
-
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -7,6 +6,7 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 Plug 'kien/ctrlp.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'itchyny/lightline.vim'
@@ -14,15 +14,20 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
-Plug 'shofel/syntastic-local-eslint.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'dag/vim-fish'
 
+" symlinked
+" Plug 'shofel/syntastic-local-eslint.vim'
+Plug 'shofel/syntastic-local-js-checkers'
+
 " trying right now
 Plug 'tommcdo/vim-exchange'
+Plug 'janko-m/vim-test'
+Plug 'tpope/vim-dispatch'
 
 " javascript
-" Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim'
 " Plug 'carlitux/deoplete-ternjs'
 Plug 'ternjs/tern_for_vim' " needs 'npm i' inside of the cloned repo
 Plug 'pangloss/vim-javascript'
@@ -57,11 +62,18 @@ set noswapfile
 
 set smartindent
 set expandtab
+set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0 " block cursor always
+
+" russian
+set keymap=russian-dvorak
+set iminsert=0
+set imsearch=0
+highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
 " syntax and filetypes {{{
@@ -69,6 +81,7 @@ colorscheme onedark
 let g:javascript_plugin_flow = 1
 augroup initvim
   autocmd!
+  autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
   autocmd BufWritePre * StripWhitespace
   autocmd BufRead,BufNewFile *.njk setfiletype jinja
   autocmd BufRead,BufNewFile *.nj setfiletype jinja
@@ -78,6 +91,11 @@ augroup END
 " }}}
 
 " keys {{{
+" helper function to swap the option between x and y values
+fun! SwapVal (name, x, y)
+  execute 'let '.a:name.' = {'.a:x.':'.a:y.', '.a:y.':'.a:x.'}['.a:name.']'
+endfun
+
 let mapleader="\<Space>"
 " esc
 " inoremap <Leader>' <Esc>
@@ -93,6 +111,11 @@ nnoremap <Leader>sv :source $MYVIMRC<Return>
 nnoremap <Leader>q :copen<Return>
 nnoremap <Leader>Q :cclose<Return>
 nnoremap <Leader>d :TernDef<Return>
+" open buffer
+nnoremap <Leader>b :b<Space>
+" folding
+nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
+
 " }}}
 
 " syntastic {{{
@@ -100,19 +123,21 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_javascript_flow_exec = 'flow' " eslint_exec: see shofel/syntastic-local-eslint.vim
-let g:syntastic_javascript_checkers = ['eslint', 'flow'] " requires them to be installed
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_local_javascript_checkers_politeness = 1
 " }}}
 
 " various plugins {{{
 let g:deoplete#enable_at_startup = 1
 let NERDSpaceDelims=1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let test#strategy = "dispatch"
 " }}}
 
 " search and replace {{{
@@ -136,3 +161,4 @@ if executable('ag')
 endif
 " }}}
 
+" vim: set fdm=marker :
