@@ -32,6 +32,8 @@ abbr gclean 'git clean -fd'
 abbr ghash 'git rev-parse --short HEAD'
 abbr ginit 'git init ;and git commit -m "root" --allow-empty'
 abbr gcd 'cd (git rev-parse --show-toplevel)'
+abbr ggone "git branch -vv | grep ': gone]' | cut -d ' ' -f 3"
+abbr ggoneD "git branch -vv | grep ': gone]' | cut -d ' ' -f 3 | xargs git branch -D"
 
 # keyboard
 abbr dvorak 'setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle'
