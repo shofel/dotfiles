@@ -1,11 +1,15 @@
 ``` sh
 ## Add PPAs
 
-for x in 'ppa:fish-shell/release-2' 'ppa:neovim-ppa/unstable'
-do
-  sudo add-apt-repository -y $x;
-done
+for x in 'ppa:fish-shell/release-2' 'ppa:neovim-ppa/unstable' 'ppa:atareao/telegram'
+  do sudo add-apt-repository -y $x; done
 
+
+## Add google-chrome repo
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
+  | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 ## Install packages
 
@@ -13,28 +17,18 @@ sudo apt update
 sudo apt install -y \
   xclip git \
   sakura fonts-firacode fish neovim \
-  stumpwm
-
+  stumpwm \
+  telegram google-chrome-stable
 
 ## Set default terminal
 
 sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
 
 
-## Install Telegram
+## Set default shell
 
-sudo add-apt-repository ppa:atareao/telegram -y
-sudo apt-get update
-sudo apt-get install telegram -y
-
-
-## Install google-chrome
-
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
-  | sudo tee /etc/apt/sources.list.d/google-chrome.list
-sudo apt-get update 
-sudo apt-get install google-chrome-stable
+echo 'Setting default shell to "/usr/bin/fish"'
+chsh -s /usr/bin/fish
 
 ```
 
