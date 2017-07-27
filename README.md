@@ -11,7 +11,7 @@ Install packages
 sudo apt update
 sudo apt install \
   xclip git \
-  qterminal firacode fish neovim \
+  qterminal fonts-firacode fish neovim \
   stumpwm
 ```
 
