@@ -1,23 +1,41 @@
-Add PPAs
 ``` sh
+## Add PPAs
+
 for x in 'ppa:fish-shell/release-2' 'ppa:neovim-ppa/unstable'
 do
   sudo add-apt-repository -y $x;
 done
-```
 
-Install packages
-``` sh
+
+## Install packages
+
 sudo apt update
-sudo apt install \
+sudo apt install -y \
   xclip git \
-  qterminal fonts-firacode fish neovim \
+  sakura fonts-firacode fish neovim \
   stumpwm
-```
 
-Set default terminal
-```
-sudo update-alternatives --set x-terminal-emulator /usr/bin/qterminal
+
+## Set default terminal
+
+sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
+
+
+## Install Telegram
+
+sudo add-apt-repository ppa:atareao/telegram -y
+sudo apt-get update
+sudo apt-get install telegram -y
+
+
+## Install google-chrome
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
+  | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt-get update 
+sudo apt-get install google-chrome-stable
+
 ```
 
 Symlink the dotfiles
@@ -26,9 +44,6 @@ Symlink the dotfiles
 ln -sf $PWD/qterminal.org/qterminal.ini ~/.config/qterminal.org/qterminal.ini
 ln -sf $PWD/stumpwm/config ~/.config/stumpwm/config
 ```
-
-Telegram
-https://telegram.org/dl/desktop/linux
 
 Link the dotfiles
 (from the directory of this repo)
