@@ -1,33 +1,28 @@
 #!/bin/bash
 
-# Load resources
+# Load resources.
 xrdb -merge .Xresources
 
-# Manage monitors
-(if [ "$(xrandr | grep 'HDMI-0 connected')" ]; then
-  xrandr --output eDP --off --output HDMI-0 --auto
-fi) &
+# Init lang switcher.
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+fcitx
 
-# background and screensaver
+# background and screensaver.
 xscreensaver -no-splash &
 ./.fehbg &
 
-# User apps
+# User apps.
 google-chrome &
-Telegram &
+/opt/telegram/Telegram &
 
-# ssh-agent
+# ssh-agent.
 eval $(ssh-agent -s)
 ssh-add < /dev/null &
 
-# keyboard and mouse
-setxkbmap -model pc104 -layout us,ru -option grp:alt_shift_toggle
+# keyboard and mouse.
+setxkbmap -option ctrl:nocaps
 xset m 1 0
 
-# network manager applet
-([ -x /usr/bin/nm-applet ] && nm-applet --sm-disable) &
-
-# waiting for slack and start the tray
-(sleep 30 && stalonetray) &
-
-exec xmonad
+exec stumpwm
