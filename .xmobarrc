@@ -1,8 +1,0 @@
-Config { font = "xft:Bitstream Vera Sans Mono:size=8:*:antialias=true"
-       , bgColor = "black"
-       , fgColor = "grey"
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 16 }
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = "%StdinReader% }{ %date%"
-       }
