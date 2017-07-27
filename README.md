@@ -20,6 +20,7 @@ sudo apt install -y \
   stumpwm \
   telegram google-chrome-stable
 
+
 ## Set default terminal
 
 sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
@@ -32,28 +33,24 @@ chsh -s /usr/bin/fish
 
 ```
 
-Symlink the dotfiles
-``` sh
-# TODO: add the rest of them
-ln -sf $PWD/qterminal.org/qterminal.ini ~/.config/qterminal.org/qterminal.ini
-ln -sf $PWD/stumpwm/config ~/.config/stumpwm/config
-```
+### Fish script
+Run this fish script from the root of this repo.
 
-Link the dotfiles
-(from the directory of this repo)
-``` sh
-ln .xsessionrc ~
-mkdir ~/.xmonad
-ln xmonad/xmonad.hs ~/.xmonad/xmonad.hs
-ln .xmobarrc ~
+``` fish
+#!/usr/bin/fish
 
-mkdir ~/.config/nvim/
-ln nvim/init.vim ~/.config/nvim/
+## Symlink all we have
 
-mkdir -p ~/.config/fish/functions/
-for x in fish/functions/*
-do
-  ln $x ~/.config/fish/functions/
-done
+for x in fish nvim stumpwm
+  if test -e ~/.config/$x
+    mv ~/.config/$x{,-backup}
+  end
+  ln -s $PWD/$x ~/.config/$x
+end
 
+## Source fish abbrs
+source fish.abbr.fish
+
+TODO: xinitrc
+TODO: lang swiching
 ```
