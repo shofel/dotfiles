@@ -13,10 +13,6 @@ fcitx
 xscreensaver -no-splash &
 ./.fehbg &
 
-# User apps.
-google-chrome &
-/opt/telegram/Telegram &
-
 # ssh-agent.
 eval $(ssh-agent -s)
 ssh-add < /dev/null &
