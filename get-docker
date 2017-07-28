@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+###
+# This script is just a code from official docker site
+# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
+###
+
+echo "Install prerequisites..."
+sudo apt-get install -yq > /dev/null \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+echo "Add Docker’s official GPG key"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+echo
+echo "Fingerprint must be:"
+echo "      9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88."
+
+echo
+echo "Actual key fingerprint:"
+sudo apt-key fingerprint 0EBFCD88
+
+
+echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list
+
+echo
+echo 'apt update...'
+sudo apt-get update >/dev/null
+
+echo 'apt install docker-ce...'
+sudo apt-get install docker-ce -y >/dev/null
