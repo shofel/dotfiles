@@ -51,6 +51,10 @@ end
 ## Source fish abbrs
 source fish.abbr.fish
 
-TODO: xinitrc
+## Copy .xinitrc
+ln -s $PWD/.xinitrc ~/.xinitrc
+
+
 TODO: lang swiching
+TODO: install `Plug` for neovim
 ```
