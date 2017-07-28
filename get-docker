@@ -7,10 +7,10 @@
 
 echo "Install prerequisites..."
 sudo apt-get install -yq > /dev/null \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+       apt-transport-https \
+       ca-certificates \
+       curl \
+       software-properties-common
 
 echo "Add Docker’s official GPG key"
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -31,5 +31,20 @@ echo
 echo 'apt update...'
 sudo apt-get update >/dev/null
 
+echo
 echo 'apt install docker-ce...'
 sudo apt-get install docker-ce -y >/dev/null
+
+echo
+echo 'Install docker-compose...'
+
+DOCKER_COMPOSE_VERSION=1.15.0
+DOCKER_COMPOSE_URL="https://github.com/docker/compose/releases/download/"
+DOCKER_COMPOSE_URL+="$DOCKER_COMPOSE_VERSION/docker-compose"
+DOCKER_COMPOSE_URL+="-`uname -s`-`uname -m`"
+
+sudo curl --progress-bar -L \
+          $DOCKER_COMPOSE_URL \
+          --output /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
