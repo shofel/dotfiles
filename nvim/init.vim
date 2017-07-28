@@ -18,7 +18,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'dag/vim-fish'
 
 " symlinked
-" Plug 'shofel/syntastic-local-eslint.vim'
 Plug 'shofel/syntastic-local-js-checkers'
 
 " trying right now
@@ -27,9 +26,9 @@ Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
 
 " javascript
-Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim'
 " Plug 'carlitux/deoplete-ternjs'
-Plug 'ternjs/tern_for_vim' " needs 'npm i' inside of the cloned repo
+" Plug 'ternjs/tern_for_vim' " needs 'npm i' inside of the cloned repo
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'gutenye/json5.vim'
