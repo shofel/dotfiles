@@ -54,7 +54,5 @@ source fish.abbr.fish
 ## Copy .xinitrc
 ln -s $PWD/.xinitrc ~/.xinitrc
 
-
-TODO: lang swiching
 TODO: install `Plug` for neovim
 ```
