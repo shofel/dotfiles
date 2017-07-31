@@ -17,7 +17,7 @@ sudo apt update
 sudo apt install -y \
   xclip git \
   sakura fonts-firacode fish \
-  neovim python3-neovim \
+  neovim python3-neovim silversearcher-ag \
   stumpwm \
   ssh-askpass-fullscreen \
   telegram google-chrome-stable
@@ -55,6 +55,4 @@ source fish.abbr.fish
 
 ## Copy .xinitrc
 ln -s $PWD/.xinitrc ~/.xinitrc
-
-TODO: install `Plug` for neovim
 ```
