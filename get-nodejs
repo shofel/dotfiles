@@ -20,3 +20,14 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" \
 
 sudo apt-get update >/dev/null
 sudo apt-get install yarn -y >/dev/null
+
+
+### Workaround to install npm packages from private repos.
+
+echo "\
+Host github.com
+  User git
+
+Host gitlab.com
+  User git
+" >> ~/.ssh/config
