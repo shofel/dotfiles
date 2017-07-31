@@ -115,6 +115,9 @@ nnoremap <Leader>b :b<Space>
 " folding
 nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 
+" ctrlp meets stumpwm
+let g:ctrlp_prompt_mappings = { 'AcceptSelection("t")': ['<a-t>'] }
+
 " }}}
 
 " syntastic {{{
