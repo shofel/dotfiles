@@ -19,6 +19,7 @@ sudo apt install -y \
   sakura fonts-firacode fish \
   neovim python3-neovim \
   stumpwm \
+  ssh-askpass-fullscreen \
   telegram google-chrome-stable
 
 
