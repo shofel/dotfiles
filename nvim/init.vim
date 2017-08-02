@@ -16,14 +16,15 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
 Plug 'dag/vim-fish'
+Plug 'tommcdo/vim-exchange'
 
 " symlinked
 Plug 'shofel/syntastic-local-js-checkers'
 
 " trying right now
-Plug 'tommcdo/vim-exchange'
-Plug 'janko-m/vim-test'
+" Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
+Plug 'prendradjaja/vim-vertigo'
 
 " javascript
 " Plug 'Shougo/deoplete.nvim'
@@ -118,6 +119,14 @@ nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 " ctrlp meets stumpwm
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("t")': ['<a-t>'] }
 
+" vim-vertigo
+let g:Vertigo_homerow = 'aoeuidhtns'
+nnoremap <silent> <Leader>j :<C-U>VertigoDown n<CR>
+vnoremap <silent> <Leader>j :<C-U>VertigoDown v<CR>
+onoremap <silent> <Leader>j :<C-U>VertigoDown o<CR>
+nnoremap <silent> <Leader>k :<C-U>VertigoUp n<CR>
+vnoremap <silent> <Leader>k :<C-U>VertigoUp v<CR>
+onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 " }}}
 
 " syntastic {{{
