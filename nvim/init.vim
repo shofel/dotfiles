@@ -116,6 +116,12 @@ nnoremap <Leader>b :b<Space>
 " folding
 nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 
+" switch windows
+nnoremap <silent> <C-w><C-l> <C-w><C-l>:wincmd \|<Return>zz
+nnoremap <silent> <C-w><C-h> <C-w><C-h>:wincmd \|<Return>zz
+nnoremap <silent> <C-w><C-j> <C-w><C-j>:wincmd _<Return>zz
+nnoremap <silent> <C-w><C-k> <C-w><C-k>:wincmd _<Return>zz
+
 " ctrlp meets stumpwm
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("t")': ['<a-t>'] }
 
