@@ -7,6 +7,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
 Plug 'kien/ctrlp.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'itchyny/lightline.vim'
@@ -14,7 +15,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdcommenter'
 Plug 'dag/vim-fish'
 Plug 'tommcdo/vim-exchange'
 
@@ -82,11 +82,14 @@ let g:javascript_plugin_flow = 1
 augroup initvim
   autocmd!
   autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
+  autocmd BufRead,BufNewFile *.js let b:textwidth=80
   autocmd BufWritePre * StripWhitespace
   autocmd BufRead,BufNewFile *.njk setfiletype jinja
   autocmd BufRead,BufNewFile *.nj setfiletype jinja
+  autocmd Filetype text let b:AutoPairs = {'"(': '")'}
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
+  autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 " }}}
 
@@ -121,6 +124,9 @@ nnoremap <silent> <C-w><C-l> <C-w><C-l>:wincmd \|<Return>zz
 nnoremap <silent> <C-w><C-h> <C-w><C-h>:wincmd \|<Return>zz
 nnoremap <silent> <C-w><C-j> <C-w><C-j>:wincmd _<Return>zz
 nnoremap <silent> <C-w><C-k> <C-w><C-k>:wincmd _<Return>zz
+
+" in terminal
+" http://neovim.io/doc/user/nvim_terminal_emulator.html
 
 " ctrlp meets stumpwm
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("t")': ['<a-t>'] }

@@ -15,19 +15,38 @@
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pactl set-sink-volume 0 +5%")
 (define-key *top-map* (kbd "XF86AudioMute") "exec pactl set-sink-mute 0 toggle")
 
+
+;;; Define a set of single keys for the most frequent actions.
+
+;; Change frames.
+
+(define-key *top-map* (kbd "Left") "move-focus left")
+(define-key *top-map* (kbd "Right") "move-focus right")
+
+;; Change groups.
+
+(define-key *top-map* (kbd "C-Left") "gprev left")
+(define-key *top-map* (kbd "C-Right") "gnext right")
+
+
 ;; Switch input languages.
-(define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
+;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
 
-;; Create groups.
-(run-commands "grename browse"
-              "gnewbg hack"
-              "gnewbg 3"
-              "gnewbg 4"
-              "gnewbg chat")
+;; Restore groups and frames.
+(restore-from-file "~/.config/stumpwm/desktop")
 
-;; Here be the rules for windows placement.
-;; Hint: use 'show-window-properties' command while debugging this.
+;; Restore window placement rules.
+(restore-window-placement-rules "~/.config/stumpwm/window-placement")
 
 ;; Run the apps.
-;; Turned off while debugging the config.
-;; (run-commands "exec firefox")
+(when (not (ignore-errors *apps-started*))
+  (run-commands "exec firefox"
+                "exec google-chrome"
+                "exec google-chrome-beta"
+                "exec Telegram")
+  (defparameter *apps-started* T))
+
+;; Fix up the groups.
+(run-commands "gselect Default"
+              "gkill"
+              "gselect three")
