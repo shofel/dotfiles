@@ -1,4 +1,6 @@
 # @see https://github.com/akoenig/gulp.plugin.zsh/blob/master/gulp.plugin.zsh
+set PATH ~/.local/bin/ $PATH
+
 function gulptasks
         set -l gulpfiles (find . -maxdepth 1 -name 'gulpfile.*')
 
