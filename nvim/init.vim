@@ -100,9 +100,7 @@ fun! SwapVal (name, x, y)
 endfun
 
 let mapleader="\<Space>"
-" esc
-" inoremap <Leader>' <Esc>
-" vnoremap <Leader>' <Esc>
+
 " ctrl-s
 nnoremap <c-s> :w<Return>
 nnoremap <Leader>s :w<Return>
@@ -112,7 +110,6 @@ nnoremap <Leader>ev :e $MYVIMRC<Return>
 nnoremap <Leader>sv :source $MYVIMRC<Return>
 " quickfix window
 nnoremap <Leader>q :copen<Return>
-nnoremap <Leader>Q :cclose<Return>
 nnoremap <Leader>d :TernDef<Return>
 " open buffer
 nnoremap <Leader>b :b<Space>
@@ -127,6 +124,7 @@ nnoremap <silent> <C-w><C-k> <C-w><C-k>:wincmd _<Return>zz
 
 " in terminal
 " http://neovim.io/doc/user/nvim_terminal_emulator.html
+tnoremap <Esc> <C-\><C-n>
 
 " ctrlp meets stumpwm
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("t")': ['<a-t>'] }
