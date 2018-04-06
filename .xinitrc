@@ -18,7 +18,8 @@ eval $(ssh-agent -s)
 ssh-add < /dev/null &
 
 # keyboard and mouse.
-setxkbmap -option ctrl:nocaps
+imwheel # @see ~/.imwheelrc
 xset m 1 0
+# setxkbmap -option ctrl:nocaps
 
 exec stumpwm
