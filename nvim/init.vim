@@ -1,4 +1,9 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
+"
+" TODO unmap S from sneak to default
+" TODO grepping http://ellengummesson.com/blog/2015/08/01/dropping-ctrlp-and-other-vim-plugins/
+" TODO autoformat js code by paragraph. https://github.com/prettier/prettier-eslint
+
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -17,14 +22,16 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
 Plug 'dag/vim-fish'
 Plug 'tommcdo/vim-exchange'
+Plug 'prendradjaja/vim-vertigo'
 
 " symlinked
 Plug 'shofel/syntastic-local-js-checkers'
 
 " trying right now
 " Plug 'janko-m/vim-test'
-Plug 'tpope/vim-dispatch'
-Plug 'prendradjaja/vim-vertigo'
+" Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
+Plug 'justinmk/vim-sneak'
 
 " javascript
 " Plug 'Shougo/deoplete.nvim'
