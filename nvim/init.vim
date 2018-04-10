@@ -128,6 +128,15 @@ nnoremap <silent> <C-w><C-h> <C-w><C-h>:wincmd \|<Return>zz
 nnoremap <silent> <C-w><C-j> <C-w><C-j>:wincmd _<Return>zz
 nnoremap <silent> <C-w><C-k> <C-w><C-k>:wincmd _<Return>zz
 
+"
+nnoremap <Up> {
+nnoremap <Down> }
+
+" Mouse clipboard: yank and print.
+" TODO to work with motions etc.
+vnoremap <Leader>y "*y<Return>
+nnoremap <Leader>p "*]p<Return>
+
 " in terminal
 " http://neovim.io/doc/user/nvim_terminal_emulator.html
 tnoremap <Esc> <C-\><C-n>
