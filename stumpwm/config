@@ -23,6 +23,11 @@
 (define-key *top-map* (kbd "Left") "move-focus left")
 (define-key *top-map* (kbd "Right") "move-focus right")
 
+;; Move windows.
+
+(define-key *root-map* (kbd "Left") "move-window left")
+(define-key *root-map* (kbd "Right") "move-window right")
+
 ;; Change groups.
 
 (define-key *top-map* (kbd "C-Left") "gprev left")
