@@ -30,8 +30,8 @@ Plug 'shofel/syntastic-local-js-checkers'
 " trying right now
 " Plug 'janko-m/vim-test'
 " Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'justinmk/vim-sneak'
+" Plug 'tpope/vim-eunuch'
+" Plug 'justinmk/vim-sneak'
 
 " javascript
 " Plug 'Shougo/deoplete.nvim'
@@ -46,7 +46,6 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
 
 " Clojure and Lisps
-Plug 'guns/vim-clojure-static'
 Plug 'bhurlow/vim-parinfer'
 Plug 'tpope/vim-fireplace'
 
