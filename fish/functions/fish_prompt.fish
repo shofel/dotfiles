@@ -42,6 +42,12 @@ function fish_prompt --description 'Write out the prompt'
 		set suffix '❯'
 	end
 
+	# Indicate failed commands.
+	set -l color_status $fish_color_cwd
+	if test $last_status -ne 0
+		set color_status red --bold
+	end
+
 	# PWD
 	set_color $color_cwd
 	echo -n (prompt_pwd)
@@ -53,6 +59,7 @@ function fish_prompt --description 'Write out the prompt'
 	set_color $fish_color_error
 	end
 
+	set_color $color_status
 	echo -n "$suffix "
 
 	set_color normal
