@@ -1,10 +1,22 @@
 # vim: ts=2 sts=2 noet :
 #
-# SEE for details: https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish
+# SEE
+# __fish_git_prompt sources
+# https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish
+#
+# SEE
+# nice command composition
+# https://github.com/oh-my-fish/theme-mars/blob/master/fish_prompt.fish
+#
+# TODO current time: pale and at the right side
+# SEE https://github.com/oh-my-fish/theme-trout
+#
+# TODO command execution duration when
+#
 function fish_prompt --description 'Write out the prompt'
 
 	# TODO check if the vars are already declared
-	# @see https://github.com/fish-shell/fish-shell/blob/627ce4ea34f180745003f50c540a17cbfc5a22ba/share/tools/web_config/sample_prompts/classic_vcs.fish#L37
+	# @see https://github.com/fish-shell/fish-shell/blob/master/share/tools/web_config/sample_prompts/classic_vcs.fish#L37
 
 	set -g __fish_git_prompt_show_informative_status 1
 	set -g __fish_git_prompt_hide_untrackedfiles 1
