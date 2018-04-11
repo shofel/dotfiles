@@ -169,9 +169,10 @@ let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_local_javascript_checkers_politeness = 1
 " }}}
 
-" Signify
+" Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_realtime = 1
+" }}}
 
 " various plugins {{{
 let g:deoplete#enable_at_startup = 1
