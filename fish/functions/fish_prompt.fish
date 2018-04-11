@@ -24,42 +24,41 @@ function fish_prompt --description 'Write out the prompt'
 
 	set -g __fish_prompt_normal (set_color normal)
 
-	set -l color_cwd
-	set -l prefix
-	switch $USER
-	case root toor
-		if set -q fish_color_cwd_root
-			set color_cwd $fish_color_cwd_root
+
+	function suffix -S --description "Prompt trailer. + Indicates status."
+		# Color: error or clean.
+		set -l color
+		if test $last_status -eq 0
+			set color $fish_color_cwd
 		else
-			set color_cwd $fish_color_cwd
+			set color $fish_color_error
 		end
-		set suffix '#'
-	case '*'
-		set color_cwd $fish_color_cwd
-		set suffix '❯'
+
+		# Error code. Empty if status is 0.
+		set -l error_code
+		if test $last_status -ne 0
+			set error_code $last_status
+		end
+
+		# Print
+		echo -ns (set_color $color) $error_code '❯ '
 	end
 
-	# Indicate failed commands.
-	set -l color_status $fish_color_cwd
-	if test $last_status -ne 0
-		set color_status $fish_color_error
-	end
 
 	#
 	# Print
 	#
 
 	# PWD
-	set_color $color_cwd
+	set_color $fish_color_cwd
 	echo -n (prompt_pwd)
 	set_color normal
 
 	# Git
-	__fish_git_prompt ' %s '
+	__fish_git_prompt '  %s '
 
 	# Suffix
-	set_color $color_status
-	echo -n "$suffix "
+	suffix
 
 	set_color normal
 end
