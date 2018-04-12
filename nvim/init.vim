@@ -30,8 +30,9 @@ Plug 'shofel/syntastic-local-js-checkers'
 " trying right now
 " Plug 'janko-m/vim-test'
 " Plug 'tpope/vim-dispatch'
-" Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 " Plug 'justinmk/vim-sneak'
+Plug 'jez/vim-superman'
 
 " javascript
 " Plug 'Shougo/deoplete.nvim'
