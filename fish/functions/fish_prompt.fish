@@ -51,20 +51,8 @@ function fish_prompt --description 'Write out the prompt'
 			set error_code $last_status
 		end
 
-		set -l suffix_list  ↳ ⯈ ⇶ ⮞ ⮕ ⮩ ⮚ ⮞
-
-		# Increment or initialize the suffix number.
-		set -qg __prompt_suffix_number
-		or set -g __prompt_suffix_number 0
-
-		# Inc suffix index
-		set __prompt_suffix_number (math $__prompt_suffix_number + 1)
-
-		# Modulo
-		set __prompt_suffix_number (\
-			math 1 + $__prompt_suffix_number '%' (count $suffix_list -1))
-
-		set -l suffix_symbol $suffix_list[$__prompt_suffix_number]
+		# Other options: ⯈ ⮞ ⮚
+		set -l suffix_symbol ⮞
 
 		# Print
 		echo -ns (set_color $color) $error_code $suffix_symbol ' '
