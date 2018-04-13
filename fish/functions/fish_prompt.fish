@@ -36,7 +36,6 @@ function fish_prompt --description 'Write out the prompt'
 
 	set -g __fish_prompt_normal (set_color normal)
 
-
 	function suffix -S --description "Prompt trailer. + Indicates status."
 		# Color: error or clean.
 		set -l color
@@ -52,8 +51,23 @@ function fish_prompt --description 'Write out the prompt'
 			set error_code $last_status
 		end
 
+		set -l suffix_list  ↳ ⯈ ⇶ ⮞ ⮕ ⮩ ⮚ ⮞
+
+		# Increment or initialize the suffix number.
+		set -qg __prompt_suffix_number
+		or set -g __prompt_suffix_number 0
+
+		# Inc suffix index
+		set __prompt_suffix_number (math $__prompt_suffix_number + 1)
+
+		# Modulo
+		set __prompt_suffix_number (\
+			math 1 + $__prompt_suffix_number '%' (count $suffix_list -1))
+
+		set -l suffix_symbol $suffix_list[$__prompt_suffix_number]
+
 		# Print
-		echo -ns (set_color $color) $error_code '❯ '
+		echo -ns (set_color $color) $error_code $suffix_symbol ' '
 	end
 
 
