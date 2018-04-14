@@ -65,11 +65,11 @@ function fish_prompt --description 'Write out the prompt'
 
 	# PWD
 	set_color $fish_color_cwd
-	echo -n (prompt_pwd)
+	echo -n (prompt_pwd) ''
 	set_color normal
 
 	# Git
-	__fish_git_prompt '  %s '
+	__fish_git_prompt ' %s '
 
 	# Suffix
 	suffix
