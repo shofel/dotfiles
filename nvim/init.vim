@@ -88,8 +88,13 @@ colorscheme onedark
 let g:javascript_plugin_flow = 1
 augroup initvim
   autocmd!
+
+  " Javascript
   autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
+  autocmd BufRead,BufNewFile *.js set commentstring=/*\ %s\ **/
   autocmd BufRead,BufNewFile *.js let b:textwidth=80
+  autocmd BufRead,BufNewFile *.js let b:textwidth=80
+
   autocmd BufWritePre * StripWhitespace
   autocmd BufRead,BufNewFile *.njk setfiletype jinja
   autocmd BufRead,BufNewFile *.nj setfiletype jinja
@@ -117,21 +122,37 @@ nnoremap <Leader>ev :e $MYVIMRC<Return>
 nnoremap <Leader>sv :source $MYVIMRC<Return>
 " quickfix window
 nnoremap <Leader>q :copen<Return>
+nnoremap <Leader>Q :cclose<Return>
 nnoremap <Leader>d :TernDef<Return>
 " open buffer
 nnoremap <Leader>b :b<Space>
 " folding
 nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 
-" switch windows
-nnoremap <silent> <C-w><C-l> <C-w><C-l>:wincmd \|<Return>zz
-nnoremap <silent> <C-w><C-h> <C-w><C-h>:wincmd \|<Return>zz
-nnoremap <silent> <C-w><C-j> <C-w><C-j>:wincmd _<Return>zz
-nnoremap <silent> <C-w><C-k> <C-w><C-k>:wincmd _<Return>zz
+" windows
+
+" basic movements
+nnoremap <Leader>wl  <C-w><C-l>
+nnoremap <Leader>wh  <C-w><C-h>
+nnoremap <Leader>wj  <C-w><C-j>
+nnoremap <Leader>wk  <C-w><C-k>
+
+" some commands
+nnoremap <Leader>wt  <C-w>T
+nnoremap <Leader>wc  <C-w>c
+
+" tabs
+nnoremap <Leader>tl gt
+nnoremap <Leader>th gT
+
+" TODO git
+" TODO nnoremap <Leader>gs :Gw<Return>
 
 "
 nnoremap <Up> {
+vnoremap <Up> {
 nnoremap <Down> }
+vnoremap <Down> }
 
 " Mouse clipboard: yank and print.
 " TODO to work with motions etc.
@@ -172,7 +193,7 @@ let g:syntastic_local_javascript_checkers_politeness = 1
 
 " Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
-let g:signify_realtime = 1
+let g:signify_realtime = 0
 " }}}
 
 " various plugins {{{
