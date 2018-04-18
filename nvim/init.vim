@@ -91,7 +91,7 @@ augroup initvim
 
   " Javascript
   autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
-  autocmd BufRead,BufNewFile *.js set commentstring=/*\ %s\ **/
+  autocmd BufRead,BufNewFile *.js set commentstring=/*\ %s\ */
   autocmd BufRead,BufNewFile *.js let b:textwidth=80
   autocmd BufRead,BufNewFile *.js let b:textwidth=80
 
@@ -128,6 +128,8 @@ nnoremap <Leader>d :TernDef<Return>
 nnoremap <Leader>b :b<Space>
 " folding
 nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
+" execute command
+nnoremap <Leader>; :
 
 " windows
 
@@ -139,14 +141,16 @@ nnoremap <Leader>wk  <C-w><C-k>
 
 " some commands
 nnoremap <Leader>wt  <C-w>T
-nnoremap <Leader>wc  <C-w>c
+nnoremap <Leader>wq  <C-w>c
+nnoremap <Leader>wz  ZZ
 
 " tabs
 nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
 
 " TODO git
-" TODO nnoremap <Leader>gs :Gw<Return>
+nnoremap <Leader>gs :Gw<Return>:SignifyRefresh<Return>
+" TODO nnoremap <Leader>gco :Gco<Return>
 
 "
 nnoremap <Up> {
