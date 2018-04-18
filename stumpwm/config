@@ -2,7 +2,7 @@
 
 (in-package :stumpwm)
 
-(set-prefix-key (kbd "C-t")) ; "C-t" is the default value.
+(set-prefix-key (kbd "F9")) ; "C-t" is the default value.
 
 (setf *message-window-gravity* :center)
 (setf *input-window-gravity* :center)
@@ -20,18 +20,18 @@
 
 ;; Change frames.
 
-(define-key *top-map* (kbd "Left") "move-focus left")
-(define-key *top-map* (kbd "Right") "move-focus right")
+(define-key *root-map* (kbd "Left") "move-focus left")
+(define-key *root-map* (kbd "Right") "move-focus right")
 
 ;; Move windows.
 
-(define-key *root-map* (kbd "Left") "move-window left")
-(define-key *root-map* (kbd "Right") "move-window right")
+(define-key *root-map* (kbd "M-Left") "move-window left")
+(define-key *root-map* (kbd "M-Right") "move-window right")
 
 ;; Change groups.
 
-(define-key *top-map* (kbd "C-Left") "gprev left")
-(define-key *top-map* (kbd "C-Right") "gnext right")
+(define-key *root-map* (kbd "C-Left") "gprev")
+(define-key *root-map* (kbd "C-Right") "gnext")
 
 
 ;; Switch input languages.
