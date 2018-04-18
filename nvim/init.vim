@@ -149,8 +149,9 @@ nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
 
 " TODO git
-nnoremap <Leader>gs :Gw<Return>:SignifyRefresh<Return>
-" TODO nnoremap <Leader>gco :Gco<Return>
+nnoremap <Leader>gs :Gw<Return>
+nnoremap <Leader>gc :Gco<Return>
+nnoremap <Leader>gr :SignifyRefresh<Return>
 
 "
 nnoremap <Up> {
