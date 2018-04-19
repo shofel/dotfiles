@@ -52,7 +52,8 @@ Plug 'tpope/vim-fireplace'
 
 " colors
 Plug 'joshdick/onedark.vim'
-Plug 'sjl/badwolf'
+" Plug 'sjl/badwolf'
+" Plug 'junegunn/seoul256.vim'
 " other nice colorschemes: obsidian tomorrow-night-bright monokai
 
 call plug#end()
@@ -83,8 +84,18 @@ set imsearch=0
 highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
-" syntax and filetypes {{{
+" colors {{{
 colorscheme onedark
+
+" fix up diff colors
+hi DiffAdd          ctermbg=235  ctermfg=108  guibg=#262626 guifg=#87af87 cterm=reverse        gui=reverse
+hi DiffChange       ctermbg=235  ctermfg=103  guibg=#262626 guifg=#8787af cterm=reverse        gui=reverse
+hi DiffDelete       ctermbg=235  ctermfg=131  guibg=#262626 guifg=#af5f5f cterm=reverse        gui=reverse
+hi DiffText         ctermbg=235  ctermfg=208  guibg=#262626 guifg=#ff8700 cterm=reverse        gui=reverse
+
+" }}}
+
+" syntax and filetypes {{{
 let g:javascript_plugin_flow = 1
 augroup initvim
   autocmd!
@@ -147,10 +158,10 @@ nnoremap <Leader>wz  ZZ
 " tabs
 nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
+nnoremap <Leader>te :tabe<Return>
 
 " TODO git
-nnoremap <Leader>gs :Gw<Return>
-nnoremap <Leader>gc :Gco<Return>
+nnoremap <Leader>gs :Gstatus<Return>
 nnoremap <Leader>gr :SignifyRefresh<Return>
 
 "
