@@ -52,6 +52,7 @@ Plug 'tpope/vim-fireplace'
 
 " colors
 Plug 'joshdick/onedark.vim'
+Plug 'altercation/vim-colors-solarized'
 " Plug 'sjl/badwolf'
 " Plug 'junegunn/seoul256.vim'
 " other nice colorschemes: obsidian tomorrow-night-bright monokai
@@ -160,8 +161,9 @@ nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
 nnoremap <Leader>te :tabe<Return>
 
-" TODO git
+" git
 nnoremap <Leader>gs :Gstatus<Return>
+nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gr :SignifyRefresh<Return>
 
 "
