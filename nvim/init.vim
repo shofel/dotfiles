@@ -136,8 +136,6 @@ nnoremap <Leader>sv :source $MYVIMRC<Return>
 nnoremap <Leader>q :copen<Return>
 nnoremap <Leader>Q :cclose<Return>
 nnoremap <Leader>d :TernDef<Return>
-" open buffer
-nnoremap <Leader>b :b<Space>
 " folding
 nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 " execute command
@@ -160,6 +158,10 @@ nnoremap <Leader>wz  ZZ
 nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
 nnoremap <Leader>te :tabe<Return>
+
+" buffers
+nnoremap <Leader>bw :bwipeout!
+nnoremap <Leader>b<Space> :b<Space>
 
 " git
 nnoremap <Leader>gs :Gstatus<Return>
