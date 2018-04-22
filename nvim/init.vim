@@ -183,9 +183,6 @@ nnoremap <Leader>p "*]p<Return>
 " http://neovim.io/doc/user/nvim_terminal_emulator.html
 tnoremap <Esc> <C-\><C-n>
 
-" ctrlp meets stumpwm
-let g:ctrlp_prompt_mappings = { 'AcceptSelection("t")': ['<a-t>'] }
-
 " vim-vertigo
 let g:Vertigo_homerow = 'aoeuidhtns'
 nnoremap <silent> <Leader>j :<C-U>VertigoDown n<CR>
