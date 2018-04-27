@@ -3,80 +3,47 @@
                 :NUMBER 0
                 :GROUPS (#S(GDUMP
                             :NUMBER 1
-                            :NAME "browse"
-                            :TREE ((#S(FDUMP
-                                       :NUMBER 0
-                                       :X 0
-                                       :Y 0
-                                       :WIDTH 1720
-                                       :HEIGHT 1440
-                                       :WINDOWS (10485776)
-                                       :CURRENT 10485776)
-                                    #S(FDUMP
-                                       :NUMBER 1
-                                       :X 1720
-                                       :Y 0
-                                       :WIDTH 1720
-                                       :HEIGHT 1440
-                                       :WINDOWS (37748737)
-                                       :CURRENT 37748737)))
+                            :NAME "one"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1920
+                                      :HEIGHT 1080
+                                      :WINDOWS (12582913)
+                                      :CURRENT 12582913))
                             :CURRENT 0)
                          #S(GDUMP
                             :NUMBER 2
-                            :NAME "hack"
-                            :TREE (((#S(FDUMP
-                                        :NUMBER 0
-                                        :X 0
-                                        :Y 0
-                                        :WIDTH 395
-                                        :HEIGHT 720
-                                        :WINDOWS (14680067)
-                                        :CURRENT 14680067)
-                                     #S(FDUMP
-                                        :NUMBER 1
-                                        :X 0
-                                        :Y 720
-                                        :WIDTH 395
-                                        :HEIGHT 720
-                                        :WINDOWS (16777219)
-                                        :CURRENT 16777219))
-                                    #S(FDUMP
-                                       :NUMBER 2
-                                       :X 395
-                                       :Y 0
-                                       :WIDTH 1325
-                                       :HEIGHT 1440
-                                       :WINDOWS (20971521)
-                                       :CURRENT 20971521)
-                                    #S(FDUMP
-                                       :NUMBER 3
-                                       :X 1720
-                                       :Y 0
-                                       :WIDTH 1720
-                                       :HEIGHT 1440
-                                       :WINDOWS (46137347 29360131)
-                                       :CURRENT 46137347)))
-                            :CURRENT 1)
-                         #S(GDUMP
-                            :NUMBER 3
-                            :NAME "three"
+                            :NAME "two"
                             :TREE ((#S(FDUMP
                                        :NUMBER 0
                                        :X 0
                                        :Y 0
-                                       :WIDTH 1720
-                                       :HEIGHT 1440
-                                       :WINDOWS (31457284)
-                                       :CURRENT 31457284)
+                                       :WIDTH 960
+                                       :HEIGHT 1080
+                                       :WINDOWS (23068673)
+                                       :CURRENT 23068673)
                                     #S(FDUMP
                                        :NUMBER 1
-                                       :X 1720
+                                       :X 960
                                        :Y 0
-                                       :WIDTH 1720
-                                       :HEIGHT 1440
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)))
+                                       :WIDTH 960
+                                       :HEIGHT 1080
+                                       :WINDOWS (37748739 31457283)
+                                       :CURRENT 37748739)))
                             :CURRENT 0)
-                         )
+                         #S(GDUMP
+                            :NUMBER 3
+                            :NAME "three"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1920
+                                      :HEIGHT 1080
+                                      :WINDOWS (33554436)
+                                      :CURRENT 33554436))
+                            :CURRENT 0))
                 :CURRENT 2))
    :CURRENT 0)

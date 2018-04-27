@@ -1,13 +1,10 @@
-(("hack" 2 T T :CLASS "Google-chrome-beta" :INSTANCE "google-chrome-beta"
+(("three" 0 T NIL :CLASS "TelegramDesktop" :INSTANCE "telegram" :TITLE NIL
+  :ROLE NIL)
+ ("two" 1 T NIL :CLASS "X-terminal-emulator" :INSTANCE "x-terminal-emulator"
+  :TITLE NIL :ROLE NIL)
+ ("two" 0 T NIL :CLASS "Google-chrome-beta" :INSTANCE "google-chrome-beta"
   :TITLE NIL :ROLE "browser")
+ ("one" 0 T T :CLASS "Google-chrome" :INSTANCE "google-chrome" :TITLE NIL :ROLE
+  "browser"))
 
- ("browse" 0 T T :CLASS "Firefox" :INSTANCE "Navigator" :TITLE NIL :ROLE
-  "browser")
-
- ("browse" 1 T T :CLASS "Google-chrome" :INSTANCE "google-chrome" :TITLE NIL
-  :ROLE "browser")
-
- ("three" 0 T T :CLASS "TelegramDesktop" :INSTANCE "telegram" :TITLE NIL :ROLE
-  NIL))
-
-; vim: set filetype=lisp :
+""" vim: ft=lisp
