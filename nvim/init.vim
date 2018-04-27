@@ -89,10 +89,10 @@ highlight lCursor guifg=NONE guibg=Cyan
 colorscheme onedark
 
 " fix up diff colors
-hi DiffAdd          ctermbg=235  ctermfg=108  guibg=#262626 guifg=#87af87 cterm=reverse        gui=reverse
+hi DiffAdd          ctermbg=235  ctermfg=108  guibg=#262626 guifg=#c8e6c9 cterm=reverse        gui=reverse
 hi DiffChange       ctermbg=235  ctermfg=103  guibg=#262626 guifg=#8787af cterm=reverse        gui=reverse
-hi DiffDelete       ctermbg=235  ctermfg=131  guibg=#262626 guifg=#af5f5f cterm=reverse        gui=reverse
-hi DiffText         ctermbg=235  ctermfg=208  guibg=#262626 guifg=#ff8700 cterm=reverse        gui=reverse
+hi DiffDelete       ctermbg=235  ctermfg=131  guibg=#262626 guifg=#ffcdd2 cterm=reverse        gui=reverse
+hi DiffText         ctermbg=235  ctermfg=108  guibg=#262626 guifg=#c8e6c9 cterm=reverse        gui=reverse
 
 " }}}
 
@@ -141,6 +141,9 @@ nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 " execute command
 nnoremap <Leader>; :
 
+" grep with K
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " windows
 
 " basic movements
@@ -157,7 +160,7 @@ nnoremap <Leader>wz  ZZ
 " tabs
 nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
-nnoremap <Leader>te :tabe<Return>
+nnoremap <Leader>te :tabe<Space>
 
 " buffers
 nnoremap <Leader>bw :bwipeout!
