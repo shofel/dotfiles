@@ -37,21 +37,25 @@
 ;; Switch input languages.
 ;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
 
-
 ;; Restore groups and frames.
-;; Restore window placement rules.
-
-(defun restore-layout ()
+(defun -restore-groups-and-frames ()
   (run-commands "gselect 1"
                 "grename one")
 
-  (restore-from-file "~/.config/stumpwm/desktop")
+  (restore-from-file "~/.config/stumpwm/desktop"))
 
+;; Restore window placement rules.
+(defun -restore-window-rules ()
   (restore-window-placement-rules "~/.config/stumpwm/window-placement"))
 
-;; Run the apps.
+;; Restore
+(-restore-groups-and-frames)
+(-restore-window-rules)
+
+;;
+;; initializing
+;;
 (when *initializing*
-  (restore-layout)
   (run-commands "exec google-chrome"
                 "exec google-chrome-beta"
                 "exec x-terminal-emulator"
