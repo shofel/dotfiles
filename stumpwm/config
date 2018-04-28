@@ -40,15 +40,18 @@
 
 ;; Restore groups and frames.
 ;; Restore window placement rules.
-(run-commands "gselect 1"
-              "grename one")
 
-(restore-from-file "~/.config/stumpwm/desktop")
+(defun restore-layout ()
+  (run-commands "gselect 1"
+                "grename one")
 
-(restore-window-placement-rules "~/.config/stumpwm/window-placement")
+  (restore-from-file "~/.config/stumpwm/desktop")
+
+  (restore-window-placement-rules "~/.config/stumpwm/window-placement"))
 
 ;; Run the apps.
 (when *initializing*
+  (restore-layout)
   (run-commands "exec google-chrome"
                 "exec google-chrome-beta"
                 "exec x-terminal-emulator"
