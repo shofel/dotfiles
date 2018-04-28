@@ -37,21 +37,19 @@
 ;; Switch input languages.
 ;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
 
+
 ;; Restore groups and frames.
+;; Restore window placement rules.
+(run-commands "gselect 1"
+              "grename one")
+
 (restore-from-file "~/.config/stumpwm/desktop")
 
-;; Restore window placement rules.
 (restore-window-placement-rules "~/.config/stumpwm/window-placement")
 
 ;; Run the apps.
-(when (not (ignore-errors *apps-started*))
-  (run-commands "exec firefox"
-                "exec google-chrome"
+(when *initializing*
+  (run-commands "exec google-chrome"
                 "exec google-chrome-beta"
-                "exec Telegram")
-  (defparameter *apps-started* T))
-
-;; Fix up the groups.
-(run-commands "gselect Default"
-              "gkill"
-              "gselect three")
+                "exec x-terminal-emulator"
+                "exec Telegram"))
