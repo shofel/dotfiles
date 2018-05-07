@@ -165,6 +165,7 @@ nnoremap <Leader>te :tabe<Space>
 " buffers
 nnoremap <Leader>bw :bwipeout!
 nnoremap <Leader>b<Space> :b<Space>
+nnoremap <Leader>tt :b term<Tab><Return>i
 
 " git
 nnoremap <Leader>gs :Gstatus<Return>
