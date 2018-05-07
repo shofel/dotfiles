@@ -8,8 +8,7 @@
 (setf *input-window-gravity* :center)
 (setf *window-border-style* :thin)
 
-;; Don't focus with mouse to encourage more keyboard usage.
-(setf *mouse-focus-policy* :ignore) ; :ignore :sloppy :click
+(setf *mouse-focus-policy* :sloppy) ; :ignore :sloppy :click
 
 ;;;
 ;;; Top-map keys.
