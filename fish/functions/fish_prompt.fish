@@ -51,8 +51,8 @@ function fish_prompt --description 'Write out the prompt'
 			set error_code $last_status
 		end
 
-		# Other options: ⯈ ⮞ ⮚
-		set -l suffix_symbol ⮞
+		# Other options: ⯈ ⮞ ⮚ ⮞
+		set -l suffix_symbol ➤
 
 		# Print
 		echo -ns (set_color $color) $error_code $suffix_symbol ' '
