@@ -53,6 +53,9 @@ end
 ## Source fish abbrs
 source fish.abbr.fish
 
-## Copy .xinitrc
+## .xinitrc
 ln -s $PWD/.xinitrc ~/.xinitrc
+
+## emacs.d
+ln -s $PWD/.emacs.d ~/.emacs.d
 ```
