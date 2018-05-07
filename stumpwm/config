@@ -10,13 +10,19 @@
 ;; Don't focus with mouse to encourage more keyboard usage.
 (setf *mouse-focus-policy* :ignore) ; :ignore :sloppy :click
 
+;;;
+;;; Top-map keys.
+;;;
+
 ;; Define the volume control and mute keys.
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "exec pactl set-sink-volume 0 -5%")
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pactl set-sink-volume 0 +5%")
 (define-key *top-map* (kbd "XF86AudioMute") "exec pactl set-sink-mute 0 toggle")
 
 
-;;; Define a set of single keys for the most frequent actions.
+;;;
+;;; Root-map keys.
+;;;
 
 ;; Change frames.
 
