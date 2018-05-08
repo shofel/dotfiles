@@ -52,6 +52,23 @@
 (use-package yaml-mode
   :mode "\\.yml\\'")
 
+;; Javascript
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :init (add-hook 'js2-mode-hook #'js2-imene-extras-mode))
+
+(use-package js2-refactor
+  :init
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (js2r-add-keybindings-with-prefix "C-c C-r")
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill) ; todo: use bind-keymap syntax
+  (define-key js-mode-map (kbd "M-.") nil))
+
+(use-package xref-js2
+  :init
+  (add-hook 'js2-mode-hook
+            (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+
 ;; evil
 (use-package evil
   :init (evil-mode 1))
