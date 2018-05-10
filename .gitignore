@@ -25,6 +25,4 @@ fish/conf.d/z.fish
 
 ## emacs
 .emacs.d/elpa/
-.emacs.d/init.el~
 .emacs.d/network-security.data
-.emacs.d/auto-save-list/
