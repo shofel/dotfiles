@@ -134,12 +134,17 @@
 ;;; UI
 ;;;
 
-;; reduce gui noize
-;; TODO: fix the thick window border
+;; Reduce gui noize.
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+;; Store all backup and autosave files in the tmp dir.
+;; @see http://emacsredux.com/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;; deal with trailing whitespace
 (setq show-trailing-whitespace t)
