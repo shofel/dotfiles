@@ -41,26 +41,38 @@
 (use-package evil
   :init (evil-mode 1))
 
-;; Helm
-;; @see https://github.com/emacs-helm/helm/wiki/Fuzzy-matching
-(use-package helm
+;; Ivy
+;; @see http://oremacs.com/swiper/
+;; todo helm-ls-git: helm-browse-project
+(use-package ivy
+  :ensure flx :ensure counsel :ensure swiper
   :init
-  (helm-mode 1)
-  (setq helm-find-files-fuzzy-match t)
-  (setq helm-M-x-fuzzy-match t)
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  :bind ("M-x" . helm-M-x))
-
-(use-package helm-fuzzier
-  :init
-  (helm-fuzzier-mode 1)
-  (helm-flx-mode 1))
-
-;; Like ctrlp.
-;; Todo: fix the binding.
-(use-package helm-ls-git
-  :bind ("C-p" . helm-browse-project))
+  (ivy-mode 1)
+  ;; Basic customization (for new Ivy users).
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  ;; Fuzzy matching somewhere.
+  (setq ivy-re-builders-alist
+      '((ivy-switch-buffer . ivy--regex-plus)
+        (swiper . ivy--regex-plus)
+        (t . ivy--regex-fuzzy)))
+  ;; Commented keys are the defaults.
+  :bind
+  ("C-s" . swiper)
+  ;; Keys for help.
+  ; ("<f1> f" . counsel-describe-function)
+  ; ("<f1> v" . counsel-describe-variable)
+  ; ("<f1> l" . counsel-find-library)
+  ; ("<f2> i" . counsel-info-lookup-symbol)
+  ; ("<f2> u" . counsel-unicode-char)
+  ;; Ivy-based interface to shell and system tools.
+  ; ("C-c g" . counsel-git)
+  ; ("C-c j" . counsel-git-grep)
+  ; ("C-c k" . counsel-ag)
+  ; ("C-x l" . counsel-locate)
+  ;; Ivy-resume.
+  ; ("C-c C-r" . ivy-resume)
+)
 
 ;; line numbers
 (use-package linum-relative
@@ -105,13 +117,12 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-fuzzier helm-flx diff-hl helm-ls-git helm linum-relative zerodark-theme yaml-mode use-package evil))))
+    (counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '()
  )
 
 
