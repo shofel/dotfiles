@@ -38,8 +38,11 @@
   :mode "\\.yml\\'")
 
 ;; evil
+
 (use-package evil
   :init (evil-mode 1))
+
+(use-package evil-commentary)
 
 ;; Ivy
 ;; @see http://oremacs.com/swiper/
