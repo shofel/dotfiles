@@ -29,22 +29,7 @@
 ;;; Packages
 ;;;
 
-;; Parinfer
-;; @see https://github.com/DogLooksGood/parinfer-mode
-(use-package parinfer
-  :bind
-  (("C-," . parinfer-toggle-mode))
-  :init
-  (progn
-    (setq parinfer-extensions
-          '(defaults       ; should be included.
-            smart-yank
-            evil))        ; If you use Evil.
-    (add-hook 'clojure-mode-hook #'parinfer-mode)
-    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'scheme-mode-hook #'parinfer-mode)
-    (add-hook 'lisp-mode-hook #'parinfer-mode)))
+;; Surround
 
 (show-paren-mode 1) ; Show matching pairs.
 
@@ -120,7 +105,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-fuzzier helm-flx diff-hl helm-ls-git helm linum-relative zerodark-theme yaml-mode use-package parinfer evil))))
+    (helm-fuzzier helm-flx diff-hl helm-ls-git helm linum-relative zerodark-theme yaml-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
