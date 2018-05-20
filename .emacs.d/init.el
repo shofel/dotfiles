@@ -87,7 +87,6 @@
       '((ivy-switch-buffer . ivy--regex-plus)
         (swiper . ivy--regex-plus)
         (t . ivy--regex-fuzzy)))
-  :config
   (ivy-mode 1)
   (use-package amx
     :config (amx-mode 1))
