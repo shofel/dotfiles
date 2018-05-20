@@ -125,10 +125,8 @@ endfun
 
 let mapleader="\<Space>"
 
-" ctrl-s
-nnoremap <c-s> :w<Return>
+" write file
 nnoremap <Leader>s :w<Return>
-inoremap <c-s> <c-o>:w<Return>
 " edit .vimrc
 nnoremap <Leader>ev :e $MYVIMRC<Return>
 nnoremap <Leader>sv :source $MYVIMRC<Return>
