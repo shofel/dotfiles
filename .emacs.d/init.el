@@ -42,7 +42,18 @@
 (use-package evil
   :init (evil-mode 1))
 
-(use-package evil-commentary)
+(use-package general
+  :init
+  ;; Backport some of the keys from init.vim
+  (setq shofel-leader "SPC")
+  (general-def
+   'normal
+   :prefix shofel-leader
+   "s" 'save-buffer)
+  )
+
+(use-package evil-commentary
+  :init (evil-commentary-mode))
 
 ;; Ivy
 ;; @see http://oremacs.com/swiper/
@@ -120,7 +131,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
+    (general counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
