@@ -79,7 +79,6 @@
 (use-package ivy
   :ensure flx :ensure counsel :ensure swiper
   :init
-  (ivy-mode 1)
   ;; Basic customization (for new Ivy users).
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -88,6 +87,11 @@
       '((ivy-switch-buffer . ivy--regex-plus)
         (swiper . ivy--regex-plus)
         (t . ivy--regex-fuzzy)))
+  :config
+  (ivy-mode 1)
+  (use-package amx
+    :config (amx-mode 1))
+
   ;; Commented keys are the defaults.
   :bind
   ("C-s" . swiper)
@@ -149,7 +153,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (general counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
+    (amx general counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
