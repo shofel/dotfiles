@@ -42,14 +42,32 @@
 (use-package evil
   :init (evil-mode 1))
 
+;; @see https://github.com/noctuid/general.el/blob/master/README.org#general-examples
 (use-package general
   :init
-  ;; Backport some of the keys from init.vim
+
+  ;;;
+  ;;; Backport some of the keys from init.vim
+  ;;;
+
   (setq shofel-leader "SPC")
+
+  ;; <Leader>s for write file
   (general-def
    'normal
    :prefix shofel-leader
    "s" 'save-buffer)
+
+  ;; / for swiper
+  (general-def
+   'normal
+   "/" 'swiper)
+
+  ;; Up and Down for { and }
+  (general-def
+   'normal
+   "<down>" 'evil-forward-paragraph
+   "<up>" 'evil-backward-paragraph)
   )
 
 (use-package evil-commentary
