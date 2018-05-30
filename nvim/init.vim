@@ -130,6 +130,10 @@ nnoremap <Leader>s :w<Return>
 " edit .vimrc
 nnoremap <Leader>ev :e $MYVIMRC<Return>
 nnoremap <Leader>sv :source $MYVIMRC<Return>
+
+" execute visually selected text
+vnoremap <F6> y:"
+
 " quickfix window
 nnoremap <Leader>q :copen<Return>
 nnoremap <Leader>Q :cclose<Return>
