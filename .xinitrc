@@ -13,6 +13,8 @@ xset m 1 0
 # setxkbmap -option ctrl:nocaps
 
 # Sticky modifiers.
+# @see https://www.emacswiki.org/emacs/StickyModifiers#toc10
 xkbset -bell -feedback sticky -twokey latchlock
+xkbset exp 64 '=sticky' '=twokey' '=latchlock'
 
 exec stumpwm
