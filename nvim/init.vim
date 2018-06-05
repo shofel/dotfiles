@@ -175,8 +175,10 @@ nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gr :SignifyRefresh<Return>
 
 "
+onoremap <Up> {
 nnoremap <Up> {
 vnoremap <Up> {
+onoremap <Down> }
 nnoremap <Down> }
 vnoremap <Down> }
 
