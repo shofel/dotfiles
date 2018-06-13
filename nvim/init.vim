@@ -51,10 +51,8 @@ Plug 'bhurlow/vim-parinfer'
 Plug 'tpope/vim-fireplace'
 
 " colors
-Plug 'joshdick/onedark.vim'
-Plug 'altercation/vim-colors-solarized'
-" Plug 'sjl/badwolf'
-" Plug 'junegunn/seoul256.vim'
+Plug 'tyrannicaltoucan/vim-quantum'
+" Plug 'joshdick/onedark.vim'
 " other nice colorschemes: obsidian tomorrow-night-bright monokai
 
 call plug#end()
@@ -86,7 +84,9 @@ highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
 " colors {{{
-colorscheme onedark
+set termguicolors
+let g:quantum_italics=1
+colorscheme quantum
 
 " fix up diff colors
 hi DiffAdd          ctermbg=235  ctermfg=108  guibg=#262626 guifg=#c8e6c9 cterm=reverse        gui=reverse
