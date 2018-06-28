@@ -52,6 +52,14 @@ Plug 'tpope/vim-fireplace'
 
 " colors
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'NLKNguyen/papercolor-theme' " PaperColor
+Plug 'rakr/vim-one' " one
+Plug 'rakr/vim-two-firewatch' " two-firewatch
+Plug 'rakr/vim-colors-rakr'
+" Plug 'yankcrime/direwolf' " no colors
+" Plug 'endel/vim-github-colorscheme' " no colors
+" Plug 'reedes/vim-colors-pencil'
 " Plug 'joshdick/onedark.vim'
 " other nice colorschemes: obsidian tomorrow-night-bright monokai
 
@@ -76,6 +84,9 @@ set shiftwidth=2
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0 " block cursor always
 
+" to not duplicate lightline
+set noshowmode
+
 " russian
 set keymap=russian-dvorak
 set iminsert=0
@@ -84,10 +95,11 @@ highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
 " colors {{{
-set termguicolors
+let g:lightline = {
+\ 'colorscheme': 'one'}
 let g:quantum_italics=1
-colorscheme quantum
-
+set termguicolors
+colorscheme two-firewatch
 " fix up diff colors
 hi DiffAdd          ctermbg=235  ctermfg=108  guibg=#262626 guifg=#c8e6c9 cterm=reverse        gui=reverse
 hi DiffChange       ctermbg=235  ctermfg=103  guibg=#262626 guifg=#8787af cterm=reverse        gui=reverse
