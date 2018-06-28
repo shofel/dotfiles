@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Scale 4k
+xrandr --output HDMI-1 --scale 0.7x0.7
+
 # Load resources.
 xrdb -merge .Xresources
 
