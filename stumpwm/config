@@ -56,6 +56,10 @@
 ;; Sakura as a terminal emulator.
 (define-key *root-map* (kbd "c") "exec sakura")
 
+;; Disable easy killing.
+;; undefine-key doesn't work, so use this hack.
+(define-key *root-map* (kbd "k") "exec true")
+
 ;; Switch input languages.
 ;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
 
