@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Scale 4k
-xrandr --output HDMI-1 --scale 0.7x0.7
+# I've decided not doing this, but instead scale each app separately.
+# Thanks God, I've got only three: google-chrome, sakura, and telegram.
+# xrandr --output HDMI-1 --scale 0.7x0.7
 
 # Load resources.
 xrdb -merge .Xresources
@@ -20,4 +22,4 @@ xset m 1 0
 xkbset -bell -feedback sticky -twokey latchlock
 xkbset exp 64 '=sticky' '=twokey' '=latchlock'
 
-exec stumpwm
+exec /usr/local/bin/stumpwm

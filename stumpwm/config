@@ -11,6 +11,20 @@
 (setf *mouse-focus-policy* :sloppy) ; :ignore :sloppy :click
 
 ;;;
+;;; Modules.
+;;;
+; @see https://stumpwm.github.io/git/stumpwm-git_15.html#Modules
+; briefly: invoke 'make install-modules' from StumpWM’s root source directory.
+;          Yes, you should install StumpWM from sources to make this work.
+
+;;;
+;;; Fonts.
+;;;
+(load-module "ttf-fonts")
+(xft:cache-fonts)
+(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 18))
+
+;;;
 ;;; Top-map keys.
 ;;;
 
@@ -39,6 +53,8 @@
 (define-key *root-map* (kbd "C-Left") "gprev")
 (define-key *root-map* (kbd "C-Right") "gnext")
 
+;; Sakura as a terminal emulator.
+(define-key *root-map* (kbd "c") "exec sakura")
 
 ;; Switch input languages.
 ;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
@@ -62,7 +78,7 @@
 ;; initializing
 ;;
 (when *initializing*
-  (run-commands "exec google-chrome"
-                "exec google-chrome-beta"
+  (run-commands "exec google-chrome --high-dpi-support --force-device-scale-factor=1.5"
+                "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.5"
                 "exec x-terminal-emulator"
                 "exec Telegram"))
