@@ -41,9 +41,11 @@ Run this fish script from the root of this repo.
 ``` fish
 #!/usr/bin/fish
 
-## Symlink all we have
+##
+#  Symlink all we have
+##
 
-for x in fish nvim stumpwm
+for x in fish nvim stumpwm fontconfig
   if test -e ~/.config/$x
     mv ~/.config/$x{,-backup}
   end
