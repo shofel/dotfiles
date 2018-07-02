@@ -50,18 +50,31 @@ Plug 'mattn/emmet-vim'
 Plug 'bhurlow/vim-parinfer'
 Plug 'tpope/vim-fireplace'
 
-" colors
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'NLKNguyen/papercolor-theme' " PaperColor
-Plug 'rakr/vim-one' " one
+" Python
+Plug 'tweekmonster/django-plus.vim'
+
+" my favourite colors
 Plug 'rakr/vim-two-firewatch' " two-firewatch
-Plug 'rakr/vim-colors-rakr'
-" Plug 'yankcrime/direwolf' " no colors
-" Plug 'endel/vim-github-colorscheme' " no colors
-" Plug 'reedes/vim-colors-pencil'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'rakr/vim-one' " one
+
+" dark themes
 " Plug 'joshdick/onedark.vim'
-" other nice colorschemes: obsidian tomorrow-night-bright monokai
+" Plug 'ErichDonGubler/vim-sublime-monokai'
+" Plug 'abra/vim-obsidian'
+
+" a framework and a huge collection of themes
+" Plug 'chriskempson/base16-vim'
+
+" also good colors
+" Plug 'frankier/neovim-colors-solarized-truecolor-only'
+" Plug 'NLKNguyen/papercolor-theme' " PaperColor
+" Plug 'rakr/vim-colors-rakr'
+
+" colorschemes without colors
+" Plug 'yankcrime/direwolf'
+" Plug 'endel/vim-github-colorscheme'
+" Plug 'reedes/vim-colors-pencil'
 
 call plug#end()
 " }}}
@@ -82,7 +95,7 @@ set softtabstop=2
 set shiftwidth=2
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0 " block cursor always
+set guicursor=
 
 " to not duplicate lightline
 set noshowmode
@@ -95,12 +108,22 @@ highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
 " colors {{{
+
 let g:lightline = {
 \ 'colorscheme': 'one'}
+
+" tune colorschemes
 let g:quantum_italics=1
+let g:quantum_black=1
+let g:one_allow_italics = 1
+let g:two_firewatch_italics=1
+
+" init colors
+set background=light
 set termguicolors
 colorscheme two-firewatch
-" fix up diff colors
+
+" the better diff colors
 hi DiffAdd          ctermbg=235  ctermfg=108  guibg=#262626 guifg=#c8e6c9 cterm=reverse        gui=reverse
 hi DiffChange       ctermbg=235  ctermfg=103  guibg=#262626 guifg=#8787af cterm=reverse        gui=reverse
 hi DiffDelete       ctermbg=235  ctermfg=131  guibg=#262626 guifg=#ffcdd2 cterm=reverse        gui=reverse
