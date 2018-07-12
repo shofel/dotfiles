@@ -22,7 +22,7 @@
 ;;;
 (load-module "ttf-fonts")
 (xft:cache-fonts)
-(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 18))
+(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 13))
 
 ;;;
 ;;; Top-map keys.
@@ -53,12 +53,13 @@
 (define-key *root-map* (kbd "C-Left") "gprev")
 (define-key *root-map* (kbd "C-Right") "gnext")
 
-;; Sakura as a terminal emulator.
-(define-key *root-map* (kbd "c") "exec sakura")
+;; Fix terminal-emulator
+(define-key *root-map* (kbd "c") "exec x-terminal-emulator")
 
 ;; Disable easy killing.
 ;; undefine-key doesn't work, so use this hack.
 (define-key *root-map* (kbd "k") "exec true")
+(define-key *root-map* (kbd "K") "kill")
 
 ;; Switch input languages.
 ;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
@@ -82,7 +83,7 @@
 ;; initializing
 ;;
 (when *initializing*
-  (run-commands "exec google-chrome --high-dpi-support --force-device-scale-factor=1.5"
-                "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.5"
+  (run-commands "exec google-chrome --high-dpi-support --force-device-scale-factor=1.625"
+                "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.625"
                 "exec x-terminal-emulator"
                 "exec Telegram"))
