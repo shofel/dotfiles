@@ -41,6 +41,7 @@ Plug 'jez/vim-superman'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'gutenye/json5.vim'
+Plug 'posva/vim-vue'
 
 " html and templates
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -53,8 +54,11 @@ Plug 'tpope/vim-fireplace'
 " Python
 Plug 'tweekmonster/django-plus.vim'
 
+" Go lang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " my favourite colors
-Plug 'rakr/vim-two-firewatch' " two-firewatch
+Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'rakr/vim-one' " one
 
@@ -119,7 +123,7 @@ let g:one_allow_italics = 1
 let g:two_firewatch_italics=1
 
 " init colors
-set background=light
+" set background=light
 set termguicolors
 colorscheme two-firewatch
 
@@ -152,6 +156,10 @@ augroup initvim
 augroup END
 " }}}
 
+" abbreviations {{{
+abbr retrun return
+" }}}
+
 " keys {{{
 " helper function to swap the option between x and y values
 fun! SwapVal (name, x, y)
@@ -164,7 +172,7 @@ let mapleader="\<Space>"
 nnoremap <Leader>s :w<Return>
 " edit .vimrc
 nnoremap <Leader>ev :e $MYVIMRC<Return>
-nnoremap <Leader>sv :source $MYVIMRC<Return>
+nnoremap <Leader>S :source $MYVIMRC<Return>
 
 " execute visually selected text
 vnoremap <F6> y:"
