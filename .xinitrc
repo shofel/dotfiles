@@ -17,6 +17,9 @@ imwheel # @see ~/.imwheelrc
 xset m 1 0
 # setxkbmap -option ctrl:nocaps
 
+# f.lux is like a twighlight for linux
+xflux -l 56.83 -g 60.60 -k 4500
+
 # Sticky modifiers.
 # @see https://www.emacswiki.org/emacs/StickyModifiers#toc10
 xkbset -bell -feedback sticky -twokey latchlock
