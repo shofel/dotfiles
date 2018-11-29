@@ -10,8 +10,8 @@
                                        :Y 0
                                        :WIDTH 1920
                                        :HEIGHT 2160
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)
+                                       :WINDOWS (23068673)
+                                       :CURRENT 23068673)
                                     #S(FDUMP
                                        :NUMBER 1
                                        :X 1920
@@ -30,17 +30,33 @@
                                        :Y 0
                                        :WIDTH 1920
                                        :HEIGHT 2160
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)
-                                    #S(FDUMP
-                                       :NUMBER 1
-                                       :X 1920
-                                       :Y 0
-                                       :WIDTH 1920
-                                       :HEIGHT 2160
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)))
-                            :CURRENT 0)
+                                       :WINDOWS (20971521)
+                                       :CURRENT 20971521)
+                                    (#S(FDUMP
+                                        :NUMBER 1
+                                        :X 1920
+                                        :Y 0
+                                        :WIDTH 1920
+                                        :HEIGHT 1836
+                                        :WINDOWS (12582918)
+                                        :CURRENT 12582918)
+                                     (#S(FDUMP
+                                         :NUMBER 2
+                                         :X 1920
+                                         :Y 1836
+                                         :WIDTH 960
+                                         :HEIGHT 324
+                                         :WINDOWS NIL
+                                         :CURRENT NIL)
+                                      #S(FDUMP
+                                         :NUMBER 3
+                                         :X 2880
+                                         :Y 1836
+                                         :WIDTH 960
+                                         :HEIGHT 324
+                                         :WINDOWS NIL
+                                         :CURRENT NIL)))))
+                            :CURRENT 2)
                          #S(GDUMP
                             :NUMBER 3
                             :NAME "3"
@@ -50,8 +66,8 @@
                                        :Y 0
                                        :WIDTH 1920
                                        :HEIGHT 2160
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)
+                                       :WINDOWS (10485764)
+                                       :CURRENT 10485764)
                                     #S(FDUMP
                                        :NUMBER 1
                                        :X 1920
@@ -61,5 +77,5 @@
                                        :WINDOWS NIL
                                        :CURRENT NIL)))
                             :CURRENT 0))
-                :CURRENT 3))
+                :CURRENT 2))
    :CURRENT 0)
