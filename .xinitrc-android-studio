@@ -1,0 +1,4 @@
+#!/bin/sh
+
+android-studio &
+exec blackbox
