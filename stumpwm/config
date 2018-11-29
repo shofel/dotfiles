@@ -84,6 +84,6 @@
 ;;
 (when *initializing*
   (run-commands "exec google-chrome --high-dpi-support --force-device-scale-factor=1.625"
-                "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.4"
+                "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.5"
                 "exec x-terminal-emulator"
-                "exec Telegram"))
+                "exec snap run telegram-desktop"))
