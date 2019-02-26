@@ -32,16 +32,26 @@
 ;; Surround
 
 (show-paren-mode 1) ; Show matching pairs.
+(electric-pair-mode) ; Insert pairs at once.
 
 ;; Yaml
 (use-package yaml-mode
   :mode "\\.yml\\'")
+
+;;
+;; Clojure
+;;
+(use-package cider)
 
 ;; evil
 
 (use-package evil
   :init (evil-mode 1))
 
+(use-package evil-commentary
+  :init (evil-commentary-mode))
+
+;; General for key bindings.
 ;; @see https://github.com/noctuid/general.el/blob/master/README.org#general-examples
 (use-package general
   :init
@@ -152,7 +162,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (amx general counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
+    (cider amx general counsel swiper hydra flx ivy diff-hl linum-relative zerodark-theme yaml-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
