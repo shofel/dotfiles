@@ -63,20 +63,20 @@
 
   ;; <Leader>s for write file
   (general-def
-   'normal
-   :prefix shofel-leader
-   "s" 'save-buffer)
+    'normal
+    :prefix shofel-leader
+    "s" 'save-buffer)
 
   ;; / for swiper
   (general-def
-   'normal
-   "/" 'swiper)
+    'normal
+    "/" 'swiper)
 
   ;; Up and Down for { and }
   (general-def
-   'normal
-   "<down>" 'evil-forward-paragraph
-   "<up>" 'evil-backward-paragraph)
+    'normal
+    "<down>" 'evil-forward-paragraph
+    "<up>" 'evil-backward-paragraph)
   )
 
 (use-package evil-commentary
@@ -93,9 +93,9 @@
   (setq ivy-count-format "(%d/%d) ")
   ;; Fuzzy matching somewhere.
   (setq ivy-re-builders-alist
-      '((ivy-switch-buffer . ivy--regex-plus)
-        (swiper . ivy--regex-plus)
-        (t . ivy--regex-fuzzy)))
+        '((ivy-switch-buffer . ivy--regex-plus)
+          (swiper . ivy--regex-plus)
+          (t . ivy--regex-fuzzy)))
   (ivy-mode 1)
   (use-package amx
     :config (amx-mode 1))
@@ -104,19 +104,19 @@
   :bind
   ("C-s" . swiper)
   ;; Keys for help.
-  ; ("<f1> f" . counsel-describe-function)
-  ; ("<f1> v" . counsel-describe-variable)
-  ; ("<f1> l" . counsel-find-library)
-  ; ("<f2> i" . counsel-info-lookup-symbol)
-  ; ("<f2> u" . counsel-unicode-char)
+  ;; ("<f1> f" . counsel-describe-function)
+  ;; ("<f1> v" . counsel-describe-variable)
+  ;; ("<f1> l" . counsel-find-library)
+  ;; ("<f2> i" . counsel-info-lookup-symbol)
+  ;; ("<f2> u" . counsel-unicode-char)
   ;; Ivy-based interface to shell and system tools.
-  ; ("C-c g" . counsel-git)
-  ; ("C-c j" . counsel-git-grep)
-  ; ("C-c k" . counsel-ag)
-  ; ("C-x l" . counsel-locate)
+  ("C-c g" . counsel-git)
+  ("C-c j" . counsel-git-grep)
+  ("C-c k" . counsel-ag)
+  ("C-x l" . counsel-locate)
   ;; Ivy-resume.
-  ; ("C-c C-r" . ivy-resume)
-)
+  ;; ("C-c C-r" . ivy-resume)
+  )
 
 ;; line numbers
 (use-package linum-relative
