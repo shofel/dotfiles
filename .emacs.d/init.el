@@ -1,7 +1,13 @@
 ;;; -*- indent-tabs-mode: nil; tab-width: 2 -*- */
 
+;;; Cyrillic dvorak.
+(load-file "~/.emacs.d/opt/mk-dvorak-russian.el")
+(set-input-method "mk-dvorak-russian")
+(toggle-input-method)
+
 ;;;
-;;; MELPA
+;;; Setup package management.
+;;; @see package.el
 ;;; @see https://melpa.org/#/getting-started
 ;;;
 
