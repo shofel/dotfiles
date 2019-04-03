@@ -23,10 +23,16 @@ sudo apt install -y \
   telegram google-chrome-stable
 
 
-## Set default terminal
+## Set default apps
 
-sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
+sudo update-alternatives --install \
+  /usr/bin/x-terminal-emulator \
+  x-terminal-emulator \
+  /home/shovel/opt/bin/kitty 100
 
+sudo update-alternatives --set x-terminal-emulator /home/shovel/opt/bin/kitty
+
+xdg-settings set default-web-browser google-chrome-beta.desktop
 
 ## Set default shell
 
