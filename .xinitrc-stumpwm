@@ -24,4 +24,7 @@ xflux -l 56.83 -g 60.60 -k 4500
 xkbset -bell -feedback sticky -twokey latchlock
 xkbset exp 64 '=sticky' '=twokey' '=latchlock'
 
+# Start notification server.
+dunst &
+
 exec /usr/local/bin/stumpwm
