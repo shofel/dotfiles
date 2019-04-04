@@ -1,4 +1,6 @@
 ;; vim: set ft=lisp:
+;;
+;; To test changes use `restart-soft` command.
 
 (in-package :stumpwm)
 
@@ -9,6 +11,8 @@
 (setf *window-border-style* :thin)
 
 (setf *mouse-focus-policy* :sloppy) ; :ignore :sloppy :click
+
+(setf *shell-program* "/usr/bin/fish")
 
 ;;;
 ;;; Modules.
@@ -69,6 +73,7 @@
   (run-commands "gselect 1"
                 "grename one")
 
+  ;; Use `dump-desktop` command to create a dump.
   (restore-from-file "~/.config/stumpwm/desktop"))
 
 ;; Restore window placement rules.
