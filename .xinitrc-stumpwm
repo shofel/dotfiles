@@ -16,8 +16,8 @@ ssh-add < /dev/null &
 xset m 1 0
 # setxkbmap -option ctrl:nocaps
 
-# f.lux is like a twighlight for linux
-xflux -l 56.83 -g 60.60 -k 4500
+# redshift is like a twighlight for linux
+redshift -l56.83:60.60 -t 6500:3000 &
 
 # Sticky modifiers.
 # @see https://www.emacswiki.org/emacs/StickyModifiers#toc10
