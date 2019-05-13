@@ -48,11 +48,16 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
 
 " Clojure and Lisps
-Plug 'bhurlow/vim-parinfer'
-Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 
 " Python
+Plug 'idanarye/vim-vebugger'
 Plug 'tweekmonster/django-plus.vim'
+Plug 'python-mode/python-mode'
+
+" Nginx
+Plug 'chr4/nginx.vim'
 
 " Go lang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -172,7 +177,7 @@ let mapleader="\<Space>"
 nnoremap <Leader>s :w<Return>
 " edit .vimrc
 nnoremap <Leader>ev :e $MYVIMRC<Return>
-nnoremap <Leader>S :source $MYVIMRC<Return>
+nnoremap <Leader>vs :source $MYVIMRC<Return>
 
 " execute visually selected text
 vnoremap <F6> y:"
@@ -214,6 +219,7 @@ nnoremap <Leader>tt :b term<Tab><Return>i
 
 " git
 nnoremap <Leader>gs :Gstatus<Return>
+nnoremap <Leader>ga :Gwrite<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gr :SignifyRefresh<Return>
 
