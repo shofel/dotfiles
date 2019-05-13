@@ -1,5 +1,5 @@
 #!/bin/sh
 
 xrandr --output HDMI-0 --mode 1920x1080
-steam &
-exec blackbox
+xsetroot -xcf /usr/share/icons/whiteglass/cursors/left_ptr 8
+exec steam
