@@ -1,6 +1,11 @@
 # Install on the Notebook
 
-1. Basic tools
+0. System Tools
+``` bash
+sudo apt install -y htop curl
+```
+
+1. My basic tools
 
 Fish and neovim. Not only because they are the most important, but also because
 they are easiest to install.
@@ -29,10 +34,12 @@ end
 
 ## Source fish abbrs.
 source fish.abbr.fish
+
+## install vim plugins
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim +PlugInstall
 ```
-
-## vim-plug
-
 
 
 2. Restore global gitconfig
