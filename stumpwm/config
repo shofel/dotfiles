@@ -59,6 +59,7 @@
 
 ;; Fix terminal-emulator
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
+(define-key *root-map* (kbd "y") (concatenate 'string "exec " "yandex-browser"))
 
 ;; Disable easy killing.
 ;; undefine-key doesn't work, so use this hack.
@@ -88,6 +89,6 @@
 ;; initializing
 ;;
 (when *initializing*
-  (run-commands "exec google-chrome --high-dpi-support --force-device-scale-factor=1.5"
-                "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.5"
+  (run-commands "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.5"
+                "exec yandex-browser-beta --high-dpi-support --force-device-scale-factor=1.5"
                 "exec telegram-desktop"))
