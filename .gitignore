@@ -2,25 +2,9 @@ fishd.*
 nvim/plugged
 .netrwhist
 
-## Ignore plugins installed with fisher.
-## Make it explicitly to feel safe.
-fish/completions/docker-compose.fish
-fish/functions/brightness.fish
-fish/functions/examus.fish
-fish/functions/__fish_man_page.fish
-fish/functions/fish_prompt.fish
-fish/functions/fish_user_key_bindings.fish
-fish/functions/glog.fish
-fish/functions/gpr.fish
-fish/functions/grbm.fish
-fish/functions/npm-do.fish
-fish/functions/zadd.awk
-fish/functions/__z_add.fish
-fish/functions/z.awk
-fish/functions/zclean.awk
-fish/functions/__z_clean.fish
-fish/functions/__z_complete.fish
-fish/functions/__z.fish
+## To track a file, `git add` it explicitly.
+fish/completions/
+fish/functions/
 fish/conf.d/
 fish/fish_variables
 
