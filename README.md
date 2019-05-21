@@ -1,7 +1,7 @@
 ``` sh
 ## Add PPAs
 
-for x in 'ppa:fish-shell/release-2' 'ppa:neovim-ppa/unstable' 'ppa:atareao/telegram'
+for x in 'ppa:fish-shell/release-3' 'ppa:neovim-ppa/unstable' 'ppa:atareao/telegram'
   do sudo add-apt-repository -y $x; done
 
 
