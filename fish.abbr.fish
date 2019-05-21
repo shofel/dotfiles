@@ -1,45 +1,40 @@
-# git update
-abbr gfa 'git fetch --all --prune --tags'
-abbr gl 'git pull'
-abbr gp 'git push'
-abbr gpf 'git push --force-with-lease'
-
-# git checkout
-abbr gco 'git checkout'
-abbr gcm 'git checkout master'
-abbr gcb 'git checkout -b'
-abbr grh 'git reset HEAD'
-abbr gb 'git branch'
-
-# git rebase
-abbr grb 'git rebase'
-abbr grba 'git rebase --abort'
-abbr grbc 'git rebase --continue'
-abbr grbi 'git rebase -i'
-abbr grbs 'git rebase --skip'
-abbr gmt 'git mergetool'
-
-# commit
-abbr gd 'git diff'
-abbr gst 'git status --short'
-abbr gdca 'git diff --cached'
-abbr ga 'git add'
-abbr gcom 'git commit'
-abbr gamend 'git commit --amend --no-edit'
-
-# housekeeping
-abbr gclean 'git clean -fd'
-abbr ghash 'git rev-parse --short HEAD'
-abbr ginit 'git init ;and git commit -m "root" --allow-empty'
-abbr gcd 'cd (git rev-parse --show-toplevel)'
-abbr ggone "git branch -vv | grep ': gone]' | cut -d ' ' -f 3"
-abbr ggoneD "git branch -vv | grep ': gone]' | cut -d ' ' -f 3 | xargs git branch -D"
-
-# keyboard
-abbr dvorak 'setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle'
-abbr nocaps 'setxkbmap -option ctrl:nocaps'
-
-# fun
-abbr dc docker-compose
-abbr weather 'curl wttr.in/guangzhou'
-abbr suspend "clear; echo 'Cover the keyboard, dude!'; sleep 10; and echo 'suspended'; and xscreensaver-command -lock; and sudo pm-suspend-hybrid"
+abbr -a -U -- c 'composer -vvv exec'
+abbr -a -U -- cg 'composer -vvv global exec'
+abbr -a -U -- dc docker-compose
+abbr -a -U -- dvorak 'setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle'
+abbr -a -U -- ecs examus-create-session
+abbr -a -U -- execlip 'fish -c (xclip -o)'
+abbr -a -U -- ga 'git add'
+abbr -a -U -- gamend 'git commit --amend --no-edit'
+abbr -a -U -- gb 'git branch'
+abbr -a -U -- gcb 'git checkout -b'
+abbr -a -U -- gcd 'cd (git rev-parse --show-toplevel)'
+abbr -a -U -- gclean 'git clean -fd'
+abbr -a -U -- gcm 'git checkout master'
+abbr -a -U -- gco 'git checkout'
+abbr -a -U -- gcom 'git commit'
+abbr -a -U -- gd 'git diff'
+abbr -a -U -- gdca 'git diff --cached'
+abbr -a -U -- gfa 'git fetch --all --prune --tags'
+abbr -a -U -- ggone git\ branch\ -vv\ \|\ grep\ \':\ gone\]\'\ \|\ awk\ \'\{print\ \$1\}\'
+abbr -a -U -- ggoneD git\ branch\ -vv\ \|\ grep\ \':\ gone\]\'\ \|\ awk\ \'\{print\ \$1\}\'\ \|\ xargs\ git\ branch\ -D
+abbr -a -U -- ghash 'git rev-parse --short HEAD'
+abbr -a -U -- ginit 'git init ;and git commit -m "root" --allow-empty'
+abbr -a -U -- gl 'git pull'
+abbr -a -U -- glr 'git pull --rebase'
+abbr -a -U -- gmt 'git mergetool'
+abbr -a -U -- gp 'git push'
+abbr -a -U -- gpf 'git push --force-with-lease'
+abbr -a -U -- grb 'git rebase'
+abbr -a -U -- grba 'git rebase --abort'
+abbr -a -U -- grbc 'git rebase --continue'
+abbr -a -U -- grbi 'git rebase -i'
+abbr -a -U -- grbs 'git rebase --skip'
+abbr -a -U -- grh 'git reset --hard'
+abbr -a -U -- gst 'git status --short --branch'
+abbr -a -U -- lectoriy_sync 'rsync -avz --exclude node_modules --exclude .git --exclude *swp frontend/themes/teachin/skins/default/ lectoriy:/var/www/html/test/lectoriy/frontend/themes/teachin/skins/default/'
+abbr -a -U -- nocaps 'setxkbmap -option ctrl:nocaps'
+abbr -a -U -- s sudo
+abbr -a -U -- sho-nrepl clj\ -Sdeps\ \'\{:deps\ \{nrepl/nrepl\ \{:mvn/version\ \"0.5.3\"\}\}\}\'\ -m\ nrepl.cmdline
+abbr -a -U -- suspend clear\;\ figlet\ -w100\ \'Cover\ the\ keyboard,\ dude!\'\;\ and\ sleep\ 10\;\ and\ systemctl\ suspend
+abbr -a -U -- weather 'curl wttr.in/guangzhou'
