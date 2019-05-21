@@ -16,7 +16,7 @@ echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
 sudo apt update
 sudo apt install -y \
   xclip git \
-  sakura fonts-firacode fish \
+  fonts-firacode fish \
   neovim python3-neovim silversearcher-ag \
   stumpwm \
   ssh-askpass-fullscreen \
