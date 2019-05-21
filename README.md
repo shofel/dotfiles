@@ -39,6 +39,10 @@ xdg-settings set default-web-browser google-chrome-beta.desktop
 echo 'Setting default shell to "/usr/bin/fish"'
 chsh -s /usr/bin/fish
 
+## vim-plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 ```
 
 ### Fish script
