@@ -21,7 +21,8 @@ fish/functions/zclean.awk
 fish/functions/__z_clean.fish
 fish/functions/__z_complete.fish
 fish/functions/__z.fish
-fish/conf.d/z.fish
+fish/conf.d/
+fish/fish_variables
 
 ## emacs
 .emacs.d/elpa/
