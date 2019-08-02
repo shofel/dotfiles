@@ -128,7 +128,7 @@ let g:one_allow_italics = 1
 let g:two_firewatch_italics=1
 
 " init colors
-" set background=light
+set background=light
 set termguicolors
 colorscheme two-firewatch
 
