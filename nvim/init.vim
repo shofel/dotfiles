@@ -1,8 +1,5 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 "
-" TODO ALE quick fix window
-" TODO remove syntastic?
-"
 " TODO unmap S from sneak to default
 " TODO grepping http://ellengummesson.com/blog/2015/08/01/dropping-ctrlp-and-other-vim-plugins/
 " TODO autoformat js code by paragraph. https://github.com/prettier/prettier-eslint
@@ -27,12 +24,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 
 " Languages
-Plug 'scrooloose/syntastic'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
-
-" symlinked
-Plug 'shofel/syntastic-local-js-checkers'
 
 " trying right now
 " Plug 'janko-m/vim-test'
@@ -255,26 +248,14 @@ vnoremap <silent> <Leader>k :<C-U>VertigoUp v<CR>
 onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 " }}}
 
-" Language servers for vim-lsp {{{
-" }}}
+" Asynchronous Lint Engine {{{
 
-" syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Always show the list when there are some errors
+let g:ale_open_list = 1
 
-let g:syntastic_mode_map = {
-\ "mode": "active",
-\ "passive_filetypes": ["python", "javascript"] }
-
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_local_javascript_checkers_politeness = 1
+let g:ale_linters = {
+\ "javascript": ['flow-language-server', 'eslint', 'standard', 'xo']
+\}
 " }}}
 
 " Signify {{{
