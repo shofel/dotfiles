@@ -7,41 +7,47 @@
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'mhinz/vim-signify'
+" tpope
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 
-Plug 'ctrlpvim/ctrlp.vim'
+" appearance
+Plug 'mhinz/vim-signify'
+Plug 'itchyny/lightline.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
+" more editing
 Plug 'tommcdo/vim-exchange'
 Plug 'prendradjaja/vim-vertigo'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
+
+" follow conventions
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
+
+" search files and inside files
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 
 " Languages
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 
-" trying right now
+" trying right now TODO cleanup
 " Plug 'janko-m/vim-test'
 " Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
-" Plug 'justinmk/vim-sneak'
 Plug 'jez/vim-superman'
 
 " javascript
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'carlitux/deoplete-ternjs'
-" Plug 'ternjs/tern_for_vim' " needs 'npm i' inside of the cloned repo
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'gutenye/json5.vim'
 Plug 'posva/vim-vue'
+Plug 'ap/vim-css-color'
 
 " html and templates
 Plug 'Glench/Vim-Jinja2-Syntax'
