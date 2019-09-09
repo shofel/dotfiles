@@ -1,5 +1,8 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 "
+" TODO ALE quick fix window
+" TODO remove syntastic?
+"
 " TODO unmap S from sneak to default
 " TODO grepping http://ellengummesson.com/blog/2015/08/01/dropping-ctrlp-and-other-vim-plugins/
 " TODO autoformat js code by paragraph. https://github.com/prettier/prettier-eslint
@@ -13,16 +16,20 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'prendradjaja/vim-vertigo'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/lightline.vim'
+
+" Languages
 Plug 'scrooloose/syntastic'
-Plug 'dag/vim-fish'
-Plug 'tommcdo/vim-exchange'
-Plug 'prendradjaja/vim-vertigo'
+Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polyglot'
 
 " symlinked
 Plug 'shofel/syntastic-local-js-checkers'
@@ -52,12 +59,10 @@ Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 
 " Python
-Plug 'idanarye/vim-vebugger'
+" Plug 'idanarye/vim-vebugger'
+Plug 'vim-python/python-syntax'
+Plug 'vim-scripts/indentpython.vim'
 Plug 'tweekmonster/django-plus.vim'
-Plug 'python-mode/python-mode'
-
-" Nginx
-Plug 'chr4/nginx.vim'
 
 " Go lang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -250,10 +255,17 @@ vnoremap <silent> <Leader>k :<C-U>VertigoUp v<CR>
 onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 " }}}
 
+" Language servers for vim-lsp {{{
+" }}}
+
 " syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_mode_map = {
+\ "mode": "active",
+\ "passive_filetypes": ["python", "javascript"] }
 
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
