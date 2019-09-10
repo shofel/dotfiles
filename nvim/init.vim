@@ -7,6 +7,9 @@
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
+" read local .vimrc files
+Plug 'MarcWeber/vim-addon-local-vimrc'
+
 " tpope
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -45,7 +48,6 @@ Plug 'jez/vim-superman'
 " javascript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'gutenye/json5.vim'
 Plug 'posva/vim-vue'
 Plug 'ap/vim-css-color'
 
