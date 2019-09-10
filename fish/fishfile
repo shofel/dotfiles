@@ -1,4 +1,3 @@
 brgmnn/fish-docker-compose
-fisherman/pipenv
 fisherman/z
-jorgebucaran/fish-nvm
+fisherman/pipenv
