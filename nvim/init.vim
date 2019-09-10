@@ -59,7 +59,7 @@ Plug 'mattn/emmet-vim'
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 
-" Python
+" Python TODO clean up and review
 " Plug 'idanarye/vim-vebugger'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/indentpython.vim'
@@ -262,7 +262,8 @@ onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 let g:ale_open_list = 1
 
 let g:ale_linters = {
-\ "javascript": ['flow-language-server', 'eslint', 'standard', 'xo']
+\ "javascript": ['flow-language-server', 'eslint'],
+\ "python": ['pyflakes', 'pyls', 'mypy', 'pylint']
 \}
 
 "More goodness of language servers.
