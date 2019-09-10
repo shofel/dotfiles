@@ -262,6 +262,9 @@ let g:ale_open_list = 1
 let g:ale_linters = {
 \ "javascript": ['flow-language-server', 'eslint', 'standard', 'xo']
 \}
+
+"More goodness of language servers.
+let g:ale_completion_enabled = 1
 " }}}
 
 " Signify {{{
@@ -290,6 +293,10 @@ nnoremap / /\v
 if executable('ag')
   " Use ag over :grep
   set grepprg=ag
+
+  " ack.vim
+  let g:ackprg = 'ag --vimgrep --smart-case'
+  cnoreabbrev Ag Ack
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
