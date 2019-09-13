@@ -19,6 +19,7 @@ Plug 'tpope/vim-dispatch'
 " appearance
 Plug 'mhinz/vim-signify'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " more editing
@@ -104,7 +105,7 @@ set fdm=marker
 
 set nobackup
 set noswapfile
-set updatetime=48 " set for vim-signify active mode
+set updatetime=300 " set for vim-signify active mode
 
 set smartindent
 set expandtab
@@ -115,8 +116,8 @@ set shiftwidth=2
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set guicursor=n-v-ve:block,i-c-ci-cr:ver100,o-r:hor100
 
-" to not duplicate lightline
-set noshowmode
+set noshowmode " to not duplicate lightline
+set showtabline=2
 
 " russian
 set keymap=russian-dvorak
@@ -126,9 +127,6 @@ highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
 " colors {{{
-
-let g:lightline = {
-\ 'colorscheme': 'one'}
 
 " tune colorschemes
 let g:quantum_italics=1
@@ -278,6 +276,47 @@ let g:ale_fixers = {
 
 "More goodness of language servers.
 let g:ale_completion_enabled = 1
+" }}}
+
+" Lightline {{{
+let g:lightline = {}
+
+let g:lightline.colorscheme = 'one'
+
+" ALE integration
+let g:lightline.component_expand = {
+\  'linter_checking': 'lightline#ale#checking',
+\  'linter_warnings': 'lightline#ale#warnings',
+\  'linter_errors': 'lightline#ale#errors',
+\  'linter_ok': 'lightline#ale#ok',
+\ }
+let g:lightline.component_type = {
+\     'linter_checking': 'left',
+\     'linter_warnings': 'warning',
+\     'linter_errors': 'error',
+\     'linter_ok': 'left',
+\ }
+let g:lightline#ale#indicator_checking = "..."
+let g:lightline#ale#indicator_warnings = "W:"
+let g:lightline#ale#indicator_errors = "E:"
+let g:lightline#ale#indicator_ok = " ✔ "
+
+" assemble the status line
+
+let g:lightline.active = {
+      \ 'left': [ [ 'mode', 'paste' ],
+      \           [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+      \           [ 'filename', 'readonly' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+let g:lightline.inactive = {
+      \ 'left': [ [ 'filename' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ] }
+let g:lightline.tabline = {
+      \ 'left': [ [ 'tabs' ] ],
+      \ 'right': [ [ 'close' ] ] }
 " }}}
 
 " Signify {{{
