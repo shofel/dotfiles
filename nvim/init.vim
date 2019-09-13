@@ -102,6 +102,7 @@ set fdm=marker
 
 set nobackup
 set noswapfile
+set updatetime=48 " set for vim-signify active mode
 
 set smartindent
 set expandtab
@@ -272,7 +273,7 @@ let g:ale_completion_enabled = 1
 
 " Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
-let g:signify_realtime = 0
+let g:signify_realtime = 1
 " }}}
 
 " various plugins {{{
