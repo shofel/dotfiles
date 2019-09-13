@@ -1,8 +1,6 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 "
-" TODO unmap S from sneak to default
 " TODO grepping http://ellengummesson.com/blog/2015/08/01/dropping-ctrlp-and-other-vim-plugins/
-" TODO autoformat js code by paragraph. https://github.com/prettier/prettier-eslint
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -16,6 +14,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 
 " appearance
 Plug 'mhinz/vim-signify'
@@ -34,6 +33,9 @@ Plug 'editorconfig/editorconfig-vim'
 " search files and inside files
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
+
+" Testing
+Plug 'janko-m/vim-test'
 
 " Languages
 Plug 'dense-analysis/ale'
@@ -95,7 +97,7 @@ call plug#end()
 " }}}
 
 " general {{{
-set number " see also vim-numbertoggle plugin
+set nonumber " see also vim-numbertoggle plugin
 set hidden
 set list
 set fdm=marker
@@ -154,11 +156,10 @@ augroup initvim
 
   " Javascript
   autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
-  autocmd BufRead,BufNewFile *.js set commentstring=/*\ %s\ */
+  autocmd BufRead,BufNewFile *.js let b:commentary_format = "/* %s */"
   autocmd BufRead,BufNewFile *.js let b:textwidth=80
   autocmd BufRead,BufNewFile *.js let b:textwidth=80
 
-  autocmd BufWritePre * StripWhitespace
   autocmd BufRead,BufNewFile *.njk setfiletype jinja
   autocmd BufRead,BufNewFile *.nj setfiletype jinja
   autocmd Filetype text let b:AutoPairs = {'"(': '")'}
@@ -183,16 +184,21 @@ let mapleader="\<Space>"
 " write file
 nnoremap <Leader>s :w<Return>
 " edit .vimrc
-nnoremap <Leader>ev :e $MYVIMRC<Return>
+nnoremap <Leader>ve :tabe $MYVIMRC<Return>
 nnoremap <Leader>vs :source $MYVIMRC<Return>
 
-" execute visually selected text
+" get to execute visually selected text
 vnoremap <F6> y:"
+
+" edit code
+nnoremap <Leader>fs :StripWhitespace<Return>
+nnoremap <Leader>fe :ALEFix<Return>
+nnoremap <Leader>fj :ALENextWrap<Return>
+nnoremap <M-s> :set number! relativenumber!<Return>
 
 " quickfix window
 nnoremap <Leader>q :copen<Return>
 nnoremap <Leader>Q :cclose<Return>
-nnoremap <Leader>d :TernDef<Return>
 " folding
 nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
 " execute command
@@ -210,6 +216,7 @@ nnoremap <Leader>wj  <C-w><C-j>
 nnoremap <Leader>wk  <C-w><C-k>
 
 " some commands
+nnoremap <Leader>o   :only<Return>
 nnoremap <Leader>wt  <C-w>T
 nnoremap <Leader>wq  <C-w>c
 nnoremap <Leader>wz  ZZ
@@ -230,7 +237,7 @@ nnoremap <Leader>ga :Gwrite<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gr :SignifyRefresh<Return>
 
-"
+" skip empty lines, when navigating with arrows
 onoremap <Up> {
 nnoremap <Up> {
 vnoremap <Up> {
@@ -239,7 +246,7 @@ nnoremap <Down> }
 vnoremap <Down> }
 
 " Mouse clipboard: yank and print.
-" TODO to work with motions etc.
+" TODO make an opeartor to enable motions.
 vnoremap <Leader>y "*y<Return>
 nnoremap <Leader>p "*]p<Return>
 
@@ -260,11 +267,13 @@ onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 " Asynchronous Lint Engine {{{
 
 " Always show the list when there are some errors
-let g:ale_open_list = 1
-
 let g:ale_linters = {
-\ "javascript": ['flow-language-server', 'eslint'],
-\ "python": ['pyflakes', 'pyls', 'mypy', 'pylint']
+\ 'javascript': ['flow-language-server', 'eslint'],
+\ 'python': ['pyflakes', 'pyls', 'mypy', 'pylint'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'python': [],
 \}
 
 "More goodness of language servers.
@@ -277,8 +286,6 @@ let g:signify_realtime = 1
 " }}}
 
 " various plugins {{{
-let g:deoplete#enable_at_startup = 1
-let NERDSpaceDelims=1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let test#strategy = "dispatch"
 " }}}
