@@ -42,9 +42,8 @@ Plug 'janko-m/vim-test'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 
-" trying right now TODO cleanup
-" Plug 'janko-m/vim-test'
-" Plug 'tpope/vim-dispatch'
+" trying right now
+Plug 'justinmk/vim-sneak' " TODO: 1.no default keys, 2.<Leader>{s,S}
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
 
@@ -98,6 +97,7 @@ call plug#end()
 " }}}
 
 " general {{{
+set signcolumn=yes
 set nonumber " see also vim-numbertoggle plugin
 set hidden
 set list
