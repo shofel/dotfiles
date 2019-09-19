@@ -28,23 +28,23 @@
                                        :NUMBER 0
                                        :X 0
                                        :Y 0
-                                       :WIDTH 1920
+                                       :WIDTH 1620
                                        :HEIGHT 2160
                                        :WINDOWS (16777217)
                                        :CURRENT 16777217)
                                     ((#S(FDUMP
                                          :NUMBER 1
-                                         :X 1920
+                                         :X 1620
                                          :Y 0
-                                         :WIDTH 1920
+                                         :WIDTH 2220
                                          :HEIGHT 2138
                                          :WINDOWS (37748747)
                                          :CURRENT 37748747)
                                       #S(FDUMP
                                          :NUMBER 2
-                                         :X 1920
+                                         :X 1620
                                          :Y 2138
-                                         :WIDTH 1920
+                                         :WIDTH 2220
                                          :HEIGHT 22
                                          :WINDOWS NIL
                                          :CURRENT NIL)))))
