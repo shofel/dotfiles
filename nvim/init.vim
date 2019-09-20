@@ -1,6 +1,9 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
-"
-" TODO grepping http://ellengummesson.com/blog/2015/08/01/dropping-ctrlp-and-other-vim-plugins/
+
+" TODO what is but <Leader>bw=bwipeout!
+" TODO pre-filter node_modules
+" TODO replace Ag with fzf#Ag
+" TODO @see fzf_key_bindings
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -32,8 +35,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 
 " search files and inside files
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Testing
 Plug 'janko-m/vim-test'
@@ -224,11 +227,6 @@ nnoremap <Leader>tl gt
 nnoremap <Leader>th gT
 nnoremap <Leader>te :tabe<Space>
 
-" buffers
-nnoremap <Leader>bw :bwipeout!
-nnoremap <Leader>b<Space> :b<Space>
-nnoremap <Leader>tt :b term<Tab><Return>i
-
 " git
 nnoremap <Leader>gs :Gstatus<Return>
 nnoremap <Leader>ga :Gwrite<Return>
@@ -344,13 +342,11 @@ if executable('ag')
   " Use ag over :grep
   set grepprg=ag
 
-  " ack.vim
-  let g:ackprg = 'ag --vimgrep --smart-case'
-  cnoreabbrev Ag Ack
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
+  " fzf
+  nnoremap <C-p> :GFiles<Return>
+  nnoremap <C-P> :Files<Return>
+  nnoremap <Leader>b :Buffers<Return>
+  nnoremap <Leader>/ :Lines<Return>
 endif
 " }}}
 
