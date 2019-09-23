@@ -1,6 +1,5 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
-" TODO what is but <Leader>bw=bwipeout!
 " TODO fzf-preview https://github.com/yuki-ycino/fzf-preview.vim
 " TODO fzf: use the git repo of the current file
 
@@ -220,13 +219,12 @@ nnoremap <Leader>wk  <C-w><C-k>
 
 " some commands
 nnoremap <Leader>o   :only<Return>
-nnoremap <Leader>wt  <C-w>T
 nnoremap <Leader>wq  <C-w>c
-nnoremap <Leader>wz  ZZ
+nnoremap <Leader>bK  :bwipeout!<Return>
 
 " tabs
-nnoremap <Leader>tl gt
-nnoremap <Leader>th gT
+nnoremap <Leader>tk gt
+nnoremap <Leader>tj gT
 nnoremap <Leader>te :tabe<Space>
 
 " git
@@ -371,9 +369,9 @@ command! -bang -nargs=* Rg
 nnoremap <C-p> :call Shofel_fzf_GFiles()<Return>
 command! Files call Shofel_fzf_Files()
 
-nnoremap <Leader>bb :Buffers<Return>
+nnoremap <Leader>bm :Buffers<Return>
 nnoremap <Leader>/ :BLines
-nnoremap <Leader>ww :Windows<Return>
+nnoremap <Leader>wm :Windows<Return>
 " }}}
 
 " terminals {{{
