@@ -231,6 +231,7 @@ nnoremap <Leader>te :tabe<Space>
 nnoremap <Leader>gs :Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
+nnoremap <Leader>c  :checkt<Return>
 
 " skip empty lines, when navigating with arrows
 onoremap <Up> {
@@ -362,15 +363,16 @@ endfunction
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'dir': projectroot#get()}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'dir': projectroot#get()}, 'right:50%:hidden', '?'),
   \   <bang>0)
 
 nnoremap <C-p> :call Shofel_fzf_GFiles()<Return>
-command! Files call Shofel_fzf_Files()
+command! PFiles call Shofel_fzf_Files()
 
 nnoremap <Leader>bm :Buffers<Return>
 nnoremap <Leader>/ :BLines
+
 nnoremap <Leader>wm :Windows<Return>
 " }}}
 
