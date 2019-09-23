@@ -1,3 +1,8 @@
+## A list of apps to install
+- fd-find
+- ripgrep
+- [asdf](https://asdf-vm.com/#/)
+
 ``` sh
 ## Add PPAs
 
