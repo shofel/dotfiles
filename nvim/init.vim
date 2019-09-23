@@ -339,14 +339,14 @@ nnoremap / /\v
 " https://github.com/junegunn/fzf.vim/commit/29db9ea1408d6cdaeed2a8b212fb3896392a8631
 " let g:fzf_buffers_jump = 1
 
-" Files
+" Files inside gitroot of the current file.
 function! Shofel_fzf_Files()
   call fzf#run(fzf#wrap('files',
       \ {'source': 'fdfind --type=file --hidden --no-ignore',
       \  'dir': projectroot#get() }))
 endfunction
 
-" GFiles
+" GFiles inside gitroot of the current file.
 function! Shofel_fzf_GFiles()
   call fzf#run(fzf#wrap('gfiles',
       \ {'source': 'fdfind --type=file',
@@ -355,6 +355,7 @@ endfunction
 
 " Rg with preview
 " @see https://sidneyliebrand.io/blog/how-fzf-and-ripgrep-improved-my-workflow
+" +edited: set dir to gitroot.
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
@@ -362,9 +363,10 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'dir': projectroot#get()}, 'right:50%:hidden', '?'),
   \   <bang>0)
 
-nnoremap <C-p> :call Shofel_fzf_GFiles()<Return>
-command! PFiles call Shofel_fzf_Files()
+command! PGFiles call PGFiles()
+command! PFiles call PFiles()
 
+nnoremap <C-p> :call PGFiles()<Return>
 nnoremap <Leader>bm :Buffers<Return>
 nnoremap <Leader>/ :BLines
 
