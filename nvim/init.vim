@@ -357,14 +357,4 @@ nnoremap <Leader>b :Buffers<Return>
 nnoremap <Leader>/ :BLines
 " }}}
 
-" The Silver Searcher {{{
-" @see https://robots.thoughtbot.com/faster-grepping-in-vim
-" TODO prefer fzf over ag
-if executable('ag')
-  " Use ag over :grep
-  set grepprg=ag
-
-endif
-" }}}
-
 " vim: set fdm=marker :
