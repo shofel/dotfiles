@@ -50,6 +50,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-sneak' " TODO: 1.no default keys, 2.<Leader>{s,S}
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
+Plug 'kassio/neoterm'
 
 " javascript
 Plug 'pangloss/vim-javascript'
@@ -367,6 +368,13 @@ command! Files call Shofel_fzf_Files()
 
 nnoremap <Leader>b :Buffers<Return>
 nnoremap <Leader>/ :BLines
+" }}}
+
+" neoterm {{{
+nnoremap <silent> <Leader>To :Topen<Return>
+nnoremap <silent> <Leader>Tt :Ttoggle<Return>
+nnoremap <silent> <Leader>Tn :Tnext<Return>
+nnoremap <silent> <Leader>Tp :Tprev<Return>
 " }}}
 
 " vim: set fdm=marker :
