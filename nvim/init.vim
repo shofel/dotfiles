@@ -1,16 +1,8 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
 " TODO what is but <Leader>bw=bwipeout!
-" TODO ripgrep https://sidneyliebrand.io/blog/how-fzf-and-ripgrep-improved-my-workflow
 " TODO fzf-preview https://github.com/yuki-ycino/fzf-preview.vim
 " TODO fzf: use the git repo of the current file
-" TODO switch buffers like ctrl-p
-
-" TODO terminals
-"   - distinguish terminal buffers
-"   -> cmd to open term with a given label
-"   - switch between them
-"   -> cmd to switch among filtered list of buffers
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -347,9 +339,11 @@ nnoremap / /\v
 " }}}
 
 " fzf {{{
-
 " @depends_on: fdfind:  https://github.com/sharkdp/fd
 " @depends_on: ripgrep: https://github.com/BurntSushi/ripgrep
+
+" https://github.com/junegunn/fzf.vim/commit/29db9ea1408d6cdaeed2a8b212fb3896392a8631
+" let g:fzf_buffers_jump = 1
 
 " Files
 function! Shofel_fzf_Files()
@@ -377,8 +371,9 @@ command! -bang -nargs=* Rg
 nnoremap <C-p> :call Shofel_fzf_GFiles()<Return>
 command! Files call Shofel_fzf_Files()
 
-nnoremap <Leader>b :Buffers<Return>
+nnoremap <Leader>bb :Buffers<Return>
 nnoremap <Leader>/ :BLines
+nnoremap <Leader>ww :Windows<Return>
 " }}}
 
 " terminals {{{
