@@ -2,6 +2,7 @@
 
 " TODO what is but <Leader>bw=bwipeout!
 " TODO ripgrep https://sidneyliebrand.io/blog/how-fzf-and-ripgrep-improved-my-workflow
+" TODO fzf-preview https://github.com/yuki-ycino/fzf-preview.vim
 " TODO fzf: use the git repo of the current file
 
 " plugins {{{
