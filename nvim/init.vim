@@ -5,6 +5,10 @@
 " TODO fzf-preview https://github.com/yuki-ycino/fzf-preview.vim
 " TODO fzf: use the git repo of the current file
 
+" TODO terminals
+" - distinguish terminal buffers
+" - switch between them
+
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -339,21 +343,24 @@ nnoremap / /\v
 
 " fzf {{{
 
+" @depends_on: fdfind:  https://github.com/sharkdp/fd
+" @depends_on: ripgrep: https://github.com/BurntSushi/ripgrep
+
 " Files
 function! Shofel_fzf_Files()
   call fzf#run(fzf#wrap('files',
-      \ {'source': 'fdfind --hidden --no-ignore',
+      \ {'source': 'fdfind --type=file --hidden --no-ignore',
       \  'dir': projectroot#get() }))
 endfunction
 
 " GFiles
 function! Shofel_fzf_GFiles()
   call fzf#run(fzf#wrap('gfiles',
-      \ {'source': 'fdfind',
+      \ {'source': 'fdfind --type=file',
       \  'dir': projectroot#get() }))
 endfunction
 
-" Rg
+" Rg with preview
 " @see https://sidneyliebrand.io/blog/how-fzf-and-ripgrep-improved-my-workflow
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
