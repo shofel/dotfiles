@@ -221,11 +221,6 @@ nnoremap <Leader>o   :only<Return>
 nnoremap <Leader>wq  <C-w>c
 nnoremap <Leader>wK  :bwipeout!<Return>
 
-" tabs
-nnoremap <Leader>tk gt
-nnoremap <Leader>tj gT
-nnoremap <Leader>te :tabe<Space>
-
 " git
 nnoremap <Leader>gs :Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
