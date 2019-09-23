@@ -229,9 +229,8 @@ nnoremap <Leader>te :tabe<Space>
 
 " git
 nnoremap <Leader>gs :Gstatus<Return>
-nnoremap <Leader>ga :Gwrite<Return>
+nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
-nnoremap <Leader>gr :SignifyRefresh<Return>
 
 " skip empty lines, when navigating with arrows
 onoremap <Up> {
