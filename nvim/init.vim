@@ -249,6 +249,11 @@ nnoremap <Leader>p "*]p<Return>
 " @see http://neovim.io/doc/user/nvim_terminal_emulator.html
 " @see https://github.com/junegunn/fzf.vim/issues/544
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
+
+" close with `q`
+augroup ShovelClose_q
+  autocmd Filetype help nnoremap <buffer> q :close<CR>
+augroup END
 " }}}
 
 " Asynchronous Lint Engine {{{
