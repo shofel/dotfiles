@@ -25,7 +25,6 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " more editing
 Plug 'tommcdo/vim-exchange'
-Plug 'prendradjaja/vim-vertigo'
 Plug 'jiangmiao/auto-pairs'
 
 " follow conventions
@@ -46,7 +45,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'georgewitteman/vim-fish'
 
 " trying right now
-Plug 'justinmk/vim-sneak' " TODO: 1.no default keys, 2.<Leader>{s,S}
+Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
 
@@ -250,15 +249,6 @@ nnoremap <Leader>p "*]p<Return>
 " @see http://neovim.io/doc/user/nvim_terminal_emulator.html
 " @see https://github.com/junegunn/fzf.vim/issues/544
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
-
-" vim-vertigo
-let g:Vertigo_homerow = 'aoeuidhtns'
-nnoremap <silent> <Leader>j :<C-U>VertigoDown n<CR>
-vnoremap <silent> <Leader>j :<C-U>VertigoDown v<CR>
-onoremap <silent> <Leader>j :<C-U>VertigoDown o<CR>
-nnoremap <silent> <Leader>k :<C-U>VertigoUp n<CR>
-vnoremap <silent> <Leader>k :<C-U>VertigoUp v<CR>
-onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 " }}}
 
 " Asynchronous Lint Engine {{{
@@ -385,6 +375,11 @@ command! -nargs=? Terminal
       \ call termopen(&shell . ' ;# ' . <q-args>)
 
 nnoremap <Leader>T :Terminal 
+" }}}
+
+" sneak {{{
+nmap <Leader>j <Plug>Sneak_s
+nmap <Leader>k <Plug>Sneak_S
 " }}}
 
 " vim: set fdm=marker :
