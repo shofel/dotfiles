@@ -49,6 +49,7 @@ Plug 'janko-m/vim-test'
 " Languages
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
+Plug 'georgewitteman/vim-fish'
 
 " trying right now
 Plug 'justinmk/vim-sneak' " TODO: 1.no default keys, 2.<Leader>{s,S}
