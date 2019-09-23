@@ -219,7 +219,7 @@ nnoremap <Leader>wk  <C-w><C-k>
 " some commands
 nnoremap <Leader>o   :only<Return>
 nnoremap <Leader>wq  <C-w>c
-nnoremap <Leader>bK  :bwipeout!<Return>
+nnoremap <Leader>wK  :bwipeout!<Return>
 
 " tabs
 nnoremap <Leader>tk gt
@@ -340,14 +340,14 @@ nnoremap / /\v
 " let g:fzf_buffers_jump = 1
 
 " Files inside gitroot of the current file.
-function! Shofel_fzf_Files()
+function! PFiles()
   call fzf#run(fzf#wrap('files',
       \ {'source': 'fdfind --type=file --hidden --no-ignore',
       \  'dir': projectroot#get() }))
 endfunction
 
 " GFiles inside gitroot of the current file.
-function! Shofel_fzf_GFiles()
+function! PGFiles()
   call fzf#run(fzf#wrap('gfiles',
       \ {'source': 'fdfind --type=file',
       \  'dir': projectroot#get() }))
@@ -368,7 +368,7 @@ command! PFiles call PFiles()
 
 nnoremap <C-p> :call PGFiles()<Return>
 nnoremap <Leader>bm :Buffers<Return>
-nnoremap <Leader>/ :BLines
+nnoremap <Leader>/ :BLines 
 
 nnoremap <Leader>wm :Windows<Return>
 " }}}
@@ -379,6 +379,7 @@ function! Shofel_terminal(label)
 endfunction
 
 command! -nargs=? Terminal
+      \ enew |
       \ call termopen(&shell . ' ;# ' . <q-args>)
 
 nnoremap <Leader>T :Terminal 
