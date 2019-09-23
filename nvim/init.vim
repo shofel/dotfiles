@@ -387,6 +387,7 @@ nnoremap <Leader>T :Terminal
 " sneak {{{
 nmap <Leader>j <Plug>Sneak_s
 nmap <Leader>k <Plug>Sneak_S
+xmap z <Plug>Sneak_s
 " }}}
 
 " vim: set fdm=marker :
