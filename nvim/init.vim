@@ -4,10 +4,13 @@
 " TODO ripgrep https://sidneyliebrand.io/blog/how-fzf-and-ripgrep-improved-my-workflow
 " TODO fzf-preview https://github.com/yuki-ycino/fzf-preview.vim
 " TODO fzf: use the git repo of the current file
+" TODO switch buffers like ctrl-p
 
 " TODO terminals
-" - distinguish terminal buffers
-" - switch between them
+"   - distinguish terminal buffers
+"   -> cmd to open term with a given label
+"   - switch between them
+"   -> cmd to switch among filtered list of buffers
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -172,6 +175,7 @@ augroup initvim
   autocmd Filetype text let b:AutoPairs = {'"(': '")'}
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
+
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 " }}}
@@ -375,6 +379,17 @@ command! Files call Shofel_fzf_Files()
 
 nnoremap <Leader>b :Buffers<Return>
 nnoremap <Leader>/ :BLines
+" }}}
+
+" terminals {{{
+
+function! Shofel_terminal(label)
+endfunction
+
+command! -nargs=? Terminal
+      \ call termopen(&shell . ' ;# ' . <q-args>)
+
+nnoremap <Leader>T :Terminal 
 " }}}
 
 " vim: set fdm=marker :
