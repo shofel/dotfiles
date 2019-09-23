@@ -247,8 +247,9 @@ vnoremap <Leader>y "*y<Return>
 nnoremap <Leader>p "*]p<Return>
 
 " in terminal
-" http://neovim.io/doc/user/nvim_terminal_emulator.html
-tnoremap <Esc> <C-\><C-n>
+" @see http://neovim.io/doc/user/nvim_terminal_emulator.html
+" @see https://github.com/junegunn/fzf.vim/issues/544
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
 
 " vim-vertigo
 let g:Vertigo_homerow = 'aoeuidhtns'
