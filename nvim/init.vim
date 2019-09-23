@@ -1,9 +1,6 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
 " TODO what is but <Leader>bw=bwipeout!
-" TODO pre-filter node_modules
-" TODO replace Ag with fzf#Ag
-" TODO @see fzf_key_bindings
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -37,6 +34,7 @@ Plug 'editorconfig/editorconfig-vim'
 " search files and inside files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'dbakker/vim-projectroot'
 
 " Testing
 Plug 'janko-m/vim-test'
@@ -336,17 +334,36 @@ nnoremap <Leader>n :nohlsearch<cr>
 nnoremap / /\v
 " }}}
 
+" fzf {{{
+
+" Files
+function! Shofel_fzf_Files()
+  call fzf#run(fzf#wrap('files',
+      \ {'source': 'fdfind --hidden --no-ignore',
+      \  'dir': projectroot#get() }))
+endfunction
+
+" GFiles
+function! Shofel_fzf_GFiles()
+  call fzf#run(fzf#wrap('gfiles',
+      \ {'source': 'fdfind',
+      \  'dir': projectroot#get() }))
+endfunction
+
+nnoremap <C-p> :call Shofel_fzf_GFiles()<Return>
+command! Files call Shofel_fzf_Files()
+
+nnoremap <Leader>b :Buffers<Return>
+nnoremap <Leader>/ :BLines
+" }}}
+
 " The Silver Searcher {{{
 " @see https://robots.thoughtbot.com/faster-grepping-in-vim
+" TODO prefer fzf over ag
 if executable('ag')
   " Use ag over :grep
   set grepprg=ag
 
-  " fzf
-  nnoremap <C-p> :GFiles<Return>
-  nnoremap <C-P> :Files<Return>
-  nnoremap <Leader>b :Buffers<Return>
-  nnoremap <Leader>/ :Lines<Return>
 endif
 " }}}
 
