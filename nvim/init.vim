@@ -215,7 +215,7 @@ nnoremap <Leader>wk  <C-w><C-k>
 
 " some commands
 nnoremap <Leader>o   :only<Return>
-nnoremap <Leader>wq  <C-w>c
+nnoremap <Leader>wk  :close<Return>
 nnoremap <Leader>wK  :bwipeout!<Return>
 
 " git & bufsync
@@ -372,7 +372,7 @@ command! PGFiles call PGFiles()
 command! PFiles call PFiles()
 
 nnoremap <C-p> :call PGFiles()<Return>
-nnoremap <Leader>bm :Buffers<Return>
+nnoremap <Leader>b :Buffers<Return>
 nnoremap <Leader>/ :BLines 
 
 nnoremap <Leader>wm :Windows<Return>
