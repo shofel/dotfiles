@@ -1,8 +1,5 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
-" TODO fzf-preview https://github.com/yuki-ycino/fzf-preview.vim
-" TODO fzf: use the git repo of the current file
-
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -26,6 +23,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " more editing
 Plug 'tommcdo/vim-exchange'
 Plug 'jiangmiao/auto-pairs'
+Plug 'justinmk/vim-sneak'
 
 " follow conventions
 Plug 'ntpeters/vim-better-whitespace'
@@ -45,7 +43,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'georgewitteman/vim-fish'
 
 " trying right now
-Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
 
@@ -166,6 +163,7 @@ augroup initvim
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
 
+  autocmd VimEnter * term
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 " }}}
@@ -182,8 +180,6 @@ endfun
 
 let mapleader="\<Space>"
 
-" write file
-nnoremap <Leader>s :w<Return>
 " edit .vimrc
 nnoremap <Leader>ve :tabe $MYVIMRC<Return>
 nnoremap <Leader>vs :source $MYVIMRC<Return>
@@ -237,7 +233,7 @@ vnoremap <Down> }
 
 " Mouse clipboard: yank and print.
 " TODO make an opeartor to enable motions.
-vnoremap <Leader>y "*y<Return>
+xnoremap <Leader>y "*y<Return>
 nnoremap <Leader>p "*]p<Return>
 
 " in terminal
@@ -328,8 +324,17 @@ nnoremap / /\v
 " }}}
 
 " fzf {{{
-" @depends_on: fdfind:  https://github.com/sharkdp/fd
-" @depends_on: ripgrep: https://github.com/BurntSushi/ripgrep
+" @see https://www.freecodecamp.org/news/fzf-a-command-line-fuzzy-finder-missing-demo-a7de312403ff/
+"
+" Changes
+" - search files in git repo of the current file
+"   (Files->PFiles, GFiles->PGFiles, Rg)
+" - Rg: with preview
+" - Commits: the way fzf.vim determines gitroot is unmodifiable :/
+"
+" These changes depend on
+" - fdfind:  https://github.com/sharkdp/fd
+" - ripgrep: https://github.com/BurntSushi/ripgrep
 
 " https://github.com/junegunn/fzf.vim/commit/29db9ea1408d6cdaeed2a8b212fb3896392a8631
 " let g:fzf_buffers_jump = 1
