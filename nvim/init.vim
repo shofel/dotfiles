@@ -163,7 +163,6 @@ augroup initvim
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
 
-  autocmd VimEnter * term
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 " }}}
@@ -189,6 +188,8 @@ vnoremap <F6> y:"
 
 " edit code
 nnoremap <Leader>fs :StripWhitespace<Return>
+let g:better_whitespace_operator = ''
+
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
@@ -217,11 +218,12 @@ nnoremap <Leader>o   :only<Return>
 nnoremap <Leader>wq  <C-w>c
 nnoremap <Leader>wK  :bwipeout!<Return>
 
-" git
+" git & bufsync
 nnoremap <Leader>gs :Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>c  :checkt<Return>
+nnoremap <Leader>s  :write<Return>
 
 " skip empty lines, when navigating with arrows
 onoremap <Up> {
@@ -247,17 +249,20 @@ augroup ShovelClose_q
 augroup END
 " }}}
 
-" Asynchronous Lint Engine {{{
+" ALE Asynchronous Lint Engine {{{
 
-" Always show the list when there are some errors
-let g:ale_linters = {
-\ 'javascript': ['flow-language-server', 'eslint'],
-\ 'python': ['pyflakes', 'pyls', 'mypy', 'pylint'],
-\}
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'python': [],
-\}
+" Python
+let g:ale_python_auto_pipenv= 1
+
+" Linters and fixers.
+let g:ale_linters = {}
+let g:ale_fixers = {}
+
+let g:ale_linters.python = ['pylint']
+let g:ale_fixers.python = []
+
+let g:ale_linters.javascript = ['flow-language-server', 'eslint']
+let g:ale_fixers.javascript = ['eslint']
 
 "More goodness of language servers.
 let g:ale_completion_enabled = 1
