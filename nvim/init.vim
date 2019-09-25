@@ -45,6 +45,7 @@ Plug 'georgewitteman/vim-fish'
 " trying right now
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
+Plug 'rhysd/reply.vim'
 
 " javascript
 Plug 'pangloss/vim-javascript'
