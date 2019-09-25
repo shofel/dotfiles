@@ -192,6 +192,7 @@ let g:better_whitespace_operator = ''
 
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
+nnoremap <Leader>fd :ALEGoToDefinition<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
 
 " quickfix window
@@ -237,6 +238,7 @@ vnoremap <Down> }
 " TODO make an opeartor to enable motions.
 xnoremap <Leader>y "*y<Return>
 nnoremap <Leader>p "*]p<Return>
+xnoremap <Leader>p "*]p<Return>
 
 " in terminal
 " @see http://neovim.io/doc/user/nvim_terminal_emulator.html
