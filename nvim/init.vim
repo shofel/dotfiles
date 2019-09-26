@@ -193,8 +193,20 @@ let g:better_whitespace_operator = ''
 
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
+nnoremap <Leader>fk :ALEPreviousWrap<Return>
 nnoremap <Leader>fd :ALEGoToDefinition<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
+
+" switch to tab {{{
+nnoremap <Leader>1 :tabn 1<Return>
+nnoremap <Leader>2 :tabn 2<Return>
+nnoremap <Leader>3 :tabn 3<Return>
+nnoremap <Leader>4 :tabn 4<Return>
+nnoremap <Leader>6 :tabn 6<Return>
+nnoremap <Leader>7 :tabn 7<Return>
+nnoremap <Leader>8 :tabn 8<Return>
+nnoremap <Leader>9 :tabn 9<Return>
+" }}}
 
 " quickfix window
 nnoremap <Leader>q :copen<Return>
@@ -261,11 +273,11 @@ let g:ale_python_auto_pipenv= 1
 let g:ale_linters = {}
 let g:ale_fixers = {}
 
-let g:ale_linters.python = ['pylint']
+let g:ale_linters.python = ['pylint', 'pyls']
 let g:ale_fixers.python = []
 
 let g:ale_linters.javascript = ['flow-language-server', 'eslint']
-let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.javascript = ['eslint', 'importjs']
 
 "More goodness of language servers.
 let g:ale_completion_enabled = 1
