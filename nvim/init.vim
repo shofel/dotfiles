@@ -198,6 +198,16 @@ nnoremap <Leader>fk :ALEPreviousWrap<Return>
 nnoremap <Leader>fd :ALEGoToDefinition<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
 
+" emmet {{{
+let g:user_emmet_install_global = 0
+
+augroup ShovelEmmet
+  for x in ['css', 'html', 'htmldjango']
+    exe "autocmd FileType " x " EmmetInstall"
+  endfor
+augroup END
+" }}}
+
 " switch to tab {{{
 nnoremap <Leader>1 :tabn 1<Return>
 nnoremap <Leader>2 :tabn 2<Return>
