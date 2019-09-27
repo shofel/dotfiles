@@ -338,6 +338,11 @@ let g:lightline.tabline = {
 " Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_realtime = 1
+
+omap ic <Plug>(signify-motion-inner-pending)
+xmap ic <Plug>(signify-motion-inner-visual)
+omap ac <Plug>(signify-motion-outer-pending)
+xmap ac <Plug>(signify-motion-outer-visual)
 " }}}
 
 " various plugins {{{
