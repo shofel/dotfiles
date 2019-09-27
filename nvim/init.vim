@@ -115,6 +115,7 @@ set shiftwidth=2
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set guicursor=n-v-ve:block,i-c-ci-cr:ver100,o-r:hor100
+set mouse=a
 
 set noshowmode " to not duplicate lightline
 set showtabline=2
