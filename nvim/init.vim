@@ -155,17 +155,18 @@ augroup initvim
 
   " Javascript
   autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
-  autocmd BufRead,BufNewFile *.js let b:commentary_format = "/* %s */"
-  autocmd BufRead,BufNewFile *.js let b:textwidth=80
-  autocmd BufRead,BufNewFile *.js let b:textwidth=80
+  autocmd Filetype javascript let b:commentary_format = "/* %s */"
+  autocmd Filetype javascript let b:textwidth=80
+  autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
 
-  autocmd BufRead,BufNewFile *.njk setfiletype jinja
-  autocmd BufRead,BufNewFile *.nj setfiletype jinja
   autocmd Filetype text let b:AutoPairs = {'"(': '")'}
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
+
+  " close help windows with `q`
+  autocmd Filetype help nnoremap <buffer> q :close<CR>
 augroup END
 " }}}
 
@@ -174,10 +175,6 @@ abbr retrun return
 " }}}
 
 " keys {{{
-" helper function to swap the option between x and y values
-fun! SwapVal (name, x, y)
-  execute 'let '.a:name.' = {'.a:x.':'.a:y.', '.a:y.':'.a:x.'}['.a:name.']'
-endfun
 
 let mapleader="\<Space>"
 
@@ -202,9 +199,9 @@ nnoremap <M-s> :set number! relativenumber!<Return>
 let g:user_emmet_install_global = 0
 
 augroup ShovelEmmet
-  for x in ['css', 'html', 'htmldjango']
-    exe "autocmd FileType " x " EmmetInstall"
-  endfor
+  autocmd FileType css EmmetInstall
+  autocmd FileType html EmmetInstall
+  autocmd FileType htmldjango EmmetInstall
 augroup END
 " }}}
 
@@ -218,17 +215,6 @@ nnoremap <Leader>7 :tabn 7<Return>
 nnoremap <Leader>8 :tabn 8<Return>
 nnoremap <Leader>9 :tabn 9<Return>
 " }}}
-
-" quickfix window
-nnoremap <Leader>q :copen<Return>
-nnoremap <Leader>Q :cclose<Return>
-" folding
-nnoremap <Leader>zs :call SwapVal('&foldcolumn', 0, 4)<cr>
-" execute command
-nnoremap <Leader>; :
-
-" grep with K
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " windows
 
@@ -267,12 +253,8 @@ xnoremap <Leader>p "*]p<Return>
 " in terminal
 " @see http://neovim.io/doc/user/nvim_terminal_emulator.html
 " @see https://github.com/junegunn/fzf.vim/issues/544
+" map <c-g> for fzf is because it closes fzf window faster than <Esc>.
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
-
-" close with `q`
-augroup ShovelClose_q
-  autocmd Filetype help nnoremap <buffer> q :close<CR>
-augroup END
 " }}}
 
 " ALE Asynchronous Lint Engine {{{
