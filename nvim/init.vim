@@ -228,9 +228,9 @@ nnoremap <Leader><Up>    <C-w><C-k>
 " }}}
 
 " some commands
+nnoremap <Leader>s   :w<Return>
 nnoremap <Leader>o   :only<Return>
-nnoremap <Leader>wk  :close<Return>
-nnoremap <Leader>wK  :bwipeout!<Return>
+nnoremap <Leader>kk  :bwipeout!<Return>
 
 " git & bufsync
 nnoremap <Leader>gs :Gstatus<Return>
@@ -389,9 +389,8 @@ command! PFiles call PFiles()
 
 nnoremap <C-p> :call PGFiles()<Return>
 nnoremap <Leader>b :Buffers<Return>
+nnoremap <Leader>w :Windows<Return>
 nnoremap <Leader>/ :BLines 
-
-nnoremap <Leader>wm :Windows<Return>
 " }}}
 
 " terminals {{{
