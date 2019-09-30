@@ -406,9 +406,18 @@ nnoremap <Leader>T :Terminal
 " }}}
 
 " sneak {{{
-nmap <Leader>j <Plug>Sneak_s
-nmap <Leader>k <Plug>Sneak_S
+g:sneak#prompt = 'sneak>'
+" These are defaults:
+nmap s <Plug>Sneak_s
+nmap S <Plug>Sneak_S
+omap z <Plug>Sneak_s
+omap Z <Plug>Sneak_S
+" This one is not default.
 xmap z <Plug>Sneak_s
+xmap Z <Plug>Sneak_S
+" Map f and F to a one-char sneak.
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
 " }}}
 
 " vim: set fdm=marker :
