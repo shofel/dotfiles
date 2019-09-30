@@ -205,7 +205,11 @@ augroup ShovelEmmet
 augroup END
 " }}}
 
-" switch to tab {{{
+" Switch tabs and windows.
+" Tabs : <Leader>+number
+" Windows : <Leader>+error
+
+" switch tab {{{
 nnoremap <Leader>1 :tabn 1<Return>
 nnoremap <Leader>2 :tabn 2<Return>
 nnoremap <Leader>3 :tabn 3<Return>
@@ -216,13 +220,12 @@ nnoremap <Leader>8 :tabn 8<Return>
 nnoremap <Leader>9 :tabn 9<Return>
 " }}}
 
-" windows
-
-" basic movements
-nnoremap <Leader>wl  <C-w><C-l>
-nnoremap <Leader>wh  <C-w><C-h>
-nnoremap <Leader>wj  <C-w><C-j>
-nnoremap <Leader>wk  <C-w><C-k>
+" switch window {{{
+nnoremap <Leader><Left>  <C-w><C-l>
+nnoremap <Leader><Right> <C-w><C-h>
+nnoremap <Leader><Down>  <C-w><C-j>
+nnoremap <Leader><Up>    <C-w><C-k>
+" }}}
 
 " some commands
 nnoremap <Leader>o   :only<Return>
