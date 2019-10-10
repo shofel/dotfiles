@@ -42,6 +42,9 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'georgewitteman/vim-fish'
 
+" draw ascii diagrams
+Plug 'gyim/vim-boxdraw'
+
 " trying right now
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
@@ -398,9 +401,10 @@ nnoremap <Leader>/ :BLines
 function! Shofel_terminal(label)
 endfunction
 
-command! -nargs=? Terminal
+command! -nargs=? -bar Terminal
       \ enew |
-      \ call termopen(&shell . ' ;# ' . <q-args>)
+      \ call termopen(&shell . ' ;# ' . <q-args>) |
+      \ f <q-args>
 
 nnoremap <Leader>T :Terminal 
 " }}}
