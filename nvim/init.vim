@@ -45,6 +45,9 @@ Plug 'georgewitteman/vim-fish'
 " draw ascii diagrams
 Plug 'gyim/vim-boxdraw'
 
+" embed to browser
+Plug 'glacambre/firenvim'
+
 " trying right now
 Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
@@ -161,6 +164,7 @@ augroup initvim
   autocmd Filetype javascript let b:commentary_format = "/* %s */"
   autocmd Filetype javascript let b:textwidth=80
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
+  autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
 
   autocmd Filetype text let b:AutoPairs = {'"(': '")'}
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
@@ -217,6 +221,7 @@ nnoremap <Leader>1 :tabn 1<Return>
 nnoremap <Leader>2 :tabn 2<Return>
 nnoremap <Leader>3 :tabn 3<Return>
 nnoremap <Leader>4 :tabn 4<Return>
+nnoremap <Leader>5 :tabn 5<Return>
 nnoremap <Leader>6 :tabn 6<Return>
 nnoremap <Leader>7 :tabn 7<Return>
 nnoremap <Leader>8 :tabn 8<Return>
@@ -410,7 +415,7 @@ nnoremap <Leader>T :Terminal
 " }}}
 
 " sneak {{{
-g:sneak#prompt = 'sneak>'
+let g:sneak#prompt = 'sneak>'
 " These are defaults:
 nmap s <Plug>Sneak_s
 nmap S <Plug>Sneak_S
