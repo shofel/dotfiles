@@ -429,4 +429,23 @@ map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 " }}}
 
+" firenvim {{{
+" TODO: extract to 1.detection and 2.effect
+" TODO: commit back to firenvim repo.
+function! OnUIEnter(event)
+    let l:ui = nvim_get_chan_info(a:event.chan)
+    if has_key(l:ui, 'client') && has_key(l:ui.client, "name")
+      if l:ui.client.name == "Firenvim"
+        set signcolumn=no
+        set laststatus=0
+        set showtabline=1
+        set nowrap
+      endif
+    endif
+endfunction
+
+" invoke onuienter
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+" }}}
+
 " vim: set fdm=marker :
