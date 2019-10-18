@@ -147,10 +147,10 @@ set termguicolors
 colorscheme two-firewatch
 
 " the better diff colors
-hi DiffAdd          guibg=#262626 guifg=#c8e6c9 gui=reverse
-hi DiffChange       guibg=#262626 guifg=#8787af gui=reverse
-hi DiffDelete       guibg=#262626 guifg=#ffcdd2 gui=reverse
-hi DiffText         guibg=#262626 guifg=#c8e6c9 gui=reverse
+hi DiffChange       guibg=black guifg=#cdcdfd  gui=reverse
+hi DiffDelete       guibg=black guifg=#ffcddc  gui=reverse
+hi DiffAdd          guibg=black guifg=#c9e6c9  gui=reverse
+hi DiffText         guibg=black guifg=#c9e6c9  gui=reverse
 
 " }}}
 
