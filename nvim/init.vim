@@ -200,6 +200,7 @@ nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
 nnoremap <Leader>fk :ALEPreviousWrap<Return>
 nnoremap <Leader>fd :ALEGoToDefinition<Return>
+nnoremap <Leader>fr :ALEFindReferences<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
 
 " emmet {{{
@@ -234,6 +235,9 @@ nnoremap <Leader><Right> <C-w><C-h>
 nnoremap <Leader><Down>  <C-w><C-j>
 nnoremap <Leader><Up>    <C-w><C-k>
 " }}}
+
+" to be more useful in a browser
+inoremap <c-backspace> <c-w>
 
 " some commands
 nnoremap <Leader>s   :w<Return>
@@ -270,6 +274,9 @@ tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
 
 " ALE Asynchronous Lint Engine {{{
 
+" @see https://github.com/dense-analysis/ale/issues/1700#issuecomment-402807012
+set completeopt+=noinsert
+
 " Python
 let g:ale_python_auto_pipenv= 1
 
@@ -281,6 +288,7 @@ let g:ale_linters.python = ['pylint', 'pyls']
 let g:ale_fixers.python = []
 
 let g:ale_linters.javascript = ['flow-language-server', 'eslint']
+" TODO use importjs separately. I suspect performance issue here.
 let g:ale_fixers.javascript = ['eslint', 'importjs']
 
 "More goodness of language servers.
@@ -393,12 +401,15 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 command! PGFiles call PGFiles()
-command! PFiles call PFiles()
+command! PFiles  call PFiles()
 
-nnoremap <C-p> :call PGFiles()<Return>
-nnoremap <Leader>b :Buffers<Return>
-nnoremap <Leader>w :Windows<Return>
-nnoremap <Leader>/ :BLines 
+nnoremap <c-p>     <cmd>PGFiles<Return>
+nnoremap <Leader>b <cmd>Buffers<Return>
+nnoremap <Leader>w <cmd>Windows<Return>
+" TODO mimic to / and ?
+nnoremap / <cmd>BLines<cr>
+nnoremap <Leader>/ /\v
+nnoremap <Leader>* :BLines <c-r><c-w><Return>
 " }}}
 
 " terminals {{{
