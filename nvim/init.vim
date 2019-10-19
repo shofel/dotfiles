@@ -57,7 +57,7 @@ Plug 'rhysd/reply.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
-Plug 'ap/vim-css-color'
+Plug 'RRethy/Vim-hexokinase', { 'do': 'make hexokinase' }
 
 " html and templates
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -146,11 +146,11 @@ set background=light
 set termguicolors
 colorscheme two-firewatch
 
-" the better diff colors
-hi DiffChange       guibg=black guifg=#cdcdfd  gui=reverse
-hi DiffDelete       guibg=black guifg=#ffcddc  gui=reverse
-hi DiffAdd          guibg=black guifg=#c9e6c9  gui=reverse
-hi DiffText         guibg=black guifg=#c9e6c9  gui=reverse
+" hide tildas after the end of file
+highlight EndOfBuffer guifg=bg guibg=none
+
+" bold exchange.vim
+highlight link ExchangeRegion Folded
 
 " }}}
 
@@ -195,6 +195,7 @@ vnoremap <F6> y:"
 " edit code
 nnoremap <Leader>fs :StripWhitespace<Return>
 let g:better_whitespace_operator = ''
+let g:better_whitespace_guicolor = '#cc7a7a'
 
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
@@ -215,7 +216,7 @@ augroup END
 
 " Switch tabs and windows.
 " Tabs : <Leader>+number
-" Windows : <Leader>+error
+" Windows : <Leader>+arrow
 
 " switch tab {{{
 nnoremap <Leader>1 :tabn 1<Return>
@@ -457,6 +458,12 @@ endfunction
 
 " invoke onuienter
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+" }}}
+
+" Hexokinase {{{
+let g:Hexokinase_refreshEvents = [
+      \ 'BufWrite', 'BufCreate',
+      \ 'TextChanged', 'InsertLeave']
 " }}}
 
 " vim: set fdm=marker :
