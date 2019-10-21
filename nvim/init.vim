@@ -142,9 +142,11 @@ let g:one_allow_italics = 1
 let g:two_firewatch_italics=1
 
 " init colors
-set background=light
-set termguicolors
-colorscheme two-firewatch
+if (!v:vim_did_enter)
+  set background=light
+  set termguicolors
+  colorscheme two-firewatch
+endif
 
 " hide tildas after the end of file
 highlight EndOfBuffer guifg=bg guibg=none
@@ -373,21 +375,24 @@ nnoremap / /\v
 " These changes depend on
 " - fdfind:  https://github.com/sharkdp/fd
 " - ripgrep: https://github.com/BurntSushi/ripgrep
+" TODO Fixup sticky comments on i_o.
 
+if (!executable('fd'))  | echoerr 'fd (fd-find) executable not found'  | endif
+if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
 " https://github.com/junegunn/fzf.vim/commit/29db9ea1408d6cdaeed2a8b212fb3896392a8631
 " let g:fzf_buffers_jump = 1
 
 " Files inside gitroot of the current file.
 function! PFiles()
   call fzf#run(fzf#wrap('files',
-      \ {'source': 'fdfind --type=file --hidden --no-ignore',
+      \ {'source': 'fd --type=file --hidden --no-ignore',
       \  'dir': projectroot#get() }))
 endfunction
 
 " GFiles inside gitroot of the current file.
 function! PGFiles()
   call fzf#run(fzf#wrap('gfiles',
-      \ {'source': 'fdfind --type=file',
+      \ {'source': 'fd --type=file',
       \  'dir': projectroot#get() }))
 endfunction
 
