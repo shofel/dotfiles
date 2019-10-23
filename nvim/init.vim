@@ -294,6 +294,8 @@ let g:ale_linters.javascript = ['flow-language-server', 'eslint']
 " TODO use importjs separately. I suspect performance issue here.
 let g:ale_fixers.javascript = ['eslint', 'importjs']
 
+let g:ale_linters.fish = []
+
 "More goodness of language servers.
 let g:ale_completion_enabled = 1
 " }}}
