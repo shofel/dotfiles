@@ -1,5 +1,7 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
+" TODO key to go to github page of plugin
+
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -38,6 +40,8 @@ Plug 'dbakker/vim-projectroot'
 Plug 'janko-m/vim-test'
 
 " Languages
+Plug 'junegunn/gv.vim'
+Plug 'rhysd/git-messenger.vim'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'georgewitteman/vim-fish'
@@ -179,6 +183,19 @@ augroup initvim
 augroup END
 " }}}
 
+" vman {{{
+function! s:vmanSettings()
+  setlocal signcolumn=no
+  setlocal showtabline=0
+  setlocal ruler
+  nnoremap <buffer> q <cmd>q!<cr>
+endfunction
+
+augroup vmanSettings
+  autocmd Filetype man call s:vmanSettings()
+augroup END
+" }}}
+
 " abbreviations {{{
 abbr retrun return
 " }}}
@@ -273,6 +290,9 @@ xnoremap <Leader>p "*]p<Return>
 " @see https://github.com/junegunn/fzf.vim/issues/544
 " map <c-g> for fzf is because it closes fzf window faster than <Esc>.
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
+
+" Git messager
+nnoremap <Leader>gm <cmd>GitMessenger<cr>
 " }}}
 
 " ALE Asynchronous Lint Engine {{{
@@ -331,7 +351,7 @@ let g:lightline.active = {
       \           [ 'filename', 'readonly' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
-      \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+      \            [ 'filetype' ] ] }
 let g:lightline.inactive = {
       \ 'left': [ [ 'filename' ] ],
       \ 'right': [ [ 'lineinfo' ],
