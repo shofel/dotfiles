@@ -57,6 +57,9 @@ Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
 Plug 'rhysd/reply.vim'
 
+" markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
 " javascript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -85,6 +88,7 @@ Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'rakr/vim-one' " one
 
+" {{{ alternative colors
 " dark themes
 " Plug 'joshdick/onedark.vim'
 " Plug 'ErichDonGubler/vim-sublime-monokai'
@@ -102,6 +106,7 @@ Plug 'rakr/vim-one' " one
 " Plug 'yankcrime/direwolf'
 " Plug 'endel/vim-github-colorscheme'
 " Plug 'reedes/vim-colors-pencil'
+" }}}
 
 call plug#end()
 " }}}
@@ -157,7 +162,6 @@ highlight EndOfBuffer guifg=bg guibg=none
 
 " bold exchange.vim
 highlight link ExchangeRegion Folded
-
 " }}}
 
 " syntax and filetypes {{{
@@ -171,10 +175,11 @@ augroup initvim
   autocmd Filetype javascript let b:textwidth=80
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
+  autocmd Filetype javascript nnoremap <buffer> <Leader>r :Dispatch yarn ava %<cr>
 
   autocmd Filetype text let b:AutoPairs = {'"(': '")'}
   autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
-  autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<Return>
+  autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 
@@ -250,8 +255,8 @@ nnoremap <Leader>9 :tabn 9<Return>
 " }}}
 
 " switch window {{{
-nnoremap <Leader><Left>  <C-w><C-l>
-nnoremap <Leader><Right> <C-w><C-h>
+nnoremap <Leader><Left>  <C-w><C-h>
+nnoremap <Leader><Right> <C-w><C-l>
 nnoremap <Leader><Down>  <C-w><C-j>
 nnoremap <Leader><Up>    <C-w><C-k>
 " }}}
@@ -450,7 +455,7 @@ command! -nargs=? -bar Terminal
       \ call termopen(&shell . ' ;# ' . <q-args>) |
       \ f <q-args>
 
-nnoremap <Leader>T :Terminal 
+nnoremap <Leader>T :Terminal _
 " }}}
 
 " sneak {{{
@@ -491,6 +496,13 @@ autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 let g:Hexokinase_refreshEvents = [
       \ 'BufWrite', 'BufCreate',
       \ 'TextChanged', 'InsertLeave']
+" }}}
+
+" markdown-preview.nvim {{{
+let g:mkdp_browser = 'google-chrome-beta'
+augroup markdown-preview.nvim
+  autocmd Filetype markdown  nnoremap <buffer> <Leader>fp <cmd>MarkdownPreview<cr>
+augroup END
 " }}}
 
 " vim: set fdm=marker :
