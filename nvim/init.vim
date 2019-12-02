@@ -220,6 +220,9 @@ vnoremap <F6> y:"
 nnoremap <Leader>fs :StripWhitespace<Return>
 let g:better_whitespace_operator = ''
 let g:better_whitespace_guicolor = '#cc7a7a'
+let g:better_whitespace_filetypes_blacklist = [
+  \ 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown',
+  \ 'git']
 
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
@@ -504,5 +507,11 @@ augroup markdown-preview.nvim
   autocmd Filetype markdown  nnoremap <buffer> <Leader>fp <cmd>MarkdownPreview<cr>
 augroup END
 " }}}
+
+" Debug highlighing.
+" @see https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
+function! Synstack()
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " vim: set fdm=marker :
