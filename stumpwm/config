@@ -1,10 +1,14 @@
 ;; vim: set ft=lisp:
 ;;
-;; To test changes use `restart-soft` command.
+;; TODO make a clean clone of *root-map*
 
 (in-package :stumpwm)
 
 (set-prefix-key (kbd "F9")) ; "C-t" is the default value.
+
+(define-key *root-map* (kbd "?") "which-key-mode")
+; (define-key *root-map* (kbd "R") "restart-soft") ;; To test changes.
+; (define-key *root-map* (kbd "I") "show-window-properties")
 
 (setf *message-window-gravity* :center)
 (setf *input-window-gravity* :center)
@@ -43,33 +47,50 @@
 ;;;
 
 ;; Change frames.
-
-(define-key *root-map* (kbd "Left") "move-focus left")
-(define-key *root-map* (kbd "Right") "move-focus right")
+(define-key *root-map* (kbd "h") "move-focus left")
+(define-key *root-map* (kbd "l") "move-focus right")
 
 ;; Move windows.
-
-(define-key *root-map* (kbd "M-Left") "move-window left")
-(define-key *root-map* (kbd "M-Right") "move-window right")
+(define-key *root-map* (kbd "H") "move-window left")
+(define-key *root-map* (kbd "L") "move-window right")
 
 ;; Change groups.
-
+;; TODO ga: group1; go: group2; ge: group3
 (define-key *root-map* (kbd "C-Left") "gprev")
 (define-key *root-map* (kbd "C-Right") "gnext")
 
+;;
+(define-key *root-map* (kbd "w") "windowlist")
+
 ;; Fix terminal-emulator
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
+
+;; Browsers.
+
+(setf -browser-options
+      "--high-dpi-support --force-device-scale-factor=1.5")
+
 (setf -exec-yandex-browser
-  "exec yandex-browser-beta --high-dpi-support --force-device-scale-factor=1.5")
+  (concatenate 'string "exec yandex-browser-beta " -browser-options))
+(setf -exec-google-chrome
+  (concatenate 'string "exec google-chrome-beta " -browser-options))
+
 (define-key *root-map* (kbd "y") -exec-yandex-browser)
+(define-key *root-map* (kbd "C") -exec-google-chrome)
+
+;;
+
+(defun -unbind-key (-map -key)
+  (define-key -map -key "exec true"))
 
 ;; Disable easy killing.
-;; undefine-key doesn't work, so use this hack.
-(define-key *root-map* (kbd "k") "exec true")
+;; undefine-key only resets key to default, so use this hack.
+(-unbind-key *root-map* (kbd "k"))
 (define-key *root-map* (kbd "K") "kill")
 
-;; Switch input languages.
-;; (define-key *root-map* (kbd "C-l") "exec fcitx-remote -t")
+;;
+;; Restore.
+;;
 
 ;; Restore groups and frames.
 (defun -restore-groups-and-frames ()
@@ -83,14 +104,14 @@
 (defun -restore-window-rules ()
   (restore-window-placement-rules "~/.config/stumpwm/window-placement"))
 
-;; Restore
+;;
 (-restore-groups-and-frames)
 (-restore-window-rules)
 
 ;;
-;; initializing
+;; Initializing.
 ;;
 (when *initializing*
-  (run-commands "exec google-chrome-beta --high-dpi-support --force-device-scale-factor=1.5"
+  (run-commands -exec-google-chrome
                 -exec-yandex-browser
                 "exec telegram-desktop"))
