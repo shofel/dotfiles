@@ -265,11 +265,9 @@ nnoremap <Leader>kk  :bwipeout!<Return>
 
 " git & bufsync
 nnoremap <Leader>gs :Gstatus<Return>
-nnoremap <Leader>gc :Gcommit<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gP :Git push --force-with-lease
-nnoremap <Leader>gd :vert Git diff --cached<cr>
 nnoremap <Leader>c  :checkt<Return>
 nnoremap <Leader>s  :write<Return>
 
