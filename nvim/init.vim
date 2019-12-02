@@ -28,7 +28,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-sneak'
 
 " follow conventions
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 
 " search files and inside files
@@ -215,14 +214,6 @@ nnoremap <Leader>vs :source $MYVIMRC<Return>
 
 " get to execute visually selected text
 vnoremap <F6> y:"
-
-" edit code
-nnoremap <Leader>fs :StripWhitespace<Return>
-let g:better_whitespace_operator = ''
-let g:better_whitespace_guicolor = '#cc7a7a'
-let g:better_whitespace_filetypes_blacklist = [
-  \ 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown',
-  \ 'git', 'fugitive']
 
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
