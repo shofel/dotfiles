@@ -222,7 +222,7 @@ let g:better_whitespace_operator = ''
 let g:better_whitespace_guicolor = '#cc7a7a'
 let g:better_whitespace_filetypes_blacklist = [
   \ 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown',
-  \ 'git']
+  \ 'git', 'fugitive']
 
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fj :ALENextWrap<Return>
