@@ -33,7 +33,7 @@
 (set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 13))
 
 ;;;
-;;; Top-map keys.
+;;; Keys.
 ;;;
 
 ;; Define the volume control and mute keys.
@@ -41,16 +41,12 @@
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pactl set-sink-volume 0 +5%")
 (define-key *top-map* (kbd "XF86AudioMute") "exec pactl set-sink-mute 0 toggle")
 
-
-;;;
-;;; Root-map keys.
-;;;
-
 ;; Change frames.
 (define-key *root-map* (kbd "h") "move-focus left")
 (define-key *root-map* (kbd "l") "move-focus right")
 
-;; Move windows.
+;; Windows.
+(define-key *root-map* (kbd "w") "windowlist")
 (define-key *root-map* (kbd "H") "move-window left")
 (define-key *root-map* (kbd "L") "move-window right")
 
@@ -58,12 +54,14 @@
 ;; TODO ga: group1; go: group2; ge: group3
 (define-key *root-map* (kbd "C-Left") "gprev")
 (define-key *root-map* (kbd "C-Right") "gnext")
-
-;;
-(define-key *root-map* (kbd "w") "windowlist")
+(define-key *group-map* (kbd "Left") "gprev")
+(define-key *group-map* (kbd "Right") "gnext")
 
 ;; Fix terminal-emulator
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
+
+;; Restore help-map.
+(define-key *root-map* (kbd "&" *help-map*)
 
 ;; Browsers.
 
