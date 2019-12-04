@@ -54,14 +54,9 @@
 ;; TODO ga: group1; go: group2; ge: group3
 (define-key *root-map* (kbd "C-Left") "gprev")
 (define-key *root-map* (kbd "C-Right") "gnext")
-(define-key *group-map* (kbd "Left") "gprev")
-(define-key *group-map* (kbd "Right") "gnext")
 
 ;; Fix terminal-emulator
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
-
-;; Restore help-map.
-(define-key *root-map* (kbd "&" *help-map*)
 
 ;; Browsers.
 
