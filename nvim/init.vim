@@ -267,7 +267,7 @@ nnoremap <Leader>kk  :bwipeout!<Return>
 nnoremap <Leader>gs :Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
-nnoremap <Leader>gP :Git push --force-with-lease
+nnoremap <Leader>gP :Git push --force-with-lease<Return>
 
 nmap <Leader>gk <Plug>(signify-prev-hunk)
 nmap <Leader>gj <Plug>(signify-next-hunk)
