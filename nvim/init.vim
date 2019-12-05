@@ -360,15 +360,36 @@ let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings
 
 " Git status
 
-function! ShovelGitStatus ()
-  // TODO replace head and cut with easier RE.
-  let l:s = system('git status --short --branch | head -n 1 | cut -d" " -f 3-')
-  let l:s = substitute(l:s, '.$', '', '')
-  let l:s = substitute(l:s, '[\]\[]', '', 'g')
-  let l:s = substitute(l:s, 'ahead ',  '↑', '')
-  let l:s = substitute(l:s, 'behind ', '↓', '')
+function! ShovelGitUnsyncStatus (x)
+  let l:x = a:x
 
-  return l:s
+  " Sample inputs for tests.
+  " let l:x = '## master...origin/master [ahead 4]^@'
+  " let l:x = '## master...origin/master [behind 4]^@'
+  " let l:x = '## xmas...origin/xmas^@'
+
+  let l:uptodate = -1 == match(l:x, '\(ahead\|behind\)')
+
+  if (l:uptodate)
+    return ''
+  endif
+
+  " Arrow and number.
+  let l:_ = substitute(l:x, '^[^[]\{-}\[\(ahead\|behind\) \(\d\+\)\].*$', '\1 \2', '')
+  let [l:arrow, l:number] = split(l:_)
+  let l:arrow = get({'ahead': '↑', 'behind': '↓'}, l:arrow, '')
+
+  " Branch name.
+  let l:_ = split(l:x)[1]
+  let l:branch = substitute(l:_, '\([^.]\{-}\)\.\{3}.*$', '\1', '')
+
+  " Concat together.
+  return l:branch .' '. l:arrow . l:number
+endfunc
+
+function! ShovelGitStatus ()
+  let l:s = system('git status --short --branch | head -n 1')
+  return ShovelParseGitStatus(l:s)
 endfunc
 
 let g:lightline.component_expand.gitstatus = 'ShovelGitStatus'
