@@ -353,12 +353,22 @@ let g:lightline#ale#indicator_warnings = "W:"
 let g:lightline#ale#indicator_errors = "E:"
 let g:lightline#ale#indicator_ok = " ✔ "
 
+" Git status
+
+function! ShovelGitStatus ()
+  let l:s = system('git status --short --branch | head -n 1 | cut -d" " -f 3-')
+  return substitute(l:s, '.$', '', '')
+endfunc
+
+let g:lightline.component_expand.gitstatus = 'ShovelGitStatus'
+let g:lightline.component_type.gitstatus = 'error'
+
 " assemble the status line
 
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-      \           [ 'filename', 'readonly' ] ],
+      \           [ 'filename', 'readonly', 'gitstatus' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'filetype' ] ] }
