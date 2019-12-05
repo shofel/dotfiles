@@ -58,6 +58,9 @@
 ;; Fix terminal-emulator
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
 
+;; Suspend.
+(define-key *root-map* (kbd "C-M-s") "exec systemctl suspend")
+
 ;; Browsers.
 
 (setf -browser-options
