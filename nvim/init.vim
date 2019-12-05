@@ -389,7 +389,7 @@ endfunc
 
 function! ShovelGitStatus ()
   let l:s = system('git status --short --branch | head -n 1')
-  return ShovelParseGitStatus(l:s)
+  return ShovelGitUnsyncStatus(l:s)
 endfunc
 
 let g:lightline.component_expand.gitstatus = 'ShovelGitStatus'
