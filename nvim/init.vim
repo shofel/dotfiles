@@ -381,6 +381,12 @@ let g:lightline.tabline = {
       \ 'right': [ [ 'close' ] ] }
 " }}}
 
+" Refresh when reloading
+if (v:vim_did_enter)
+  call lightline#init()
+  call lightline#update()
+endif
+
 " Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_realtime = 1
