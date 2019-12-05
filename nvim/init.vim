@@ -336,28 +336,39 @@ let g:lightline = {}
 let g:lightline.colorscheme = 'one'
 
 " ALE integration
+"
 let g:lightline.component_expand = {
 \  'linter_checking': 'lightline#ale#checking',
 \  'linter_warnings': 'lightline#ale#warnings',
 \  'linter_errors': 'lightline#ale#errors',
 \  'linter_ok': 'lightline#ale#ok',
 \ }
+
 let g:lightline.component_type = {
 \     'linter_checking': 'left',
 \     'linter_warnings': 'warning',
 \     'linter_errors': 'error',
 \     'linter_ok': 'left',
 \ }
+
 let g:lightline#ale#indicator_checking = "..."
 let g:lightline#ale#indicator_warnings = "W:"
 let g:lightline#ale#indicator_errors = "E:"
 let g:lightline#ale#indicator_ok = " ✔ "
 
+let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
+
 " Git status
 
 function! ShovelGitStatus ()
+  // TODO replace head and cut with easier RE.
   let l:s = system('git status --short --branch | head -n 1 | cut -d" " -f 3-')
-  return substitute(l:s, '.$', '', '')
+  let l:s = substitute(l:s, '.$', '', '')
+  let l:s = substitute(l:s, '[\]\[]', '', 'g')
+  let l:s = substitute(l:s, 'ahead ',  '↑', '')
+  let l:s = substitute(l:s, 'behind ', '↓', '')
+
+  return l:s
 endfunc
 
 let g:lightline.component_expand.gitstatus = 'ShovelGitStatus'
@@ -366,9 +377,10 @@ let g:lightline.component_type.gitstatus = 'error'
 " assemble the status line
 
 let g:lightline.active = {
-      \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-      \           [ 'filename', 'readonly', 'gitstatus' ] ],
+      \ 'left': [ [ 'mode', 'paste' ] +
+      \             s:linter_components,
+      \           [ 'gitstatus' ],
+      \           [ 'filename', 'readonly' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'filetype' ] ] }
