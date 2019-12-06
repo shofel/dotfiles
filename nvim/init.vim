@@ -269,12 +269,16 @@ nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gP :Git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
+nnoremap <Leader>gt :term glog<cr>i
+nnoremap <Leader>gv :GV!
 
 nmap <Leader>gk <Plug>(signify-prev-hunk)
 nmap <Leader>gj <Plug>(signify-next-hunk)
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
+  autocmd Filetype fugitive nmap <buffer> s <Plug>Sneak_s
+  autocmd Filetype fugitive nmap <buffer> S <Plug>Sneak_S
   autocmd Filetype fugitive nmap <buffer>   <Up> <c-p>
   autocmd Filetype fugitive nmap <buffer> <Down> <c-n>
   autocmd Filetype git      nmap <buffer>   <Up> <c-p>
