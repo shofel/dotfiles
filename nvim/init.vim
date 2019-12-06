@@ -275,8 +275,8 @@ nmap <Leader>gj <Plug>(signify-next-hunk)
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
-  autocmd Filetype fugitive nmap <buffer>   <Up> [c
-  autocmd Filetype fugitive nmap <buffer> <Down> ]c
+  autocmd Filetype fugitive nmap <buffer>   <Up> <c-p>
+  autocmd Filetype fugitive nmap <buffer> <Down> <c-n>
 augroup END
 
 nnoremap <Leader>c  :checkt<Return>
