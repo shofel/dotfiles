@@ -264,10 +264,11 @@ nnoremap <Leader>o   :only<Return>
 nnoremap <Leader>kk  :bwipeout!<Return>
 
 " git & bufsync
-nnoremap <Leader>gs :Gstatus<Return>
+nnoremap <Leader>gs :vert Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gP :Git push --force-with-lease<Return>
+nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 
 nmap <Leader>gk <Plug>(signify-prev-hunk)
 nmap <Leader>gj <Plug>(signify-next-hunk)
@@ -360,6 +361,12 @@ let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings
 
 " Git status
 
+" @param first line of `git status --short`
+function! ShovelGitParseBranch (x)
+  let l:_ = split(a:x)[1]
+  return substitute(l:_, '\([^.]\{-}\)\.\{3}.*$', '\1', '')
+endfunc
+
 function! ShovelGitUnsyncStatus (x)
   let l:x = a:x
 
@@ -380,19 +387,25 @@ function! ShovelGitUnsyncStatus (x)
   let l:arrow = get({'ahead': '↑', 'behind': '↓'}, l:arrow, '')
 
   " Branch name.
-  let l:_ = split(l:x)[1]
-  let l:branch = substitute(l:_, '\([^.]\{-}\)\.\{3}.*$', '\1', '')
+  let l:branch = ShovelGitParseBranch(l:x)
 
   " Concat together.
   return l:branch .' '. l:arrow . l:number
 endfunc
 
-function! ShovelGitStatus ()
-  let l:s = system('git status --short --branch | head -n 1')
-  return ShovelGitUnsyncStatus(l:s)
+function ShovelGitRawStatus ()
+  return system('git status --short --branch | head -n 1')
 endfunc
 
-let g:lightline.component_expand.gitstatus = 'ShovelGitStatus'
+function! ShovelGitStatusLine ()
+  return ShovelGitUnsyncStatus(ShovelGitRawStatus())
+endfunc
+
+function! ShovelGitBranch ()
+  return ShovelGitParseBranch(ShovelGitRawStatus())
+endfunc
+
+let g:lightline.component_expand.gitstatus = 'ShovelGitStatusLine'
 let g:lightline.component_type.gitstatus = 'error'
 
 " assemble the status line
