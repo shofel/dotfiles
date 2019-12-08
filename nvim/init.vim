@@ -25,6 +25,8 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " more editing
 Plug 'tommcdo/vim-exchange'
 Plug 'jiangmiao/auto-pairs'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'justinmk/vim-sneak'
 
 " follow conventions
@@ -70,7 +72,6 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
 
 " Clojure and Lisps
-Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 
 " Python TODO clean up and review
@@ -176,9 +177,9 @@ augroup initvim
   autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype javascript nnoremap <buffer> <Leader>r :Dispatch yarn ava %<cr>
 
-  autocmd Filetype text let b:AutoPairs = {'"(': '")'}
-  autocmd Filetype clojure let b:AutoPairs = {'"': '"'}
+  autocmd Filetype clojure let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
+  autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<cr>
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 
@@ -207,6 +208,7 @@ abbr retrun return
 " keys {{{
 
 let mapleader="\<Space>"
+let maplocalleader="\<Space>l"
 
 " edit .vimrc
 nnoremap <Leader>ve :tabe $MYVIMRC<Return>
