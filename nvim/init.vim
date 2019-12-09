@@ -290,6 +290,7 @@ nmap     <Leader>jg <Plug>(signify-next-hunk)
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
+  autocmd Filetype fugitive unmap <buffer> q
   autocmd Filetype fugitive nmap <buffer> s <Plug>Sneak_s
   autocmd Filetype fugitive nmap <buffer> S <Plug>Sneak_S
   autocmd Filetype fugitive nmap <buffer>   <Up> <c-p>
