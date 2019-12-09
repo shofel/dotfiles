@@ -217,9 +217,8 @@ nnoremap <Leader>vs :source $MYVIMRC<Return>
 " get to execute visually selected text
 vnoremap <F6> y:"
 
+" TODO leverage more from LSP
 nnoremap <Leader>fe :ALEFix<Return>
-nnoremap <Leader>fj :ALENextWrap<Return>
-nnoremap <Leader>fk :ALEPreviousWrap<Return>
 nnoremap <Leader>fd :ALEGoToDefinition<Return>
 nnoremap <Leader>fr :ALEFindReferences<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
@@ -274,8 +273,12 @@ nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gt :term glog<cr>i
 nnoremap <Leader>gv :GV!
 
-nmap <Leader>gk <Plug>(signify-prev-hunk)
-nmap <Leader>gj <Plug>(signify-next-hunk)
+" Navigate by signs in signcolumn
+nnoremap <Leader>jl <cmd>ALENextWrap<cr>
+nnoremap <Leader>kl <cmd>ALEPreviousWrap<cr>
+nmap     <Leader>kg <Plug>(signify-prev-hunk)
+nmap     <Leader>jg <Plug>(signify-next-hunk)
+
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
