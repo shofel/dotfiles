@@ -273,8 +273,8 @@ nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gP :Git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
-nnoremap <Leader>gt :term glog<cr>i
 nnoremap <Leader>gv :GV!
+nnoremap <Leader>gV :tabe +term\ glog<cr>i
 
 " Navigate by signs in signcolumn
 nnoremap <Leader>jl <cmd>ALENextWrap<cr>
