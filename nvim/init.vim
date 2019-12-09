@@ -262,9 +262,6 @@ nnoremap <Leader><Up>    <C-w><C-k>
 nnoremap gq <C-w>c
 " }}}
 
-" to be more useful in a browser
-inoremap <c-backspace> <c-w>
-
 " some commands
 nnoremap <Leader>s   :w<Return>
 nnoremap <Leader>o   :only<Return>
