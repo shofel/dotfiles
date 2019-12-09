@@ -9,12 +9,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
 " tpope
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " appearance
 Plug 'mhinz/vim-signify'
@@ -57,7 +58,6 @@ Plug 'gyim/vim-boxdraw'
 Plug 'glacambre/firenvim'
 
 " trying right now
-Plug 'tpope/vim-eunuch'
 Plug 'jez/vim-superman'
 Plug 'rhysd/reply.vim'
 
