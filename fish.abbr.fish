@@ -1,9 +1,7 @@
-abbr -a -U -- c 'composer -vvv exec'
-abbr -a -U -- cg 'composer -vvv global exec'
+abbr -a -U -- ava-inspect 'node --inspect=localhost:44444 ./node_modules/ava/profile.js'
 abbr -a -U -- dc docker-compose
 abbr -a -U -- dvorak 'setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle'
 abbr -a -U -- ecs examus-create-session
-abbr -a -U -- execlip 'fish -c (xclip -o)'
 abbr -a -U -- ga 'git add'
 abbr -a -U -- gamend 'git commit --amend --no-edit'
 abbr -a -U -- gb 'git branch'
@@ -13,28 +11,24 @@ abbr -a -U -- gclean 'git clean -fd'
 abbr -a -U -- gcm 'git checkout master'
 abbr -a -U -- gco 'git checkout'
 abbr -a -U -- gcom 'git commit'
+abbr -a -U -- gcp 'git cherry-pick'
 abbr -a -U -- gd 'git diff'
 abbr -a -U -- gdca 'git diff --cached'
 abbr -a -U -- gfa 'git fetch --all --prune --tags'
-abbr -a -U -- ggone git\ branch\ -vv\ \|\ grep\ \':\ gone\]\'\ \|\ awk\ \'\{print\ \$1\}\'
-abbr -a -U -- ggoneD git\ branch\ -vv\ \|\ grep\ \':\ gone\]\'\ \|\ awk\ \'\{print\ \$1\}\'\ \|\ xargs\ git\ branch\ -D
 abbr -a -U -- ghash 'git rev-parse --short HEAD'
 abbr -a -U -- ginit 'git init ;and git commit -m "root" --allow-empty'
 abbr -a -U -- gl 'git pull'
-abbr -a -U -- glr 'git pull --rebase'
-abbr -a -U -- gmt 'git mergetool'
 abbr -a -U -- gp 'git push'
 abbr -a -U -- gpf 'git push --force-with-lease'
+abbr -a -U -- gpu 'git push -u origin'
+abbr -a -U -- gr 'git reset'
 abbr -a -U -- grb 'git rebase'
 abbr -a -U -- grba 'git rebase --abort'
 abbr -a -U -- grbc 'git rebase --continue'
-abbr -a -U -- grbi 'git rebase -i'
 abbr -a -U -- grbs 'git rebase --skip'
-abbr -a -U -- grh 'git reset --hard'
+abbr -a -U -- grh 'git reset HEAD'
+abbr -a -U -- grhh 'git reset --hard HEAD'
 abbr -a -U -- gst 'git status --short --branch'
-abbr -a -U -- lectoriy_sync 'rsync -avz --exclude node_modules --exclude .git --exclude *swp frontend/themes/teachin/skins/default/ lectoriy:/var/www/html/test/lectoriy/frontend/themes/teachin/skins/default/'
-abbr -a -U -- nocaps 'setxkbmap -option ctrl:nocaps'
 abbr -a -U -- s sudo
-abbr -a -U -- sho-nrepl clj\ -Sdeps\ \'\{:deps\ \{nrepl/nrepl\ \{:mvn/version\ \"0.5.3\"\}\}\}\'\ -m\ nrepl.cmdline
-abbr -a -U -- suspend clear\;\ figlet\ -w100\ \'Cover\ the\ keyboard,\ dude!\'\;\ and\ sleep\ 10\;\ and\ systemctl\ suspend
-abbr -a -U -- weather 'curl wttr.in/guangzhou'
+abbr -a -U -- -nrepl clj\ -Sdeps\ \'\{:deps\ \{nrepl/nrepl\ \{:mvn/version\ \"0.5.3\"\}\}\}\'\ -m\ nrepl.cmdline
+abbr -a -U -- suspend systemctl\ suspend
