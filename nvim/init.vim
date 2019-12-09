@@ -40,12 +40,15 @@ Plug 'dbakker/vim-projectroot'
 " Testing
 Plug 'janko-m/vim-test'
 
-" Languages
-Plug 'junegunn/gv.vim'
+" Git
+Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'rhysd/git-messenger.vim'
+
+" Lang
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'georgewitteman/vim-fish'
+Plug 'Junegunn/vader.vim'
 
 " draw ascii diagrams
 Plug 'gyim/vim-boxdraw'
