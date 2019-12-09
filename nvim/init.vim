@@ -190,9 +190,6 @@ augroup initvim
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<cr>
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
-
-  " close help windows with `q`
-  autocmd Filetype help nnoremap <buffer> q :close<CR>
 augroup END
 " }}}
 
@@ -262,6 +259,7 @@ nnoremap <Leader><Left>  <C-w><C-h>
 nnoremap <Leader><Right> <C-w><C-l>
 nnoremap <Leader><Down>  <C-w><C-j>
 nnoremap <Leader><Up>    <C-w><C-k>
+nnoremap gq <C-w>c
 " }}}
 
 " to be more useful in a browser
