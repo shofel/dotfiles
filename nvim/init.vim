@@ -9,11 +9,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
 " tpope
+" TODO https://github.com/tpope/vim-projectionist
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
@@ -65,6 +68,7 @@ Plug 'rhysd/reply.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " javascript
+" TODO https://www.npmjs.com/package/eslint-pretty
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
@@ -125,6 +129,7 @@ set nobackup
 set noswapfile
 set updatetime=300 " set for vim-signify active mode
 
+" default indentation settings
 set smartindent
 set expandtab
 set tabstop=2
