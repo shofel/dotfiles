@@ -119,11 +119,14 @@ call plug#end()
 " }}}
 
 " general {{{
+set encoding=utf-8
+scriptencoding=utf-8
+
 set signcolumn=yes
 set nonumber " see also vim-numbertoggle plugin
 set hidden
 set list
-set fdm=marker
+set foldmethod=marker
 
 set nobackup
 set noswapfile
@@ -368,10 +371,10 @@ let g:lightline.component_type = {
 \     'linter_ok': 'left',
 \ }
 
-let g:lightline#ale#indicator_checking = "..."
-let g:lightline#ale#indicator_warnings = "W:"
-let g:lightline#ale#indicator_errors = "E:"
-let g:lightline#ale#indicator_ok = " ✔ "
+let g:lightline#ale#indicator_checking = '...'
+let g:lightline#ale#indicator_warnings = 'W:'
+let g:lightline#ale#indicator_errors = 'E:'
+let g:lightline#ale#indicator_ok = ' ✔ '
 
 let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
 
@@ -461,7 +464,7 @@ xmap ac <Plug>(signify-motion-outer-visual)
 
 " various plugins {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-let test#strategy = "dispatch"
+let test#strategy = 'dispatch'
 " }}}
 
 " search and replace {{{
@@ -561,8 +564,8 @@ map F <Plug>Sneak_F
 " TODO: commit back to firenvim repo.
 function! OnUIEnter(event)
     let l:ui = nvim_get_chan_info(a:event.chan)
-    if has_key(l:ui, 'client') && has_key(l:ui.client, "name")
-      if l:ui.client.name == "Firenvim"
+    if has_key(l:ui, 'client') && has_key(l:ui.client, 'name')
+      if l:ui.client.name ==? 'Firenvim'
         set signcolumn=no
         set laststatus=0
         set showtabline=1
