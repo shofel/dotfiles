@@ -279,13 +279,12 @@ nnoremap <Leader>gV :tabe +term\ glog<cr>i
 " Navigate by signs in signcolumn
 nnoremap <Leader>jl <cmd>ALENextWrap<cr>
 nnoremap <Leader>kl <cmd>ALEPreviousWrap<cr>
-nmap     <Leader>kg <Plug>(signify-prev-hunk)
-nmap     <Leader>jg <Plug>(signify-next-hunk)
+nmap     <Leader>kc <Plug>(signify-prev-hunk)
+nmap     <Leader>jc <Plug>(signify-next-hunk)
 
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
-  autocmd Filetype fugitive unmap <buffer> q
   autocmd Filetype fugitive nmap <buffer> s <Plug>Sneak_s
   autocmd Filetype fugitive nmap <buffer> S <Plug>Sneak_S
   autocmd Filetype fugitive nmap <buffer>   <Up> <c-p>
