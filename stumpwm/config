@@ -1,6 +1,7 @@
 ;; vim: set ft=lisp:
 ;;
-;; TODO make a clean clone of *root-map*
+;; TODO make a clean clone of *root-map*. I mean, free of unused mappings.
+;; The problem to solve is noisy keymap descriptions in "which-key-mode".
 ;;
 ;; TODO make hydras
 ;; @see https://github.com/caioaao/stumpwm.d/blob/f9c75be0c5db4b431d33f557a40451a943a35590/keymaps.lisp#L21
@@ -9,11 +10,11 @@
 
 (in-package :stumpwm)
 
-(set-prefix-key (kbd "F9")) ; "C-t" is the default value.
+(set-prefix-key (kbd "Delete"))
 
 (define-key *root-map* (kbd "?") "which-key-mode")
 ; (define-key *root-map* (kbd "R") "restart-soft") ;; To test changes.
-; (define-key *root-map* (kbd "I") "show-window-properties")
+(define-key *root-map* (kbd "I") "show-window-properties")
 
 (setf *message-window-gravity* :center)
 (setf *input-window-gravity* :center)
@@ -57,8 +58,8 @@
 
 ;; Change groups.
 ;; TODO ga: group1; go: group2; ge: group3
-(define-key *root-map* (kbd "C-Left") "gprev")
-(define-key *root-map* (kbd "C-Right") "gnext")
+(define-key *root-map* (kbd "BackSpace") "gprev")
+(define-key *root-map* (kbd "space") "gnext")
 
 ;; Fix terminal-emulator
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
