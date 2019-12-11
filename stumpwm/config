@@ -1,5 +1,7 @@
 ;; vim: set ft=lisp:
 ;;
+;; @see `stumpwm/keysyms.lisp` for the list of key names
+;;
 ;; TODO make a clean clone of *root-map*. I mean, free of unused mappings.
 ;; The problem to solve is noisy keymap descriptions in "which-key-mode".
 ;;
@@ -7,6 +9,7 @@
 ;; @see https://github.com/caioaao/stumpwm.d/blob/f9c75be0c5db4b431d33f557a40451a943a35590/keymaps.lisp#L21
 ;; @see https://github.com/alezost/stumpwm-config/blob/master/keys.lisp
 ;;
+;; TODO fast program switching-to: yabro, googleChrome, telegram
 
 (in-package :stumpwm)
 
@@ -66,6 +69,10 @@
 
 ;; Suspend.
 (define-key *root-map* (kbd "C-M-s") "exec systemctl suspend")
+
+;; Restore after suspending.
+;; sticky modifiers
+(define-key *root-map* (kbd "F9") "exec sh -c 'grep sticky /home/shovel/workspaces/dotfiles/.xinitrc-stumpwm | sh'")
 
 ;; Browsers.
 
