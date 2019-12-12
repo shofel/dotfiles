@@ -10,6 +10,8 @@
 ;; @see https://github.com/alezost/stumpwm-config/blob/master/keys.lisp
 ;;
 ;; TODO fast program switching-to: yabro, googleChrome, telegram
+;;
+;; TODO mask prefix-key when <Leader> key pressed
 
 (in-package :stumpwm)
 
