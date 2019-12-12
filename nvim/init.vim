@@ -273,8 +273,16 @@ nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp :Gpush<Return>
 nnoremap <Leader>gP :Git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
-nnoremap <Leader>gv :GV!
-nnoremap <Leader>gV :tabe +term\ glog<cr>i
+nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
+nnoremap <Leader>gV :GV!<Return>
+
+" TODO sum GV and glog
+function! Shovel_glog() abort
+  exe('tabe +term\ glog')
+  exe('setlocal bufhidden=wipe')
+  exe('tnoremap <buffer> q <c-\><c-n><c-w>c')
+  exe('startinsert')
+endfun
 
 " Navigate by signs in signcolumn
 nnoremap <Leader>jl <cmd>ALENextWrap<cr>
