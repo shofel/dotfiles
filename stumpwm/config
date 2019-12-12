@@ -62,7 +62,6 @@
 (define-key *root-map* (kbd "L") "move-window right")
 
 ;; Change groups.
-;; TODO ga: group1; go: group2; ge: group3
 (define-key *root-map* (kbd "Return") "gprev")
 (define-key *root-map* (kbd "space") "gnext")
 
