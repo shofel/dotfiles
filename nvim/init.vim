@@ -295,8 +295,6 @@ nnoremap <Leader>gd :SignifyHunkDiff<cr>
 augroup shovel-fugitive
   autocmd Filetype fugitive nmap <buffer> s <Plug>Sneak_s
   autocmd Filetype fugitive nmap <buffer> S <Plug>Sneak_S
-  autocmd Filetype fugitive nmap <buffer>   <Up> <c-p>
-  autocmd Filetype fugitive nmap <buffer> <Down> <c-n>
   autocmd Filetype git      nmap <buffer>   <Up> <c-p>
   autocmd Filetype git      nmap <buffer> <Down> <c-n>
   autocmd Filetype GV       nmap <buffer>   <Up> <c-p>
