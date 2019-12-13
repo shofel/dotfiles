@@ -265,7 +265,7 @@ nnoremap <Leader><Up>    <C-w><C-k>
 " some commands
 nnoremap <Leader>s   :w<Return>
 nnoremap <Leader>o   :only<Return>
-nnoremap <Leader>kk  :bwipeout!<Return>
+nnoremap <Leader>kk  :bdelete!<Return>
 
 " git & bufsync
 nnoremap <Leader>gs :vert Gstatus<Return>
