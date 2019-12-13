@@ -9,5 +9,7 @@ fish/conf.d/
 fish/fish_variables
 
 ## emacs
-.emacs.d/elpa/
+.emacs.d/amx-items
+.emacs.d/auto-save-list
+.emacs.d/elpa
 .emacs.d/network-security.data
