@@ -13,3 +13,4 @@ fish/fish_variables
 .emacs.d/auto-save-list
 .emacs.d/elpa
 .emacs.d/network-security.data
+.emacs.d/recentf

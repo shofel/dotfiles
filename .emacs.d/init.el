@@ -1,8 +1,8 @@
 ;;; -*- indent-tabs-mode: nil; tab-width: 2 -*- */
 
 ;;; Cyrillic dvorak.
-(load-file "~/.emacs.d/opt/mk-dvorak-russian.el")
-(set-input-method "mk-dvorak-russian")
+(load-file "~/.emacs.d/opt/cyrillic-dvorak.el")
+(set-input-method "cyrillic-dvorak")
 (toggle-input-method)
 
 ;;;
