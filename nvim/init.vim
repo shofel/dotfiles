@@ -386,7 +386,17 @@ let g:lightline#ale#indicator_ok = ' ✔ '
 
 let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
 
-" Git status
+" Git
+
+cabbrev  Gfa Git fetch --all --prune --tags
+cabbrev  Gclean Git clean -fd
+cabbrev  Gpushup Git push -u origin
+command! Ghash echo ShovelGitHash()
+
+function! ShovelGitHash ()
+  let l:_ = system('git rev-parse --short HEAD')
+  return substitute(l:_, '^\(\w\+\).*', '\1', '')
+endfunc
 
 " @param first line of `git status --short`
 function! ShovelGitParseBranch (x)
