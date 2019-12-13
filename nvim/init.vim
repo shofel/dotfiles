@@ -314,14 +314,14 @@ vnoremap <Down> }
 
 " X buffers.
 " TODO make an opeartor to enable motions.
-" X selection
-xnoremap <Leader>y "*y<Return>
-nnoremap <Leader>p "*]p<Return>
-xnoremap <Leader>p "*]p<Return>
 " X clipboard
-xnoremap <Leader>Y "+y<Return>
-nnoremap <Leader>P "+]p<Return>
-xnoremap <Leader>P "+]p<Return>
+xnoremap <Leader>y "+y<Return>
+nnoremap <Leader>p "+]p<Return>
+xnoremap <Leader>p "+]p<Return>
+" X selection
+xnoremap <Leader>Y "*y<Return>
+nnoremap <Leader>P "*]p<Return>
+xnoremap <Leader>P "*]p<Return>
 
 " in terminal
 " @see http://neovim.io/doc/user/nvim_terminal_emulator.html
