@@ -260,6 +260,7 @@ nnoremap <Leader><Left>  <C-w><C-h>
 nnoremap <Leader><Right> <C-w><C-l>
 nnoremap <Leader><Down>  <C-w><C-j>
 nnoremap <Leader><Up>    <C-w><C-k>
+nnoremap <Leader><BS> <C-w><C-w>
 " }}}
 
 " some commands
