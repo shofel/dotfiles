@@ -555,10 +555,12 @@ nnoremap <Leader>* :BLines <c-r><c-w><Return>
 function! Shofel_terminal(label)
 endfunction
 
+command! -bar BarTerm term
+
 command! -nargs=? -bar Terminal
       \ enew |
-      \ call termopen(&shell . ' ;# ' . <q-args>) |
-      \ f <q-args>
+      \ BarTerm |
+      \ file term:<args>
 
 nnoremap <Leader>T :Terminal _
 " }}}
