@@ -290,6 +290,8 @@ nnoremap <Leader>jl <cmd>ALENextWrap<cr>
 nnoremap <Leader>kl <cmd>ALEPreviousWrap<cr>
 nmap     <Leader>kc <Plug>(signify-prev-hunk)
 nmap     <Leader>jc <Plug>(signify-next-hunk)
+nmap             [c <Plug>(signify-prev-hunk)
+nmap             ]c <Plug>(signify-next-hunk)
 
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
@@ -391,7 +393,7 @@ let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings
 
 cabbrev  Gfa Git fetch --all --prune --tags
 cabbrev  Gclean Git clean -fd
-cabbrev  Gpushup Git push -u origin
+cabbrev  Gpu Git push -u origin
 command! Ghash echo ShovelGitHash()
 
 function! ShovelGitHash ()
