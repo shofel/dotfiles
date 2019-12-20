@@ -446,13 +446,19 @@ endfunc
 let g:lightline.component_expand.gitstatus = 'ShovelGitStatusLine'
 let g:lightline.component_type.gitstatus = 'error'
 
+function! ShovelFullpath ()
+  return expand('%:f')
+endfunc
+
+let g:lightline.component_expand.fullpath = 'ShovelFullpath'
+
 " assemble the status line
 
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ] +
       \             s:linter_components,
       \           [ 'gitstatus' ],
-      \           [ 'filename', 'readonly' ] ],
+      \           [ 'fullpath', 'readonly' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'filetype' ] ] }
