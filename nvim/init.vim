@@ -281,7 +281,7 @@ nnoremap <Leader>gV :GV!<Return>
 function! Shovel_glog() abort
   exe('tabe +term\ glog')
   exe('setlocal bufhidden=wipe')
-  exe('tnoremap <buffer> q <c-\><c-n><c-w>c')
+  exe('tnoremap <buffer> q <c-\><c-n>:bdelete!<cr>')
   exe('startinsert')
 endfun
 
