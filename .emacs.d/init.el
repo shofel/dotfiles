@@ -77,13 +77,7 @@
   (general-def
     'normal
     "/" 'swiper)
-
-  ;; Up and Down for { and }
-  (general-def
-    'normal
-    "<down>" 'evil-forward-paragraph
-    "<up>" 'evil-backward-paragraph)
-  )
+)
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
