@@ -1,9 +1,0 @@
-#!/bin/bash
-
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh.deb | sudo bash
-
-echo
-echo Install git-lfs...
-sudo apt-get install git-lfs -y &>/dev/null
-
-git lfs install
