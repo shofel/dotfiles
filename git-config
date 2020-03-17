@@ -1,0 +1,4 @@
+#!/bin/sh
+git config --global user.email "visla.vvi@gmail.com"
+git config --global user.name "Slava Istomin"
+
