@@ -10,6 +10,19 @@ nix-env -i google-chrome telegram-desktop
 # fonts-firacode python3-neovim
 # stumpwm ssh-askpass-fullscreen
 
+## Set default shell
+
+chsh -s /usr/bin/fish
+
+
+## vim-plug
+```
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+nvim +':PlugInstall'
+```
+
 ## Set default apps
 
 sudo update-alternatives --install \
@@ -21,16 +34,6 @@ sudo update-alternatives --set x-terminal-emulator /home/shovel/opt/bin/kitty
 
 xdg-settings set default-web-browser google-chrome-beta.desktop
 
-## Set default shell
-
-echo 'Setting default shell to "/usr/bin/fish"'
-chsh -s /usr/bin/fish
-
-## vim-plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-```
 
 ### Fish script
 Run this fish script from the root of this repo.
