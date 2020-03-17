@@ -1,14 +1,9 @@
-## A list of apps to install
-- fd-find
-- ripgrep
-- [asdf](https://asdf-vm.com/#/)
+## Install packages
 
-``` sh
-## Add PPAs
+nix-env -i xclip git git-lfs
+nix-env -i neovim fish ripgrep fd
 
-for x in 'ppa:fish-shell/release-3' 'ppa:neovim-ppa/unstable' 'ppa:atareao/telegram'
-  do sudo add-apt-repository -y $x; done
-
+snap install telegram-desktop
 
 ## Add google-chrome repo
 
@@ -16,17 +11,14 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
   | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
-## Install packages
-
 sudo apt update
-sudo apt install -y \
-  xclip git \
-  fonts-firacode fish \
-  neovim python3-neovim silversearcher-ag \
-  stumpwm \
-  ssh-askpass-fullscreen \
-  telegram google-chrome-stable
+sudo apt install -y google-chrome-stable
 
+
+## More packages
+
+# fonts-firacode python3-neovim
+# stumpwm ssh-askpass-fullscreen
 
 ## Set default apps
 
