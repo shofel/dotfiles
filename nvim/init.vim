@@ -72,7 +72,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
-Plug 'RRethy/Vim-hexokinase', { 'do': 'make hexokinase' }
 
 " html and templates
 Plug 'Glench/Vim-Jinja2-Syntax'
