@@ -185,6 +185,7 @@ augroup initvim
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype javascript nnoremap <buffer> <Leader>r :w<cr>:Dispatch yarn ava %<cr>
+  autocmd Filetype javascript nnoremap <buffer> <Leader>T :w<cr>:Dispatch yarn run puppeteer<cr>
 
   autocmd Filetype clojure let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
@@ -394,6 +395,7 @@ let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings
 cabbrev  Gfa Git fetch --all --prune --tags
 cabbrev  Gclean Git clean -fd
 cabbrev  Gpu Git push -u origin
+cabbrev  Grbm Dispatch grbm
 command! Ghash echo ShovelGitHash()
 
 function! ShovelGitHash ()
