@@ -129,6 +129,7 @@ set list
 set foldmethod=marker
 
 set nobackup
+set backupcopy=yes
 set noswapfile
 set updatetime=300 " set for vim-signify active mode
 
