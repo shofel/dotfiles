@@ -586,9 +586,11 @@ omap Z <Plug>Sneak_S
 " This one is not default.
 xmap z <Plug>Sneak_s
 xmap Z <Plug>Sneak_S
-" Map f and F to a one-char sneak.
+" Map fFTt to a one-char sneaks.
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 " }}}
 
 " firenvim {{{
