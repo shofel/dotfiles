@@ -230,6 +230,7 @@ nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fd :ALEGoToDefinition<Return>
 nnoremap <Leader>fr :ALEFindReferences<Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
+nnoremap <C-LeftMouse> :ALEGoToDefinition<Return>
 
 " emmet {{{
 let g:user_emmet_install_global = 0
