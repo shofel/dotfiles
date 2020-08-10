@@ -8,9 +8,6 @@
 # Load resources.
 xrdb -merge .Xresources
 
-# ssh-agent.
-eval $(ssh-agent -t 1h -s)
-
 # keyboard and mouse.
 xset m 1 0
 # setxkbmap -option ctrl:nocaps
