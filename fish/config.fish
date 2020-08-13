@@ -6,7 +6,7 @@ source ~/opt/asdf/asdf.fish
 # SSH agent.
 
 # Assure an agent is running.
-if test -z (pgrep ssh-agent); ssh-agent -t 1h; end
+if ! pgrep ssh-agent > /dev/null; ssh-agent -t 1h; end
 
 # Connect to the agent, mimicking output of `ssh-agent`.
 # -U means universally; -x means export
