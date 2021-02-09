@@ -5,12 +5,16 @@ source ~/opt/asdf/asdf.fish
 
 # SSH agent.
 
-# Assure an agent is running.
-if ! pgrep ssh-agent > /dev/null; ssh-agent -t 1h; end
-
 set -eg SSH_AGENT_PID
 set -eg SSH_AUTH_SOCK
-# Connect to the agent, mimicking output of `ssh-agent`.
-# -U means universally; -x means export
-set -Ux SSH_AGENT_PID (pgrep ssh-agent | sed -n '1p')
-set -Ux SSH_AUTH_SOCK /tmp/ssh-*/agent.(math $SSH_AGENT_PID - 1)
+
+if ssh-add -L 2>&1 | string match -r '^Error ' > /dev/null
+  set out (ssh-agent -t 1h -c | awk '{gsub(";", ""); print $3}')
+
+  # Connect to the agent, mimicking output of `ssh-agent`.
+  # -U means universally. That is connect all fish instances.
+  set -U SSH_AUTH_SOCK $out[1]
+  set -U SSH_AGENT_PID $out[2]
+
+  echo got new ssh-agent: pid=\|$SSH_AUTH_SOCK\| sock=\|$SSH_AGENT_PID\|
+end
