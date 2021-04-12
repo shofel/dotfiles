@@ -84,9 +84,12 @@
   (concatenate 'string "exec yandex-browser-beta " -browser-options))
 (setf -exec-google-chrome
   (concatenate 'string "exec google-chrome-beta " -browser-options))
+(setf -exec-google-chrome-stable
+  (concatenate 'string "exec google-chrome " -browser-options))
 
 (define-key *root-map* (kbd "y") -exec-yandex-browser)
 (define-key *root-map* (kbd "C") -exec-google-chrome)
+(define-key *root-map* (kbd "b") -exec-google-chrome-stable)
 
 ;;
 
