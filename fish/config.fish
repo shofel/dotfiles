@@ -4,17 +4,22 @@
 source ~/opt/asdf/asdf.fish
 
 # SSH agent.
+#
 
-set -eg SSH_AGENT_PID
-set -eg SSH_AUTH_SOCK
+# Sometimes global vars are annoyingly set by someone.
+set -ge SSH_AUTH_SOCK
+set -ge SSH_AGENT_PID
 
-if ssh-add -L 2>&1 | string match -r '^Error ' > /dev/null
+# Check if ssh-agent is up and connected.
+ssh-add -L 2>&1 >/dev/null
+
+if test $status -eq 2
   set out (ssh-agent -t 1h -c | awk '{gsub(";", ""); print $3}')
 
   # Connect to the agent, mimicking output of `ssh-agent`.
   # -U means universally. That is connect all fish instances.
-  set -U SSH_AUTH_SOCK $out[1]
-  set -U SSH_AGENT_PID $out[2]
+  set -Ux SSH_AUTH_SOCK $out[1]
+  set -Ux SSH_AGENT_PID $out[2]
 
   echo got new ssh-agent: pid=\|$SSH_AUTH_SOCK\| sock=\|$SSH_AGENT_PID\|
 end
