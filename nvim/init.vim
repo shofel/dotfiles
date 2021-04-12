@@ -186,11 +186,13 @@ augroup initvim
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype javascript nnoremap <buffer> <Leader>r :w<cr>:Dispatch yarn ava %<cr>
-  autocmd Filetype javascript nnoremap <buffer> <Leader>T :w<cr>:Dispatch yarn run puppeteer<cr>
+  autocmd Filetype javascript nnoremap <buffer> <Leader>t :w<cr>:Dispatch yarn run puppeteer<cr>
 
   autocmd Filetype clojure let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<cr>
+
+  autocmd Filetype python let b:ale_command_wrapper = "/* %s */"
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
