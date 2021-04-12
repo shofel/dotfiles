@@ -72,7 +72,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
-Plug 'RRethy/Vim-hexokinase', { 'do': 'make hexokinase' }
 
 " html and templates
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -227,6 +226,9 @@ nnoremap <Leader>vs :source $MYVIMRC<Return>
 " get to execute visually selected text
 vnoremap <F6> y:"
 
+" fixup search
+nnoremap / /\v
+
 " TODO leverage more from LSP
 nnoremap <Leader>fe :ALEFix<Return>
 nnoremap <Leader>fd :ALEGoToDefinition<Return>
@@ -290,7 +292,7 @@ function! Shovel_glog() abort
   exe('startinsert')
 endfun
 
-" Navigate by signs in signcolumn
+" Navigate between signs in signcolumn
 nnoremap <Leader>jl <cmd>ALENextWrap<cr>
 nnoremap <Leader>kl <cmd>ALEPreviousWrap<cr>
 nmap     <Leader>kc <Plug>(signify-prev-hunk)
@@ -555,13 +557,11 @@ command! -bang -nargs=* Rg
 command! PGFiles call PGFiles()
 command! PFiles  call PFiles()
 
-nnoremap <c-p>     <cmd>PGFiles<Return>
+nnoremap <Leader>f <cmd>PGFiles<Return>
+nnoremap <Leader>F <cmd>PFiles<Return>
 nnoremap <Leader>b <cmd>Buffers<Return>
 nnoremap <Leader>w <cmd>Windows<Return>
-" TODO mimic to / and ?
-nnoremap / <cmd>BLines<cr>
-nnoremap <Leader>/ /\v
-nnoremap <Leader>* :BLines <c-r><c-w><Return>
+nnoremap <Leader>/ <cmd>BLines<Return>
 " }}}
 
 " terminals {{{
@@ -613,12 +613,6 @@ endfunction
 
 " invoke onuienter
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-" }}}
-
-" Hexokinase {{{
-let g:Hexokinase_refreshEvents = [
-      \ 'BufWrite', 'BufCreate',
-      \ 'TextChanged', 'InsertLeave']
 " }}}
 
 " markdown-preview.nvim {{{
