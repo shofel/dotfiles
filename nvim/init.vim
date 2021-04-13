@@ -230,9 +230,10 @@ vnoremap <F6> y:"
 nnoremap / /\v
 
 " TODO leverage more from LSP
-nnoremap <Leader>fe :ALEFix<Return>
-nnoremap <Leader>fd :ALEGoToDefinition<Return>
-nnoremap <Leader>fr :ALEFindReferences<Return>
+nnoremap <Leader>de :ALEFix<Return>
+nnoremap <Leader>dd :ALEGoToDefinition<Return>
+nnoremap <Leader>dr :ALEFindReferences<Return>
+nnoremap <Leader>dR :Rg! <c-r><c-w><Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
 nnoremap <C-LeftMouse> :ALEGoToDefinition<Return>
 
@@ -267,22 +268,22 @@ nnoremap <Leader><Left>  <C-w><C-h>
 nnoremap <Leader><Right> <C-w><C-l>
 nnoremap <Leader><Down>  <C-w><C-j>
 nnoremap <Leader><Up>    <C-w><C-k>
-nnoremap <Leader><BS> <C-w><C-w>
+nnoremap <Leader><BS>    <C-w><C-w>
 " }}}
 
 " some commands
-nnoremap <Leader>s   :w<Return>
-nnoremap <Leader>o   :only<Return>
-nnoremap <Leader>kk  :bdelete!<Return>
+nnoremap <Leader>s   <cmd>w<Return>
+nnoremap <Leader>o   <cmd>only<Return>
+nnoremap <Leader>kk  <cmd>bdelete!<Return>
 
 " git & bufsync
 nnoremap <Leader>gs :vert Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
-nnoremap <Leader>gp :Gpush<Return>
-nnoremap <Leader>gP :Git push --force-with-lease<Return>
+nnoremap <Leader>gp <cmd>Git push<Return>
+nnoremap <Leader>gP <cmd>Git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
-nnoremap <Leader>gV :GV!<Return>
+nnoremap <Leader>gV <cmd>GV!<Return>
 
 " TODO sum GV and glog
 function! Shovel_glog() abort
