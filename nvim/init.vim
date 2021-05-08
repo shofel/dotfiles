@@ -1,7 +1,5 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
-" TODO key to go to github page of plugin
-
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -178,6 +176,9 @@ EOF
 let g:javascript_plugin_flow = 1
 augroup initvim
   autocmd!
+
+  " Vimscript
+  autocmd Filetype vim nnoremap <Leader>gf :!open https://github.com/<c-r><c-f><cr>
 
   " Javascript
   autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
