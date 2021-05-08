@@ -184,8 +184,8 @@ augroup initvim
   autocmd Filetype javascript let b:textwidth=80
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
-  autocmd Filetype javascript nnoremap <buffer> <Leader>r :w<cr>:Dispatch yarn ava %<cr>
-  autocmd Filetype javascript nnoremap <buffer> <Leader>t :w<cr>:Dispatch yarn run puppeteer<cr>
+  autocmd Filetype javascript nnoremap <buffer> <Leader>t :w<cr>:!yarn ava_ %<cr>
+  autocmd Filetype javascript nnoremap <buffer> <Leader>T :w<cr>:Dispatch yarn ava<cr>
 
   autocmd Filetype clojure let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
@@ -232,6 +232,7 @@ nnoremap / /\v
 " TODO leverage more from LSP
 nnoremap <Leader>de :ALEFix<Return>
 nnoremap <Leader>dd :ALEGoToDefinition<Return>
+nnoremap <Leader>dt :ALEGoToTypeDefinition<Return>
 nnoremap <Leader>dr :ALEFindReferences<Return>
 nnoremap <Leader>dR :Rg! <c-r><c-w><Return>
 nnoremap <M-s> :set number! relativenumber!<Return>
