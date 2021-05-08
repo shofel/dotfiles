@@ -31,6 +31,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'jiangmiao/auto-pairs'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
+" motion
 Plug 'justinmk/vim-sneak'
 
 " follow conventions
@@ -583,6 +584,7 @@ nnoremap <Leader>T :Terminal _
 
 " sneak {{{
 let g:sneak#prompt = 'sneak>'
+let g:sneak#label = 1
 " These are defaults:
 nmap s <Plug>Sneak_s
 nmap S <Plug>Sneak_S
