@@ -25,6 +25,7 @@ Plug 'mhinz/vim-signify'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " more editing
 Plug 'tommcdo/vim-exchange'
@@ -165,6 +166,12 @@ highlight EndOfBuffer guifg=bg guibg=none
 
 " bold exchange.vim
 highlight link ExchangeRegion Folded
+
+" colorizer
+lua  <<EOF
+require'colorizer'.setup()
+EOF
+
 " }}}
 
 " syntax and filetypes {{{
