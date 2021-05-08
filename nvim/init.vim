@@ -51,10 +51,8 @@ Plug 'rhysd/git-messenger.vim'
 
 " Lang {{{
 Plug 'dense-analysis/ale'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-"
 Plug 'sheerun/vim-polyglot'
+"
 Plug 'Junegunn/vader.vim'
 "
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
