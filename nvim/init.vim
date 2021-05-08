@@ -49,11 +49,31 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'rhysd/git-messenger.vim'
 
-" Lang
+" Lang {{{
 Plug 'dense-analysis/ale'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+"
 Plug 'sheerun/vim-polyglot'
-Plug 'georgewitteman/vim-fish'
 Plug 'Junegunn/vader.vim'
+"
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'georgewitteman/vim-fish'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
+" Web Dev
+" TODO https://www.npmjs.com/package/eslint-pretty
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'posva/vim-vue'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'mattn/emmet-vim'
+" Python TODO clean up and review
+" Plug 'idanarye/vim-vebugger'
+Plug 'vim-python/python-syntax'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'tweekmonster/django-plus.vim'
+" }}} Lang
 
 " draw ascii diagrams
 Plug 'gyim/vim-boxdraw'
@@ -64,31 +84,6 @@ Plug 'glacambre/firenvim'
 " trying right now
 Plug 'jez/vim-superman'
 Plug 'rhysd/reply.vim'
-
-" markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-" javascript
-" TODO https://www.npmjs.com/package/eslint-pretty
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'posva/vim-vue'
-
-" html and templates
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'mattn/emmet-vim'
-
-" Clojure and Lisps
-Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
-
-" Python TODO clean up and review
-" Plug 'idanarye/vim-vebugger'
-Plug 'vim-python/python-syntax'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'tweekmonster/django-plus.vim'
-
-" Go lang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " my favourite colors
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
@@ -484,11 +479,12 @@ let g:lightline.tabline = {
       \ 'right': [ [ 'close' ] ] }
 " }}}
 
-" Refresh when reloading
+" Refresh when reloading {{{
 if (v:vim_did_enter)
   call lightline#init()
   call lightline#update()
 endif
+" }}}
 
 " Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
