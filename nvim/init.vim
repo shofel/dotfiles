@@ -54,22 +54,13 @@ Plug 'sheerun/vim-polyglot'
 "
 Plug 'Junegunn/vader.vim'
 "
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 " Web Dev
-" TODO https://www.npmjs.com/package/eslint-pretty
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'posva/vim-vue'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
-" Python TODO clean up and review
-" Plug 'idanarye/vim-vebugger'
-Plug 'vim-python/python-syntax'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'tweekmonster/django-plus.vim'
+" Plug 'idanarye/vim-vebugger' TODO
 " }}} Lang
 
 " draw ascii diagrams
@@ -228,17 +219,21 @@ nnoremap <Leader>vs :source $MYVIMRC<Return>
 " get to execute visually selected text
 vnoremap <F6> y:"
 
+" switch keymap in normal mode
+nnoremap <Leader>0 i<esc>:echom 'Keymap switched'<cr>
+
 " fixup search
 nnoremap / /\v
 
-" TODO leverage more from LSP
+" ALE
 nnoremap <Leader>de :ALEFix<Return>
 nnoremap <Leader>dd :ALEGoToDefinition<Return>
 nnoremap <Leader>dt :ALEGoToTypeDefinition<Return>
 nnoremap <Leader>dr :ALEFindReferences<Return>
+nnoremap <Leader>r  :ALERename<Return>
 nnoremap <Leader>dR :Rg! <c-r><c-w><Return>
+
 nnoremap <M-s> :set number! relativenumber!<Return>
-nnoremap <C-LeftMouse> :ALEGoToDefinition<Return>
 
 " emmet {{{
 let g:user_emmet_install_global = 0
@@ -288,7 +283,6 @@ nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
 
-" TODO sum GV and glog
 function! Shovel_glog() abort
   exe('tabe +term\ glog')
   exe('setlocal bufhidden=wipe')
@@ -326,8 +320,6 @@ onoremap <Down> }
 nnoremap <Down> }
 vnoremap <Down> }
 
-" X buffers.
-" TODO make an opeartor to enable motions.
 " X clipboard
 xnoremap <Leader>y "+y<Return>
 nnoremap <Leader>p "+]p<Return>
@@ -349,9 +341,6 @@ nnoremap <Leader>gm <cmd>GitMessenger<cr>
 
 " ALE Asynchronous Lint Engine {{{
 
-" @see https://github.com/dense-analysis/ale/issues/1700#issuecomment-402807012
-set completeopt+=noinsert
-
 " Python
 let g:ale_python_auto_pipenv= 1
 
@@ -363,14 +352,14 @@ let g:ale_linters.python = ['pylint', 'pyls']
 let g:ale_fixers.python = []
 
 let g:ale_linters.javascript = ['flow-language-server', 'eslint']
-" TODO use importjs separately. I suspect performance issue here.
-let g:ale_fixers.javascript = ['eslint', 'importjs']
+let g:ale_fixers.javascript = ['eslint']
 
 let g:ale_linters.fish = []
 
 "More goodness of language servers.
 let g:ale_completion_enabled = 1
-" }}}
+
+" }}} ALE
 
 " Lightline {{{
 let g:lightline = {}
@@ -528,7 +517,6 @@ nnoremap / /\v
 " These changes depend on
 " - fdfind:  https://github.com/sharkdp/fd
 " - ripgrep: https://github.com/BurntSushi/ripgrep
-" TODO Fixup sticky comments on i_o.
 
 if (!executable('fd'))  | echoerr 'fd (fd-find) executable not found'  | endif
 if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
