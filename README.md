@@ -60,7 +60,7 @@ Run this fish script from the root of this repo.
 #  Symlink all we have
 ##
 
-for x in fish nvim stumpwm fontconfig
+for x in fish nvim stumpwm fontconfig bat
   if test -e ~/.config/$x
     mv ~/.config/$x{,-backup}
   end

@@ -3,9 +3,6 @@
 # see https://fishshell.com/docs/current/tutorial.html#tut_path
 source ~/opt/asdf/asdf.fish
 
-# Batcat theme
-set -x BAT_THEME Monokai Extended Light
-
 # SSH agent.
 #
 
