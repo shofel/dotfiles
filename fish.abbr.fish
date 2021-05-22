@@ -1,11 +1,14 @@
+abbr -a -U -- -nrepl clj\ -Sdeps\ \'\{:deps\ \{nrepl/nrepl\ \{:mvn/version\ \"0.5.3\"\}\}\}\'\ -m\ nrepl.cmdline
 abbr -a -U -- ava-inspect 'node --inspect=localhost:44444 ./node_modules/ava/profile.js'
 abbr -a -U -- dc docker-compose
 abbr -a -U -- dvorak 'setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle'
-abbr -a -U -- ecs examus-create-session
+abbr -a -U -- ecs 'examus-start-session (examus-create-session)'
+abbr -a -U -- execlip 'fish -c (xclip -o)'
+abbr -a -U -- fzb 'git switch (git branch | string trim | fzf)'
 abbr -a -U -- ga 'git add'
 abbr -a -U -- gamend 'git commit --amend --no-edit'
 abbr -a -U -- gb 'git branch'
-abbr -a -U -- gcb 'git checkout -b'
+abbr -a -U -- gcb 'git switch -c'
 abbr -a -U -- gcd 'cd (git rev-parse --show-toplevel)'
 abbr -a -U -- gclean 'git clean -fd'
 abbr -a -U -- gcm 'git checkout master'
@@ -26,9 +29,10 @@ abbr -a -U -- grb 'git rebase'
 abbr -a -U -- grba 'git rebase --abort'
 abbr -a -U -- grbc 'git rebase --continue'
 abbr -a -U -- grbs 'git rebase --skip'
-abbr -a -U -- grh 'git reset HEAD'
-abbr -a -U -- grhh 'git reset --hard HEAD'
+abbr -a -U -- gsm 'git switch master'
 abbr -a -U -- gst 'git status --short --branch'
-abbr -a -U -- s sudo
-abbr -a -U -- -nrepl clj\ -Sdeps\ \'\{:deps\ \{nrepl/nrepl\ \{:mvn/version\ \"0.5.3\"\}\}\}\'\ -m\ nrepl.cmdline
+abbr -a -U -- gsw 'git switch'
+abbr -a -U -- nocaps 'setxkbmap -option ctrl:nocaps'
 abbr -a -U -- suspend systemctl\ suspend
+abbr -a -U -- v 'nvim +term'
+abbr -a -U -- weather 'curl wttr.in/guangzhou'
