@@ -398,9 +398,9 @@ let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings
 
 cabbrev  Gfa Git fetch --all --prune --tags
 cabbrev  Gclean Git clean -fd
-cabbrev  Gpu Git push -u origin
 cabbrev  Grbm Dispatch grbm
 command! Ghash echo ShovelGitHash()
+command! Gpu call ShovelGitPushSetUpstream()
 
 function! ShovelGitHash ()
   let l:_ = system('git rev-parse --short HEAD')
@@ -456,6 +456,11 @@ let g:lightline.component_type.gitstatus = 'error'
 
 function! ShovelFullpath ()
   return expand('%:f')
+endfunc
+
+function! ShovelGitPushSetUpstream ()
+  let l:branch = ShovelGitBranch()
+  exe('Git push -u origin ' . l:branch)
 endfunc
 
 let g:lightline.component_expand.fullpath = 'ShovelFullpath'
