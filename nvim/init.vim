@@ -282,8 +282,8 @@ nnoremap <Leader>kk  <cmd>bdelete!<Return>
 " git & bufsync
 nnoremap <Leader>gs :vert Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
-nnoremap <Leader>gp <cmd>Git push<Return>
-nnoremap <Leader>gP <cmd>Git push --force-with-lease<Return>
+nnoremap <Leader>gp <cmd>Dispatch git push<Return>
+nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
