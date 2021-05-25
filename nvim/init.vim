@@ -283,6 +283,7 @@ nnoremap <Leader>kk  <cmd>bdelete!<Return>
 nnoremap <Leader>gs :vert Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
+nnoremap <Leader>gf <cmd>Dispatch git fetch<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
