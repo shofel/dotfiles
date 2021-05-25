@@ -2,15 +2,15 @@
 
 new_tab student
 cd ~/workspaces/Examus/examus-extension/
-launch nvim +term
+launch nvim +Term
 
 new_tab compose
 launch fish -c 'nvim ~/tmp/drafts-(date +%Y-%m-%-d)'
 
 new_tab student-o
 cd ~/workspaces/Examus/examus-extension-other/
-launch nvim +term
+launch nvim +Term
 
 new_tab dotfiles
 cd ~/workspaces/dotfiles/
-launch nvim +term
+launch nvim +Term
