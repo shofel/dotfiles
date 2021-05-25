@@ -9,16 +9,14 @@
 ;; @see https://github.com/caioaao/stumpwm.d/blob/f9c75be0c5db4b431d33f557a40451a943a35590/keymaps.lisp#L21
 ;; @see https://github.com/alezost/stumpwm-config/blob/master/keys.lisp
 ;;
-;; TODO fast program switching-to: yabro, googleChrome, telegram
-;;
-;; TODO mask prefix-key when <Leader> key pressed
+;; TODO name windows. On window open?
 
 (in-package :stumpwm)
 
 (set-prefix-key (kbd "Delete"))
 
 (define-key *root-map* (kbd "?") "which-key-mode")
-; (define-key *root-map* (kbd "R") "restart-soft") ;; To test changes.
+(define-key *root-map* (kbd "C-M-r") "restart-soft") ;; To test changes.
 (define-key *root-map* (kbd "I") "show-window-properties")
 
 (setf *message-window-gravity* :center)
@@ -57,6 +55,8 @@
 (define-key *root-map* (kbd "l") "move-focus right")
 
 ;; Windows.
+(define-key *root-map* (kbd "T") "title")
+(define-key *root-map* (kbd "t") "other-window")
 (define-key *root-map* (kbd "w") "windowlist")
 (define-key *root-map* (kbd "H") "move-window left")
 (define-key *root-map* (kbd "L") "move-window right")
@@ -109,8 +109,7 @@
 (defun -restore-groups-and-frames ()
   (run-commands "gselect 1"
                 "grename one")
-
-  ;; Use `dump-desktop` command to create a dump.
+  ;; To update the dump, use `dump-desktop` command
   (restore-from-file "~/.config/stumpwm/desktop"))
 
 ;; Restore window placement rules.
@@ -118,13 +117,10 @@
   (restore-window-placement-rules "~/.config/stumpwm/window-placement"))
 
 ;;
-(-restore-groups-and-frames)
-(-restore-window-rules)
-
-;;
 ;; Initializing.
 ;;
 (when *initializing*
+  (-restore-groups-and-frames)
+  (-restore-window-rules)
   (run-commands -exec-google-chrome
-                -exec-yandex-browser
-                "exec telegram-desktop"))
+                -exec-yandex-browser))
