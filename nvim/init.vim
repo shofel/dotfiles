@@ -370,7 +370,19 @@ let g:ale_completion_enabled = 1
 " Lightline {{{
 let g:lightline = {}
 
+" Load and tune the colors
 let g:lightline.colorscheme = 'one'
+
+function ShovelHackLightLineColors ()
+  let s:Lightline_one = g:lightline#colorscheme#one#palette
+  let s:one_bg = '#fafafa'
+  let s:one_green = '#a5cc8a' " s:green from the `one` palette
+
+  let g:lightline#colorscheme#one#palette.tabline.tabsel =
+        \ [[s:one_bg, s:one_green, 255, 176, 'bold']]
+endfunc
+
+call ShovelHackLightLineColors()
 
 " ALE integration
 "
@@ -476,13 +488,16 @@ let g:lightline.active = {
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'filetype' ] ] }
+
 let g:lightline.inactive = {
       \ 'left': [ [ 'filename' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ] ] }
+
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
-      \ 'right': [ [ 'close' ] ] }
+      \ 'right': [ [ ] ] }
+
 " }}}
 
 " Refresh when reloading {{{
