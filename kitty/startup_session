@@ -14,3 +14,6 @@ launch nvim +Term
 new_tab dotfiles
 cd ~/workspaces/dotfiles/
 launch nvim +Term
+
+new_tab ci@student
+launch nvim +Term
