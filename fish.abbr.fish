@@ -1,9 +1,9 @@
-abbr -a -U -- gBFG "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D"
 abbr -a -U -- dc docker-compose
 abbr -a -U -- dvorak 'setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle'
 abbr -a -U -- execlip 'fish -c (xclip -o)'
-abbr -a -U -- fzb 'git switch (git branch | string trim | fzf)'
-abbr -a -U -- fzB "git switch (git branch --all | string replace 'remotes/origin/' '' | string trim | fzf)"
+abbr -a -U -- gB "git switch (git branch --all | string replace 'remotes/origin/' '' | string trim | fzf)"
+abbr -a -U -- gb 'git switch (git branch | string trim | fzf)'
+abbr -a -U -- gBFG "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D"
 abbr -a -U -- ga 'git add'
 abbr -a -U -- gamend 'git commit --amend --no-edit'
 abbr -a -U -- gcb 'git switch -c'
