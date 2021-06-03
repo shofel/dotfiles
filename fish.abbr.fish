@@ -18,7 +18,7 @@ abbr -a -U -- ginit 'git init ;and git commit -m "root" --allow-empty'
 abbr -a -U -- gl 'git pull'
 abbr -a -U -- gp 'git push'
 abbr -a -U -- gpf 'git push --force-with-lease'
-abbr -a -U -- gpu 'git push -u origin'
+abbr -a -U -- gpu "git push -u origin (git branch | grep \* | awk '{print \$2}')"
 abbr -a -U -- grba 'git rebase --abort'
 abbr -a -U -- grbc 'git rebase --continue'
 abbr -a -U -- grbs 'git rebase --skip'
