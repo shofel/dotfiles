@@ -52,10 +52,12 @@ Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'rhysd/git-messenger.vim'
 
 " Lang {{{
+Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'p00f/nvim-ts-rainbow'
+" Plug 'p00f/nvim-ts-rainbow'
 
 Plug 'dense-analysis/ale'
+Plug 'neomake/neomake'
 "
 Plug 'Junegunn/vader.vim'
 "
@@ -174,10 +176,10 @@ augroup initvim
   autocmd!
 
   " Vimscript
-  autocmd Filetype vim nnoremap <Leader>gf :!open https://github.com/<c-r><c-f><cr>
+  autocmd Filetype vim nnoremap <buffer> <Leader>gf :!open https://github.com/<c-r><c-f><cr>
 
   " Javascript
-  autocmd BufRead,BufNewFile *.js.flow setfiletype javascript
+  autocmd BufRead,BufNewFile *.js.flow setfiletype typescript
   autocmd Filetype javascript let b:commentary_format = "/* %s */"
   autocmd Filetype javascript let b:textwidth=80
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
@@ -285,7 +287,7 @@ nnoremap <Leader>kk  <cmd>bdelete!<Return>
 nnoremap <Leader>gs :vert Gstatus<Return>
 nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
-nnoremap <Leader>gf <cmd>Dispatch git fetch<Return>
+nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
@@ -362,6 +364,10 @@ let g:ale_fixers.python = []
 let g:ale_linters.javascript = ['flow-language-server', 'eslint']
 let g:ale_fixers.javascript = ['eslint']
 
+" Treat typescript the same way as javascript
+let g:ale_linters.typescript = g:ale_linters.javascript
+let g:ale_fixers.typescript = g:ale_fixers.javascript
+
 let g:ale_linters.fish = []
 
 "More goodness of language servers.
@@ -369,8 +375,43 @@ let g:ale_completion_enabled = 1
 
 " }}} ALE
 
+" NeoMake {{{
+
+function! Shovel_InitNeoMake()
+
+  let g:neomake_open_list = 2
+
+  let g:neomake_javascript_enabled_makers = []
+
+  if findfile('.flowconfig', '.;') !=# ''
+    let l:flow = 'yarn -s flow --json 2>/dev/null'
+    let l:flow_vim_quickfix = system('echo -n (yarn global dir)/node_modules/.bin/flow-vim-quickfix')
+
+    let g:neomake_javascript_flow_maker = {
+          \ 'exe': 'fish',
+          \ 'args': ['-c', l:flow . ' | ' . l:flow_vim_quickfix],
+          \ 'errorformat': '%E%f:%l:%c\,%n: %m',
+          \ 'cwd': '%:p:h' 
+          \ }
+    let g:neomake_javascript_enabled_makers = g:neomake_javascript_enabled_makers + [ 'flow']
+  endif
+
+endfunction
+
+call Shovel_InitNeoMake()
+
+" This is kinda useful to prevent Neomake from unnecessary runs
+augroup neomake
+  if !empty(g:neomake_javascript_enabled_makers)
+    " autocmd! BufWritePost * Neomake
+  endif
+augroup END
+
+" }}} NeoMake
+
 " TS TreeSitter {{{
 lua  <<EOF
+--[[
 require'nvim-treesitter.configs'.setup {
   rainbow = {
     enable = true,
@@ -378,6 +419,7 @@ require'nvim-treesitter.configs'.setup {
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
   }
 }
+]]
 EOF
 " }}} TS TreeSitter
 
@@ -595,6 +637,7 @@ nnoremap <Leader>F <cmd>PFiles<Return>
 nnoremap <Leader>b <cmd>Buffers<Return>
 nnoremap <Leader>w <cmd>Windows<Return>
 nnoremap <Leader>/ <cmd>BLines<Return>
+nnoremap <Leader>: <cmd>Commands<Return>
 " }}}
 
 " terminals {{{
