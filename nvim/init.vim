@@ -10,11 +10,11 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
 " tpope
-" TODO https://github.com/tpope/vim-projectionist
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sleuth'
@@ -130,7 +130,10 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
-set guicursor=n-v-ve:block,i-c-ci-cr:ver100,o-r:hor100
+set guicursor=n-v-ve:block-Cursor
+            \,i-c-ci-cr:ver100-Cursor
+            \,o-r:hor100-Cursor
+
 set mouse=a
 
 set noshowmode " to not duplicate lightline
@@ -233,6 +236,10 @@ nnoremap <Leader>0 i<esc>:echom 'Keymap switched'<cr>
 
 " fixup search
 nnoremap / /\v
+
+" REPLy
+nnoremap <Leader>e :ReplSend<Return>
+xnoremap <Leader>e :ReplSend<Return>
 
 " ALE
 nnoremap <Leader>de :ALEFix<Return>

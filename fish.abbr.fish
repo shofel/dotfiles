@@ -27,5 +27,5 @@ abbr -a -U -- gst 'git status --short --branch'
 abbr -a -U -- gsw 'git switch'
 abbr -a -U -- nocaps 'setxkbmap -option ctrl:nocaps'
 abbr -a -U -- suspend systemctl\ suspend
-abbr -a -U -- v 'nvim +term'
+abbr -a -U -- v 'nvim "+Term fish"'
 abbr -a -U -- weather 'curl wttr.in/guangzhou'
