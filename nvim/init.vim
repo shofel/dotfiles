@@ -655,9 +655,13 @@ command! -nargs=? -bar Terminal
 nnoremap <Leader>T :Terminal _
 " }}}
 
-" sneak {{{
+" sneak & clever-f {{{
 let g:sneak#prompt = 'sneak>'
 let g:sneak#label = 1
+let g:sneak#target_labels = 'gfdhtnsiyiueoa'
+" Be like rhysd/clever-f.vim 
+let g:sneak#s_next = 1
+
 " These are defaults:
 nmap s <Plug>Sneak_s
 nmap S <Plug>Sneak_S
