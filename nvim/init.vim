@@ -351,6 +351,8 @@ nnoremap <Leader>gm <cmd>GitMessenger<cr>
 
 " ALE Asynchronous Lint Engine {{{
 
+let g:ale_open_list = 'on_save'
+
 " Python
 let g:ale_python_auto_pipenv= 1
 
@@ -642,17 +644,14 @@ nnoremap <Leader>: <cmd>Commands<Return>
 
 " terminals {{{
 
-function! Shofel_terminal(label)
-endfunction
-
 command! -bar BarTerm term
 
-command! -nargs=? -bar Terminal
+command! -nargs=1 -bar Terminal
       \ enew |
       \ BarTerm |
       \ file term:<args>
 
-nnoremap <Leader>T :Terminal _
+nnoremap <Leader>~ :Terminal 
 " }}}
 
 " sneak & clever-f {{{
