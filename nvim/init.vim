@@ -197,6 +197,7 @@ augroup initvim
   autocmd Filetype python let b:ale_command_wrapper = "/* %s */"
 
   autocmd Filetype ps1 let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
+  autocmd Filetype vim let b:AutoPairs = {'{':'}', '(':')', "'":"'"}
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
