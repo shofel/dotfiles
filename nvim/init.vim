@@ -198,6 +198,9 @@ augroup initvim
   autocmd Filetype ps1 let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype vim let b:AutoPairs = {'{':'}', '(':')', "'":"'"}
 
+  " Fugitive : open files in a vertical split.
+  autocmd Filetype fugitive nmap <buffer> <cr> gO
+
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 " }}}
