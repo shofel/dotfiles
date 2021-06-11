@@ -1,7 +1,6 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
-" TODO ~: script to cd and vim +term
-" TODO cmd or a key to :tabe +Term +:file serve<cr>
+" TODO a key which: 1.reads termname 2.executes Term
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
