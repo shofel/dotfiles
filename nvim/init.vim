@@ -244,10 +244,12 @@ nnoremap / /\v
 " REPLy
 nnoremap <Leader>e :ReplSend<Return>
 xnoremap <Leader>e :ReplSend<Return>
+nnoremap <Leader>E :Repl<Return>
 
 " ALE
 nnoremap <Leader>de :ALEFix<Return>
 nnoremap <Leader>dd :ALEGoToDefinition<Return>
+nnoremap <Leader>dh :ALEHover<Return>
 nnoremap <Leader>dt :ALEGoToTypeDefinition<Return>
 nnoremap <Leader>dr :ALEFindReferences<Return>
 nnoremap <Leader>r  :ALERename<Return>
@@ -300,6 +302,7 @@ nnoremap <Leader>ga <cmd>Gwrite<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
 nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
+nnoremap <Leader>gu <cmd>SignifyHunkUndo<Return>
 nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
