@@ -666,11 +666,10 @@ nnoremap <Leader>: <cmd>Commands<Return>
 command! -bar BarTerm term
 
 command! -nargs=1 -bar Terminal
-      \ tabe |
       \ BarTerm |
       \ file term:<args>
 
-nnoremap <Leader>~ :Terminal 
+nnoremap <Leader>~ :tabe +Terminal\ 
 " }}}
 
 " sneak & clever-f {{{
