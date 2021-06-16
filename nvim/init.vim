@@ -295,8 +295,8 @@ nnoremap <Leader>o   <cmd>only<Return>
 nnoremap <Leader>kk  <cmd>bdelete!<Return>
 
 " git & bufsync
-nnoremap <Leader>gs :tab Git<Return>
-nnoremap <Leader>ga :Gwrite <CR>:sleep 1m<CR>: SignifyRefresh<Return>
+nnoremap <Leader>gs <cmd>tab Git<Return>
+nnoremap <Leader>ga <cmd>Gwrite<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
 nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
