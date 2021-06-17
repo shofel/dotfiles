@@ -23,3 +23,6 @@ if test $status -eq 2
 
   echo got new ssh-agent: pid=\|$SSH_AUTH_SOCK\| sock=\|$SSH_AGENT_PID\|
 end
+
+# HiDPI
+set -Ux GDK_SCALE 2
