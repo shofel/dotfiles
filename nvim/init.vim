@@ -189,6 +189,7 @@ augroup initvim
   autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
   autocmd Filetype javascript nnoremap <buffer> <Leader>t :w<cr>:!yarn ava_ %<cr>
   autocmd Filetype javascript nnoremap <buffer> <Leader>T :w<cr>:Dispatch yarn ava<cr>
+  autocmd BufNewFile,BufRead *.json5 set filetype=json5
 
   autocmd Filetype clojure let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
