@@ -60,6 +60,7 @@
 (define-key *root-map* (kbd "w") "windowlist")
 (define-key *root-map* (kbd "H") "move-window left")
 (define-key *root-map* (kbd "L") "move-window right")
+(define-key *root-map* (kbd "f") "fullscreen")
 
 ;; Change groups.
 (define-key *root-map* (kbd "Return") "gprev")
