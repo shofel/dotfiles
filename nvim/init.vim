@@ -396,12 +396,14 @@ let g:ale_completion_enabled = 1
 " }}} ALE
 
 " Neovim LSP {{{
+" @see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 lua <<EOF
 require'lspconfig'.powershell_es.setup{
   bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
 }
 
 require'lspconfig'.yamlls.setup{}
+require'lspconfig'.rnix.setup{}
 EOF
 " }}}
 
