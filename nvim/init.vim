@@ -384,6 +384,9 @@ let g:ale_fixers.javascript = ['eslint']
 " Treat typescript the same way as javascript
 let g:ale_linters.typescript = g:ale_linters.javascript
 let g:ale_fixers.typescript = g:ale_fixers.javascript
+" Treat flow the same way as javascript
+let g:ale_linters.flow = g:ale_linters.javascript
+let g:ale_fixers.flow = g:ale_fixers.javascript
 
 let g:ale_linters.fish = []
 
@@ -397,6 +400,8 @@ lua <<EOF
 require'lspconfig'.powershell_es.setup{
   bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
 }
+
+require'lspconfig'.yamlls.setup{}
 EOF
 " }}}
 
