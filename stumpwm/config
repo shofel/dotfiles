@@ -66,7 +66,8 @@
 (define-key *root-map* (kbd "Return") "gprev")
 (define-key *root-map* (kbd "space") "gnext")
 
-;; Fix terminal-emulator
+;; Start terminal-emulator
+(define-key *root-map* (kbd "C") "exec kitty --session /home/shovel/.config/kitty/empty_session")
 (define-key *root-map* (kbd "c") "exec x-terminal-emulator")
 
 ;; Suspend.
@@ -89,8 +90,8 @@
   (concatenate 'string "exec google-chrome " -browser-options))
 
 (define-key *root-map* (kbd "y") -exec-yandex-browser)
-(define-key *root-map* (kbd "C") -exec-google-chrome)
-(define-key *root-map* (kbd "b") -exec-google-chrome-stable)
+(define-key *root-map* (kbd "b") -exec-google-chrome)
+(define-key *root-map* (kbd "B") -exec-google-chrome-stable)
 
 ;;
 
