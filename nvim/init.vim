@@ -112,6 +112,8 @@ call plug#end()
 set encoding=utf-8
 scriptencoding=utf-8
 
+set shell=/usr/bin/fish
+
 set signcolumn=yes
 set nonumber " see also vim-numbertoggle plugin
 set hidden
@@ -133,7 +135,6 @@ set shiftwidth=2
 set guicursor=n-v-ve:block-Cursor
             \,i-c-ci-cr:ver100-Cursor
             \,o-r:hor100-Cursor
-
 set mouse=a
 
 set noshowmode " to not duplicate lightline
