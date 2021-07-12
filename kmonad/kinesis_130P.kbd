@@ -30,20 +30,6 @@
    Kinesis cheatsheet: http://web.mit.edu/jmorzins/Public/kinesisCheatSheet.html
    ------------------------------------------------------------------------- |#
 
-#| src:dvorak |#
-(defsrc
-  =    1    2    3    4    5                    6    7    8    9    0    -
-  tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a    o    e    u    i                    d    h    t    n    s    \
-  lsft ;    q    j    k    x                    b    m    w    v    z rsft
-       grv  ins  left rght                           up   down [    ]
-
-                           lctl lalt    ralt rctl
-                      bspc del  home    pgup ret spc
-                                end     pgdn
-)
-#||#
-
 #| src:qwerty | #
 (defsrc
   =    1    2    3    4    5                    6    7    8    9    0    -
@@ -58,11 +44,37 @@
 )
 |#
 
+#| src:dvorak |#
+(defsrc
+  =    1    2    3    4    5                    6    7    8    9    0    -
+  tab  '    ,    .    p    y                    f    g    c    r    l    /
+  esc  a    o    e    u    i                    d    h    t    n    s    \
+  lsft ;    q    j    k    x                    b    m    w    v    z rsft
+       grv  ins  left rght                           up   down [    ]
+
+                           lctl lalt    ralt rctl
+                      bspc del  home    pgup ret spc
+                                end     pgdn
+)
+#||#
+
 #| --------------------------------------------------------------------------
                                    Layers
   -------------------------------------------------------------------------- |#
 
-(deflayer template
+(deflayer dvorak
+  \    1    2    3    4    5                    6    7    8    9    0    =
+  tab  '    ,    .    p    y                    f    g    c    r    l    /
+  esc  a    o    e    u    i                    d    h    t    n    s    -
+  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
+       grv  ins  left rght                           up   down [    ]
+
+                           lctl lalt    ralt rctl
+                      bspc del  home    pgup ret spc
+                                @sym    pgdn
+)
+
+(deflayer template-_
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    _    _    _    _    _    _
@@ -74,16 +86,16 @@
                                 _       _
 )
 
-(deflayer dvorak
-  \    1    2    3    4    5                    6    7    8    9    0    =
-  tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a    o    e    u    i                    d    h    t    n    s    -
-  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
-       grv  ins  left rght                           up   down [    ]
+(deflayer template-XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+       XX   XX   XX   XX                             XX   XX   XX   XX
 
-                           lctl lalt    ralt rctl
-                      bspc del  home    pgup ret spc
-                                end     pgdn
+                           XX   XX      XX   XX
+                      XX   XX   XX      XX   XX  XX
+                                XX      XX  
 )
 
 
@@ -101,11 +113,11 @@
 
 
 (deflayer symbols
-  \    1    2    3    4    5                    6    7    8    9    0    =
-  tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  <    [    {    (    _                    d    h    t    n    s    -
-  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
-       grv  ins  left rght                           up   down [    ]
+  XX   F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   <    [    {   \(    XX                   XX  \)    }    ]    >    XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+       XX   XX   XX   XX                             XX   XX   XX   XX
 
                            lctl lalt    ralt rctl
                       bspc del  home    pgup ret spc
@@ -118,7 +130,7 @@
   -------------------------------------------------------------------------- |#
 
 (defalias
-  qwe  (layer-toggle qwerty)
+  sym  (layer-toggle symbols)
   kil  C-A-del
 )
 
@@ -425,11 +437,6 @@
   syntax.
 
   -------------------------------------------------------------------------- |#
-
-(defalias
-  sym (layer-toggle qwerty)
-
-)
 
 #| --------------------------------------------------------------------------
                         Optional: Command buttons
