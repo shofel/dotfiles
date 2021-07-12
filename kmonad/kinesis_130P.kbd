@@ -23,12 +23,28 @@
                             The original layout
 
    Keyboard is to be prepared like this:
-   1. Reset memory: Program+Control+F10
-   2. Remap Escape to CapsLock (Program+F12 Esc CapsLock Program+F12)
+   1. Reset memory: `Program+Control+F10`
+   2. (Optionally) Switch to Dvorak: `Program+Control+F5`
+   3. Remap Escape to CapsLock: `Program+F12 Esc CapsLock Program+F12`
 
    Kinesis cheatsheet: http://web.mit.edu/jmorzins/Public/kinesisCheatSheet.html
    ------------------------------------------------------------------------- |#
 
+#| src:dvorak |#
+(defsrc
+  =    1    2    3    4    5                    6    7    8    9    0    -
+  tab  '    ,    .    p    y                    f    g    c    r    l    /
+  esc  a    o    e    u    i                    d    h    t    n    s    \
+  lsft ;    q    j    k    x                    b    m    w    v    z rsft
+       grv  ins  left rght                           up   down [    ]
+
+                           lctl lalt    ralt rctl
+                      bspc del  home    pgup ret spc
+                                end     pgdn
+)
+#||#
+
+#| src:qwerty | #
 (defsrc
   =    1    2    3    4    5                    6    7    8    9    0    -
   tab  q    w    e    r    t                    y    u    i    o    p    \
@@ -40,7 +56,7 @@
                       bspc del  home    pgup ret spc
                                 end     pgdn
 )
-
+#||#
 
 #| --------------------------------------------------------------------------
                                    Layers
@@ -50,7 +66,7 @@
   \    1    2    3    4    5                    6    7    8    9    0    =
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u    i                    d    h    t    n    s    -
-  lsft ;    q    j    k    x                    b    m    w    v    z rsft
+  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
        grv  ins  left rght                           up   down [    ]
 
                            lctl lalt    ralt rctl
