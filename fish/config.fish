@@ -2,6 +2,10 @@
 # use universal variable $fish_user_path
 # see https://fishshell.com/docs/current/tutorial.html#tut_path
 
+# Path
+#
+fish_add_path ~/opt/bin ~/opt/node_packages/node_modules/.bin
+
 # SSH agent.
 #
 
@@ -34,5 +38,5 @@ set -Ux SUDO_ASKPASS (which ssh-askpass)
 
 # Nix
 #
-set PATH /nix/var/nix/profiles/per-user/shovel/profile/bin $PATH
+fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin
 set -x --unpath NIX_PATH nixpkgs=https://github.com/NixOS/nixpkgs/archive/release-21.05.tar.gz
