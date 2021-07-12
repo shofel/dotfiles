@@ -8,8 +8,6 @@
 ;; TODO make hydras
 ;; @see https://github.com/caioaao/stumpwm.d/blob/f9c75be0c5db4b431d33f557a40451a943a35590/keymaps.lisp#L21
 ;; @see https://github.com/alezost/stumpwm-config/blob/master/keys.lisp
-;;
-;; TODO name windows. On window open?
 
 (in-package :stumpwm)
 
@@ -60,6 +58,7 @@
 (define-key *root-map* (kbd "w") "windowlist")
 (define-key *root-map* (kbd "H") "move-window left")
 (define-key *root-map* (kbd "L") "move-window right")
+
 (define-key *root-map* (kbd "f") "fullscreen")
 
 ;; Change groups.
