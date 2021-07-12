@@ -56,11 +56,23 @@
                       bspc del  home    pgup ret spc
                                 end     pgdn
 )
-#||#
+|#
 
 #| --------------------------------------------------------------------------
                                    Layers
   -------------------------------------------------------------------------- |#
+
+(deflayer template
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+       _    _    _    _                              _    _    _    _
+
+                           _    _       _    _
+                      _    _    _       _    _   _
+                                _       _
+)
 
 (deflayer dvorak
   \    1    2    3    4    5                    6    7    8    9    0    =
@@ -74,17 +86,32 @@
                                 end     pgdn
 )
 
+
 (deflayer qwerty
   \    1    2    3    4    5                    6    7    8    9    0    =
   tab  q    w    e    r    t                    y    u    i    o    p    /
   esc  a    s    d    f    g                    h    j    k    l    ;    -
-  lsft z    x    c    v    b                    n    m    ,    .    / rsft
+  @sl  z    x    c    v    b                    n    m    ,    .    /  @sr
        grv  ins  left rght                           up   down [    ]
 
                            lctl lalt    ralt rctl
                       bspc del  home    pgup ret spc
                                 end     pgdn
 )
+
+
+(deflayer symbols
+  \    1    2    3    4    5                    6    7    8    9    0    =
+  tab  '    ,    .    p    y                    f    g    c    r    l    /
+  esc  <    [    {    (    _                    d    h    t    n    s    -
+  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
+       grv  ins  left rght                           up   down [    ]
+
+                           lctl lalt    ralt rctl
+                      bspc del  home    pgup ret spc
+                                end     pgdn
+)
+
 
 #| --------------------------------------------------------------------------
                                 Alias
@@ -103,37 +130,14 @@
 
 
 #| --------------------------------------------------------------------------
-                          Optional: sticky keys
-
-  KMonad also support so called "sticky keys".  These are keys that will
-  behave as if they were pressed after just tapping them.  This behaviour
-  wears off after the next button is pressed, which makes them ideal for
-  things like a quick control or shift.  For example, tapping a sticky and
-  then pressing `abc' will result in `Abc'.
-
-  You can create these keys with the `sticky-key' keyword:
-
-    (defalias
-      slc (sticky-key 500 lctl))
-
-  The number after `sticky-key' is the timeout you want, in milliseconds.  If
-  a key is tapped and that time has passed, it won't act like it's pressed
-  down when we receive the next keypress.
-
-  It is also possible to combine sticky keys.  For example, to
-  get a sticky shift+control you can do
-
-    (defalias
-      ssc (around
-           (sticky-key 500 lsft)
-           (sticky-key 500 lctl)))
-
+                                Sticky Keys
   -------------------------------------------------------------------------- |#
 
 ;; Let's make both shift keys sticky
 (defalias
   sl (sticky-key 300 lsft)
-  sr (sticky-key 300 rsft))
+  sr (sticky-key 300 rsft)
+)
 
 
 #| --------------------------------------------------------------------------
