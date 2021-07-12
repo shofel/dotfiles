@@ -25,13 +25,14 @@
    Keyboard is to be prepared like this:
    1. Reset memory: `Program+Control+F10`
    2. (Optionally) Switch to Dvorak: `Program+Control+F5`
-   3. Remap Escape to CapsLock: `Program+F12 Esc CapsLock Program+F12`
+   3. Swap Escape and CapsLock: `Program+F12 Esc CapsLock CapsLock Esc Program+F12`
 
    Kinesis cheatsheet: http://web.mit.edu/jmorzins/Public/kinesisCheatSheet.html
    ------------------------------------------------------------------------- |#
 
 #| src:qwerty | #
 (defsrc
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
   =    1    2    3    4    5                    6    7    8    9    0    -
   tab  q    w    e    r    t                    y    u    i    o    p    \
   esc  a    s    d    f    g                    h    j    k    l    ;    '
@@ -46,6 +47,7 @@
 
 #| src:dvorak |#
 (defsrc
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
   =    1    2    3    4    5                    6    7    8    9    0    -
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u    i                    d    h    t    n    s    \
@@ -63,6 +65,7 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer dvorak
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
   \    1    2    3    4    5                    6    7    8    9    0    =
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u    i                    d    h    t    n    s    -
@@ -75,6 +78,7 @@
 )
 
 (deflayer template-_
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    _    _    _    _    _    _
@@ -87,6 +91,7 @@
 )
 
 (deflayer template-XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
@@ -99,7 +104,8 @@
 )
 
 
-(deflayer qwerty
+(deflayer raw-qwerty
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
   \    1    2    3    4    5                    6    7    8    9    0    =
   tab  q    w    e    r    t                    y    u    i    o    p    /
   esc  a    s    d    f    g                    h    j    k    l    ;    -
@@ -113,9 +119,10 @@
 
 
 (deflayer second
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
   _    `    \    =    _    _                    _    @=>  @=>{ _    _    _ 
-  _    <    [    {   \(    _                    _   \)    }    ]    >    _ 
+  _    <    [    {   \(    tab                  _   \)    }    ]    >    _ 
   _    _    _    _    _    _                    _    _    _    _    _    _ 
        _    _    _    _                              _    _    _    _ 
 
@@ -126,9 +133,10 @@
 
 
 (deflayer navigation
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
   _    @cn1 @cn2 @cn3 @cn4 F5                   F6   F7   F8   F9   F10  _ 
   _    _    _    _    _    _                    @cpu pgup up   _    _    _ 
-  _    home _    end  _    _                    @cpd left down rght _    _ 
+  _    home _    end  _    tab                  @cpd left down rght _    _ 
   _    _    _    _    _    _                    _    pgdn _    _    _    _ 
        _    _    _    _                              _    _    _    _ 
 
