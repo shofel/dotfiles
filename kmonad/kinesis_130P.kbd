@@ -61,21 +61,8 @@
 #||#
 
 #| --------------------------------------------------------------------------
-                                   Layers
-  -------------------------------------------------------------------------- |#
-
-(deflayer dvorak
-  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
-  \    1    2    3    4    5                    6    7    8    9    0    =
-  tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a    o    e    u    i                    d    h    t    n    s    -
-  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
-       XX   XX   left rght                           up   down XX   XX
-
-                           lctl lalt    ralt rctl
-                      bspc del  @3      @3   ret spc
-                                @2      @2
-)
+                       Templates for custom layers
+  -------------------------------------------------------------------------- |# #|
 
 (deflayer template-_
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
@@ -101,6 +88,25 @@
                            XX   XX      XX   XX
                       XX   XX   XX      XX   XX  XX
                                 XX      XX  
+)
+
+|#
+
+#| --------------------------------------------------------------------------
+                                   Layers
+  -------------------------------------------------------------------------- |#
+
+(deflayer dvorak
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
+  \    1    2    3    4    5                    6    7    8    9    0    =
+  tab  '    ,    .    p    y                    f    g    c    r    l    /
+  esc  a    o    e    u    i                    d    h    t    n    s    -
+  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
+       XX   XX   left rght                           up   down XX   XX
+
+                           lctl lalt    ralt rctl
+                      bspc del  @3      @3   ret spc
+                                @2      @2
 )
 
 
