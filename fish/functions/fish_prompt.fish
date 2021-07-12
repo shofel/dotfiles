@@ -1,4 +1,3 @@
-# Defined in /tmp/fish.um6jVT/fish_prompt.fish @ line 2
 function fish_prompt --description 'Write out the prompt'
 
 	# TODO check if the vars are already declared
@@ -34,9 +33,18 @@ function fish_prompt --description 'Write out the prompt'
 		echo -n '➤ '
 	end
 
+	function vim_marker
+		if test -n "$VIM"; echo -n 'vim'; end
+	end
+
 	function nix_shell_marker
-		if test -n "$IN_NIX_SHELL"
-			echo -n "<nix-shell> "
+		if test -z "$IN_NIX_SHELL"; echo -n 'nix'; end
+	end
+
+	function markers
+		set -l markers (vim_marker) (nix_shell_marker)
+		if test (count $markers) -gt 0
+			echo -n (set_color $fish_color_param)'['(string join ' ' $markers)'] '
 		end
 	end
 
@@ -49,6 +57,7 @@ function fish_prompt --description 'Write out the prompt'
 	# Print
 	#
 
+	markers
 	_pwd
 	__fish_git_prompt ' %s '
 	status_
