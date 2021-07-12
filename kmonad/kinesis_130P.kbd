@@ -166,17 +166,17 @@
 
 (defalias
 
-  ;; Strings
+  ;; Strings (tap-macro)
   =>  #(= >)
   =>{ #(= > {)
 
-  ;; Layers
+  ;; Switch Layers  ;; see also (layer-delay) (layer-next)
   2   (layer-toggle second)
   3   (layer-toggle navigation)
   raw (layer-switch raw-qwerty)
   def (layer-switch dvorak)
 
-  ;; Chords
+  ;; Chords  (aliases for around-next)
   cpu C-pgup
   cpd C-pgdn
   ;; Virtual console
@@ -185,13 +185,6 @@
   cn3 C-A-F3
   cn4 C-A-F4
 )
-
-
-#| NOTE: The above code could just as easily have been written as:
-(defalias num (layer-toggle numbers))
-(defalias kil C-A-del)
-|#
-
 
 #| --------------------------------------------------------------------------
                                 Sticky Keys
@@ -203,102 +196,7 @@
   sr (sticky-key 300 rsft)
 )
 
-
-#| --------------------------------------------------------------------------
-                              Optional: tap-macros
-
-  Let's look at a button we haven't seen yet, tap-macros.
-
-  `tap-macro` is a function that takes an arbitrary number of buttons and
-  returns a new button. When this new button is pressed it rapidly taps all its
-  stored buttons in quick succesion except for its last button, which it only
-  presses. This last button gets released when the `tap-macro` gets released.
-
-  There are two ways to define a `tap-macro`, using the `tap-macro` function
-  directly, or through the #() syntactic sugar. Both evaluate to exactly the
-  same button.
-
-    (tap-macro K M o n a d)
-    #(K M o n a d)
-
-  If you are going to use a `tap-macro` to perform a sequence of actions inside
-  some program you probably want to include short pauses between inputs to give
-  the program time to register all the key-presses. Therefore we also provide
-  the 'pause' function, which simply pauses processing for a certain amount of
-  milliseconds. Pauses can be created like this:
-
-    (pause 20)
-    P20
-
-  You can also pause between each key stroke by specifying the `:delay' keyword,
-  as well as a time in ms, at the end of a `tap-macro':
-
-    (tap-macro K M o n a d :delay 5)
-    #(K M o n a d :delay 5)
-
-  The above would be equivalent to e.g.
-
-    (tap-macro K P5 M P5 o P5 n P5 a P5 d)
-
-  WARNING: DO NOT STORE YOUR PASSWORDS IN PLAIN TEXT OR IN YOUR KEYBOARD
-
-  I know it might be tempting to store your password as a macro, but there are 2
-  huge risks:
-  1. You accidentally leak your config and expose your password
-  2. Anyone who knows about the button can get clear-text representation of your
-  password with any text editor, shell, or text-input field.
-
-  Support for triggering shell commands directly from KMonad is described in the
-  command buttons section below.
-
-  This concludes this public service announcement.
-
-  -------------------------------------------------------------------------- |#
-
 (defalias
-  mc1 #(K M o n a d)
-  mc2 #(C-c P50 A-tab P50 C-v) ;; Careful, this might do something
-  mc3 #(P200 h P150 4 P100 > < P50 > < P20 0 r z 1 ! 1 ! !)
-  mc4 (tap-macro a (pause 50) @mc2 (pause 50) c)
-  mc5 #(@mc3 spc @mc3 spc @mc3)
-)
-
-#| --------------------------------------------------------------------------
-                          Optional: layer manipulation
-
-  `layer-toggle` works as described before
-
-  `layer-delay`, once pressed, temporarily switches to some layer for some
-  milliseconds.    (layer-delay 500 my-layer)
-
-  `layer-next`, once pressed, primes KMonad to handle the next press from some
-    (around-next (layer-toggle layer-name) some-button)
-  Until then though, use `layer-next` like this:
-    (layer-next layer-name)
-
-  `layer-switch`: change the base-layer of KMonad. As described at the top of
-    (layer-switch my-layer)
-  This is where things start getting potentially dangerous (i.e. get KMonad into
-
-  `layer-add` and `layer-rem`. This is where you can very quickly cause yourself
-  a big headache
-    (layer-add name) ;; Add a layer to the top of the stack
-    (layer-rem name) ;; Remove a layer by name (noop if no such layer)
-
-  To use `layer-add` and `layer-rem` well, you should take a moment to think
-  about how to create a layout that will prevent you from getting into
-  situations where you enter a key-configuration you cannot get out of again.
-  These two operations together, however, are very useful for activating a
-  permanent overlay for a while. This technique is illustrated in the tap-hold
-  overlay a bit further down.
-
-
-  -------------------------------------------------------------------------- |# #|
-
-(defalias
-
-  yah (layer-toggle asking-for-trouble) ;; Completely safe
-  nah (layer-add asking-for-trouble)    ;; Completely unsafe
 
   ld1 (layer-delay 500 numbers) ;; One way to get a leader-key
   ld2 (layer-next numbers)      ;; Another way to get a leader key
@@ -309,18 +207,6 @@
   qwe (layer-switch qwerty) ;; Set qwerty as the base layer
   col (layer-switch colemak) ;; Set colemak as the base layer
 )
-
-(defalias lol #(: - D))
-
-
-;; One way to safely use layer-add and layer-rem: the button bound to layer-add
-;; is the same button bound to layer-rem in the layer that `add` adds to the
-;; stack. I.e., it becomes impossible to add or remove multiple copies of a
-;; layer.
-(defalias
-  add (layer-add multi-overlay) ;; multi-overlay is defined in the next
-  rem (layer-rem multi-overlay) ;; section below this
-  )
 
 #| --------------------------------------------------------------------------
                           Optional: Multi-use buttons
