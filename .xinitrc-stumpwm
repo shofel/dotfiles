@@ -2,7 +2,6 @@
 
 # Scale 4k
 # I've decided not doing this, but instead scale each app separately.
-# Thanks God, I've got only three: google-chrome, sakura, and telegram.
 # xrandr --output HDMI-1 --scale 0.7x0.7
 
 # Load resources.
@@ -10,17 +9,8 @@ xrdb -merge .Xresources
 
 # keyboard and mouse.
 xset m 1 0
-# setxkbmap -option ctrl:nocaps
 
 # redshift is like a twighlight for linux
 redshift -l56.83:60.60 -t 6500:3000 &
-
-# Sticky modifiers.
-# @see https://www.emacswiki.org/emacs/StickyModifiers#toc10
-xkbset -bell -feedback sticky -twokey latchlock
-xkbset exp 64 '=sticky' '=twokey' '=latchlock'
-
-# Start notification server.
-dunst &
 
 exec /usr/local/bin/stumpwm
