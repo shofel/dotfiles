@@ -71,28 +71,12 @@
 )
 
 #| --------------------------------------------------------------------------
-                        Optional : `defalias` statements
-
-  KMonad will let you specify some very specific, crazy buttons. These
-  definitions can get pretty long, though, and would make `deflayer` blocks
-  nearly impossible to read. Therefore we provide the ability to alias names to
-  these buttons, to keep the actual `deflayer` statements orderly.
-
-  A `defalias` can contain any number of aliases, and it can refer backwards or
-  forwards to layers without issue. The only sequencing that needs to be kept in
-  mind is that a `defalias` cannot refer forward to another `defalias` that is
-  not yet defined.
-
-  Here we define a few aliases, but we will define more later. Notice that we
-  try to only use 3 letter names for aliases. If that is not enough to be clear,
-  consider widening all columns to 6 or 7 characters (or be content with a messy
-  config).
-
-  -------------------------------------------------------------------------- |# #|
+                                Alias
+  -------------------------------------------------------------------------- |#
 
 (defalias
-  qwe  (layer-toggle qwerty) ;; Bind num to a button that switches to a layer
-  kil  C-A-del               ;; Bind kil to a button that Ctrl-Alt-deletes
+  qwe  (layer-toggle qwerty)
+  kil  C-A-del
 )
 
 
