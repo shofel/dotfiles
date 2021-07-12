@@ -68,6 +68,8 @@ Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
 " Plug 'idanarye/vim-vebugger' TODO
+
+Plug 'kmonad/kmonad-vim'
 " }}} Lang
 
 " draw ascii diagrams
