@@ -38,7 +38,7 @@ function fish_prompt --description 'Write out the prompt'
 	end
 
 	function nix_shell_marker
-		if test -z "$IN_NIX_SHELL"; echo -n 'nix'; end
+		if test -n "$IN_NIX_SHELL"; echo -n 'nix'; end
 	end
 
 	function markers
