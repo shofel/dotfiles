@@ -8,8 +8,8 @@
   input  (device-file "/dev/input/by-id/usb-13ba_Barcode_Reader-event-kbd")
   output (uinput-sink "My KMonad output"
     ;; Prepare support for compose-key
-    "sleep 1 && setxkbmap -option compose:ralt")
-  cmp-seq ralt    ;; Set the compose key to `RightAlt'
+    "sleep 1 && setxkbmap -option compose:menu")
+  cmp-seq menu    ;; Set the compose key to menu
   cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
 
   ;; TODO Comment this is you want unhandled events not to be emitted
@@ -117,9 +117,9 @@
 (deflayer dvorak
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
 
-  @scr 1    2    3    4    5                    6    7    8    9    0    XX
+  @scr !    @    #    $    %                    ^    &    *    @=>  @=>{ XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a   @o    e   @u    i                    d   @h    t   @n    s    -
+  esc  a   @o    e    u   @i                   @d    h    t   @n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
        XX   XX   @nav @sym                           @sym @nav XX   XX
 
@@ -134,10 +134,10 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    _    `    =    |    \                    /    |    -    @=>  @=>{ _ 
+  _    _    `    =    |    \                    /    |    -    _    _    _ 
   _    _    <    {   \(    [                    ]   \)    }    >    _    _ 
   _    _    ~    +    _    _                    _    _   \_    _    _    _ 
-       _    _    @num @num                           @=>  @=>{ _    _ 
+       _    _    @num @num                           _    _    _    _ 
 
                            _    _       _    _
                       _    _    _       _    _    _
@@ -182,16 +182,16 @@
 (defalias
 
   ;; Strings (tap-macro)
-  =>  #(= > spc)
-  =>{ #(= > spc {)
+  =>  #(spc = > spc)
+  =>{ #(spc = > spc {)
 
   ;; Switch Layers
   ;; see also (layer-delay n x) (layer-next x)
-  0   (layer-toggle dvorak)
-  0_  (layer-switch dvorak)
-  sym (layer-toggle symbols)
-  nav (layer-toggle navigation)
-  num (layer-toggle numbers)
+  0    (layer-toggle dvorak)
+  0_   (layer-switch dvorak)
+  sym  (layer-toggle symbols)
+  nav  (layer-toggle navigation)
+  num  (layer-toggle numbers)
   num_ (layer-switch numbers)
 
   ;; Chords  (aliases for around-next)
@@ -229,11 +229,9 @@
   ;; Home row modifiers
 
   o (tap-hold-next-release 200 o lalt)
-  e #(e)
-  u (tap-hold-next-release 200 u lctl)
+  i (tap-hold-next-release 200 i lctl)
 
-  h (tap-hold-next-release 200 h rctl)
-  t #(t)
+  d (tap-hold-next-release 200 d rctl)
   n (tap-hold-next-release 200 n ralt)
 )
 
@@ -322,7 +320,7 @@
   -------------------------------------------------------------------------- |#
 
 (defalias
-  scr (cmd-button "scrot --line style=solid,width=3 --select ~/screenshots/$(date +%Y-%m-%-d-%R-%S)")
+  scr (cmd-button "scrot --line style=solid,width=3 --select /home/shovel/screenshots/$(date +%Y-%m-%-d-%R-%S).png")
 
   ;; `dat' on press and `pth' on release
   bth (cmd-button "date >> /tmp/kmonad_example.txt"
