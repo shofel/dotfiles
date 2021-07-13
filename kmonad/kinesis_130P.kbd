@@ -119,12 +119,12 @@
 
   @scr !    @    #    $    %                    ^    &    *    @=>  @=>{ XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a   @o    e    u   @i                   @d    h    t   @n    s    -
+  esc  a    o    e    u   @i                   @d    h    t    n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
        XX   XX   @nav @sym                           @sym @nav XX   XX
 
                            XX   XX      XX   XX
-                      bspc del  @num_   XX   ret  spc
+                      bspc @del @num_   XX   @ret spc
                                 XX      XX
 )
 
@@ -226,13 +226,13 @@
 (defalias
   xtn (tap-next x lsft)
 
-  ;; Home row modifiers
+  ;; Modifiers
 
-  o (tap-hold-next-release 200 o lalt)
-  i (tap-hold-next-release 200 i lctl)
+  i   (tap-hold-next-release 200 i   lctl)
+  d   (tap-hold-next-release 200 d   rctl)
 
-  d (tap-hold-next-release 200 d rctl)
-  n (tap-hold-next-release 200 n ralt)
+  del (tap-hold-next-release 500 del lalt)
+  ret (tap-hold-next-release 500 ret ralt)
 )
 
 #| --------------------------------------------------------------------------
