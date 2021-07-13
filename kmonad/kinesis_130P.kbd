@@ -119,11 +119,11 @@
 
   XX   1    2    3    4    5                    6    7    8    9    0    XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a   @o   @e   @u    i                    d   @h   @t   @n    s    -
+  esc  a   @o    e   @u    i                    d   @h    t   @n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
        XX   XX   @nav @sym                           @sym @nav XX   XX
 
-                           lctl lalt    ralt rctl
+                           XX   XX      XX   XX
                       bspc del  @num_   XX   ret  spc
                                 XX      XX
 )
