@@ -240,7 +240,7 @@ nnoremap <Leader>vs :source $MYVIMRC<Return>
 vnoremap <F6> y:"
 
 " switch keymap in normal mode
-nnoremap <Leader>0 i<esc>:echom 'Keymap switched'<cr>
+nnoremap <Leader>0 a<esc>:echom 'Keymap switched'<cr>
 
 " fixup search
 nnoremap / /\v
