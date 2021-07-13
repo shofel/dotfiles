@@ -115,46 +115,32 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer dvorak
-  caps @raw F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
+  caps XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
 
   XX   1    2    3    4    5                    6    7    8    9    0    XX
-  XX   '    ,    .    p    y                    f    g    c    r    l    /
+  tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u    i                    d    h    t    n    s    -
-  @sl  ;    q    j    k    x                    b    m    w    v    z  @sr
-       XX   XX   left rght                           up   down XX   XX
+  @sls ;    q    j    k    x                    b    m    w    v    z    @srs
+       XX   XX   @sym @nav                           @nav @sym XX   XX
 
                            lctl lalt    ralt rctl
-                      bspc del  @3      @3   ret spc
-                                @2      @2
-)
-
-
-(deflayer raw-qwerty
-  caps @def F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
-
-  =    1    2    3    4    5                    6    7    8    9    0    -
-  tab  q    w    e    r    t                    y    u    i    o    p    \
-  esc  a    s    d    f    g                    h    j    k    l    ;    '
-  lsft z    x    c    v    b                    n    m    ,    .    / rsft
-       grv  ins  left rght                           up   down [    ]
-
-                           lctl lalt    ralt rctl
-                      bspc del  home    pgup ret spc
-                                end     pgdn
+                      bspc del  XX      XX   ret  spc
+                                XX      XX
 )
 
 
 (deflayer second
+  #| Hint to type cyrillics:  `ё =ъ ~Ё +Ъ  |#
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
   _    _    `    =    |    \                    /    |    -    @=>  @=>{ _ 
-  _    <    [    {   \(    tab                  _   \)    }    ]    >    _ 
-  _    _    _    _    _    _                    _    _    _    _    _    _ 
-       _    _    _    _                              _    _    _    _ 
+  _    _    <    {   \(    [                    ]   \)    }    >    _    _ 
+  _    _    ~    +    _    _                    _    _   \_    _    _    _ 
+       _    _    @num @num                           @=>  @=>{ _    _ 
 
-                           _    _       _    _ 
-                      _    _    _       _    _   _ 
+                           _    _       _    _
+                      _    _    _       _    _    _
                                 _       _   
 )
 
@@ -162,15 +148,30 @@
 (deflayer navigation
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
-  _    @cn1 @cn2 @cn3 @cn4 F5                   F6   F7   F8   F9   F10  _ 
+  _    @vt1 @vt2 @vt3 @vt4 _                    _    _    _    _    _    _ 
   _    _    _    _    _    _                    @cpu pgup up   _    _    _ 
   _    home _    end  _    tab                  @cpd left down rght _    _ 
-  _    _    _    _    _    _                    _    pgdn _    _    _    _ 
-       _    _    _    _                              _    _    _    _ 
+  _    _    _    _    _    _                    _    pgdn down _    _    _ 
+       _    _    @num @num                           up   down _    _ 
 
                            _    _       _    _ 
-                      _    _    _       _    _   _ 
+                      _    _    _       _    _    _ 
                                 _       _   
+)
+
+
+(deflayer numbers
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
+
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    &    *    _    _                    _    7    8    9    _    _
+  _    _    $    %    ^    _                    _    4    5    6    _    _
+  _    _    !    @    #    _                    0    1    2    3    _    _
+       _    _    _    _                              _    _    _    _
+
+                           _    _       _    _
+                      _    _    _       _    _    _
+                                _       _
 )
 
 
@@ -181,23 +182,24 @@
 (defalias
 
   ;; Strings (tap-macro)
-  =>  #(= >)
-  =>{ #(= > {)
+  =>  #(= > spc)
+  =>{ #(= > spc {)
 
   ;; Switch Layers  ;; see also (layer-delay) (layer-next)
-  2   (layer-toggle second)
-  3   (layer-toggle navigation)
-  raw (layer-switch raw-qwerty)
+  0   (layer-toggle dvorak)
+  sym (layer-toggle second)
+  nav (layer-toggle navigation)
+  num (layer-toggle numbers)
   def (layer-switch dvorak)
 
   ;; Chords  (aliases for around-next)
   cpu C-pgup
   cpd C-pgdn
-  ;; Virtual console
-  cn1 C-A-F1
-  cn2 C-A-F2
-  cn3 C-A-F3
-  cn4 C-A-F4
+  ;; Virtual terminals
+  vt1 C-A-F1
+  vt2 C-A-F2
+  vt3 C-A-F3
+  vt4 C-A-F4
 )
 
 #| --------------------------------------------------------------------------
@@ -206,20 +208,13 @@
 
 ;; Let's make both shift keys sticky
 (defalias
-  sl (sticky-key 300 lsft)
-  sr (sticky-key 300 rsft)
+  sls (sticky-key 300 lsft)
+  srs (sticky-key 300 rsft)
 )
 
 (defalias
-
-  ld1 (layer-delay 500 numbers) ;; One way to get a leader-key
-  ld2 (layer-next numbers)      ;; Another way to get a leader key
-
-  ;; NOTE, this is safe because both `qwerty` and `colemak` contain the `@tst`
-  ;; button which will get us to the `layer-test` layer, which itself contains
-  ;; both `@qwe` and `@col`.
-  qwe (layer-switch qwerty) ;; Set qwerty as the base layer
-  col (layer-switch colemak) ;; Set colemak as the base layer
+  ld1 (layer-delay 500 dvorak) ;; One way to get a leader-key
+  ld2 (layer-next dvorak)      ;; Another way to get a leader key
 )
 
 #| --------------------------------------------------------------------------
