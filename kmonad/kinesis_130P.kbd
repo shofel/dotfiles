@@ -119,17 +119,17 @@
 
   XX   1    2    3    4    5                    6    7    8    9    0    XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a    o    e    u    i                    d    h    t    n    s    -
+  esc  a   @o   @e   @u    i                    d   @h   @t   @n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
        XX   XX   @nav @sym                           @sym @nav XX   XX
 
                            lctl lalt    ralt rctl
-                      bspc del  XX      XX   ret  spc
+                      bspc del  @num_   XX   ret  spc
                                 XX      XX
 )
 
 
-(deflayer second
+(deflayer symbols
   #| Hint to type cyrillics:  `ё =ъ ~Ё +Ъ  |#
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
@@ -164,13 +164,13 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    &    *    _    _                    _    7    8    9    _    _
-  _    _    $    %    ^    _                    _    4    5    6    _    _
-  _    _    !    @    #    _                    0    1    2    3    _    _
+  _    _    _    _    _    _                    _    7    8    9    _    _
+  _    _    _    _    _    _                    _    4    5    6    _    _
+  _    _    _    _    _    _                    0    1    2    3    _    _
        _    _    _    _                              _    _    _    _
 
                            _    _       _    _
-                      _    _    _       _    _    _
+                      _    _    @0_     _    _    _
                                 _       _
 )
 
@@ -185,12 +185,14 @@
   =>  #(= > spc)
   =>{ #(= > spc {)
 
-  ;; Switch Layers  ;; see also (layer-delay) (layer-next)
+  ;; Switch Layers
+  ;; see also (layer-delay n x) (layer-next x)
   0   (layer-toggle dvorak)
-  sym (layer-toggle second)
+  0_  (layer-switch dvorak)
+  sym (layer-toggle symbols)
   nav (layer-toggle navigation)
   num (layer-toggle numbers)
-  def (layer-switch dvorak)
+  num_ (layer-switch numbers)
 
   ;; Chords  (aliases for around-next)
   cpu C-pgup
@@ -208,8 +210,8 @@
 
 ;; Let's make both shift keys sticky
 (defalias
-  sls (sticky-key 300 lsft)
-  srs (sticky-key 300 rsft)
+  sls (sticky-key 500 lsft)
+  srs (sticky-key 500 rsft)
 )
 
 (defalias
@@ -218,109 +220,21 @@
 )
 
 #| --------------------------------------------------------------------------
-                          Optional: Multi-use buttons
-
-  Perhaps one of the most useful features of KMonad, where a lot of work has
-  gone into, but also an area with many buttons that are ever so slightly
-  different. The naming and structuring of these buttons might change sometime
-  soon, but for now, this is what there is.
-
-  For the next section being able to talk about examples is going to be handy,
-  so consider the following scenario and mini-language that will be the same
-  between scenarios.
-    - We have some button `foo` that will be different between scenarios
-    - `foo` is bound to 'Esc' on the input keyboard
-    - the letters a s d f are bound to themselves
-    - Px  signifies the press of button x on the keyboard
-    - Rx  signifies the release of said button
-    - Tx  signifies the sequential and near instantaneous press and release of x
-    - 100 signifies 100ms pass
-
-  So for example:
-    Tesc Ta:
-      tap of 'Esc' (triggering `foo`), tap of 'a' triggering `a`
-    Pesc 100 Ta Tb Resc:
-      press of 'Esc', 100ms pause, tap of 'a', tap of 'b', release of 'Esc'
-
-  The `tap-next` button takes 2 buttons, one for tapping, one for holding, and
-  combines them into a single button. When pressed, if the next event is its own
-  release, we tap the 'tapping' button. In all other cases we first press the
-  'holding' button then we handle the event. Then when the `tap-next` gets
-  released, we release the 'holding' button.
-
-  So, using our mini-language, we set foo to:
-    (tap-next x lsft)
-  Then:
-    Tesc            -> x
-    Tesc Ta         -> xa
-    Pesc Ta Resc    -> A
-    Pesc Ta Tr Resc -> AR
-
-  The `tap-hold` button is very similar to `tap-next` (a theme, trust me). The
-  difference lies in how the decision is made whether to tap or hold. A
-  `tap-hold` waits for a particular timeout, if the `tap-hold` is released
-  anywhere before that moment we execute a tap immediately. If the timeout
-  occurs and the `tap-hold` is still held, we switch to holding mode.
-
-  The additional feature of a `tap-hold` is that it pauses event-processing
-  until it makes its decision and then rolls back processing when the decision
-  has been made.
-
-  So, again with the mini-language, we set foo to:
-    (tap-hold 200 x lsft) ;; Like tap-next, but with a 200ms timeout
-  Then:
-    Tesc            -> x
-    Tesc Ta         -> xa
-    Pesc 300 a      -> A (the moment you press a)
-    Pesc a 300      -> A (after 200 ms)
-    Pesc a 100 Resc -> xa (both happening immediately on Resc)
-
-  The `tap-hold-next` button is a combination of the previous 2. Essentially,
-  think of it as a `tap-next` button, but it also switches to held after a
-  period of time. This is useful, because if you have a (tap-next ret ctl) for
-  example, and you press it thinking you want to press C-v, but then you change
-  your mind, you now cannot release the button without triggering a 'ret', that
-  you then have to backspace. With the `tap-hold-next` button, you simply
-  outwait the delay, and you're good. I see no benefit of `tap-next` over
-  `tap-hold-next` with a decent timeout value.
-
-  The `tap-next-release` is like `tap-next`, except it decides whether to tap or
-  hold based on the next release of a key that was *not* pressed before us. This
-  also performs rollback like `tap-hold`.So, using the minilanguage and foo as:
-    (tap-next-release x lsft)
-  Then:
-    Tesc Ta         -> xa
-    Pa Pesc Ra Resc -> ax (because 'a' was already pressed when we started, so
-                           foo decides it is tapping)
-    Pesc Ta Resc    -> A (because a was pressed *and* released after we started,
-                          so foo decides it is holding)
-
-  These increasingly stranger buttons are, I think, coming from the stubborn
-  drive of some of my more eccentric (and I mean that in the most positive way)
-  users to make typing with modifiers on the home-row more comfortable.
-  Especially layouts that encourage a lot of rolling motions are nicer to use
-  with the `release` style buttons.
-
-  The `tap-hold-next-release` (notice a trend?) is just like `tap-next-release`,
-  but it comes with an additional timeout that, just like `tap-hold-next` will
-  jump into holding-mode after a timeout.
-
-  I honestly think that `tap-hold-next-release`, although it seems the most
-  complicated, probably is the most comfortable to use. But I've put all of them
-  in a testing layer down below, so give them a go and see what is nice.
-
+                               Multi-use buttons
   -------------------------------------------------------------------------- |#
 
-
 (defalias
-  xtn (tap-next x lsft)         ;; Shift that does 'x' on tap
-  xth (tap-hold 400 x lsft)     ;; Long delay for easier testing
-  thn (tap-hold-next 400 x lsft)
-  tnr (tap-next-release x lsft)
-  tnh (tap-hold-next-release 2000 x lsft)
+  xtn (tap-next x lsft)
 
-  ;; Used it the colemak layer
-  xcp (tap-hold-next 400 esc ctl)
+  ;; Home row modifiers
+
+  o (tap-hold-next-release 500 o lalt)
+  e #(e)
+  u (tap-hold-next-release 500 u lctl)
+
+  h (tap-hold-next-release 500 h rctl)
+  t #(t)
+  n (tap-hold-next-release 500 n ralt)
 )
 
 #| --------------------------------------------------------------------------
