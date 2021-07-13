@@ -95,7 +95,7 @@
 )
 
 (deflayer raw-qwerty
-  caps @def F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
+  caps @0_  F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
 
   =    1    2    3    4    5                    6    7    8    9    0    -
   tab  q    w    e    r    t                    y    u    i    o    p    \
@@ -115,9 +115,9 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer dvorak
-  caps XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
 
-  XX   1    2    3    4    5                    6    7    8    9    0    XX
+  @scr 1    2    3    4    5                    6    7    8    9    0    XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a   @o    e   @u    i                    d   @h    t   @n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
@@ -151,7 +151,7 @@
   _    @vt1 @vt2 @vt3 @vt4 _                    _    _    _    _    _    _ 
   _    _    _    _    _    _                    @cpu pgup up   _    _    _ 
   _    home _    end  _    tab                  @cpd left down rght _    _ 
-  _    _    _    _    _    _                    _    pgdn down _    _    _ 
+  _    _    _    _    _    _                    _    pgdn _    _    _    _ 
        _    _    @num @num                           up   down _    _ 
 
                            _    _       _    _ 
@@ -228,13 +228,13 @@
 
   ;; Home row modifiers
 
-  o (tap-hold-next-release 500 o lalt)
+  o (tap-hold-next-release 200 o lalt)
   e #(e)
-  u (tap-hold-next-release 500 u lctl)
+  u (tap-hold-next-release 200 u lctl)
 
-  h (tap-hold-next-release 500 h rctl)
+  h (tap-hold-next-release 200 h rctl)
   t #(t)
-  n (tap-hold-next-release 500 n ralt)
+  n (tap-hold-next-release 200 n ralt)
 )
 
 #| --------------------------------------------------------------------------
@@ -322,8 +322,8 @@
   -------------------------------------------------------------------------- |#
 
 (defalias
-  dat (cmd-button "date >> /tmp/kmonad_example.txt")   ;; Append date to tmpfile
-  pth (cmd-button "echo $PATH > /tmp/kmonad_path.txt") ;; Write out PATH
+  scr (cmd-button "scrot --line style=solid,width=3 --select ~/screenshots/$(date +%Y-%m-%-d-%R-%S)")
+
   ;; `dat' on press and `pth' on release
   bth (cmd-button "date >> /tmp/kmonad_example.txt"
                   "echo $PATH > /tmp/kmonad_path.txt")
