@@ -121,7 +121,7 @@
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u    i                    d    h    t    n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
-       XX   XX   @sym @nav                           @nav @sym XX   XX
+       XX   XX   @nav @sym                           @sym @nav XX   XX
 
                            lctl lalt    ralt rctl
                       bspc del  XX      XX   ret  spc
