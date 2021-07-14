@@ -104,7 +104,7 @@
        grv  ins  left rght                           up   down [    ]
 
                            lctl lalt    ralt rctl
-                      bspc del  home    pgup ret  spc
+                      bspc  del home    pgup ret  spc
                                 end     pgdn
 )
 
@@ -119,13 +119,13 @@
 
   @scr !    @    #    $    %                    ^    &    *    @=>  @=>{ XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a    o    e    u   @i                   @d    h    t    n    s    -
-  @sls ;    q    j    k    x                    b    m    w    v    z    @srs
+  esc  a    o    e    u    i                    d    h    t    n    s    -
+  @sls ;    q    j    k    x                    b    m    w    v    z   @srs
        XX   XX  @<-  @->                            @↑   @↓    XX   XX
 
-                           XX   XX      XX   XX
-                      bspc del  @num_   XX   ret  spc
-                                XX      XX
+                           lctl lalt    ralt rctl
+                      bspc  del   XX    XX   ret  spc
+                                  XX    XX
 )
 
 
@@ -152,7 +152,7 @@
   _    _    _    _    _    _                    @cpu pgup up   _    _    _ 
   _    home _    end  _    tab                  @cpd left down rght _    _ 
   _    _    _    _    _    _                    _    pgdn _    _    _    _ 
-       _    _    @num @num                           up   down _    _ 
+       _    _    @num @num                           _    _    _    _ 
 
                            _    _       _    _ 
                       _    _    _       _    _    _ 
@@ -227,9 +227,6 @@
   xtn (tap-next x lsft)
 
   ;; Modifiers
-
-  i   (tap-hold-next-release 200 i    lctl)
-  d   (tap-hold-next-release 200 d    rctl)
 
   <-  (tap-hold-next-release 200 left @nav)
   ->  (tap-hold-next-release 200 rght @sym)
