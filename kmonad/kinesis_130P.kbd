@@ -114,17 +114,17 @@
                                    Layers
   -------------------------------------------------------------------------- |#
 
-(deflayer dvorak
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
+(deflayer base
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   @sus XX   XX   XX
 
   @scr !    @    #    $    %                    ^    &    *    @=>  @=>{ XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u   @i                   @d    h    t    n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z    @srs
-       XX   XX   @nav @sym                           @sym @nav XX   XX
+       XX   XX  @<-  @->                            @↑   @↓    XX   XX
 
                            XX   XX      XX   XX
-                      bspc @del @num_   XX   @ret spc
+                      bspc del  @num_   XX   ret  spc
                                 XX      XX
 )
 
@@ -187,8 +187,8 @@
 
   ;; Switch Layers
   ;; see also (layer-delay n x) (layer-next x)
-  0    (layer-toggle dvorak)
-  0_   (layer-switch dvorak)
+  0    (layer-toggle base)
+  0_   (layer-switch base)
   sym  (layer-toggle symbols)
   nav  (layer-toggle navigation)
   num  (layer-toggle numbers)
@@ -215,8 +215,8 @@
 )
 
 (defalias
-  ld1 (layer-delay 500 dvorak) ;; One way to get a leader-key
-  ld2 (layer-next dvorak)      ;; Another way to get a leader key
+  ld1 (layer-delay 500 base) ;; One way to get a leader-key
+  ld2 (layer-next base)      ;; Another way to get a leader key
 )
 
 #| --------------------------------------------------------------------------
@@ -228,11 +228,13 @@
 
   ;; Modifiers
 
-  i   (tap-hold-next-release 200 i   lctl)
-  d   (tap-hold-next-release 200 d   rctl)
+  i   (tap-hold-next-release 200 i    lctl)
+  d   (tap-hold-next-release 200 d    rctl)
 
-  del (tap-hold-next-release 500 del lalt)
-  ret (tap-hold-next-release 500 ret ralt)
+  <-  (tap-hold-next-release 200 left @nav)
+  ->  (tap-hold-next-release 200 rght @sym)
+  ↑   (tap-hold-next-release 200 up   @sym)
+  ↓   (tap-hold-next-release 200 down @nav)
 )
 
 #| --------------------------------------------------------------------------
@@ -321,6 +323,7 @@
 
 (defalias
   scr (cmd-button "scrot --line style=solid,width=3 --select /home/shovel/screenshots/$(date +%Y-%m-%-d-%R-%S).png")
+  sus (cmd-button "exec systemctl suspend")
 
   ;; `dat' on press and `pth' on release
   bth (cmd-button "date >> /tmp/kmonad_example.txt"
