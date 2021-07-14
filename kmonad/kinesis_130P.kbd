@@ -117,7 +117,7 @@
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   @sus XX   XX   XX
 
-  @scr !    @    #    $    %                    ^    &    *    @=>  @=>{ XX
+  @scr !    @    #    $    %                    ^    &    *    XX   XX   XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
   esc  a    o    e    u    i                    d    h    t    n    s    -
   @sls ;    q    j    k    x                    b    m    w    v    z   @srs
@@ -135,7 +135,7 @@
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
   _    _    `    =    |    \                    /    |    -    _    _    _ 
-  _    _    <    {   \(    [                    ]   \)    }    >    _    _ 
+  _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    ~    +    _    _                    _    _   \_    _    _    _ 
        _    _    @num @num                           _    _    _    _ 
 
@@ -164,7 +164,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    _    7    8    9    _    _
+  _    _    _    _    _    _                    -    7    8    9    -    _
   _    _    _    _    _    _                    .    4    5    6    .    _
   _    _    _    _    _    _                    0    1    2    3    _    _
        _    _    _    _                              _    _    _    _
