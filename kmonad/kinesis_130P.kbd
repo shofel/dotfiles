@@ -42,7 +42,7 @@
 
                            lctl lalt    ralt rctl
                       bspc del  home    pgup ret  spc
-                                end     pgdn
+                                 end    pgdn
 )
 |#
 
@@ -58,7 +58,7 @@
 
                            lctl lalt    ralt rctl
                       bspc del  home    pgup ret  spc
-                                end     pgdn
+                                 end    pgdn
 )
 #||#
 
@@ -105,7 +105,7 @@
 
                            lctl lalt    ralt rctl
                       bspc  del home    pgup ret  spc
-                                end     pgdn
+                                 end    pgdn
 )
 
 |#
@@ -115,17 +115,17 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer base
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   @sus XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @sus  XX
 
-  @scr !    @    #    $    %                    ^    &    *    XX   XX   XX
+ @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-  esc  a    o    e    u    i                    d    h    t    n    s    -
-  @sls ;    q    j    k    x                    b    m    w    v    z   @srs
+ @esc  a    o    e    u    i                    d    h    t    n    s    -
+ @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
        XX   XX  @<-  @->                            @↑   @↓    XX   XX
 
                            lctl lalt    ralt rctl
-                      bspc  del   XX    XX   ret  spc
-                                  XX    XX
+                     @bspc  del home    pgup ret  spc
+                                 end    pgdn
 )
 
 
@@ -134,10 +134,10 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    _    `    =    |    \                    /    |    -    _    _    _ 
-  _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
+  _    _    `    =    |    \                    /    XX   ?    _    _    _ 
+  _    _    <   \(    {    [                    ]    }   \)    >    _   \_ 
   _    _    ~    +    _    _                    _    _   \_    _    _    _ 
-       _    _    @num @num                           _    _    _    _ 
+       _    _    _    _                              _    _    _    _ 
 
                            _    _       _    _
                       _    _    _       _    _    _
@@ -149,10 +149,10 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    @vt1 @vt2 @vt3 @vt4 _                    _    _    _    _    _    _ 
-  _    _    _    _    _    _                    @cpu pgup up   _    _    _ 
+  _    _    _    _    _    _                    @cpu _    up   _    _    _ 
   _    home _    end  _    tab                  @cpd left down rght _    _ 
-  _    _    _    _    _    _                    _    pgdn _    _    _    _ 
-       _    _    @num @num                           _    _    _    _ 
+  _    _    _    _    _    _                    _    _    _    _    _    _ 
+       _    _    _    _                              pgup pgdn _    _ 
 
                            _    _       _    _ 
                       _    _    _       _    _    _ 
@@ -170,7 +170,7 @@
        _    _    _    _                              _    _    _    _
 
                            _    _       _    _
-                      _    _    @0_     _    _    _
+                      _    _    _       _    _    _
                                 _       _
 )
 
@@ -205,13 +205,10 @@
 )
 
 #| --------------------------------------------------------------------------
-                                Sticky Keys
+                                Examples
   -------------------------------------------------------------------------- |#
 
-;; Let's make both shift keys sticky
 (defalias
-  sls (sticky-key 500 lsft)
-  srs (sticky-key 500 rsft)
 )
 
 (defalias
@@ -226,35 +223,20 @@
 (defalias
   xtn (tap-next x lsft)
 
-  ;; Modifiers
+  ;; Arrows
 
-  <-  (tap-hold-next-release 200 left @nav)
-  ->  (tap-hold-next-release 200 rght @sym)
-  ↑   (tap-hold-next-release 200 up   @sym)
-  ↓   (tap-hold-next-release 200 down @nav)
+  <-  #(left)
+  ->   (tap-hold-next-release 200 rght @sym)
+  ↑    (tap-hold-next-release 200 up   @sym)
+  ↓   #(down)
+
+  ;;
+
+  bspc (tap-hold-next-release 200 bspc @num)
+  esc #(esc)
+  lsft (sticky-key            500 lsft)
+  rsft (sticky-key            500 rsft)
 )
-
-#| --------------------------------------------------------------------------
-                              Optional: Multi-tap
-
-  Besides the tap-hold style buttons there is another multi-use button (with.
-  only 1 variant, at the moment). The `multi-tap`.
-
-  A `multi-tap` codes for different buttons depending on how often it is tapped.
-  It is defined by a series of delays and buttons, followed by a last button
-  without delay. As long as you tap the `multi-tap` within the delay specified,
-  it will jump to the next button. Once the delay is exceeded the selected
-  button is pressed. If the last button in the list is reached, it is
-  immediately pressed.
-
-  Note that you can actually hold the button, so in the below example, going:
-  tap-tap-hold (wait 300ms) will get you a pressed c, until you release again.
-
-  -------------------------------------------------------------------------- |#
-
-(defalias
-  mt  (multi-tap 300 a 300 b 300 c 300 d e))
-
 
 #| --------------------------------------------------------------------------
                         Optional: Compose-key sequences
@@ -302,9 +284,6 @@
   Currently we also provide the ability to launch arbitrary shell-commands from
   inside kmonad. These commands are simply handed off to the command-shell
   without any further checking or waiting.
-
-  NOTE: currently only tested on Linux, but should work on any platform, as long
-  as the command is valid for that platform.
 
   The `cmd-button' function takes two arguments, the second one of which is
   optional. These represent the commands to be executed on pressing and
