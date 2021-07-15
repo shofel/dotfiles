@@ -119,7 +119,7 @@
 
  @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
- @esc  a    o    e    u    i                    d    h    t    n    s    -
+   XX  a    o    e    u    i                    d    h    t    n    s    -
  @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
        XX   XX  @<-  @->                            @↑   @↓    XX   XX
 
@@ -145,27 +145,12 @@
 )
 
 
-(deflayer navigation
-  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
-
-  _    @vt1 @vt2 @vt3 @vt4 _                    _    _    _    _    _    _ 
-  _    _    _    _    _    _                    @cpu _    up   _    _    _ 
-  _    home _    end  _    tab                  @cpd left down rght _    _ 
-  _    _    _    _    _    _                    _    _    _    _    _    _ 
-       _    _    _    _                              pgup pgdn _    _ 
-
-                           _    _       _    _ 
-                      _    _    _       _    _    _ 
-                                _       _   
-)
-
-
 (deflayer numbers
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    -    7    8    9    -    _
-  _    _    _    _    _    _                    .    4    5    6    .    _
+  _    _    _    _    _    _                    bspc 4    5    6    .    _
   _    _    _    _    _    _                    0    1    2    3    _    _
        _    _    _    _                              _    _    _    _
 
@@ -190,7 +175,6 @@
   0    (layer-toggle base)
   0_   (layer-switch base)
   sym  (layer-toggle symbols)
-  nav  (layer-toggle navigation)
   num  (layer-toggle numbers)
   num_ (layer-switch numbers)
 
@@ -227,13 +211,13 @@
 
   <-  #(left)
   ->   (tap-hold-next-release 200 rght @sym)
+
   ↑    (tap-hold-next-release 200 up   @sym)
   ↓   #(down)
 
-  ;;
+  ;; Thumb blocks
 
-  bspc (tap-hold-next-release 200 bspc @num)
-  esc #(esc)
+  bspc (tap-hold-next-release 200 esc  @num)
   lsft (sticky-key            500 lsft)
   rsft (sticky-key            500 rsft)
 )
