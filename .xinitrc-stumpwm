@@ -1,17 +1,9 @@
 #!/bin/bash
 
-# Scale 4k
-# I've decided not doing this, but instead scale each app separately.
-# xrandr --output HDMI-1 --scale 0.7x0.7
-
-# Load resources.
 xrdb -merge .Xresources
 
-# keyboard and mouse.
+redshift -l56.83:60.60 -t 6500:3000 &
 kmonad ~/.config/kmonad/kinesis_130P.kbd &
 xset m 1 0
-
-# redshift is like a twighlight for linux
-redshift -l56.83:60.60 -t 6500:3000 &
 
 exec /usr/local/bin/stumpwm
