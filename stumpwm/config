@@ -11,7 +11,7 @@
 
 (in-package :stumpwm)
 
-(set-prefix-key (kbd "Delete"))
+(set-prefix-key (kbd "F10"))
 
 (define-key *root-map* (kbd "?") "which-key-mode")
 (define-key *root-map* (kbd "C-M-r") "restart-soft") ;; To test changes.
@@ -43,11 +43,6 @@
 ;;; Keys.
 ;;;
 
-;; Define the volume control and mute keys.
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec pactl set-sink-volume 0 -5%")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pactl set-sink-volume 0 +5%")
-(define-key *top-map* (kbd "XF86AudioMute") "exec pactl set-sink-mute 0 toggle")
-
 ;; Change frames.
 (define-key *root-map* (kbd "h") "move-focus left")
 (define-key *root-map* (kbd "l") "move-focus right")
@@ -60,6 +55,7 @@
 (define-key *root-map* (kbd "L") "move-window right")
 
 (define-key *root-map* (kbd "f") "fullscreen")
+(define-key *root-map* (kbd "F") "meta F11")
 
 ;; Change groups.
 (define-key *root-map* (kbd "Return") "gprev")
