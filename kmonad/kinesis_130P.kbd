@@ -95,7 +95,7 @@
 )
 
 (deflayer raw-qwerty
-  caps @0_  F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck @0
 
   =    1    2    3    4    5                    6    7    8    9    0    -
   tab  q    w    e    r    t                    y    u    i    o    p    \
@@ -115,16 +115,16 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer base
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @sus  XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX  @sus
 
  @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
   tab  '    ,    .    p    y                    f    g    c    r    l    /
-   XX  a    o    e    u    i                    d    h    t    n    s    -
+  lsft a    o    e    u    i                    d    h    t    n    s    -
  @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
        XX   XX  @<-  @->                            @↑   @↓    XX   XX
 
                            lctl lalt    ralt rctl
-                     @bspc  del home    pgup ret  spc
+                     @bspc @del home    pgup @ret spc
                                  end    pgdn
 )
 
@@ -166,10 +166,6 @@
 
 (defalias
 
-  ;; Strings (tap-macro)
-  =>  #(spc = > spc)
-  =>{ #(spc = > spc {)
-
   ;; Switch Layers
   ;; see also (layer-delay n x) (layer-next x)
   0    (layer-toggle base)
@@ -178,9 +174,6 @@
   num  (layer-toggle numbers)
   num_ (layer-switch numbers)
 
-  ;; Chords  (aliases for around-next)
-  cpu C-pgup
-  cpd C-pgdn
   ;; Virtual terminals
   vt1 C-A-F1
   vt2 C-A-F2
@@ -205,7 +198,9 @@
   -------------------------------------------------------------------------- |#
 
 (defalias
-  xtn (tap-next x lsft)
+  ;; 
+
+  wm F10 ;; Prefix-key for stumpwm
 
   ;; Arrows
 
@@ -217,7 +212,10 @@
 
   ;; Thumb blocks
 
-  bspc (tap-hold-next-release 200 esc  @num)
+  bspc (tap-hold              220 esc   @num)
+   del (tap-hold-next         200 @wm   @sym)
+   ret (tap-hold              200 ret   @sym)
+
   lsft (sticky-key            500 lsft)
   rsft (sticky-key            500 rsft)
 )
@@ -284,6 +282,11 @@
 (defalias
   scr (cmd-button "scrot --line style=solid,width=3 --select /home/shovel/screenshots/$(date +%Y-%m-%-d-%R-%S).png")
   sus (cmd-button "exec systemctl suspend")
+
+  ;; volume control and mute
+  volu (cmd-button "exec pactl set-sink-volume 0 -5%")
+  vold (cmd-button "exec pactl set-sink-volume 0 +5%")
+  mute (cmd-button "exec pactl set-sink-mute 0 toggle")
 
   ;; `dat' on press and `pth' on release
   bth (cmd-button "date >> /tmp/kmonad_example.txt"
