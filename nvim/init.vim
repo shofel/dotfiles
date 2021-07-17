@@ -391,6 +391,9 @@ let g:ale_fixers.typescript = g:ale_fixers.javascript
 let g:ale_linters.flow = g:ale_linters.javascript
 let g:ale_fixers.flow = g:ale_fixers.javascript
 
+let g:ale_linters.scss = ['stylelint']
+let g:ale_fixers.scss  = ['stylelint']
+
 let g:ale_linters.fish = []
 
 "More goodness of language servers.
