@@ -123,9 +123,9 @@
  @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
        XX   XX  @<-  @->                            @↑   @↓    XX   XX
 
-                           lctl lalt    ralt rctl
-                     @bspc @del home    pgup @ret spc
-                                 end    pgdn
+                         @lctl @lalt   @ralt @rctl
+                   @bspc  @del @home   @pgup  @ret  @spc
+                                @end   @pgdn  
 )
 
 
@@ -149,7 +149,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    -    7    8    9    -    _
+  _    _    _    _    _    _                    +    7    8    9    _    _
   _    _    _    _    _    _                    bspc 4    5    6    .    _
   _    _    _    _    _    _                    0    1    2    3    _    _
        _    _    _    _                              _    _    _    _
@@ -186,9 +186,6 @@
   -------------------------------------------------------------------------- |#
 
 (defalias
-)
-
-(defalias
   ld1 (layer-delay 500 base) ;; One way to get a leader-key
   ld2 (layer-next base)      ;; Another way to get a leader key
 )
@@ -204,20 +201,27 @@
 
   ;; Arrows
 
-  <-  #(left)
-  ->   (tap-hold-next-release 200 rght @sym)
+  <-                             left
+  ->  (tap-hold-next-release 200 rght @sym)
 
-  ↑    (tap-hold-next-release 200 up   @sym)
-  ↓   #(down)
+  ↑   (tap-hold-next-release 200 up   @sym)
+  ↓                              down
 
   ;; Thumb blocks
 
   bspc (tap-hold              220 esc   @num)
    del (tap-hold-next         200 @wm   @sym)
    ret (tap-hold              200 ret   @sym)
-
+  ;;
   lsft (sticky-key            500 lsft)
+  lctl (sticky-key            500 lctl)
+  lalt (sticky-key            500 lalt)
+  ;;
+  ralt (sticky-key            500 ralt)
+  rctl (sticky-key            500 rctl)
   rsft (sticky-key            500 rsft)
+  ;;
+  home home   end end   pgup pgup   pgdn pgdn   spc spc
 )
 
 #| --------------------------------------------------------------------------
