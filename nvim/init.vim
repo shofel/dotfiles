@@ -375,26 +375,24 @@ let g:ale_open_list = 'on_save'
 let g:ale_python_auto_pipenv= 1
 
 " Linters and fixers.
-let g:ale_linters = {}
-let g:ale_fixers = {}
+let g:ale_linters = {
+      \   'python':     ['pylint', 'pyls'],
+      \   'javascript': ['flow-language-server', 'eslint'],
+      \   'scss':       ['stylelint'],
+      \   'fish':       [],
+      \ }
+let g:ale_fixers = {
+      \   'python':     [],
+      \   'javascript': ['eslint'],
+      \   'scss':       ['stylelint'],
+      \   'fish':       [],
+      \ }
 
-let g:ale_linters.python = ['pylint', 'pyls']
-let g:ale_fixers.python = []
-
-let g:ale_linters.javascript = ['flow-language-server', 'eslint']
-let g:ale_fixers.javascript = ['eslint']
-
-" Treat typescript the same way as javascript
+" Treat typescript and flow the same way as javascript
 let g:ale_linters.typescript = g:ale_linters.javascript
-let g:ale_fixers.typescript = g:ale_fixers.javascript
-" Treat flow the same way as javascript
-let g:ale_linters.flow = g:ale_linters.javascript
-let g:ale_fixers.flow = g:ale_fixers.javascript
-
-let g:ale_linters.scss = ['stylelint']
-let g:ale_fixers.scss  = ['stylelint']
-
-let g:ale_linters.fish = []
+let g:ale_linters.flow       = g:ale_linters.javascript
+let g:ale_fixers.typescript  = g:ale_fixers.javascript
+let g:ale_fixers.flow        = g:ale_fixers.javascript
 
 "More goodness of language servers.
 let g:ale_completion_enabled = 1
