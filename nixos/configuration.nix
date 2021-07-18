@@ -37,15 +37,11 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "dvorak";
-    displayManager.lightdm.enable = true;
     windowManager.stumpwm.enable = true;
-  };
-  
 
-  # Configure keymap in X11
-  # services.xserver.layout = "us_dvorak";
-  # services.xserver.xkbOptions = "eurosign:e";
+    xkbVariant = "dvorak";
+    xkbOptions = "ctrl:nocaps";
+  };
 
   # Enable sound.
   # sound.enable = true;
@@ -69,7 +65,9 @@
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.users.shovel = { pkgs, ... }: {
-    home.packages = with pkgs; [ htop kitty neovim gh bat fd ];
+    home.packages = with pkgs; [ htop kitty neovim gh bat fd ripgrep ];
+
+    home.homeDirectory = "/home/shovel";
 
     programs.git = {
       enable = true;
@@ -79,10 +77,11 @@
 
     programs.command-not-found.enable = true;
 
+    # Fish
+
     home.file = {
       ".config/fish/functions" = {
         source = /home/shovel/w/dotfiles/fish/functions;
-        target = ".config/fish/functions";
         recursive = true;
       };
     };
@@ -90,10 +89,11 @@
     programs.fish.enable = true;
 
     # TODO another way to keep abbrs in sync is `home.file.<name>.onChange`.
+    # TODO reorganize such a way that everything of git is gathered together.
     programs.fish.shellAbbrs = {
       dc = "docker-compose";
-      dvorak = "setxkbmap -model pc104 -layout us,ru -variant dvorak, -option grp:alt_shift_toggle";
       execlip = "fish -c (xclip -o)";
+      # git
       gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
       gb = "git switch (git branch | string trim | fzf)";
       gBFG = "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
@@ -118,10 +118,18 @@
       gsm = "git switch master";
       gst = "git status --short --branch";
       gsw = "git switch";
+      #
       nocaps = "setxkbmap -option ctrl:nocaps";
       suspend = "systemctl suspend";
       v = "nvim '+Term fish'";
       weather = "curl wttr.in/guangzhou";
+    };
+
+    services.redshift = {
+      enable = true;
+      latitude = 56.83;
+      longitude = 60.60;
+      temperature = { day = 6500; night = 3000; };
     };
   };
 

@@ -1,9 +1,0 @@
-#!/bin/bash
-
-xrdb -merge .Xresources
-
-redshift -l56.83:60.60 -t 6500:3000 &
-kmonad ~/.config/kmonad/kinesis_130P.kbd &
-xset m 1 0
-
-exec /usr/local/bin/stumpwm
