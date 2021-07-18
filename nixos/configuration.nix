@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -63,29 +64,39 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.shovel = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
+  };
+
+  # Home Manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.shovel = { pkgs, ... }: {
+    home.packages = with pkgs; [ htop kitty neovim gh bat fd ];
+
+    programs.git = {
+      enable = true;
+      userName = "Slava";
+      userEmail = "visla.vvi@gmail.com";
+    };
+
+    programs.command-not-found.enable = true;
+
+    home.file = {
+      ".config/fish" = {
+        source = /home/shovel/w/dotfiles/fish/config.fish;
+        target = ".config/fish/config.fish";
+      };
+    };
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    htop
-    neovim
-    kitty
-    git
-    gh
     x11_ssh_askpass
   ];
 
-  # vi & vim aliases for neovim
-  nixpkgs.overlays = [
-    (self: super: {
-      neovim = super.neovim.override {
-        viAlias = true;
-	vimAlias = true;
-      };
-    })
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
 
   # VirtualBox
@@ -119,5 +130,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.05"; # Did you read the comment?
 
+  # Some other custom stuff
+
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 8d";
 }
 
