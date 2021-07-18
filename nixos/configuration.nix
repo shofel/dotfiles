@@ -85,6 +85,12 @@
         source = /home/shovel/w/dotfiles/fish/config.fish;
         target = ".config/fish/config.fish";
       };
+
+      ".config/fish/functions" = {
+        source = /home/shovel/w/dotfiles/fish/functions;
+        target = ".config/fish/functions";
+        recursive = true;
+      };
     };
   };
 
