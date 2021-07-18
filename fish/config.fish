@@ -10,10 +10,6 @@ fish_add_path ~/opt/bin ~/opt/node_packages/node_modules/.bin
 #
 set -Ux GDK_SCALE 2
 
-# Ask pass
-#
-set -Ux SUDO_ASKPASS (which ssh-askpass)
-
 # Nix
 #
 fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin

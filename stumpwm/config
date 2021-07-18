@@ -105,9 +105,7 @@
 ;; Restore groups and frames.
 (defun -restore-groups-and-frames ()
   (run-commands "gselect 1"
-                "grename one")
-  ;; To update the dump, use `dump-desktop` command
-  (restore-from-file "~/.config/stumpwm/desktop"))
+                "grename one"))
 
 ;; Restore window placement rules.
 (defun -restore-window-rules ()
