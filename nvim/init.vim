@@ -8,18 +8,6 @@ call plug#begin('~/.config/nvim/plugged')
 " read local .vimrc files
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
-" tpope
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-
 " appearance
 Plug 'mhinz/vim-signify'
 Plug 'itchyny/lightline.vim'

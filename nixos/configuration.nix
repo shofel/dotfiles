@@ -65,7 +65,7 @@
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.users.shovel = { pkgs, ... }: {
-    home.packages = with pkgs; [ htop kitty neovim gh bat fd ripgrep ];
+    home.packages = with pkgs; [ htop kitty gh bat fd ripgrep ];
 
     home.homeDirectory = "/home/shovel";
 
@@ -77,21 +77,41 @@
 
     programs.command-not-found.enable = true;
 
+    # Links to the dotfiles
+    # home.file.".config/nvim/init.vim".source = "/home/shovel/w/dotfiles/nvim/init.vim";
+
+    # NeoVim
+    programs.neovim = {
+      enable = true;
+      vimAlias = true;
+      viAlias = true;
+
+      plugins = with pkgs.vimPlugins; [
+        # tpope 
+        vim-commentary
+        vim-dispatch
+        vim-eunuch
+        vim-fugitive
+        vim-projectionist
+        vim-repeat
+        vim-rsi
+        vim-sleuth
+        vim-surround
+        vim-unimpaired
+      ];
+    };
+
     # Fish
 
-    home.file = {
-      ".config/fish/functions" = {
-        source = /home/shovel/w/dotfiles/fish/functions;
-        recursive = true;
-      };
+    home.file.".config/fish/functions" = {
+      source = /home/shovel/w/dotfiles/fish/functions;
+      recursive = true;
     };
 
     programs.fish.enable = true;
 
-    # TODO another way to keep abbrs in sync is `home.file.<name>.onChange`.
-    # TODO reorganize such a way that everything of git is gathered together.
     programs.fish.shellAbbrs = {
-      dc = "docker-compose";
+      dc = ''docker-compose'';
       execlip = "fish -c (xclip -o)";
       # git
       gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
@@ -111,13 +131,15 @@
       gl = "git pull";
       gp = "git push";
       gpf = "git push --force-with-lease";
-      gpu = "git push -u origin (git branch | grep \* | awk \"{print \$2}\")";
+      gpu = "echo git push -u origin (git branch | grep \* | awk \"{print \$2}\")";
       grba = "git rebase --abort";
       grbc = "git rebase --continue";
       grbs = "git rebase --skip";
       gsm = "git switch master";
       gst = "git status --short --branch";
       gsw = "git switch";
+      #
+      r  = "sudo nixos-rebuild switch";
       #
       nocaps = "setxkbmap -option ctrl:nocaps";
       suspend = "systemctl suspend";
