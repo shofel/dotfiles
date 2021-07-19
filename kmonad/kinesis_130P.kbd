@@ -187,7 +187,7 @@
 
 (defalias
   ld1 (layer-delay 500 base) ;; One way to get a leader-key
-  ld2 (layer-next base)      ;; Another way to get a leader key
+  ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
 )
 
 #| --------------------------------------------------------------------------
@@ -210,7 +210,7 @@
   ;; Thumb blocks
 
   bspc (tap-hold              220 esc   @num)
-   del (tap-hold-next         200 @wm   @sym)
+   del                            @wm       
    ret (tap-hold              200 ret   @sym)
   ;;
   lsft (sticky-key            500 lsft)
@@ -221,7 +221,9 @@
   rctl (sticky-key            500 rctl)
   rsft (sticky-key            500 rsft)
   ;;
-  home home   end end   pgup pgup   pgdn pgdn   spc spc
+  home home   end end
+  pgup pgup   pgdn pgdn
+        spc   spc
 )
 
 #| --------------------------------------------------------------------------
