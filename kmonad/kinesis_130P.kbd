@@ -124,7 +124,7 @@
        XX   XX  @sym @sym                           @sym  @sym XX   XX
 
                          @lctl @lalt   @ralt @rctl
-                   @esc'  @wm   home    pgup  @ret  spc
+                     @num> @wm  home    pgup  @ret  spc
                                  end    pgdn  
 )
 
@@ -137,7 +137,7 @@
   _    _    `    =    |    \                    /    XX   ?    _    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _   \_ 
   _    _    ~    +    _    _                    _    _   \_    _    _    _ 
-       _    _    _    _                              _    _    _    _ 
+       _    _    left right                          up   down _    _
 
                            _    _       _    _
                       _    _    _       _    _    _
@@ -155,7 +155,7 @@
        _    _    left right                          up   down _    _
 
                            _    _       _    _
-                      _    _    _       _    _    _
+                      _    _    _       _    _    esc
                                 _       _
 )
 
@@ -172,7 +172,6 @@
   0_   (layer-switch base)
   sym  (layer-toggle symbols)
   num  (layer-toggle numbers)
-  num_ (layer-switch numbers)
 
   ;; Virtual terminals
   vt1 C-A-F1
@@ -199,27 +198,18 @@
 
   wm F10 ;; Prefix-key for stumpwm
 
-  ;; Arrows
-
-  <-                             left
-  ->  (tap-hold-next-release 200 rght @sym)
-
-  ↑   (tap-hold-next-release 200 up   @sym)
-  ↓                              down
-
   ;; Thumb blocks
 
-  esc' (tap-hold              220 esc   @num)
-   del                            @wm       
-   ret (tap-hold              200 ret   @sym)
+  num> (sticky-key 500 (layer-toggle numbers))
+   ret (tap-hold   200 ret   @sym)
   ;;
-  lsft (sticky-key            500 lsft)
-  lctl (sticky-key            500 lctl)
-  lalt (sticky-key            500 lalt)
+  lsft (sticky-key 500 lsft)
+  lctl (sticky-key 500 lctl)
+  lalt (sticky-key 500 lalt)
   ;;
-  ralt (sticky-key            500 ralt)
-  rctl (sticky-key            500 rctl)
-  rsft (sticky-key            500 rsft)
+  ralt (sticky-key 500 ralt)
+  rctl (sticky-key 500 rctl)
+  rsft (sticky-key 500 rsft)
 )
 
 #| --------------------------------------------------------------------------
