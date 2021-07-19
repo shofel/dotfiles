@@ -39,4 +39,6 @@ set -Ux SUDO_ASKPASS (which ssh-askpass)
 # Nix
 #
 fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin
-set -x --unpath NIX_PATH nixpkgs=https://github.com/NixOS/nixpkgs/archive/release-21.05.tar.gz
+set -x --unpath NIX_PATH (string join ':' \
+  home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
+  nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
