@@ -118,8 +118,8 @@
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX  @sus
 
  @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
-  tab  '    ,    .    p    y                    f    g    c    r    l    /
-  lsft a    o    e    u    i                    d    h    t    n    s    -
+  XX   '    ,    .    p    y                    f    g    c    r    l    /
+  XX   a    o    e    u    i                    d    h    t    n    s    -
  @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
        XX   XX  @sym @sym                           @sym  @sym XX   XX
 
@@ -140,7 +140,7 @@
        _    _    left right                          up   down _    _
 
                            _    _       _    _
-                      _    _    _       _    _    _
+                      _    _    _       _    _    spc
                                 _       _   
 )
 
@@ -150,7 +150,7 @@
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    +    7    8    9    del  _
-  _    _    _    _    _    _                    bspc 4    5    6    .    _
+  _    @sym lsft lalt lctl tab                  bspc 4    5    6    .    _
   _    _    _    _    _    _                    0    1    2    3    _    _
        _    _    left right                          up   down _    _
 
