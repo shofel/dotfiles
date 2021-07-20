@@ -81,9 +81,9 @@
 
     programs.command-not-found.enable = true;
 
-    # Links to the dotfiles
+    # Links to single dotfiles
     xdg.enable = true;
-    # home.file.".config/nvim/init.vim".source = "/home/shovel/w/dotfiles/nvim/init.vim";
+    xdg.configFile."bat/config".source = ../bat/config;
 
     # Kitty
     xdg.configFile."kitty/startup_session".source = ../kitty/startup_session;
