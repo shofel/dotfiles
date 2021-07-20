@@ -65,7 +65,11 @@
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.users.shovel = { pkgs, ... }: {
-    home.packages = with pkgs; [ htop kitty gh bat fd ripgrep ];
+    home.packages = with pkgs; [
+      bat fd ripgrep
+      gh
+      nixfmt
+    ];
 
     home.homeDirectory = "/home/shovel";
 
@@ -78,7 +82,126 @@
     programs.command-not-found.enable = true;
 
     # Links to the dotfiles
+    xdg.enable = true;
     # home.file.".config/nvim/init.vim".source = "/home/shovel/w/dotfiles/nvim/init.vim";
+
+    # Kitty
+    xdg.configFile."kitty/startup_session".source = ../kitty/startup_session;
+    xdg.configFile."kitty/empty_session".source = ../kitty/empty_session;
+    programs.kitty = {
+      enable = true;
+
+      font = {
+        package = pkgs.fira-code;
+        name = "Fira Code";
+        size = 11;
+      };
+
+      settings = {
+        bold_font = "auto";
+        italic_font = "auto";
+        bold_italic_font = "auto";
+
+        clear_all_shortcuts = "yes";
+
+        # Tab bar
+        # @see https://sw.kovidgoyal.net/kitty/conf.html#tab-bar
+        "tab_bar_edge" = "top";
+        "tab_bar_style" = "powerline";
+        "tab_powerline_style" = "slanted";
+        #
+        "tab_bar_min_tabs" = "1";
+        "tab_title_template" = "{index} {title}";
+        #
+        "tab_bar_background" = "#bbb";
+        "active_tab_foreground" = "#222";
+        "active_tab_background" = "#faf8f5";
+        "active_tab_font_style" = "normal";
+        "inactive_tab_foreground" = "#444";
+        "inactive_tab_background" = "#bbb";
+        "inactive_tab_font_style" = "normal";
+
+        # Misc
+        "cursor_blink_interval" = "0";
+
+        # Colors
+        #
+        "background_opacity" = "1.0";
+        "dynamic_background_opacity" = "no";
+        # special
+        "foreground" = "#8c6923";
+        "background" = "#faf8f5";
+        # black
+        "color0" = "#000000";
+        "color8" = "#4d4d4d";
+        # red
+        "color1" = "#e06c75";
+        "color9" = "#e06c75";
+        # green
+        "color2" = "#98c379";
+        "color10" = "#98c379";
+        # yellow
+        "color3" = "#e5c07b";
+        "color11" = "#e5c07b";
+        # blue
+        "color4" = "#61afef";
+        "color12" = "#61afef";
+        # magenta
+        "color5" = "#c678dd";
+        "color13" = "#c678dd";
+        # cyan
+        "color6" = "#56b6c2";
+        "color14" = "#56b6c2";
+        # white
+        "color7" = "#737780";
+        "color15" = "#a1a7b3";
+      };
+
+      keybindings = {
+        ## Keys: Tabs {{{
+        "ctrl+space>t" = "new_tab";
+        "ctrl+space>r" = "set_tab_title";
+        "ctrl+space>k>k" = "close_tab";
+
+        "ctrl+space>shift+l" = "move_tab_forward";
+        "ctrl+space>shift+h" = "move_tab_backward";
+        "ctrl+space>l" = "next_tab";
+        "ctrl+space>h" = "previous_tab";
+
+        ## Switch tabs with Leader > number
+        "ctrl+space>1" = "goto_tab 1";
+        "ctrl+space>2" = "goto_tab 2";
+        "ctrl+space>3" = "goto_tab 3";
+        "ctrl+space>4" = "goto_tab 4";
+        "ctrl+space>5" = "goto_tab 5";
+        "ctrl+space>6" = "goto_tab 6";
+        "ctrl+space>7" = "goto_tab 7";
+        "ctrl+space>8" = "goto_tab 8";
+        "ctrl+space>9" = "goto_tab 9";
+        # }}} Tabs
+
+        # Copy and paste
+        "ctrl+space>y" = "copy_to_clipboard";
+        "ctrl+space>p" = "paste_from_clipboard";
+        "ctrl+space>shift+p" = "paste_from_selection";
+
+        # scroll
+        "ctrl+space>s" = "show_scrollback";
+
+        # font size
+        "ctrl+space>up" = "change_font_size all +4";
+        "ctrl+space>down" = "change_font_size all -4";
+        "ctrl+space>right" = "change_font_size all  0";
+
+        # Open kitty shell in window/tab/overlay/os_window
+        "ctrl+space>;" = "kitty_shell overlay";
+
+        # Reload kitty.conf
+        "ctrl+space>shift+r" = "load_config_file";
+        # }}} keys
+      };
+    };
+
 
     # NeoVim
     programs.neovim = {
