@@ -75,8 +75,18 @@
 
     programs.git = {
       enable = true;
+      lfs.enable = true;
+
       userName = "Slava";
       userEmail = "visla.vvi@gmail.com";
+
+      extraConfig = {
+        pull = { rebase = true };
+        core = {
+          editor = "nvim";
+          excludeFile = /home/shovel/.config/git/gitignore_global;
+        };
+      };
     };
 
     programs.command-not-found.enable = true;
