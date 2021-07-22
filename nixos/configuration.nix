@@ -84,6 +84,7 @@
     # Links to single dotfiles
     xdg.enable = true;
     xdg.configFile."bat/config".source = ../bat/config;
+    xdg.configFile."stumpwm/config".source = ../stumpwm/config;
 
     # Kitty
     xdg.configFile."kitty/startup_session".source = ../kitty/startup_session;

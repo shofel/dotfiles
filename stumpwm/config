@@ -23,7 +23,7 @@
 
 (setf *mouse-focus-policy* :sloppy) ; :ignore :sloppy :click
 
-(setf *shell-program* "/usr/bin/fish")
+(setf *shell-program* "/bin/sh")
 
 ;;;
 ;;; Modules.
@@ -33,11 +33,11 @@
 ;          Yes, you should install StumpWM from sources to make this work.
 
 ;;;
-;;; Fonts.
+;;; Fonts. TODO
 ;;;
-(load-module "ttf-fonts")
-(xft:cache-fonts)
-(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 13))
+;(load-module "ttf-fonts")
+;(xft:cache-fonts)
+;(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 13))
 
 ;;;
 ;;; Keys.
@@ -97,25 +97,3 @@
 ;; undefine-key only resets key to default, so use this hack.
 (-unbind-key *root-map* (kbd "k"))
 (define-key *root-map* (kbd "K") "kill")
-
-;;
-;; Restore.
-;;
-
-;; Restore groups and frames.
-(defun -restore-groups-and-frames ()
-  (run-commands "gselect 1"
-                "grename one"))
-
-;; Restore window placement rules.
-(defun -restore-window-rules ()
-  (restore-window-placement-rules "~/.config/stumpwm/window-placement"))
-
-;;
-;; Initializing.
-;;
-(when *initializing*
-  (-restore-groups-and-frames)
-  (-restore-window-rules)
-  (run-commands -exec-google-chrome
-                -exec-yandex-browser))
