@@ -297,6 +297,13 @@
   # nixpkgs.config.allowUnfree = true;
   # virtualisation.virtualbox.guest.enable = true;
 
+  virtualisation.docker = {
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

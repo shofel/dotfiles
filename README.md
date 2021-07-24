@@ -14,3 +14,4 @@
   - Nix options: https://search.nixos.org/options
   - Home manager options: https://nix-community.github.io/home-manager/options.html
   - nixos config which uses flakes and is simple: https://github.com/srid/nixos-config
+  - docker-compose with nix: https://discourse.nixos.org/t/arion-docker-compose-with-nix-or-nixos/2874
