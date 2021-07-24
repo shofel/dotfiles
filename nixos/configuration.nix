@@ -17,6 +17,7 @@
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Yekaterinburg";
@@ -25,7 +26,7 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp0s3.useDHCP = true;
+  networking.interfaces.enp0s25.useDHCP = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -59,16 +60,15 @@
   users.users.shovel = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.users.shovel = { pkgs, ... }: {
     home.packages = with pkgs; [
-      bat fd ripgrep
+      fzf bat fd ripgrep
       gh
-      nixfmt
     ];
 
     home.homeDirectory = "/home/shovel";
@@ -222,7 +222,7 @@
     # Fish
 
     home.file.".config/fish/functions" = {
-      source = /home/shovel/w/dotfiles/fish/functions;
+      source = ../fish/functions;
       recursive = true;
     };
 
