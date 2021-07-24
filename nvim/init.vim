@@ -8,24 +8,6 @@ call plug#begin('~/.config/nvim/plugged')
 " read local .vimrc files
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
-" appearance
-Plug 'mhinz/vim-signify'
-Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'norcalli/nvim-colorizer.lua'
-
-" more editing
-Plug 'tommcdo/vim-exchange'
-Plug 'jiangmiao/auto-pairs'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-" motion
-Plug 'justinmk/vim-sneak'
-
-" follow conventions
-Plug 'editorconfig/editorconfig-vim'
-
 " search files and inside files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -37,25 +19,6 @@ Plug 'janko-m/vim-test'
 " Git
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'rhysd/git-messenger.vim'
-
-" Lang {{{
-Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'neovim/nvim-lspconfig'
-" Plug 'p00f/nvim-ts-rainbow'
-
-Plug 'dense-analysis/ale'
-Plug 'neomake/neomake'
-"
-Plug 'Junegunn/vader.vim'
-"
-Plug 'georgewitteman/vim-fish'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
-" Web Dev
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'mattn/emmet-vim'
-" Plug 'idanarye/vim-vebugger' TODO
 
 Plug 'kmonad/kmonad-vim'
 " }}} Lang

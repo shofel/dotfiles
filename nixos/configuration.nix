@@ -81,11 +81,8 @@
       userEmail = "visla.vvi@gmail.com";
 
       extraConfig = {
-        pull = { rebase = true };
-        core = {
-          editor = "nvim";
-          excludeFile = /home/shovel/.config/git/gitignore_global;
-        };
+        pull = { rebase = true; };
+        core = { editor = "nvim"; };
       };
     };
 
@@ -232,6 +229,51 @@
         vim-sleuth
         vim-surround
         vim-unimpaired
+        vim-signify
+        # "lightline.vim"
+        lightline-ale
+        vim-numbertoggle
+        # "nvim-colorizer.lua"
+
+        # more editing
+        vim-exchange
+        auto-pairs
+        vim-sexp
+        vim-sexp-mappings-for-regular-people
+
+        # motion
+        vim-sneak
+
+        # follow conventions
+        editorconfig-vim
+
+        # dt'ds'df/j^
+
+# search files and inside files
+# TODO Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+# TODO Plug 'junegunn/fzf.vim'
+# TODO vim-projectroot
+
+# Testing
+# Plug 'janko-m/vim-test'
+
+        # Git
+        # Plug 'junegunn/gv.vim' # {'on': 'GV'}
+        # Plug 'rhysd/git-messenger.vim'
+
+        # Lang {{{
+        ale
+        vim-polyglot
+        nvim-treesitter
+        nvim-lspconfig
+
+        vim-fish
+        # markdown-preview.nvim
+        vim-fireplace
+        # Web Dev
+        emmet-vim
+
+        # }}} Lang
       ];
     };
 
