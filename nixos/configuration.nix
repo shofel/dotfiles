@@ -54,7 +54,11 @@
   # Shell for all users.
   environment.binsh = "${pkgs.dash}/bin/dash";
 
-  programs.ssh.startAgent = true;
+  programs.ssh = {
+    startAgent = true;
+    askPassword = "${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen";
+    extraConfig = ''addKeysToAgent yes'';
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.shovel = {
@@ -69,6 +73,8 @@
     home.packages = with pkgs; [
       fzf bat fd ripgrep
       gh
+      ssh-askpass-fullscreen
+      firefox
     ];
 
     home.homeDirectory = "/home/shovel";
@@ -93,7 +99,7 @@
     xdg.configFile."bat/config".source = ../bat/config;
     xdg.configFile."stumpwm/config".source = ../stumpwm/config;
 
-    # Kitty
+    # Kitty {{{
     xdg.configFile."kitty/startup_session".source = ../kitty/startup_session;
     xdg.configFile."kitty/empty_session".source = ../kitty/empty_session;
     programs.kitty = {
@@ -206,9 +212,10 @@
 
         # Reload kitty.conf
         "ctrl+space>shift+r" = "load_config_file";
-        # }}} keys
+        #
       };
     };
+    # }}} Kitty
 
 
     # NeoVim
@@ -219,7 +226,7 @@
     xdg.configFile."nvim/init.vim".source = ../nvim/init.vim;
 
 
-    # Fish
+    # Fish {{{
 
     home.file.".config/fish/functions" = {
       source = ../fish/functions;
@@ -264,6 +271,8 @@
       v = ''nvim +"Term fish"'';
       weather = ''curl wttr.in/guangzhou'';
     };
+    # }}} Fish
+
 
     services.redshift = {
       enable = true;
@@ -277,7 +286,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    x11_ssh_askpass
   ];
 
   fonts.fonts = with pkgs; [
