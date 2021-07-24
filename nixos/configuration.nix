@@ -72,6 +72,7 @@
   home-manager.users.shovel = { pkgs, ... }: {
     home.packages = with pkgs; [
       fzf bat fd ripgrep
+      xclip scrot
       gh
       ssh-askpass-fullscreen
       firefox
