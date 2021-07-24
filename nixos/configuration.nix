@@ -212,70 +212,12 @@
 
 
     # NeoVim
-    programs.neovim = {
-      enable = true;
-      vimAlias = true;
-      viAlias = true;
+    programs.neovim = { enable = true; vimAlias = true; viAlias = true; };
+    # Manually install vim-plug (then you run nvim +':PlugInstall')
+    home.file.".local/share/nvim/site/autoload/plug.vim".source = ../nvim/plug.vim;
+    # And do install my pressious config
+    xdg.configFile."nvim/init.vim".source = ../nvim/init.vim;
 
-      plugins = with pkgs.vimPlugins; [
-        # tpope 
-        vim-commentary
-        vim-dispatch
-        vim-eunuch
-        vim-fugitive
-        vim-projectionist
-        vim-repeat
-        vim-rsi
-        vim-sleuth
-        vim-surround
-        vim-unimpaired
-        vim-signify
-        # "lightline.vim"
-        lightline-ale
-        vim-numbertoggle
-        # "nvim-colorizer.lua"
-
-        # more editing
-        vim-exchange
-        auto-pairs
-        vim-sexp
-        vim-sexp-mappings-for-regular-people
-
-        # motion
-        vim-sneak
-
-        # follow conventions
-        editorconfig-vim
-
-        # dt'ds'df/j^
-
-# search files and inside files
-# TODO Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-# TODO Plug 'junegunn/fzf.vim'
-# TODO vim-projectroot
-
-# Testing
-# Plug 'janko-m/vim-test'
-
-        # Git
-        # Plug 'junegunn/gv.vim' # {'on': 'GV'}
-        # Plug 'rhysd/git-messenger.vim'
-
-        # Lang {{{
-        ale
-        vim-polyglot
-        nvim-treesitter
-        nvim-lspconfig
-
-        vim-fish
-        # markdown-preview.nvim
-        vim-fireplace
-        # Web Dev
-        emmet-vim
-
-        # }}} Lang
-      ];
-    };
 
     # Fish
 
@@ -288,39 +230,39 @@
 
     programs.fish.shellAbbrs = {
       dc = ''docker-compose'';
-      execlip = "fish -c (xclip -o)";
+      execlip = ''fish -c (xclip -o)'';
       # git
-      gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
-      gb = "git switch (git branch | string trim | fzf)";
-      gBFG = "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
-      ga = "git add";
-      gamend = "git commit --amend --no-edit";
-      gcb = "git switch -c";
-      gcd = "cd (git rev-parse --show-toplevel)";
-      gclean = "git clean -fd";
-      gcom = "git commit";
-      gd = "git diff";
-      gdca = "git diff --cached";
-      gfa = "git fetch --all --prune --tags";
-      ghash = "git rev-parse --short HEAD";
-      ginit = "git init ;and git commit -m 'root' --allow-empty";
-      gl = "git pull";
-      gp = "git push";
-      gpf = "git push --force-with-lease";
-      gpu = "echo git push -u origin (git branch | grep \* | awk \"{print \$2}\")";
-      grba = "git rebase --abort";
-      grbc = "git rebase --continue";
-      grbs = "git rebase --skip";
-      gsm = "git switch master";
-      gst = "git status --short --branch";
-      gsw = "git switch";
+      gB = ''git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace "remotes/origin/" "" | string trim | sort | uniq | fzf)'';
+      gb = ''git switch (git branch | string trim | fzf)'';
+      gBFG = ''git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D'';
+      ga = ''git add'';
+      gamend = ''git commit --amend --no-edit'';
+      gcb = ''git switch -c'';
+      gcd = ''cd (git rev-parse --show-toplevel)'';
+      gclean = ''git clean -fd'';
+      gcom = ''git commit'';
+      gd = ''git diff'';
+      gdca = ''git diff --cached'';
+      gfa = ''git fetch --all --prune --tags'';
+      ghash = ''git rev-parse --short HEAD'';
+      ginit = ''git init ;and git commit -m 'root' --allow-empty'';
+      gl = ''git pull'';
+      gp = ''git push'';
+      gpf = ''git push --force-with-lease'';
+      gpu = ''echo git push -u origin (git branch | grep * | awk "{print $2}")'';
+      grba = ''git rebase --abort'';
+      grbc = ''git rebase --continue'';
+      grbs = ''git rebase --skip'';
+      gsm = ''git switch master'';
+      gst = ''git status --short --branch'';
+      gsw = ''git switch'';
       #
-      r  = "sudo nixos-rebuild switch";
+      r  = ''sudo nixos-rebuild switch'';
       #
-      nocaps = "setxkbmap -option ctrl:nocaps";
-      suspend = "systemctl suspend";
-      v = "nvim '+Term fish'";
-      weather = "curl wttr.in/guangzhou";
+      nocaps = ''setxkbmap -option ctrl:nocaps'';
+      suspend = ''systemctl suspend'';
+      v = ''nvim +"Term fish"'';
+      weather = ''curl wttr.in/guangzhou'';
     };
 
     services.redshift = {
