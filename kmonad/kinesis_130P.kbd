@@ -107,7 +107,7 @@
   XX   '    ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
-       XX   XX  @nav @sym                           @sym  XX   XX   XX
+       XX   XX  @nav @sym                           @sym @nav  XX   XX
 
                           lctl  XX      XX   rctl
                      @num  @wm  XX      XX   ret  spc
@@ -120,9 +120,9 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    _    `    =    |    \                    /    XX   ?    _    _    _ 
+  _    _    `    =    |    \                    /    XX   +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
-  _    _    ~    +    _    _                    _    _   \_    _    _    _ 
+  _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    _    _                              _    _    _    _
 
                            _    _       _    _
@@ -135,24 +135,24 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    +    7    8    9    del  _
-  _    @sym lalt lsft lctl tab                  bspc 4    5    6    .    _
-  _    _    _    _    _    _                    0    1    2    3    0    _
+  _    _    _    _    _    _                    /    7    8    9    del  :
+  _    _    _    _    tab  _                    bspc 4    5    6    .    _
+  _    _    lalt lsft lctl _                    0    1    2    3    0    spc
        _    _    XX   XX                             up   down _    _
 
                            _    _       _    _
-                     XX    _    _       _    _    esc
+                      XX   _    _       _    _   esc
                                 _       _
 )
 
 
 (deflayer navigation
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
-                                                                                
+
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    _    _    up   _    _    _
-  _    @sym lalt lsft lctl tab                  _    left down rght _    _
-  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    pgup @↑   pgdn _    _
+  _    _    _    _    tab  _                    home @←   @↓   @→   end  _
+  _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    XX   XX                             up   down _    _
 
                            _    _       _    _
@@ -162,9 +162,9 @@
 
 
 (deflayer qwerty
-  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt slck pause
+  caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt @base_ pause
 
-  =    1    2    3    4    5                    6    7    8    9    0    @base_
+  =    1    2    3    4    5                    6    7    8    9    0    -
   tab  q    w    e    r    t                    y    u    i    o    p    \
   esc  a    s    d    f    g                    h    j    k    l    ;    '
   lsft z    x    c    v    b                    n    m    ,    .    / rsft
@@ -197,33 +197,15 @@
      -> but without stickiness, layer switches back,
         dispite of the second toggle is still pressed
     ----------------------------------------------------- |#
-
   sym   (sticky-key 0 (layer-toggle symbols))
   num   (sticky-key 0 (layer-toggle numbers))
   nav   (sticky-key 0 (layer-toggle navigation))
 
-  ;; Virtual terminals
-  vt1 C-A-F1
-  vt2 C-A-F2
-  vt3 C-A-F3
-  vt4 C-A-F4
-)
+  ;; Fancy names for arrows
+     ↑ up  ↓ down  ← left  → rght
 
-#| --------------------------------------------------------------------------
-                                Examples
-  -------------------------------------------------------------------------- |#
-
-(defalias
-  ld1 (layer-delay 500 base) ;; One way to get a leader-key
-  ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
-)
-
-#| --------------------------------------------------------------------------
-                               Multi-use buttons
-  -------------------------------------------------------------------------- |#
-
-(defalias
-  ;; 
+  ;; ld1 (layer-delay 500 base) ;; One way to get a leader-key
+  ;; ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
 
   wm F10 ;; Prefix-key for stumpwm
   k1 A-M-F1
