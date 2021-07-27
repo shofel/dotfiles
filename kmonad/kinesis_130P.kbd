@@ -150,7 +150,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    _    pgup @↑   pgdn _    _
+  _    _    _    _    _    _                    pgup pgdn @↑   _    _    _
   _    _    _    _    tab  _                    home @←   @↓   @→   end  _
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    XX   XX                             up   down _    _
