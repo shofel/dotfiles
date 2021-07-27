@@ -101,32 +101,32 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer base
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX  @sus
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
- @scr  !    @    #    $    %                    ^    &    *    @k1  @k2  @qwe_
+ @scr  !    @    #    $    %                    ^    &    *    @k1  @k2  XX   
   XX   '    ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
-       XX   XX  @sym @sym                           @sym  @sym XX   XX
+       XX   XX  @nav @sym                           @sym  XX   XX   XX
 
-                         @lctl @lalt   @ralt @rctl
-                     @num> @wm  home    pgup   ret  spc
-                                 end    pgdn  
+                          lctl  XX      XX   rctl
+                     @num  @wm  XX      XX   ret  spc
+                                XX      XX
 )
 
-
+#| what about ctrl+k, ctrl+v |#
 (deflayer symbols
   #| Hint to type cyrillics:  `ё =ъ ~Ё +Ъ  |#
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
   _    _    `    =    |    \                    /    XX   ?    _    _    _ 
-  _    _    <   \(    {    [                    ]    }   \)    >    _   \_ 
+  _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    ~    +    _    _                    _    _   \_    _    _    _ 
-       _    _    left right                          up   down _    _
+       _    _    _    _                              _    _    _    _
 
                            _    _       _    _
-                      _    _    _       _    _    spc
+                     @sym  _    _       _    _    spc
                                 _       _   
 )
 
@@ -137,11 +137,26 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    +    7    8    9    del  _
   _    @sym lalt lsft lctl tab                  bspc 4    5    6    .    _
-  _    _    _    _    _    _                    0    1    2    3    _    _
-       _    _    left right                          up   down _    _
+  _    _    _    _    _    _                    0    1    2    3    0    _
+       _    _    XX   XX                             up   down _    _
 
                            _    _       _    _
-                      _    _    _       _    _    esc
+                     XX    _    _       _    _    esc
+                                _       _
+)
+
+
+(deflayer navigation
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
+                                                                                
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    up   _    _    _
+  _    @sym lalt lsft lctl tab                  _    left down rght _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+       _    _    XX   XX                             up   down _    _
+
+                           _    _       _    _
+                     @nav  _    _       _    _    XX 
                                 _       _
 )
 
@@ -162,7 +177,7 @@
 
 
 #| --------------------------------------------------------------------------
-                                Alias
+                               Alias
   -------------------------------------------------------------------------- |#
 
 (defalias
@@ -171,8 +186,21 @@
   ;; see also (layer-delay n x) (layer-next x)
   base_ (layer-switch base)
   qwe_  (layer-switch qwerty)
-  sym   (layer-toggle symbols)
-  num   (layer-toggle numbers)
+
+  #| -----------------------------------------------------
+     Sticky key enables "fixation" of the layer.
+     That is:
+     - toggle layer with one key
+     - then press another key to toggle the same layer
+     - then release the first one
+     -> when sticky, then we're still on the layer
+     -> but without stickiness, layer switches back,
+        dispite of the second toggle is still pressed
+    ----------------------------------------------------- |#
+
+  sym   (sticky-key 0 (layer-toggle symbols))
+  num   (sticky-key 0 (layer-toggle numbers))
+  nav   (sticky-key 0 (layer-toggle navigation))
 
   ;; Virtual terminals
   vt1 C-A-F1
@@ -200,17 +228,7 @@
   wm F10 ;; Prefix-key for stumpwm
   k1 A-M-F1
   k2 A-M-F2
-
-  ;; Thumb blocks
-
-  num> (sticky-key 500 (layer-toggle numbers))
-  ;;
   lsft (sticky-key 500 lsft)
-  lctl (sticky-key 500 lctl)
-  lalt (sticky-key 500 lalt)
-  ;;
-  ralt (sticky-key 500 ralt)
-  rctl (sticky-key 500 rctl)
   rsft (sticky-key 500 rsft)
 )
 
@@ -278,9 +296,9 @@
   sus (cmd-button "exec systemctl suspend")
 
   ;; volume control and mute
-  volu (cmd-button "exec pactl set-sink-volume 0 -5%")
-  vold (cmd-button "exec pactl set-sink-volume 0 +5%")
-  mute (cmd-button "exec pactl set-sink-mute 0 toggle")
+  volu (cmd-button "pactl set-sink-volume 0 -5%")
+  vold (cmd-button "pactl set-sink-volume 0 +5%")
+  mute (cmd-button "pactl set-sink-mute 0 toggle")
 
   ;; `dat' on press and `pth' on release
   bth (cmd-button "date >> /tmp/kmonad_example.txt"
