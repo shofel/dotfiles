@@ -126,8 +126,8 @@
        _    _    _    _                              _    _    _    _
 
                            _    _       _    _
-                     @sym  _    _       _    _    spc
-                                _       _   
+                     @sym  lsft _       _    rsft spc
+                                _       _
 )
 
 
@@ -141,7 +141,7 @@
        _    _    XX   XX                             up   down _    _
 
                            _    _       _    _
-                      XX   _    _       _    _   esc
+                      XX   lsft _       _    rsft esc
                                 _       _
 )
 
@@ -156,7 +156,7 @@
        _    _    XX   XX                             up   down _    _
 
                            _    _       _    _
-                     @nav  _    _       _    _    XX 
+                     @nav  lsft _       _    rsft XX 
                                 _       _
 )
 
