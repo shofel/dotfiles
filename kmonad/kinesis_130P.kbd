@@ -103,13 +103,13 @@
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
- @scr  !    @    #    $    %                    ^    &    *    @k1  @k2  XX   
-  XX   '    ,    .    p    y                    f    g    c    r    l    /
-  XX   a    o    e    u    i                    d    h    t    n    s    -
- @lsft ;    q    j    k    x                    b    m    w    v    z   @rsft
+ @scr  !    @    #    $    %                    ^    &    *    @k1  @k2  XX
+  XX   '    ,    .    p    y                    f    g    c    r    l    XX
+  XX   a    o    e    u    i                    d    h    t    n    s    XX
+  XX   ;    q    j    k    x                    b    m    w    v    z    XX
        XX   XX  @nav @sym                           @sym @nav  XX   XX
 
-                          lctl  XX      XX   rctl
+                          lsft  XX      XX   rsft
                      @num  @wm  XX      XX   ret  spc
                                 XX      XX
 )
@@ -120,13 +120,13 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    _    `    =    |    \                    /    XX   +    ~    _    _ 
+  _    _    `    =    |    \                    /    -    +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    _    _                              _    _    _    _
 
                            _    _       _    _
-                     @sym  lsft _       _    rsft spc
+                     @sym XX    _       _    XX   spc
                                 _       _
 )
 
@@ -137,11 +137,11 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    /    7    8    9    del  :
   _    _    _    _    tab  _                    bspc 4    5    6    .    _
-  _    _    lalt lsft lctl _                    0    1    2    3    0    spc
-       _    _    XX   XX                             up   down _    _
+  _    _    lalt lsft lctl _                    0    1    2    3    0    _
+       _    _    _    _                              up   down _    _
 
                            _    _       _    _
-                      XX   lsft _       _    rsft esc
+                      XX  XX    _       _    spc  esc
                                 _       _
 )
 
@@ -156,7 +156,7 @@
        _    _    XX   XX                             up   down _    _
 
                            _    _       _    _
-                     @nav  lsft _       _    rsft XX 
+                     @nav  XX   _       _    XX   XX 
                                 _       _
 )
 
@@ -177,7 +177,7 @@
 
 
 #| --------------------------------------------------------------------------
-                               Alias
+                                      Alias
   -------------------------------------------------------------------------- |#
 
 (defalias
