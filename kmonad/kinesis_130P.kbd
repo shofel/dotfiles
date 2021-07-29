@@ -109,7 +109,7 @@
   XX   ;    q    j    k    x                    b    m    w    v    z    XX
        XX  @mod @nav @sym                           @sym @nav @mod  XX
 
-                           @wm  XX      XX   ret
+                           @wm  XX      XX   @kitty
                      @num lsft  XX      XX   rsft spc
                                 XX      XX
 )
@@ -208,7 +208,8 @@
   ;; ld1 (layer-delay 500 base) ;; One way to get a leader-key
   ;; ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
 
-  wm F10 ;; Prefix-key for stumpwm
+  wm    F10 ;; Prefix-key for stumpwm
+  kitty C-spc ;; Prefix-key for kitty
   k1 A-M-F1
   k2 A-M-F2
   lsft (sticky-key 500 lsft)
