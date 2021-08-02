@@ -50,7 +50,7 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'rhysd/git-messenger.vim'
 
-" Lang {{{
+" Languages {{{
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'neovim/nvim-lspconfig'
@@ -70,7 +70,7 @@ Plug 'mattn/emmet-vim'
 " Plug 'idanarye/vim-vebugger' TODO
 
 Plug 'kmonad/kmonad-vim'
-" }}} Lang
+" }}} Languages
 
 " draw ascii diagrams
 Plug 'gyim/vim-boxdraw'
@@ -406,8 +406,10 @@ require'lspconfig'.powershell_es.setup{
   bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
 }
 
+require'lspconfig'.flow.setup{}
 require'lspconfig'.yamlls.setup{}
 require'lspconfig'.rnix.setup{}
+require'lspconfig'.hls.setup{}
 EOF
 " }}}
 
