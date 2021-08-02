@@ -103,7 +103,7 @@
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
- @scr  !    @    #    $    %                    ^    -    /    *    &    XX
+ @scr  !    @    #    $    %                    ^    /    -    XX   XX   XX
   XX   '    ,    .    p    y                    f    g    c    r    l    XX
   XX   a    o    e    u    i                    d    h    t    n    s    XX
  @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
@@ -120,7 +120,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    `    XX   =    |    \                    XX   ~    +    XX   _    _ 
+  _    XX   `    =    |    \                    &    *    +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    _    _                              _    _    _    _
