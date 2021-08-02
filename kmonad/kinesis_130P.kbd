@@ -103,15 +103,15 @@
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
- @scr  !    @    #    $    %                    ^    &    *    @k1  @k2  XX
+ @scr  !    @    #    $    %                    ^    -    /    *    &    XX
   XX   '    ,    .    p    y                    f    g    c    r    l    XX
   XX   a    o    e    u    i                    d    h    t    n    s    XX
  @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
       @mod @mod @nav @sym                           @sym @nav @mod @mod
 
                            @wm  XX      XX   @kitty
-                     @num lsft   -      XX   rsft spc
-                                 /      XX
+                     @num lsft  XX      XX   rsft spc
+                                XX      XX
 )
 
 #| what about ctrl+k, ctrl+v |#
