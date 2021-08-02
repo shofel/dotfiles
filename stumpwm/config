@@ -11,12 +11,6 @@
 
 (in-package :stumpwm)
 
-(set-prefix-key (kbd "F10"))
-
-(define-key *root-map* (kbd "?") "which-key-mode")
-(define-key *root-map* (kbd "C-M-r") "restart-soft") ;; To test changes.
-(define-key *root-map* (kbd "I") "show-window-properties")
-
 (setf *message-window-gravity* :center)
 (setf *input-window-gravity* :center)
 (setf *window-border-style* :thin)
@@ -42,6 +36,20 @@
 ;;;
 ;;; Keys.
 ;;;
+;;; @see https://stumpwm.github.io/git/stumpwm-git_2.html#Remapped-Keys
+
+(set-prefix-key (kbd "Delete"))
+
+(setf *root-map* (make-sparse-keymap))
+
+(define-key *root-map* (kbd "!") "exec")
+(define-key *root-map* (kbd ";") "colon")
+(define-key *root-map* (kbd ":") "eval")
+
+;;
+(define-key *root-map* (kbd "C-M-r") "restart-soft") ;; To test changes.
+(define-key *root-map* (kbd "I") "show-window-properties")
+(define-key *root-map* (kbd "C-M-s") "exec systemctl suspend")
 
 ;; Change frames.
 (define-key *root-map* (kbd "h") "move-focus left")
@@ -49,54 +57,46 @@
 
 ;; Windows.
 (define-key *root-map* (kbd "r") "title") ; rename
-(define-key *root-map* (kbd "t") "other-window")
+(define-key *root-map* (kbd "t") "other-window") ; togggle
 (define-key *root-map* (kbd "w") "windowlist")
-(define-key *root-map* (kbd "H") "move-window left")
-(define-key *root-map* (kbd "L") "move-window right")
+(define-key *root-map* (kbd "Left") "move-window left")
+(define-key *root-map* (kbd "Right") "move-window right")
+(define-key *root-map* (kbd "K") "kill")
 
+;; Fullscreen
 (define-key *root-map* (kbd "f") "fullscreen")
 (define-key *root-map* (kbd "F") "meta F11")
 
-;; Change groups.
-(define-key *root-map* (kbd "Return") "gprev")
-(define-key *root-map* (kbd "space") "gnext")
+;; Groups.
+(define-key *root-map* (kbd "R") "grename")
+(define-key *root-map* (kbd "g") "grouplist")
+(define-key *root-map* (kbd "T") "gother")
+(define-key *root-map* (kbd "1") "gselect 1")
+(define-key *root-map* (kbd "2") "gselect 2")
+(define-key *root-map* (kbd "3") "gselect 3")
+(define-key *root-map* (kbd "4") "gselect 4")
+(define-key *root-map* (kbd "5") "gselect 5")
+(define-key *root-map* (kbd "6") "gselect 6")
+(define-key *root-map* (kbd "7") "gselect 7")
+(define-key *root-map* (kbd "8") "gselect 8")
+(define-key *root-map* (kbd "9") "gselect 9")
 
 ;; Start terminal-emulator
 (define-key *root-map* (kbd "C") "exec kitty --session /home/shovel/.config/kitty/empty_session")
-(define-key *root-map* (kbd "c") "exec x-terminal-emulator")
+(define-key *root-map* (kbd "c") "exec kitty")
 
-;; Suspend.
-(define-key *root-map* (kbd "C-M-s") "exec systemctl suspend")
-
-;; Restore after suspending.
-;; sticky modifiers
-(define-key *root-map* (kbd "F9") "exec sh -c 'grep sticky /home/shovel/workspaces/dotfiles/.xinitrc-stumpwm | sh'")
 
 ;; Browsers.
 
-(setf -browser-options
-      "--high-dpi-support --force-device-scale-factor=1.5")
+(defun -exec-browser-command (-browser)
+  (concatenate 'string
+               "exec " -browser
+               " --high-dpi-support"
+               " --force-device-scale-factor=1.5"))
 
-(setf -exec-yandex-browser
-  (concatenate 'string "exec yandex-browser-beta " -browser-options))
-(setf -exec-google-chrome
-  (concatenate 'string "exec google-chrome-beta " -browser-options))
-(setf -exec-google-chrome-stable
-  (concatenate 'string "exec google-chrome " -browser-options))
-
-(define-key *root-map* (kbd "y") -exec-yandex-browser)
-(define-key *root-map* (kbd "b") -exec-google-chrome)
-(define-key *root-map* (kbd "B") -exec-google-chrome-stable)
-
-;;
-
-(defun -unbind-key (-map -key)
-  (define-key -map -key "exec true"))
-
-;; Disable easy killing.
-;; undefine-key only resets key to default, so use this hack.
-(-unbind-key *root-map* (kbd "k"))
-(define-key *root-map* (kbd "K") "kill")
+(define-key *root-map* (kbd "y") (-exec-browser-command "yandex-browser-beta"))
+(define-key *root-map* (kbd "b") (-exec-browser-command "google-chrome-beta"))
+(define-key *root-map* (kbd "B") (-exec-browser-command "google-chrome"))
 
 ;;
 ;; Restore.
@@ -119,5 +119,5 @@
 (when *initializing*
   (-restore-groups-and-frames)
   (-restore-window-rules)
-  (run-commands -exec-google-chrome
-                -exec-yandex-browser))
+  (run-commands (-exec-browser-command "google-chrome-beta")
+                "exec kitty"))
