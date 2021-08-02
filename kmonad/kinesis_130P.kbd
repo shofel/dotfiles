@@ -110,8 +110,8 @@
       @mod @mod @nav @sym                           @sym @nav @mod @mod
 
                            @wm  XX      XX   @kitty
-                     @num lsft  XX      XX   rsft spc
-                                XX      XX
+                     @num lsft   -      XX   rsft spc
+                                 /      XX
 )
 
 #| what about ctrl+k, ctrl+v |#
@@ -120,7 +120,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    _    `    =    |    \                    /    -    +    ~    _    _ 
+  _    _    `    =    |    \                    XX   XX   +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    _    _                              _    _    _    _
