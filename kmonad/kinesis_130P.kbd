@@ -106,8 +106,8 @@
  @scr  !    @    #    $    %                    ^    &    *    @k1  @k2  XX
   XX   '    ,    .    p    y                    f    g    c    r    l    XX
   XX   a    o    e    u    i                    d    h    t    n    s    XX
-  XX   ;    q    j    k    x                    b    m    w    v    z    XX
-       XX  @mod @nav @sym                           @sym @nav @mod  XX
+ @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
+      @mod @mod @nav @sym                           @sym @nav @mod @mod
 
                            @wm  XX      XX   @kitty
                      @num lsft  XX      XX   rsft spc
@@ -161,6 +161,21 @@
 )
 
 
+(deflayer noop
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
+
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+       XX   XX   XX   XX                             XX   XX   XX   XX
+
+                           XX   XX      XX   XX
+                      XX   XX   XX      XX   XX   XX
+                                XX      XX  
+)
+
+
 (deflayer qwerty
   caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt @base_ pause
 
@@ -187,6 +202,9 @@
   base_ (layer-switch base)
   qwe_  (layer-switch qwerty)
 
+  ;; Noop layer to learn keys, which are not to be used
+  XX (layer-toggle noop)
+
   #| -----------------------------------------------------
      Sticky key enables "fixation" of the layer.
      That is:
@@ -208,8 +226,8 @@
   ;; ld1 (layer-delay 500 base) ;; One way to get a leader-key
   ;; ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
 
-  wm    F10 ;; Prefix-key for stumpwm
-  kitty C-spc ;; Prefix-key for kitty
+  wm    del ;; Prefix-key for stumpwm
+  kitty ins ;; Prefix-key for kitty
   k1 A-M-F1
   k2 A-M-F2
   lsft (sticky-key 500 lsft)
