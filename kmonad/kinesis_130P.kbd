@@ -103,13 +103,13 @@
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
- @scr  !    @    #    $    %                    ^    -    /    XX   XX   XX
-  XX   '    ,    .    p    y                    f    g    c    r    l    XX
-  XX   a    o    e    u    i                    d    h    t    n    s    XX
+ @scr  !    @    #    $    %                    ^    XX   *    XX   XX   XX
+  XX   '    ,    .    p    y                    f    g    c    r    l    /
+  XX   a    o    e    u    i                    d    h    t    n    s    -
  @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
       @mod @mod @nav @sym                           @sym @nav @mod @mod
 
-                           @wm  XX      XX   @kitty
+                           @wm  C-v    C-k   @kitty
                      @num lsft  XX      XX   rsft spc
                                 XX      XX
 )
@@ -120,7 +120,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    XX   `    =    |    \                    &    *    +    ~    _    _ 
+  _    XX   `    =    |    \                    C-6  &    +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
        _    _    _    _                              _    _    _    _
@@ -226,10 +226,8 @@
   ;; ld1 (layer-delay 500 base) ;; One way to get a leader-key
   ;; ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
 
-  wm    del ;; Prefix-key for stumpwm
-  kitty ins ;; Prefix-key for kitty
-  k1 A-M-F1
-  k2 A-M-F2
+  wm    Prog1 ;; Prefix-key for stumpwm
+  kitty Prog2 ;; Prefix-key for kitty
   lsft (sticky-key 500 lsft)
   rsft (sticky-key 500 rsft)
 )

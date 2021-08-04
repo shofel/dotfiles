@@ -38,7 +38,7 @@
 ;;;
 ;;; @see https://stumpwm.github.io/git/stumpwm-git_2.html#Remapped-Keys
 
-(set-prefix-key (kbd "Delete"))
+(set-prefix-key (kbd "XF86Launch1"))
 
 (setf *root-map* (make-sparse-keymap))
 
