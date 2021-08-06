@@ -119,7 +119,7 @@
   #| Hint to type cyrillics:  `ё =ъ ~Ё +Ъ  |#
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
-  _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
+  _    XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   _ 
   _    XX   `    =    |    \                    C-6  &    +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
@@ -153,7 +153,7 @@
   _    _    _    _    _    _                    pgup pgdn @↑   _    end  _
   _    _    _    _    tab  _                    home @←   @↓   @→   _    _
   _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
-       _    _    XX   XX                             up   down _    _
+       _    _    XX   XX                             XX   XX   _    _
 
                            _    _       _    _
                      @nav  XX   _       _    XX   XX 
