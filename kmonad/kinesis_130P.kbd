@@ -107,22 +107,21 @@
   XX   '    ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
-      @mod @mod @nav @sym                           @sym @nav @mod @mod
+      @mod @mod @nav @sym                           @sym @mod @mod @mod
 
                            @wm  C-v    C-k   @kitty
-                     @num lsft  XX      XX   rsft spc
-                                XX      XX
+                     @num lsft  C-c     XX   rsft spc
+                                C-x     XX
 )
 
-#| what about ctrl+k, ctrl+v |#
 (deflayer symbols
-  #| Hint to type cyrillics:  `ё =ъ ~Ё +Ъ  |#
+  #| Hint to type cyrillics in vim:  `ё =ъ ~Ё +Ъ  |#
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   _ 
   _    XX   `    =    |    \                    C-6  &    +    ~    _    _ 
   _    _    <   \(    {    [                    ]    }   \)    >    _    _ 
-  _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
+  _    _    _    _    _    _                    _    rctl rsft ralt _    _ 
        _    _    _    _                              _    _    _    _
 
                            _    _       _    _
@@ -135,12 +134,12 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
-  _    _    _    _    _    _                    XX   7    8    9    del  :
+  _    _    _    _    _    _                    XX   7    8    9    :    _
   _    _    _    _    tab  _                    bspc 4    5    6    .    _
-  _    _    lalt lsft lctl del                  0    1    2    3    0    _
+  _    _    lalt lsft lctl _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
-                           _    _       _    _
+                           _    _       ralt rctl
                       XX  XX    _       _    ret  esc
                                 _       _
 )
@@ -151,8 +150,8 @@
 
   _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
   _    _    _    _    _    _                    pgup pgdn @↑   _    end  _
-  _    _    _    _    tab  _                    home @←   @↓   @→   _    _
-  _    _    lalt lsft lctl _                    _    rctl rsft ralt _    _ 
+  _    _    _    _    _    _                    home @←   @↓   @→   _    _
+  _    _    _    _    _    _                    bspc rctl rsft ralt _    _
        _    _    XX   XX                             XX   XX   _    _
 
                            _    _       _    _
