@@ -130,13 +130,13 @@
 )
 
 
-(deflayer numbers
+(deflayer mods-numbers
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
-  _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
+  _    _    _    _    _    _                    _    _    _    _    _    _ 
   _    _    _    _    _    _                    XX   7    8    9    :    _
-  _    _    _    _    tab  _                    bspc 4    5    6    .    _
-  _    _    lalt lsft lctl _                    0    1    2    3    0    _
+  _    _    @alt @sft @ctl _                    bspc 4    5    6    .    _
+  _    _    _    bspc tab  _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
                            _    _       ralt rctl
@@ -145,17 +145,17 @@
 )
 
 
-(deflayer navigation
+(deflayer quotes-navigation
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
-  _    F1   F2   F3   F4   F5                   F6   F7   F8   F9   F10  _ 
+  _    _    _    _    _    _                    _    _    _    _    _    _ 
   _    _    _    _    _    _                    pgup pgdn @↑   _    end  _
-  _    _    _    _    _    _                    home @←   @↓   @→   _    _
-  _    _    _    _    _    _                    bspc rctl rsft ralt _    _
+  _    ;    `    "    '    :                    home @←   @↓   @→   _    _
+  _    _    _    _    lctl _                    bspc rctl rsft ralt _    _
        _    _    XX   XX                             XX   XX   _    _
 
                            _    _       _    _
-                     @nav  XX   _       _    XX   XX 
+                     @nav  XX   _       _    ret  XX 
                                 _       _
 )
 
@@ -215,9 +215,9 @@
         dispite of the second toggle is still pressed
     ----------------------------------------------------- |#
   sym   (sticky-key 0 (layer-toggle symbols))
-  num   (sticky-key 0 (layer-toggle numbers))
-  nav   (sticky-key 0 (layer-toggle navigation))
-  mod   (sticky-key 0 (layer-toggle navigation))
+  num   (sticky-key 0 (layer-toggle mods-numbers))
+  nav   (sticky-key 0 (layer-toggle quotes-navigation))
+  mod   (sticky-key 0 (layer-toggle quotes-navigation))
 
   ;; Fancy names for arrows
      ↑ up  ↓ down  ← left  → rght
@@ -227,8 +227,11 @@
 
   wm    Prog1 ;; Prefix-key for stumpwm
   kitty Prog2 ;; Prefix-key for kitty
-  lsft (sticky-key 500 lsft)
-  rsft (sticky-key 500 rsft)
+
+  ;; Sticky modifiers
+  ctl (sticky-key 500 lctl)
+  alt (sticky-key 500 lalt)
+  sft (sticky-key 500 lsft)
 )
 
 #| --------------------------------------------------------------------------
