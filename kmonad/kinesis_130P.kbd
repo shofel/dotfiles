@@ -62,39 +62,6 @@
 )
 #||#
 
-#| --------------------------------------------------------------------------
-                       Templates for custom layers
-  -------------------------------------------------------------------------- |# #|
-
-(deflayer template-_
-  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
-
-  _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    _    _    _    _    _    _
-       _    _    _    _                              _    _    _    _
-
-                           _    _       _    _
-                      _    _    _       _    _    _
-                                _       _
-)
-
-(deflayer template-XX
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
-
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-       XX   XX   XX   XX                             XX   XX   XX   XX
-
-                           XX   XX      XX   XX
-                      XX   XX   XX      XX   XX   XX
-                                XX      XX  
-)
-
-|#
 
 #| --------------------------------------------------------------------------
                                    Layers
@@ -136,11 +103,11 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    XX   7    8    9    :    _
   _    _    @alt @sft @ctl tab                  bspc 4    5    6    .    _
-  _    _    XX   bspc lctl _                    0    1    2    3    0    _
-       _    _    _    _                              up   down _    _
+  _    _    _    bspc lctl _                    0    1    2    3    0    _
+       _    @_   _    _                              up   down _    _
 
                            _    _       ralt rctl
-                      XX  XX    _       _    ret  esc
+                      @_  XX    _       _    ret  esc
                                 _       _
 )
 
@@ -151,8 +118,8 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    pgup pgdn @↑   _    end  _
   _    ;    `    "    '    :                    home @←   @↓   @→   _    _
-  _    _    lalt XX   lctl _                    XX   rctl XX   ralt _    _
-       _    _    XX   _                              XX   XX   _    _
+  _    _    lalt _    lctl _                    _    rctl _    XX   _    _
+       _    _    @_   _                              _    @_   _    _
 
                            _    _       _    _
                       XX   _    _       _    ret  XX 
@@ -167,21 +134,6 @@
   XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX                   XX   rctl rsft ralt XX   XX
-       XX   XX   XX   XX                             XX   XX   XX   XX
-
-                           XX   XX      XX   XX
-                      XX   XX   XX      XX   XX   XX
-                                XX      XX  
-)
-
-
-(deflayer noop
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
-
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
        XX   XX   XX   XX                             XX   XX   XX   XX
 
                            XX   XX      XX   XX
@@ -205,6 +157,39 @@
 )
 
 
+#| -------------------------------------------------------------------------
+                       Templates for custom layers
+  -------------------------------------------------------------------------- |#
+
+(deflayer template-_
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
+
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    _    _    _    _                    _    _    _    _    _    _
+       _    _    _    _                              _    _    _    _
+
+                           _    _       _    _
+                      _    _    _       _    _    _
+                                _       _
+)
+
+(deflayer template-XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
+
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
+       XX   XX   XX   XX                             XX   XX   XX   XX
+
+                           XX   XX      XX   XX
+                      XX   XX   XX      XX   XX   XX
+                                XX      XX  
+)
+
+
 #| --------------------------------------------------------------------------
                                       Alias
   -------------------------------------------------------------------------- |#
@@ -217,7 +202,10 @@
   qwe_  (layer-switch qwerty)
 
   ;; Noop layer to learn keys, which are not to be used
-  XX (layer-toggle noop)
+  XX (layer-toggle template-XX)
+
+  ;; Key, which can be an entry for the layer.
+  _ @XX
 
   #| -----------------------------------------------------
      Sticky key enables "fixation" of the layer.
