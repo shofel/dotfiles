@@ -70,11 +70,11 @@
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
- @scr  !    @    #    $    %                    ^    XX   *    XX   XX   XX
+ @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
   XX   '    ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
-       XX  @num @nav @sym                           @sym @nav @mod  XX
+       XX  @num @nav @sym                           @sym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
                      @num lsft  C-c     XX   rsft spc
@@ -86,7 +86,7 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    `    =    |    \                    C-7  &    +    ~    _    _
+  _    _    `    =    |    \                    C-6  XX   +    ~    _    _
   _    _    <   \(    {    [                    ]    }   \)    >    _    _
   _    _    _    _    _    _                    _    _    rctl ralt _    _
        _    _    _    _                              _    _    _    _
@@ -127,22 +127,22 @@
 )
 
 
-(deflayer mod
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX   XX   XX
+(deflayer fkey
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _ 
 
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX                   XX   rctl rsft ralt XX   XX
-       XX   XX   XX   XX                             XX   XX   XX   XX
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    F7   F8   F9   F12                  _    _    _    _    _    _
+  _    _    F4   F5   F6   F11                  _    _    _    _    _    _
+  _    _    F1   F2   F3   F10                  _    rctl ralt _    _    _
+       _    _    _    _                              _    _    @_   _
 
-                           XX   XX      XX   XX
-                      XX   XX   XX      XX   XX   XX
-                                XX      XX  
+                           _    _       _    _
+                      _    _    _       _    rsft _
+                                _       _
 )
 
 
-(deflayer qwerty
+(deflayer as-labeled
   caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt @base_ pause
 
   =    1    2    3    4    5                    6    7    8    9    0    -
@@ -199,7 +199,7 @@
   ;; Switch Layers
   ;; see also (layer-delay n x) (layer-next x)
   base_ (layer-switch base)
-  qwe_  (layer-switch qwerty)
+  qwe_  (layer-switch as-labeled)
 
   ;; Noop layer to learn keys, which are not to be used
   XX (layer-toggle template-XX)
@@ -220,7 +220,7 @@
   sym   (sticky-key 0 (layer-toggle symbols))
   num   (sticky-key 0 (layer-toggle mods-numbers))
   nav   (sticky-key 0 (layer-toggle quotes-navigation))
-  mod   (sticky-key 0 (layer-toggle mod))
+  fkey  (sticky-key 0 (layer-toggle fkey))
 
   ;; Fancy names for arrows
      ↑ up  ↓ down  ← left  → rght
