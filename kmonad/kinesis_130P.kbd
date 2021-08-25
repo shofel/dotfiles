@@ -71,9 +71,9 @@
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
  @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
-  XX   '    ,    .    p    y                    f    g    c    r    l    /
+  XX   XX   ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
- @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
+ @XX   XX   q    j    k    x                    b    m    w    v    z   @XX
        XX  @num @nav @sym                           @sym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
@@ -86,10 +86,10 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    `    =    |    \                    C-6  XX   +    ~    _    _
+  _    _    `    =    '    \                    |    "    +    ~    _    _
   _    _    <   \(    {    [                    ]    }   \)    >    _    _
-  _    _    _    _    _    _                    _    _    rctl ralt _    _
-       _    _    _    _                              _    _    _    _
+  _    _    ralt rtcl ;    _                    _    :    rctl ralt _    _
+       _    _    _   @_                             @_    _    _    _
 
                            _    _       _    _
                       XX  XX    _       _    XX   spc
