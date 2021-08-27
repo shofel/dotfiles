@@ -24,10 +24,11 @@
 
    Keyboard is to be prepared like this:
    1. Reset memory: `Program+Control+F10`
-   2. (Optionally) Switch to Dvorak: `Program+Control+F5`
+   2. Switch to Dvorak: `Program+Control+F5`
    3. Swap Escape and CapsLock: `Program+F12 Esc CapsLock CapsLock Esc Program+F12`
 
    Kinesis cheatsheet: http://web.mit.edu/jmorzins/Public/kinesisCheatSheet.html
+
    ------------------------------------------------------------------------- |#
 
 #| src:qwerty | #
@@ -67,6 +68,28 @@
                                    Layers
   -------------------------------------------------------------------------- |#
 
+
+#| -------------------------------------------------------------------------
+                                  Base Layer
+
+   Absent keys:
+
+   1. To type a number, use mods-numbers layer
+   2. To type a brace, a quote or colon/semicolon, use the symbols layer
+
+   Modifiers:
+
+   1. Use home row mods from the mods-numbers layer:
+      - to prepend any key with a single modifier (Control, Shift, or Alt), 
+      - to prepend a key from the right half with any combination of modifiers
+   2. Use fkeys-mods layer
+       or symbols-mods layer:
+      - to prepend any key from the left half with more than one modifier
+
+   All the above is about applying mods to the keys of Base Layer.
+   To apply modifiers to keys on other layers, consult their descriptions.
+
+   ------------------------------------------------------------------------- |#
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
@@ -81,10 +104,11 @@
                                 C-x     @?
 )
 
-#| -------------------------------------------------------------------------
-                            Symbols
 
-   § Moved from Pinkies
+#| -------------------------------------------------------------------------
+                                  Symbols
+
+   § Migrated from Pinkies
 
    On the higher and the lower row there are symbols of the pinkies' keys.
    The halves are symmetric: keys on the right half is Shifted keys from the
@@ -99,33 +123,71 @@
    § Return
 
    Both thumb Shift buttons are replaced with Return, so one can press Return
-   with any single hand. And not only just Return, but also Control+Return,
-   Alt+Return, and Control+Alt+Return.
+   with any single hand.
 
-   When using both hands, it's easier to press Return on mods-numbers layer.
-   No matter if you need to activate modifiers or not.
+   § Escape
+
+   Escape could be useful on both hands, but on the right half it is often
+   pressed by accident when typing a space after a symbol. That is why we
+   place it only on the left half, but not on both.
 
    § Modifiers
 
-   With one hand you can activate at the same time the layer, and any
-   combination of modifiers.
+   On this layer you find all modifiers on the right hand. They are useful
+   to modify a key from the left half of the @base layer.
+
    ------------------------------------------------------------------------- |#
-(deflayer symbols
-  #| Hint to type cyrillics in vim:  `ё =ъ ~Ё +Ъ  |#
+(deflayer symbols-mods
+  #| Hint to type cyrillics in vim:  ё` ъ= й'   Й" Ъ+ Ё~   я; Я:
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    `    =    '    \                    |    "    +    ~    _    _
   _    _    <   \(    {    [                    ]    }   \)    >    _    _
-  _    lsft lalt lctl ;    _                    _    :    rctl ralt rsft _
+  _    _    _    _    ;    _                    _    :    rctl ralt _    _
        _    _    _   @_                             @_    _    _    _
 
                            _    _       _    _
-                    esc  ret    _       _    ret  esc
+                    esc  ret    _       _    rsft _
                                 _       _
 )
 
 
+#| -------------------------------------------------------------------------
+                            Modifiers and Numbers
+
+   § Sticky Modifiers on Home Row
+
+   Home row mods explained: https://precondition.github.io/home-row-mods
+
+   Sticky modifiers are awesome, and these three keys on the left home row
+   can cover two use cases for you:
+
+   1. press a single modifier + any letter. Yes, only a single, because
+      it's a limitation of kmonad, it does not combine sticky key modifiers,
+      when they tapped one after another
+
+      To type Control+f:
+      - press @_
+      -   tap @ctrl
+      - release @_
+      - tap f
+
+   2. press any combination of modifiers + any key on the right half on the
+      mods-numbers layer
+
+      To type Control+Shift+BackSpace:
+      - press @_
+      -   press @sft and @ctl
+      -     tap bspc
+      - release @_ @sft and @ctl
+
+   § Modifiers for Other Layers
+
+   To combine modifiers with keys on other layers, use the dedicated modifier
+   keys from the corresponding layer.
+
+   ------------------------------------------------------------------------- |#
 (deflayer mods-numbers
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
@@ -142,7 +204,7 @@
 
 
 #| -------------------------------------------------------------------------
-                            Navigation
+                                Navigation
 
    § PgUp and PgDn in a Row
 
@@ -151,18 +213,18 @@
    - Control+PageUp walks through the tabs to the left
    - Control+PageDown walks through the tabs to the right
 
-   § BackSpace
+   § Select and Delete
 
    Backspace on the navigation layer is useful to delete some selected text:
    - with the first hand activate the layer and the Shift modifier
    - use the second hand to move cursor around, and select some text
-   - press bspc with the second key
+   - press bspc with the second hand
    - release all the keys, which you hold with the first hand
 
    § Modifiers
 
-   Use one hand to activate the layer and a modifier,
-   and another hand to tap a navigation key.
+   Use modifiers from this layer only for keys from this layer.
+
    ------------------------------------------------------------------------- |#
 (deflayer navigation
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
@@ -173,13 +235,22 @@
   _    _    lalt _    lctl pgdn                 pgdn rctl _    ralt _    _
        _    _    @_   _                              _    @_   _    _
 
-                            _   _       _    _
+                          del   _       _    del
                    bspc  lsft   _       _    rsft  bspc
                                 _       _
 )
 
 
-(deflayer fkey
+#| -------------------------------------------------------------------------
+                                 F Keys
+
+   § Modifiers
+
+   Use the mods from this layer to combine any number of mods with a key from
+   the left half of the keyboard.
+
+   ------------------------------------------------------------------------- |#
+(deflayer fkeys-mods
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _ 
 
   _    _    _    _    _    _                    _    _    _    _    _    _
@@ -194,6 +265,12 @@
 )
 
 
+#| -------------------------------------------------------------------------
+                           Original keyboard layout
+
+   This is src:qwerty, but with a switch to the base layer: @base_
+
+   ------------------------------------------------------------------------- |#
 (deflayer as-labeled
   caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt @base_ pause
 
@@ -272,10 +349,10 @@
      -> but without stickiness, layer switches back,
         dispite of the second toggle is still pressed
     ----------------------------------------------------- |#
-  sym   (sticky-key 0 (layer-toggle symbols))
+  sym   (sticky-key 0 (layer-toggle symbols-mods))
   num   (sticky-key 0 (layer-toggle mods-numbers))
   nav   (sticky-key 0 (layer-toggle navigation))
-  fkey  (sticky-key 0 (layer-toggle fkey))
+  fkey  (sticky-key 0 (layer-toggle fkeys-mods))
 
   ;; Fancy names for arrows
      ↑ up  ↓ down  ← left  → rght
