@@ -74,25 +74,54 @@
   XX   XX   ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @XX   XX   q    j    k    x                    b    m    w    v    z   @XX
-       XX  @num @nav @sym                           @sym @nav @fkey XX
+       XX   XX  @nav @sym                           @sym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
-                     @num lsft  C-c     XX   rsft spc
-                                C-x     XX
+                     @num lsft  C-c     @?   rsft spc
+                                C-x     @?
 )
 
+#| -------------------------------------------------------------------------
+                            Symbols
+
+   § Moved from Pinkies
+
+   On the higher and the lower row there are symbols of the pinkies' keys.
+   The halves are symmetric: keys on the right half is Shifted keys from the
+   left half.
+
+   § Braces
+
+   The home row contains braces of all kinds
+   - use the left half to open a brace
+   - use the right half to close a brace
+
+   § Return
+
+   Both thumb Shift buttons are replaced with Return, so one can press Return
+   with any single hand. And not only just Return, but also Control+Return,
+   Alt+Return, and Control+Alt+Return.
+
+   When using both hands, it's easier to press Return on mods-numbers layer.
+   No matter if you need to activate modifiers or not.
+
+   § Modifiers
+
+   With one hand you can activate at the same time the layer, and any
+   combination of modifiers.
+   ------------------------------------------------------------------------- |#
 (deflayer symbols
   #| Hint to type cyrillics in vim:  `ё =ъ ~Ё +Ъ  |#
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    `    =    '   \                    |    "    +    ~    _    _
+  _    _    `    =    '    \                    |    "    +    ~    _    _
   _    _    <   \(    {    [                    ]    }   \)    >    _    _
-  _    _    lalt lctl ;    _                    _    :    rctl ralt _    _
+  _    lsft lalt lctl ;    _                    _    :    rctl ralt rsft _
        _    _    _   @_                             @_    _    _    _
 
                            _    _       _    _
-                      XX  XX    _       _    XX   spc
+                    esc  ret    _       _    ret  esc
                                 _       _
 )
 
@@ -103,26 +132,49 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    _                    del  7    8    9    :    _
   _    _    @sft @alt @ctl tab                  bspc 4    5    6    .    _
-  _    _    _    lalt lctl _                    0    1    2    3    0    _
+  _    _    _    _    _    _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
-                           _    _       ralt rctl
-                      @_  XX    _       _    ret  esc
+                           _    _       _    _
+                      @_   _    _       _    ret  esc
                                 _       _
 )
 
 
-(deflayer quotes-navigation
+#| -------------------------------------------------------------------------
+                            Navigation
+
+   § PgUp and PgDn in a Row
+
+   On the higher row they are ordered this way because it reflects the way
+   of switching tabs in a web browser:
+   - Control+PageUp walks through the tabs to the left
+   - Control+PageDown walks through the tabs to the right
+
+   § BackSpace
+
+   Backspace on the navigation layer is useful to delete some selected text:
+   - with the first hand activate the layer and the Shift modifier
+   - use the second hand to move cursor around, and select some text
+   - press bspc with the second key
+   - release all the keys, which you hold with the first hand
+
+   § Modifiers
+
+   Use one hand to activate the layer and a modifier,
+   and another hand to tap a navigation key.
+   ------------------------------------------------------------------------- |#
+(deflayer navigation
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    pgup pgdn @↑   _    end  _
-  _    ;    `    "    '    :                    home @←   @↓   @→   _    _
-  _    _    lalt _    lctl _                    _    rctl _    XX   _    _
+  _    _    _    @↑   pgup pgdn                 pgup pgdn @↑   _    _    _
+  _    home @←   @↓   @→   end                  home @←   @↓   @→   end  _
+  _    _    lalt _    lctl pgdn                 pgdn rctl _    ralt _    _
        _    _    @_   _                              _    @_   _    _
 
-                           _    _       _    _
-                    bspc   _    _       _    ret  XX 
+                            _   _       _    _
+                   bspc  lsft   _       _    rsft  bspc
                                 _       _
 )
 
@@ -131,9 +183,9 @@
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _ 
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    F7   F8   F9   F12                  _    _    _    _    _    _
-  _    _    F4   F5   F6   F11                  _    _    _    _    _    _
-  _    _    F1   F2   F3   F10                  _    rctl ralt _    _    _
+  _    _   F7   F8   F9  F12                    _    _    _    _    _    _
+  _    _   F4   F5   F6  F11                    _    _    _    _    _    _
+  _    _   F1   F2   F3  F10                    _    rctl ralt _    _    _
        _    _    _    _                              _    _    @_   _
 
                            _    _       _    _
@@ -207,6 +259,9 @@
   ;; Key, which can be an entry for the layer.
   _ @XX
 
+  ;; A vacant key
+  ? XX
+
   #| -----------------------------------------------------
      Sticky key enables "fixation" of the layer.
      That is:
@@ -219,7 +274,7 @@
     ----------------------------------------------------- |#
   sym   (sticky-key 0 (layer-toggle symbols))
   num   (sticky-key 0 (layer-toggle mods-numbers))
-  nav   (sticky-key 0 (layer-toggle quotes-navigation))
+  nav   (sticky-key 0 (layer-toggle navigation))
   fkey  (sticky-key 0 (layer-toggle fkey))
 
   ;; Fancy names for arrows
