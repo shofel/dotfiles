@@ -330,35 +330,13 @@
   base_ (layer-switch base)
   qwe_  (layer-switch as-labeled)
 
-  ;; Noop layer to learn keys, which are not to be used
-  XX (layer-toggle template-XX)
-
-  ;; Key, which can be an entry for the layer.
-  _ @XX
-
-  ;; A vacant key
-  ? XX
-
-  #| -----------------------------------------------------
-     Sticky key enables "fixation" of the layer.
-     That is:
-     - toggle layer with one key
-     - then press another key to toggle the same layer
-     - then release the first one
-     -> when sticky, then we're still on the layer
-     -> but without stickiness, layer switches back,
-        dispite of the second toggle is still pressed
-    ----------------------------------------------------- |#
-  sym   (sticky-key 0 (layer-toggle symbols-mods))
-  num   (sticky-key 0 (layer-toggle mods-numbers))
-  nav   (sticky-key 0 (layer-toggle navigation))
-  fkey  (sticky-key 0 (layer-toggle fkeys-mods))
+  ;; Mark keys for documentation
+  XX (layer-toggle template-XX) ;; Noop layer to facilitate forgetting a key
+  _ XX ;; Key, which is used on Base Layer to activate this layer
+  ? XX ;; A vacant key
 
   ;; Fancy names for arrows
-     ↑ up  ↓ down  ← left  → rght
-
-  ;; ld1 (layer-delay 500 base) ;; One way to get a leader-key
-  ;; ld2 (layer-next base)      ;; (around-next (layer-toggle layer-name) some-button)
+  ↑ up  ↓ down  ← left  → rght
 
   wm    Prog1 ;; Prefix-key for stumpwm
   kitty Prog2 ;; Prefix-key for kitty
@@ -368,46 +346,6 @@
   alt (sticky-key 500 lalt)
   sft (sticky-key 500 lsft)
 )
-
-#| --------------------------------------------------------------------------
-                        Optional: Compose-key sequences
-
-  Compose-key sequences are series of button-presses that your operating system
-  will interpret as the insertion of a special character, like accented
-  characters, or various special-languages. In that sense, they are just
-  syntactic sugar for keyboard macros.
-
-  To get this to work on Linux you will need to set your compose-key with a tool
-  like `setxkbmap', as well as tell kmonad that information. See the `defcfg'
-  block at the top of this file for a working example. Note that you need to
-  wait ever so slightly for the keyboard to register with linux before the
-  command gets executed, that's why the `sleep 1`. Also, note that all the
-  `/run/current-system' stuff is because the author uses NixOS. Just find a
-  shell-command that will:
-
-    1. Sleep a moment
-    2. Set the compose-key to your desired key
-
-  Please be aware that what `setxkbmap' calls the `menu' key is not actually the
-  `menu' key! If you want to use the often suggested
-
-      setxkbmap -option compose:menu
-
-  you will have to set your compose key within kmonad to `compose' and not
-  `menu'.
-
-  After this, this should work out of the box under Linux. Windows does not
-  recognize the same compose-key sequences, but WinCompose will make most of the
-  sequences line up with KMonad: http://wincompose.info/
-  This has not in any way been tested on Mac.
-
-  In addition to hard-coded symbols, we also provide 'uncompleted' macros. Since
-  a compose-key sequence is literally just a series of keystrokes, we can omit
-  the last one, and enter the sequence for 'add an umlaut' and let the user then
-  press some letter to add this umlaut to. These are created using the `+"`
-  syntax.
-
-  -------------------------------------------------------------------------- |#
 
 #| --------------------------------------------------------------------------
                         Optional: Command buttons
