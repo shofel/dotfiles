@@ -82,14 +82,14 @@
    1. Use home row mods from the mods-numbers layer:
       - to prepend any key with a single modifier (Control, Shift, or Alt), 
       - to prepend a key from the right half with any combination of modifiers
-   2. Use fkeys-mods layer
-       or symbols-mods layer:
+   2. Use symbols-mods layer:
       - to prepend any key from the left half with more than one modifier
 
    All the above is about applying mods to the keys of Base Layer.
    To apply modifiers to keys on other layers, consult their descriptions.
 
    ------------------------------------------------------------------------- |#
+
 (deflayer base
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
@@ -122,8 +122,7 @@
 
    § Return
 
-   Both thumb Shift buttons are replaced with Return, so one can press Return
-   with any single hand.
+   One can press Return with the left hand.
 
    § Escape
 
@@ -136,15 +135,19 @@
    On this layer you find all modifiers on the right hand. They are useful
    to modify a key from the left half of the @base layer.
 
+   § Type Cyrillics in vim
+     Cheat sheet:
+     - higher row:  ё` ъ= й'  Й" Ъ+ Ё~
+     - lower  row:  я; Я:
    ------------------------------------------------------------------------- |#
+
 (deflayer symbols-mods
-  #| Hint to type cyrillics in vim:  ё` ъ= й'   Й" Ъ+ Ё~   я; Я:
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    `    =    '    \                    |    "    +    ~    _    _
   _    _    <   \(    {    [                    ]    }   \)    >    _    _
-  _    _    _    _    ;    _                    _    :    rctl ralt _    _
+  _    _    _    _    ;    _                    _    :    rctl ralt rsft _
        _    _    _   @_                             @_    _    _    _
 
                            _    _       _    _
@@ -188,6 +191,7 @@
    keys from the corresponding layer.
 
    ------------------------------------------------------------------------- |#
+
 (deflayer mods-numbers
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
@@ -226,6 +230,7 @@
    Use modifiers from this layer only for keys from this layer.
 
    ------------------------------------------------------------------------- |#
+
 (deflayer navigation
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
@@ -246,17 +251,18 @@
 
    § Modifiers
 
-   Use the mods from this layer to combine any number of mods with a key from
+   Use the mods from this layer to combine more than one mod with a key from
    the left half of the keyboard.
 
    ------------------------------------------------------------------------- |#
-(deflayer fkeys-mods
+
+(deflayer fkeys
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _ 
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _   F7   F8   F9  F12                    _    _    _    _    _    _
   _    _   F4   F5   F6  F11                    _    _    _    _    _    _
-  _    _   F1   F2   F3  F10                    _    rctl ralt _    _    _
+  _    _   F1   F2   F3  F10                    _    rctl ralt rsft _    _
        _    _    _    _                              _    _    @_   _
 
                            _    _       _    _
@@ -271,6 +277,7 @@
    This is src:qwerty, but with a switch to the base layer: @base_
 
    ------------------------------------------------------------------------- |#
+
 (deflayer as-labeled
   caps F1   F2   F3   F4   F5   F6   F7   F8   F9    F10  F11  F12  prnt @base_ pause
 
@@ -329,6 +336,10 @@
   ;; see also (layer-delay n x) (layer-next x)
   base_ (layer-switch base)
   qwe_  (layer-switch as-labeled)
+  sym   (sticky-key 400 (layer-toggle symbols-mods))
+  num   (sticky-key 400 (layer-toggle mods-numbers))
+  nav   (sticky-key 400 (layer-toggle navigation))
+  fkey  (sticky-key 400 (layer-toggle fkeys))
 
   ;; Mark keys for documentation
   XX (layer-toggle template-XX) ;; Noop layer to facilitate forgetting a key
