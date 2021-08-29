@@ -339,14 +339,6 @@ augroup END
 nnoremap <Leader>c  :checkt<Return>
 nnoremap <Leader>s  :write<Return>
 
-" skip empty lines, when navigating with arrows
-onoremap <Up> {
-nnoremap <Up> {
-vnoremap <Up> {
-onoremap <Down> }
-nnoremap <Down> }
-vnoremap <Down> }
-
 " X clipboard
 xnoremap <Leader>y "+y<Return>
 nnoremap <Leader>p "+]p<Return>
