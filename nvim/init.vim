@@ -188,8 +188,7 @@ augroup initvim
   autocmd BufRead,BufNewFile *.js.flow setfiletype typescript
   autocmd Filetype javascript let b:commentary_format = "/* %s */"
   autocmd Filetype javascript let b:textwidth=80
-  autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
-  autocmd Filetype typescript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w>
+  autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w><Return>
   autocmd Filetype javascript nnoremap <buffer> <Leader>t :w<cr>:!yarn ava_ %<cr>
   autocmd Filetype javascript nnoremap <buffer> <Leader>T :w<cr>:Dispatch yarn ava<cr>
   autocmd BufNewFile,BufRead *.json5 set filetype=json5
