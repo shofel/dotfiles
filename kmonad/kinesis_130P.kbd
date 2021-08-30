@@ -100,7 +100,7 @@
        XX   XX  @nav @sym                           @sym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
-                     @num lsft  C-c     @?   rsft spc
+                     @num lsft  C-c    C-6   rsft spc
                                 C-x     @?
 )
 
@@ -190,15 +190,23 @@
    To combine modifiers with keys on other layers, use the dedicated modifier
    keys from the corresponding layer.
 
+   § Tab, Escape, Return (the left half)
+
+   Their placements are optimise to usage, but not to easy learning.
+
+   - Tab: on the most comfortable key
+   - Ret: on the lower row, which is intuitive
+   - Esc: on the higher row, which is intuitive
+
    ------------------------------------------------------------------------- |#
 
 (deflayer mods-numbers
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    _    _    _    _                    del  7    8    9    :    _
+  _    _    _    _    esc  del                  del  7    8    9    :    _
   _    _    @sft @alt @ctl bspc                 bspc 4    5    6    .    _
-  _    _    esc  ret  tab  _                    0    1    2    3    0    _
+  _    _    _    ret  tab  _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
                            _    _       _    _
@@ -237,7 +245,7 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    @↑   pgup pgdn                 pgup pgdn @↑   _    _    _
   _    home @←   @↓   @→   end                  home @←   @↓   @→   end  _
-  _    _    lalt _    lctl pgdn                 pgdn rctl _    ralt _    _
+  _    _    lalt tab  lctl pgdn                 pgdn rctl tab  ralt _    _
        _    _    @_   _                              _    @_   _    _
 
                           del   _       _    del
