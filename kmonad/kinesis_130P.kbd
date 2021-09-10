@@ -147,11 +147,11 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    `    =    '    \                    |    "    +    ~    _    _
   _    _    <   \(    {    [                    ]    }   \)    >    _    _
-  _    _    _    _    ;    _                    _    :    rctl ralt rsft _
-       _    _    _   @_                             @_    _    _    _
+  _    _    lalt lctl ;    _                    _    :    rctl ralt _    _
+       _    _    _   @sym                           @sym  _    _    _
 
                            _    _       _    _
-                      _    _    _       _    rsft _
+                      _ lsft    _       _    rsft _
                                 _       _
 )
 
@@ -246,7 +246,7 @@
   _    _    _    @↑   pgup pgdn                 pgup pgdn @↑   _    _    _
   _    home @←   @↓   @→   end                  home @←   @↓   @→   end  _
   _    _    lalt tab  lctl pgdn                 pgdn rctl tab  ralt _    _
-       _    _    @_   _                              _    @_   _    _
+       _    _    @nav _                              _    @nav _    _
 
                           del   _       _    del
                    bspc  lsft   _       _    rsft  bspc
