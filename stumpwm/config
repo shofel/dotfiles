@@ -45,6 +45,7 @@
 (define-key *root-map* (kbd "!") "exec")
 (define-key *root-map* (kbd ";") "colon")
 (define-key *root-map* (kbd ":") "eval")
+(define-key *root-map* (kbd "m") "lastmsg")
 
 ;;
 (define-key *root-map* (kbd "C-M-r") "restart-soft") ;; To test changes.
@@ -56,11 +57,12 @@
 (define-key *root-map* (kbd "l") "move-focus right")
 
 ;; Windows.
+(define-key *root-map* (kbd "x") *exchange-window-map*)
 (define-key *root-map* (kbd "r") "title") ; rename
 (define-key *root-map* (kbd "t") "other-window") ; togggle
 (define-key *root-map* (kbd "w") "windowlist")
-(define-key *root-map* (kbd "Left") "move-window left")
-(define-key *root-map* (kbd "Right") "move-window right")
+(define-key *root-map* (kbd "L") "move-window left")
+(define-key *root-map* (kbd "H") "move-window right")
 (define-key *root-map* (kbd "K") "kill")
 
 ;; Fullscreen
@@ -71,6 +73,7 @@
 (define-key *root-map* (kbd "R") "grename")
 (define-key *root-map* (kbd "g") "grouplist")
 (define-key *root-map* (kbd "T") "gother")
+(define-key *root-map* (kbd "XF86Launch1") "gother")
 (define-key *root-map* (kbd "1") "gselect 1")
 (define-key *root-map* (kbd "2") "gselect 2")
 (define-key *root-map* (kbd "3") "gselect 3")

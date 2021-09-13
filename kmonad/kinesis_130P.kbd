@@ -205,7 +205,7 @@
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    del                  del  7    8    9    :    _
-  _    _    @sft @alt @ctl bspc                 bspc 4    5    6    .    _
+  _    _    _    @alt @ctl bspc                 bspc 4    5    6    .    _
   _    _    esc  ret  tab  _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
