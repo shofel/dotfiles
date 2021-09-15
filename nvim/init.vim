@@ -275,15 +275,17 @@ augroup END
 " Windows : <Leader>+arrow
 
 " switch tab {{{
-nnoremap <Leader>1 :tabn 1<Return>
-nnoremap <Leader>2 :tabn 2<Return>
-nnoremap <Leader>3 :tabn 3<Return>
-nnoremap <Leader>4 :tabn 4<Return>
-nnoremap <Leader>5 :tabn 5<Return>
-nnoremap <Leader>6 :tabn 6<Return>
-nnoremap <Leader>7 :tabn 7<Return>
-nnoremap <Leader>8 :tabn 8<Return>
-nnoremap <Leader>9 :tabn 9<Return>
+nnoremap <Leader>th <cmd>tabprevious<Return>
+nnoremap <Leader>tl <cmd>tabnext<Return>
+nnoremap <Leader>1 <cmd>tabn 1<Return>
+nnoremap <Leader>2 <cmd>tabn 2<Return>
+nnoremap <Leader>3 <cmd>tabn 3<Return>
+nnoremap <Leader>4 <cmd>tabn 4<Return>
+nnoremap <Leader>5 <cmd>tabn 5<Return>
+nnoremap <Leader>6 <cmd>tabn 6<Return>
+nnoremap <Leader>7 <cmd>tabn 7<Return>
+nnoremap <Leader>8 <cmd>tabn 8<Return>
+nnoremap <Leader>9 <cmd>tabn 9<Return>
 " }}}
 
 " switch window {{{
@@ -379,6 +381,10 @@ let g:ale_fixers = {
       \   'fish':       [],
       \ }
 
+let g:ale_javascript_eslint_executable = 'yarn eslint'
+let g:ale_javascript_flow_executable   = 'yarn flow'
+let g:ale_scss_stylelint_executable    = 'yarn stylelint'
+
 " Treat typescript and flow the same way as javascript
 let g:ale_linters.typescript = g:ale_linters.javascript
 let g:ale_linters.flow       = g:ale_linters.javascript
@@ -397,7 +403,9 @@ require'lspconfig'.powershell_es.setup{
   bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
 }
 
-require'lspconfig'.flow.setup{}
+require'lspconfig'.flow.setup{
+  cmd = { 'yarn', 'flow', 'lsp' }
+}
 require'lspconfig'.yamlls.setup{}
 require'lspconfig'.rnix.setup{}
 require'lspconfig'.hls.setup{}
