@@ -97,7 +97,7 @@
   XX   XX   ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @XX   XX   q    j    k    x                    b    m    w    v    z   @XX
-       XX   XX  @nav @sym                           @sym @nav @fkey XX
+       XX   XX  @nav @lsym                         @rsym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
                      @num lsft  C-c    C-6   rsft spc
@@ -138,17 +138,36 @@
    § Type Cyrillics in vim
      Cheat sheet:
      - higher row:  ё` ъ= й'  Й" Ъ+ Ё~
+     - higher row:  ё` ъ= й'  Й" Ъ+ Ё~
      - lower  row:  я; Я:
    ------------------------------------------------------------------------- |#
 
-(deflayer symbols-mods
+#| When layer activated by the left hand.
+   Left mods are on the lower row.        |#
+(deflayer symbols-mods-left
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
 
   _    _    _    _    _    _                    _    _    _    _    _    _
-  _    _    `    =    \    XX                   XX   |    +    ~    _    _
-  _    '    <   \(    {    [                    ]    }   \)    >    "    _
-  _    _    lalt lctl ;    _                    _    :    rctl ralt _    _
-       _    _    _   @sym                           @sym  _    _    _
+  _    _    `    =    '    _                    _    "    +    ~    _    _
+  _    \    <   \(    {    [                    ]    }   \)    >    |    _
+  _    _    lalt lctl ;    _                    _    :    _    _    _    _
+       _    _    _   @lsym                           _    _    _    _
+
+                           _    _       _    _
+                      _ lsft    _       _    rsft _
+                                _       _
+)
+
+#| When layer activated by the right hand.
+   Right mods are on the lower row.        |#
+(deflayer symbols-mods-right
+  _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
+
+  _    _    _    _    _    _                    _    _    _    _    _    _
+  _    _    `    =    '    _                    _    "    +    ~    _    _
+  _    \    <   \(    {    [                    ]    }   \)    >    |    _
+  _    _    _    _    ;    _                    _    :    rctl ralt _    _
+       _    _    _    _                             @rsym _    _    _
 
                            _    _       _    _
                       _ lsft    _       _    rsft _
@@ -344,7 +363,8 @@
   ;; see also (layer-delay n x) (layer-next x)
   base_ (layer-switch base)
   qwe_  (layer-switch as-labeled)
-  sym   (sticky-key 400 (layer-toggle symbols-mods))
+  lsym  (sticky-key 400 (layer-toggle symbols-mods-left))
+  rsym  (sticky-key 400 (layer-toggle symbols-mods-right))
   num   (sticky-key 400 (layer-toggle mods-numbers))
   nav   (sticky-key 400 (layer-toggle navigation))
   fkey  (sticky-key 400 (layer-toggle fkeys))
