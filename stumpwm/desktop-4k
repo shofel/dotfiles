@@ -1,29 +1,10 @@
 #S(DDUMP
    :SCREENS (#S(SDUMP
                 :NUMBER 0
-                :GROUPS (#S(GDUMP
-                            :NUMBER 1
-                            :NAME "one"
-                            :TREE ((#S(FDUMP
-                                       :NUMBER 0
-                                       :X 0
-                                       :Y 0
-                                       :WIDTH 1920
-                                       :HEIGHT 2160
-                                       :WINDOWS (18874369)
-                                       :CURRENT 18874369)
-                                    #S(FDUMP
-                                       :NUMBER 1
-                                       :X 1920
-                                       :Y 0
-                                       :WIDTH 1920
-                                       :HEIGHT 2160
-                                       :WINDOWS (41943051)
-                                       :CURRENT 41943051)))
-                            :CURRENT 1)
+                :GROUPS (#S
                          #S(GDUMP
-                            :NUMBER 2
-                            :NAME "two"
+                            :NUMBER 1
+                            :NAME "main"
                             :TREE ((#S(FDUMP
                                        :NUMBER 0
                                        :X 0
@@ -40,18 +21,11 @@
                                          :HEIGHT 2138
                                          :WINDOWS (8388619)
                                          :CURRENT 8388619)
-                                      #S(FDUMP
-                                         :NUMBER 2
-                                         :X 1620
-                                         :Y 2138
-                                         :WIDTH 2220
-                                         :HEIGHT 22
-                                         :WINDOWS NIL
-                                         :CURRENT NIL)))))
+                                      ))))
                             :CURRENT 1)
                          #S(GDUMP
-                            :NUMBER 3
-                            :NAME "three"
+                            :NUMBER 2
+                            :NAME "two"
                             :TREE ((#S(FDUMP
                                        :NUMBER 0
                                        :X 0
