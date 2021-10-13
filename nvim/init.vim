@@ -350,6 +350,15 @@ xnoremap <Leader>Y "*y<Return>
 nnoremap <Leader>P "*]p<Return>
 xnoremap <Leader>P "*]p<Return>
 
+" Insert random string
+function! Shovel_insert_random()
+  let l:x = systemlist('pwgen 8 1')
+  " echom map(l:x, "'|' . v:val . '|'")
+  execute 'normal! a' . join(l:x)
+endfunction
+
+nnoremap <Leader>R <cmd>call Shovel_insert_random()<cr>
+
 " in terminal
 " @see http://neovim.io/doc/user/nvim_terminal_emulator.html
 " @see https://github.com/junegunn/fzf.vim/issues/544
