@@ -365,9 +365,9 @@
   qwe_  (layer-switch as-labeled)
   lsym  (sticky-key 400 (layer-toggle symbols-mods-left))
   rsym  (sticky-key 400 (layer-toggle symbols-mods-right))
-  num   (sticky-key 400 (layer-toggle mods-numbers))
-  nav   (sticky-key 400 (layer-toggle navigation))
-  fkey  (sticky-key 400 (layer-toggle fkeys))
+  num   (sticky-key 100 (layer-toggle mods-numbers))
+  nav   (sticky-key 100 (layer-toggle navigation))
+  fkey  (sticky-key 100 (layer-toggle fkeys))
 
   ;; Mark keys for documentation
   XX (layer-toggle template-XX) ;; Noop layer to facilitate forgetting a key
