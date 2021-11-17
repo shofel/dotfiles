@@ -1,5 +1,9 @@
 function fish_prompt --description 'Write out the prompt'
 
+	# It's important to keep this as the first command.
+	# You know why?
+	set -l last_status $status
+
 	# TODO check if the vars are already declared
 	# @see https://github.com/fish-shell/fish-shell/blob/master/share/tools/web_config/sample_prompts/classic_vcs.fish#L37
 
@@ -18,8 +22,6 @@ function fish_prompt --description 'Write out the prompt'
 	set -g __fish_git_prompt_char_stateseparator ' '
 
 	set -g __fish_prompt_normal (set_color normal)
-
-	set -l last_status $status
 
 	function status_ -S --description "Indicate status code of the last command."
 		if test $last_status -ne 0
