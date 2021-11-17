@@ -100,8 +100,8 @@
        XX   XX  @nav @lsym                         @rsym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
-                     @num lsft  C-c    C-6   rsft spc
-                                C-x     @?
+                     @num lsft  C-c     XX   rsft spc
+                                C-x     XX
 )
 
 
@@ -111,7 +111,7 @@
    § Migrated from Pinkies
 
    On the higher and the lower row there are symbols of the pinkies' keys.
-   The halves are symmetric: keys on the right half is Shifted keys from the
+   The halves are symmetric: keys on the right half are shifted keys from the
    left half.
 
    § Braces
@@ -139,10 +139,10 @@
      Cheat sheet:
      - higher row:  ё` ъ= й'  Й" Ъ+ Ё~
      - higher row:  ё` ъ= й'  Й" Ъ+ Ё~
-     - lower  row:  я; Я:
+     - lower  row:        я;  Я:
    ------------------------------------------------------------------------- |#
 
-#| When layer activated by the left hand.
+#| When layer activated with the left hand.
    Left mods are on the lower row.        |#
 (deflayer symbols-mods-left
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
@@ -158,7 +158,7 @@
                                 _       _
 )
 
-#| When layer activated by the right hand.
+#| When layer activated with the right hand.
    Right mods are on the lower row.        |#
 (deflayer symbols-mods-right
   _    _    _    _    _    _    _    _    _    _     _    _    _    _    _    _
@@ -289,7 +289,7 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _   F7   F8   F9  F12                    _    _    _    _    _    _
   _    _   F4   F5   F6  F11                    _    _    _    _    _    _
-  _    _   F1   F2   F3  F10                    _    rctl ralt rsft _    _
+  _    _   F1   F2   F3  F10                    _    rctl ralt _    _    _
        _    _    _    _                              _    _    @_   _
 
                            _    _       _    _
@@ -365,7 +365,7 @@
   qwe_  (layer-switch as-labeled)
   lsym  (sticky-key 400 (layer-toggle symbols-mods-left))
   rsym  (sticky-key 400 (layer-toggle symbols-mods-right))
-  num   (sticky-key 100 (layer-toggle mods-numbers))
+  num   (sticky-key   0 (layer-toggle mods-numbers))
   nav   (sticky-key 100 (layer-toggle navigation))
   fkey  (sticky-key 100 (layer-toggle fkeys))
 
