@@ -100,8 +100,8 @@
        XX   XX  @nav @lsym                         @rsym @nav @fkey XX
 
                            @wm  C-v    C-k   @kitty
-                     @num lsft  C-c     XX   rsft spc
-                                C-x     XX
+                     @num lsft  spc     spc  rsft spc
+                                ret     ret
 )
 
 
@@ -225,11 +225,11 @@
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    del                  del  7    8    9    :    _
   _    _    _    @alt @ctl bspc                 bspc 4    5    6    .    _
-  _    _    esc  ret  tab  _                    0    1    2    3    0    _
+  _    _    _    tab  _    _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
                            _    _       _    _
-                      @_   _    _       _    ret  esc
+                      @_   lsft _       _    ret  esc
                                 _       _
 )
 
