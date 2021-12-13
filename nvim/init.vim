@@ -53,8 +53,7 @@ Plug 'rhysd/git-messenger.vim'
 " Languages {{{
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'neovim/nvim-lspconfig'
-" Plug 'p00f/nvim-ts-rainbow'
+Plug 'mattn/vim-lsp-settings'
 
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -392,32 +391,9 @@ let g:ale_completion_enabled = 1
 
 " }}} ALE
 
-" Neovim LSP {{{
-" @see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-lua <<EOF
-require'lspconfig'.powershell_es.setup{
-  bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
-}
-
-require'lspconfig'.flow.setup{
-  cmd = { 'yarn', 'flow', 'lsp' }
-}
-require'lspconfig'.yamlls.setup{}
-require'lspconfig'.rnix.setup{}
-require'lspconfig'.hls.setup{}
-EOF
-" }}}
-
 " TS TreeSitter {{{
 lua  <<EOF
---[[
-require'nvim-treesitter.configs'.setup {
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  }
-}
+require'nvim-treesitter.configs'.setup {}
 ]]
 EOF
 " }}} TS TreeSitter
