@@ -56,19 +56,12 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'neovim/nvim-lspconfig'
 " Plug 'p00f/nvim-ts-rainbow'
 
-Plug 'dense-analysis/ale'
-Plug 'neomake/neomake'
-"
-Plug 'Junegunn/vader.vim'
-"
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 " Web Dev
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
-" Plug 'idanarye/vim-vebugger' TODO
-
 Plug 'kmonad/kmonad-vim'
 " }}} Languages
 
@@ -198,8 +191,6 @@ augroup initvim
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<cr>
 
-  autocmd Filetype python let b:ale_command_wrapper = "/* %s */"
-
   autocmd Filetype ps1 let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype vim let b:AutoPairs = {'{':'}', '(':')', "'":"'"}
 
@@ -250,7 +241,7 @@ nnoremap <Leader>e :ReplSend<Return>
 xnoremap <Leader>e :ReplSend<Return>
 nnoremap <Leader>E :Repl<Return>
 
-" ALE
+" lsp language server
 nnoremap <Leader>de :ALEFix<Return>
 nnoremap <Leader>dd :ALEGoToDefinition<Return>
 nnoremap <Leader>dh :ALEHover<Return>
@@ -374,18 +365,13 @@ nnoremap <Leader>gm <cmd>GitMessenger<cr>
 
 let g:ale_open_list = 'on_save'
 
-" Python
-let g:ale_python_auto_pipenv= 1
-
 " Linters and fixers.
 let g:ale_linters = {
-      \   'python':     ['pylint', 'pyls'],
       \   'javascript': ['flow-language-server', 'eslint'],
       \   'scss':       ['stylelint'],
       \   'fish':       [],
       \ }
 let g:ale_fixers = {
-      \   'python':     [],
       \   'javascript': ['eslint'],
       \   'scss':       ['stylelint'],
       \   'fish':       [],
@@ -421,40 +407,6 @@ require'lspconfig'.rnix.setup{}
 require'lspconfig'.hls.setup{}
 EOF
 " }}}
-
-" NeoMake {{{
-
-function! Shovel_InitNeoMake()
-
-  let g:neomake_open_list = 2
-
-  let g:neomake_javascript_enabled_makers = []
-
-  if findfile('.flowconfig', '.;') !=# ''
-    let l:flow = 'yarn -s flow --json 2>/dev/null'
-    let l:flow_vim_quickfix = system('echo -n (yarn global dir)/node_modules/.bin/flow-vim-quickfix')
-
-    let g:neomake_javascript_flow_maker = {
-          \ 'exe': 'fish',
-          \ 'args': ['-c', l:flow . ' | ' . l:flow_vim_quickfix],
-          \ 'errorformat': '%E%f:%l:%c\,%n: %m',
-          \ 'cwd': '%:p:h' 
-          \ }
-    let g:neomake_javascript_enabled_makers = g:neomake_javascript_enabled_makers + [ 'flow']
-  endif
-
-endfunction
-
-call Shovel_InitNeoMake()
-
-" This is kinda useful to prevent Neomake from unnecessary runs
-augroup neomake
-  if !empty(g:neomake_javascript_enabled_makers)
-    " autocmd! BufWritePost * Neomake
-  endif
-augroup END
-
-" }}} NeoMake
 
 " TS TreeSitter {{{
 lua  <<EOF
