@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 
+# DOC: man home-configuration.nix
+
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -10,8 +12,8 @@
   home.homeDirectory = "/home/shovel";
 
   # Home Manager
-  useGlobalPkgs = true;
-  home.packages = with pkgs; [ htop kitty neovim gh bat fd ripgrep ];
+  # TODO kitty @see https://github.com/NixOS/nixpkgs/issues/80936
+  home.packages = with pkgs; [ htop neovim gh bat fd ripgrep ];
 
   programs.git = {
     enable = true;
@@ -24,7 +26,7 @@
       pull = { rebase = true; };
       core = {
         editor = "nvim";
-        excludesfile = /home/shovel/.config/git/gitignore_global;
+        excludesfile = "/home/shovel/.config/git/gitignore_global";
       };
     };
   };
@@ -35,7 +37,7 @@
 
     home.file = {
       ".config/fish/functions" = {
-        source = /home/shovel/w/dotfiles/fish/functions;
+        source = /home/shovel/workspaces/dotfiles/fish/functions;
         recursive = true;
       };
     };
