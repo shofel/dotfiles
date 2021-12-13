@@ -13,7 +13,10 @@
 
   # Home Manager
   # TODO kitty @see https://github.com/NixOS/nixpkgs/issues/80936
-  home.packages = with pkgs; [ htop neovim gh bat fd ripgrep ];
+  home.packages = with pkgs; [
+    htop neovim gh bat fd ripgrep
+    nodePackages.vscode-langservers-extracted
+  ];
 
   programs.git = {
     enable = true;

@@ -406,9 +406,14 @@ let g:ale_completion_enabled = 1
 
 " }}} ALE
 
+" TODO keys for lsp
+" TODO remove ALE
+
 " Neovim LSP {{{
 " @see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 lua <<EOF
+local util = require'lspconfig'.util
+
 require'lspconfig'.powershell_es.setup{
   bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
 }
@@ -416,6 +421,16 @@ require'lspconfig'.powershell_es.setup{
 require'lspconfig'.flow.setup{
   cmd = { 'yarn', 'flow', 'lsp' }
 }
+
+require'lspconfig'.eslint.setup{}
+
+require'lspconfig'.stylelint_lsp.setup{
+    cmd = { "stylelint-lsp", "--stdio" },
+    filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    root_dir = util.root_pattern('.stylelintrc', 'package.json'),
+    settings = {}
+}
+
 require'lspconfig'.yamlls.setup{}
 require'lspconfig'.rnix.setup{}
 require'lspconfig'.hls.setup{}
