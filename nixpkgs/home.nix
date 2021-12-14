@@ -15,7 +15,9 @@
   # TODO kitty @see https://github.com/NixOS/nixpkgs/issues/80936
   home.packages = with pkgs; [
     htop neovim gh bat fd ripgrep
+    # Language servers.
     nodePackages.vscode-langservers-extracted
+    nodePackages.vim-language-server
   ];
 
   programs.git = {

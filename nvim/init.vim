@@ -23,7 +23,7 @@ Plug 'tpope/vim-unimpaired'
 " appearance
 Plug 'mhinz/vim-signify'
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
+Plug 'josa42/nvim-lightline-lsp'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -56,19 +56,12 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'neovim/nvim-lspconfig'
 " Plug 'p00f/nvim-ts-rainbow'
 
-Plug 'dense-analysis/ale'
-Plug 'neomake/neomake'
-"
-Plug 'Junegunn/vader.vim'
-"
+
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
 " Web Dev
-Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
-" Plug 'idanarye/vim-vebugger' TODO
-
 Plug 'kmonad/kmonad-vim'
 " }}} Languages
 
@@ -198,8 +191,6 @@ augroup initvim
   autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
   autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<cr>
 
-  autocmd Filetype python let b:ale_command_wrapper = "/* %s */"
-
   autocmd Filetype ps1 let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype vim let b:AutoPairs = {'{':'}', '(':')', "'":"'"}
 
@@ -249,15 +240,6 @@ nnoremap / /\v
 nnoremap <Leader>e :ReplSend<Return>
 xnoremap <Leader>e :ReplSend<Return>
 nnoremap <Leader>E :Repl<Return>
-
-" ALE
-nnoremap <Leader>de :ALEFix<Return>
-nnoremap <Leader>dd :ALEGoToDefinition<Return>
-nnoremap <Leader>dh :ALEHover<Return>
-nnoremap <Leader>dt :ALEGoToTypeDefinition<Return>
-nnoremap <Leader>dr :ALEFindReferences<Return>
-nnoremap <Leader>r  :ALERename<Return>
-nnoremap <Leader>dR :Rg! <c-r><c-w><Return>
 
 nnoremap <M-s> :set number! relativenumber!<Return>
 
@@ -320,13 +302,14 @@ function! Shovel_glog() abort
   exe('startinsert')
 endfun
 
+" Another access to unimpaired
+nmap <Leader>k [
+nmap <Leader>j ]
 " Navigate between signs in signcolumn
-nnoremap <Leader>jl <cmd>ALENextWrap<cr>
-nnoremap <Leader>kl <cmd>ALEPreviousWrap<cr>
-nmap     <Leader>kc <Plug>(signify-prev-hunk)
-nmap     <Leader>jc <Plug>(signify-next-hunk)
-nmap             [c <Plug>(signify-prev-hunk)
-nmap             ]c <Plug>(signify-next-hunk)
+nmap [d <cmd>lua vim.diagnostic.goto_prev()<cr>
+nmap ]d <cmd>lua vim.diagnostic.goto_next()<cr>
+nmap [c <Plug>(signify-prev-hunk)
+nmap ]c <Plug>(signify-next-hunk)
 
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
@@ -370,106 +353,76 @@ tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
 nnoremap <Leader>gm <cmd>GitMessenger<cr>
 " }}}
 
-" ALE Asynchronous Lint Engine {{{
-
-let g:ale_open_list = 'on_save'
-
-" Python
-let g:ale_python_auto_pipenv= 1
-
-" Linters and fixers.
-let g:ale_linters = {
-      \   'python':     ['pylint', 'pyls'],
-      \   'javascript': ['flow-language-server', 'eslint'],
-      \   'scss':       ['stylelint'],
-      \   'fish':       [],
-      \ }
-let g:ale_fixers = {
-      \   'python':     [],
-      \   'javascript': ['eslint'],
-      \   'scss':       ['stylelint'],
-      \   'fish':       [],
-      \ }
-
-let g:ale_javascript_eslint_executable = 'yarn eslint'
-let g:ale_javascript_flow_executable   = 'yarn flow'
-let g:ale_scss_stylelint_executable    = 'yarn stylelint'
-
-" Treat typescript and flow the same way as javascript
-let g:ale_linters.typescript = g:ale_linters.javascript
-let g:ale_linters.flow       = g:ale_linters.javascript
-let g:ale_fixers.typescript  = g:ale_fixers.javascript
-let g:ale_fixers.flow        = g:ale_fixers.javascript
-
-"More goodness of language servers.
-let g:ale_completion_enabled = 1
-
-" }}} ALE
-
-" TODO keys for lsp
-" TODO remove ALE
-
 " Neovim LSP {{{
 " @see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 lua <<EOF
 local util = require'lspconfig'.util
 
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local opts = { noremap=true, silent=true }
+
+  -- navigation and doc
+  buf_set_keymap('n', '<Leader>dec', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', '<Leader>def', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<Leader>di', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<Leader>ds', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'K',          '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dR', '<cmd>Rg! <c-r><c-w><CR>', opts)
+  -- diagnostic
+  buf_set_keymap('n', '<Leader>dk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dw', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '<Leader>dq', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', '<Leader>df', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  -- workspace
+  buf_set_keymap('n', '<Leader>Wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<Leader>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<Leader>Wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- buf
+  buf_set_keymap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<Leader>da', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+end
+
 require'lspconfig'.powershell_es.setup{
+  on_attach = on_attach,
   bundle_path = '/home/shovel/opt/PowerShellEditorServices/',
 }
 
 require'lspconfig'.flow.setup{
+  on_attach = on_attach,
   cmd = { 'yarn', 'flow', 'lsp' }
 }
 
-require'lspconfig'.eslint.setup{}
+require'lspconfig'.eslint.setup{
+  on_attach = function() vim.api.nvim_command('autocmd BufWritePre <buffer> EslintFixAll') end
+}
 
 require'lspconfig'.stylelint_lsp.setup{
-    cmd = { "stylelint-lsp", "--stdio" },
+    cmd = { "yarn", "dlx", "-p", "stylelint-lsp", "stylelint-lsp", "--stdio" },
     filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_dir = util.root_pattern('.stylelintrc', 'package.json'),
     settings = {}
 }
 
-require'lspconfig'.yamlls.setup{}
-require'lspconfig'.rnix.setup{}
 require'lspconfig'.hls.setup{}
+require'lspconfig'.rnix.setup{}
+require'lspconfig'.vimls.setup{}
+require'lspconfig'.yamlls.setup{}
 EOF
 " }}}
-
-" NeoMake {{{
-
-function! Shovel_InitNeoMake()
-
-  let g:neomake_open_list = 2
-
-  let g:neomake_javascript_enabled_makers = []
-
-  if findfile('.flowconfig', '.;') !=# ''
-    let l:flow = 'yarn -s flow --json 2>/dev/null'
-    let l:flow_vim_quickfix = system('echo -n (yarn global dir)/node_modules/.bin/flow-vim-quickfix')
-
-    let g:neomake_javascript_flow_maker = {
-          \ 'exe': 'fish',
-          \ 'args': ['-c', l:flow . ' | ' . l:flow_vim_quickfix],
-          \ 'errorformat': '%E%f:%l:%c\,%n: %m',
-          \ 'cwd': '%:p:h' 
-          \ }
-    let g:neomake_javascript_enabled_makers = g:neomake_javascript_enabled_makers + [ 'flow']
-  endif
-
-endfunction
-
-call Shovel_InitNeoMake()
-
-" This is kinda useful to prevent Neomake from unnecessary runs
-augroup neomake
-  if !empty(g:neomake_javascript_enabled_makers)
-    " autocmd! BufWritePost * Neomake
-  endif
-augroup END
-
-" }}} NeoMake
 
 " TS TreeSitter {{{
 lua  <<EOF
@@ -502,28 +455,12 @@ endfunc
 
 call ShovelHackLightLineColors()
 
-" ALE integration
-"
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-
-let g:lightline#ale#indicator_checking = '...'
-let g:lightline#ale#indicator_warnings = 'W:'
-let g:lightline#ale#indicator_errors = 'E:'
-let g:lightline#ale#indicator_ok = ' ✔ '
-
-let s:linter_components = [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
+" lsp
+let g:lightline#lsp#indicator_warnings = 'W:'
+let g:lightline#lsp#indicator_errors = 'E:'
+let g:lightline#lsp#indicator_info = '~'
+let g:lightline#lsp#indicator_hints = '>'
+let g:lightline#lsp#indicator_ok = ' ✔ '
 
 " Git
 
@@ -582,9 +519,6 @@ function! ShovelGitBranch ()
   return ShovelGitParseBranch(ShovelGitRawStatus())
 endfunc
 
-let g:lightline.component_expand.gitstatus = 'ShovelGitStatusLine'
-let g:lightline.component_type.gitstatus = 'error'
-
 function! ShovelFullpath ()
   return expand('%:f')
 endfunc
@@ -594,14 +528,20 @@ function! ShovelGitPushSetUpstream ()
   exe('Git push -u origin ' . l:branch)
 endfunc
 
-let g:lightline.component_expand.fullpath = 'ShovelFullpath'
+let g:lightline.component_expand = {
+  \   'fullpath': 'ShovelFullpath',
+  \   'gitstatus': 'ShovelGitStatusLine',
+  \ }
+
+let g:lightline.component_type = {
+  \   'gitstatus': 'error',
+  \ }
 
 " assemble the status line
 
 let g:lightline.active = {
-      \ 'left': [ [ 'mode', 'paste' ] +
-      \             s:linter_components,
-      \           [ 'gitstatus' ],
+      \ 'left': [ [ 'mode', 'paste' ] + [ 'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ],
+      \           [ 'lsp_status', 'gitstatus' ],
       \           [ 'fullpath', 'readonly' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
@@ -615,6 +555,8 @@ let g:lightline.inactive = {
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
       \ 'right': [ [ ] ] }
+
+call lightline#lsp#register()
 
 " }}}
 
