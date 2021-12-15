@@ -56,6 +56,8 @@
       enable = true;
 
       loginShellInit = ''
+        set -U VISUAL ${pkgs.neovim}/bin/nvim
+
         # kitty and some other programs
         fish_add_path ~/opt/bin
 
