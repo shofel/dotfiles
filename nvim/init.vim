@@ -558,6 +558,13 @@ let g:lightline.tabline = {
 
 call lightline#lsp#register()
 
+" TODO
+" Status of vim.diagnostics (vim.lsp) does not refresh
+" So probably we need some hack to fix this
+augroup LightlineUpdate
+  autocmd!
+augroup END
+
 " }}}
 
 " Refresh when reloading {{{
