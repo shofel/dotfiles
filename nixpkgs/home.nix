@@ -15,10 +15,13 @@
   # TODO kitty @see https://github.com/NixOS/nixpkgs/issues/80936
   home.packages =
     let
-      main = with pkgs; [ htop neovim gh bat fd ripgrep ];
-      node = with pkgs.nodePackages; [vim-language-server
-                                      vscode-langservers-extracted
-                                      yaml-language-server
+      main = with pkgs; [ htop ssh-askpass-fullscreen
+                          neovim gh bat fd ripgrep rnix-lsp
+                          git
+                        ];
+      node = with pkgs.nodePackages; [ vim-language-server
+                                       vscode-langservers-extracted
+                                       yaml-language-server
                                      ];
     in  main ++ node;
 
@@ -44,15 +47,33 @@
 
     home.file = {
       ".config/fish/functions" = {
-        source = /home/shovel/workspaces/dotfiles/fish/functions;
+        source = ../fish/functions;
         recursive = true;
       };
     };
 
-    programs.fish.enable = true;
+    programs.fish = {
+      enable = true;
 
-    # TODO another way to keep abbrs in sync is `home.file.<name>.onChange`.
-    # TODO reorganize such a way that everything of git is staying together.
+      loginShellInit = ''
+        # kitty and some other programs
+        fish_add_path ~/opt/bin
+
+        # HiDPI
+        set -Ux GDK_SCALE 2
+
+        # Nix
+        #
+        fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin
+        set -x --unpath NIX_PATH (string join ':' \
+          home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
+          nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
+      '';
+
+      interactiveShellInit = builtins.readFile ../fish/ssh-agent.fish;
+    };
+
+
     programs.fish.shellAbbrs = {
       dc = "docker-compose";
       execlip = "fish -c (xclip -o)";
