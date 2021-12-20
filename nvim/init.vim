@@ -562,6 +562,7 @@ call lightline#lsp#register()
 " So probably we need some hack to fix this
 augroup LightlineUpdate
   autocmd!
+	autocmd DiagnosticChanged * call lightline#update()
 augroup END
 
 " }}}
