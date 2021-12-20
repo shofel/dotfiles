@@ -20,11 +20,14 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
-" appearance
-Plug 'mhinz/vim-signify'
-Plug 'itchyny/lightline.vim'
-Plug 'josa42/nvim-lightline-lsp'
+" guttor
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'mhinz/vim-signify'
+
+" statusline and tabline
+Plug 'nvim-lualine/lualine.nvim'
+
+" text decorations
 Plug 'norcalli/nvim-colorizer.lua'
 
 " more editing
@@ -132,7 +135,6 @@ set guicursor=n-v-ve:block-Cursor
             \,o-r:hor100-Cursor
 set mouse=a
 
-set noshowmode " to not duplicate lightline
 set showtabline=2
 
 " russian
@@ -290,7 +292,6 @@ nnoremap <Leader>gp <cmd>Dispatch git push<Return>
 nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
 nnoremap <Leader>gu <cmd>SignifyHunkUndo<Return>
-nnoremap <Leader>gb <cmd>echo 'git branch:' ShovelGitBranch()<cr>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
 
@@ -436,143 +437,6 @@ require'nvim-treesitter.configs'.setup {
 ]]
 EOF
 " }}} TS TreeSitter
-
-" Lightline {{{
-let g:lightline = {}
-
-" Load and tune the colors
-let g:lightline.colorscheme = 'one'
-
-function ShovelHackLightLineColors ()
-  let s:Lightline_one = g:lightline#colorscheme#one#palette
-  let s:one_bg = '#fafafa'
-  let s:one_green = '#a5cc8a' " s:green from the `one` palette
-
-  let g:lightline#colorscheme#one#palette.tabline.tabsel =
-        \ [[s:one_bg, s:one_green, 255, 176, 'bold']]
-endfunc
-
-call ShovelHackLightLineColors()
-
-" lsp
-let g:lightline#lsp#indicator_warnings = 'W:'
-let g:lightline#lsp#indicator_errors = 'E:'
-let g:lightline#lsp#indicator_info = '~'
-let g:lightline#lsp#indicator_hints = '>'
-let g:lightline#lsp#indicator_ok = ' ✔ '
-
-" Git
-
-cabbrev  Gfa Git fetch --all --prune --tags
-cabbrev  Gclean Git clean -fd
-cabbrev  Grbm Dispatch grbm
-command! Ghash echo ShovelGitHash()
-command! Gpu call ShovelGitPushSetUpstream()
-
-function! ShovelGitHash ()
-  let l:_ = system('git rev-parse --short HEAD')
-  return substitute(l:_, '^\(\w\+\).*', '\1', '')
-endfunc
-
-" @param first line of `git status --short`
-function! ShovelGitParseBranch (x)
-  let l:_ = split(a:x)[1]
-  return substitute(l:_, '\([^.]\{-}\)\.\{3}.*$', '\1', '')
-endfunc
-
-function! ShovelGitUnsyncStatus (x)
-  let l:x = a:x
-
-  " Sample inputs for tests.
-  " let l:x = '## master...origin/master [ahead 4]^@'
-  " let l:x = '## master...origin/master [behind 4]^@'
-  " let l:x = '## xmas...origin/xmas^@'
-
-  let l:uptodate = -1 == match(l:x, '\(ahead\|behind\)')
-
-  if (l:uptodate)
-    return ''
-  endif
-
-  " Arrow and number.
-  let l:_ = substitute(l:x, '^[^[]\{-}\[\(ahead\|behind\) \(\d\+\)\].*$', '\1 \2', '')
-  let [l:arrow, l:number] = split(l:_)
-  let l:arrow = get({'ahead': '↑', 'behind': '↓'}, l:arrow, '')
-
-  " Branch name.
-  let l:branch = ShovelGitParseBranch(l:x)
-
-  " Concat together.
-  return l:branch .' '. l:arrow . l:number
-endfunc
-
-function ShovelGitRawStatus ()
-  return system('git status --short --branch | head -n 1')
-endfunc
-
-function! ShovelGitStatusLine ()
-  return ShovelGitUnsyncStatus(ShovelGitRawStatus())
-endfunc
-
-function! ShovelGitBranch ()
-  return ShovelGitParseBranch(ShovelGitRawStatus())
-endfunc
-
-function! ShovelFullpath ()
-  return expand('%:f')
-endfunc
-
-function! ShovelGitPushSetUpstream ()
-  let l:branch = ShovelGitBranch()
-  exe('Git push -u origin ' . l:branch)
-endfunc
-
-let g:lightline.component_expand = {
-  \   'fullpath': 'ShovelFullpath',
-  \   'gitstatus': 'ShovelGitStatusLine',
-  \ }
-
-let g:lightline.component_type = {
-  \   'gitstatus': 'error',
-  \ }
-
-" assemble the status line
-
-let g:lightline.active = {
-      \ 'left': [ [ 'mode', 'paste' ] + [ 'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ],
-      \           [ 'lsp_status', 'gitstatus' ],
-      \           [ 'fullpath', 'readonly' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ],
-      \            [ 'filetype' ] ] }
-
-let g:lightline.inactive = {
-      \ 'left': [ [ 'filename' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ] ] }
-
-let g:lightline.tabline = {
-      \ 'left': [ [ 'tabs' ] ],
-      \ 'right': [ [ ] ] }
-
-call lightline#lsp#register()
-
-" TODO
-" Status of vim.diagnostics (vim.lsp) does not refresh
-" So probably we need some hack to fix this
-augroup LightlineUpdate
-  autocmd!
-	autocmd DiagnosticChanged * call lightline#update()
-augroup END
-
-" }}}
-
-" Refresh when reloading {{{
-if (v:vim_did_enter)
-  call lightline#init()
-  call lightline#update()
-endif
-" }}}
 
 " Signify {{{
 let g:signify_vcs_list = [ 'git', 'hg' ]
