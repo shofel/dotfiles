@@ -2,6 +2,11 @@
 
 " TODO a key which: 1.reads termname 2.executes Term
 
+" TODO next: tabs:
+" - tag tabs with a custom name
+" - switch between them fuzzy find by that title
+" - better contrast on tabline and inactive statusline
+
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -135,8 +140,6 @@ set guicursor=n-v-ve:block-Cursor
             \,o-r:hor100-Cursor
 set mouse=a
 
-set showtabline=2
-
 " russian
 set keymap=russian-dvorak
 set iminsert=0
@@ -169,6 +172,46 @@ lua  <<EOF
 require'colorizer'.setup()
 EOF
 
+" }}}
+
+" statusline and tabline {{{
+lua <<EOF
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'onelight',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'tabs'},
+    lualine_x = {'buffers'},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  extensions = {}
+}
+EOF
 " }}}
 
 " syntax and filetypes {{{
