@@ -52,64 +52,68 @@
       };
     };
 
-    programs.fish = {
-      enable = true;
+    programs.fish =
+      let
+        configExtra = ''
+          set -U VISUAL ${pkgs.neovim}/bin/nvim
 
-      loginShellInit = ''
-        set -U VISUAL ${pkgs.neovim}/bin/nvim
+          # ssh ask pass program
+          set -Ux SUDO_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
 
-        # kitty and some other programs
-        fish_add_path ~/opt/bin
+          # kitty and some other programs
+          fish_add_path ~/opt/bin
 
-        # HiDPI
-        set -Ux GDK_SCALE 2
+          # HiDPI
+          set -Ux GDK_SCALE 2
 
-        # Nix
-        #
-        fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin
-        set -x --unpath NIX_PATH (string join ':' \
-          home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
-          nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
-      '';
-
-      interactiveShellInit = builtins.readFile ../fish/ssh-agent.fish;
-    };
-
-
-    programs.fish.shellAbbrs = {
-      dc = "docker-compose";
-      execlip = "fish -c (xclip -o)";
-      # git
-      gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
-      gb = "git switch (git branch | string trim | fzf)";
-      gBFG = "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
-      ga = "git add";
-      gamend = "git commit --amend --no-edit";
-      gcb = "git switch -c";
-      gcd = "cd (git rev-parse --show-toplevel)";
-      gclean = "git clean -fd";
-      gcom = "git commit";
-      gd = "git diff";
-      gdca = "git diff --cached";
-      gfa = "git fetch --all --prune --tags";
-      ghash = "git rev-parse --short HEAD";
-      ginit = "git init ;and git commit -m 'root' --allow-empty";
-      gl = "git pull";
-      gp = "git push";
-      gpf = "git push --force-with-lease";
-      gpu = "git push -u origin (git branch | grep '*' | awk '{print \$2}')";
-      grba = "git rebase --abort";
-      grbc = "git rebase --continue";
-      grbs = "git rebase --skip";
-      gsm = "git switch master";
-      gst = "git status --short --branch";
-      gsw = "git switch";
-      #
-      nocaps = "setxkbmap -option ctrl:nocaps";
-      suspend = "systemctl suspend";
-      v = "nvim '+Term fish'";
-      weather = "curl wttr.in/guangzhou";
-    };
+          # Nix
+          #
+          fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin
+          set -x --unpath NIX_PATH (string join ':' \
+            home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
+            nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
+        '';
+        shellAbbrs = {
+          dc = "docker-compose";
+          execlip = "fish -c (xclip -o)";
+          # git
+          gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
+          gb = "git switch (git branch | string trim | fzf)";
+          gBFG = "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+          ga = "git add";
+          gamend = "git commit --amend --no-edit";
+          gcb = "git switch -c";
+          gcd = "cd (git rev-parse --show-toplevel)";
+          gclean = "git clean -fd";
+          gcom = "git commit";
+          gd = "git diff";
+          gdca = "git diff --cached";
+          gfa = "git fetch --all --prune --tags";
+          ghash = "git rev-parse --short HEAD";
+          ginit = "git init ;and git commit -m 'root' --allow-empty";
+          gl = "git pull";
+          gp = "git push";
+          gpf = "git push --force-with-lease";
+          gpu = "git push -u origin (git branch | grep '*' | awk '{print \$2}')";
+          grba = "git rebase --abort";
+          grbc = "git rebase --continue";
+          grbs = "git rebase --skip";
+          gsm = "git switch master";
+          gst = "git status --short --branch";
+          gsw = "git switch";
+          #
+          nocaps = "setxkbmap -option ctrl:nocaps";
+          suspend = "systemctl suspend";
+          v = "nvim '+Term fish'";
+          weather = "curl wttr.in/guangzhou";
+        };
+      in {
+        enable = true;
+        interactiveShellInit =
+          configExtra +
+          builtins.readFile ../fish/ssh-agent.fish;
+        shellAbbrs = shellAbbrs;
+      };
 
     services.redshift = {
       enable = true;
