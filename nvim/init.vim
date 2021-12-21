@@ -176,12 +176,16 @@ EOF
 
 " statusline and tabline {{{
 lua <<EOF
+local function hide_tabline()
+  vim.go.showtabline = 0
+end
+
 require'lualine'.setup {
   options = {
     icons_enabled = true,
     theme = 'onelight',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '|', right = '|'},
+    section_separators = { left = ' ', right = ' '},
     disabled_filetypes = {},
     always_divide_middle = true,
   },
@@ -201,15 +205,8 @@ require'lualine'.setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'tabs'},
-    lualine_x = {'buffers'},
-    lualine_y = {},
-    lualine_z = {},
-  },
-  extensions = {}
+  tabline = { hide_tabline() },
+  extensions = {'fugitive'}
 }
 EOF
 " }}}
