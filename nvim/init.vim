@@ -323,7 +323,7 @@ nnoremap <Leader>o   <cmd>only<Return>
 nnoremap <Leader>kk  <cmd>bdelete!<Return>
 
 " git & bufsync
-nnoremap <Leader>gs <cmd>tab Git<Return>
+nnoremap <Leader>gs <cmd>vert Git<Return>
 nnoremap <Leader>ga <cmd>Gwrite<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
 nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
