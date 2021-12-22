@@ -41,7 +41,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 " motion
-Plug 'justinmk/vim-sneak'
+Plug 'ggandor/lightspeed.nvim'
 
 " follow conventions
 Plug 'editorconfig/editorconfig-vim'
@@ -236,9 +236,6 @@ augroup initvim
   autocmd Filetype ps1 let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
   autocmd Filetype vim let b:AutoPairs = {'{':'}', '(':')', "'":"'"}
 
-  " Fugitive : open files in a vertical split.
-  autocmd Filetype fugitive nmap <buffer> <cr> gO
-
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 " }}}
@@ -354,12 +351,12 @@ nmap ]c <Plug>(signify-next-hunk)
 nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
-  autocmd Filetype fugitive nmap <buffer> s <Plug>Sneak_s
-  autocmd Filetype fugitive nmap <buffer> S <Plug>Sneak_S
-  autocmd Filetype git      nmap <buffer>   <Up> <c-p>
-  autocmd Filetype git      nmap <buffer> <Down> <c-n>
-  autocmd Filetype GV       nmap <buffer>   <Up> <c-p>
-  autocmd Filetype GV       nmap <buffer> <Down> <c-n>
+  autocmd!
+  " open files in a vertical split.
+  autocmd Filetype fugitive nmap <buffer> <cr> gO
+  " `s` for lightspeed
+  autocmd Filetype fugitive nmap <buffer> s <Plug>Lightspeed_s
+  autocmd Filetype fugitive xmap <buffer> s <Plug>Lightspeed_s
 augroup END
 
 nnoremap <Leader>c  :checkt<Return>
@@ -566,27 +563,50 @@ command! -nargs=1 -bar Terminal
 nnoremap <Leader>~ :tabe +Terminal\ 
 " }}}
 
-" sneak & clever-f {{{
-let g:sneak#prompt = 'sneak>'
-let g:sneak#label = 1
-let g:sneak#target_labels = 'gfdhtnsiyiueoa'
-" Be like rhysd/clever-f.vim 
-let g:sneak#s_next = 1
+" lightspeed.nvim {{{
+lua <<EOF
+local labels = {
+  -- 1. strong fingers
+  -- 1.2 left hand
+  "p", "u", "k", -- index finger
+  ".", "e", "j", -- middle finger
+  "y", "i", "x", -- inner column of index finger
+  -- 1.3 right hand
+  "g", "h", "m", -- index finger
+  "c", "t", "w", -- middle finger
+  "f", "d", "b", -- inner column of index finger
+  -- 2. weak fingers
+  -- 1.2 left hand
+  "a", -- pinky
+  ",","o","q", -- ring finger
+  -- 1.3 right hand
+  "r","n","v", -- pinky
+  "l","s","z", -- ring finger
+}
 
-" These are defaults:
-nmap s <Plug>Sneak_s
-nmap S <Plug>Sneak_S
-omap z <Plug>Sneak_s
-omap Z <Plug>Sneak_S
-" This one is not default.
-xmap z <Plug>Sneak_s
-xmap Z <Plug>Sneak_S
-" Map fFTt to a one-char sneaks.
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-" }}}
+require'lightspeed'.setup {
+  ignore_case = false,
+  exit_after_idle_msecs = { labeled = nil, unlabeled = 1000 },
+
+  -- s/x
+  grey_out_search_area = true,
+  highlight_unique_chars = true,
+  match_only_the_start_of_same_char_seqs = true,
+  jump_on_partial_input_safety_timeout = 400,
+  substitute_chars = { ['\r'] = '¬' },
+  -- Leaving the appropriate list empty effectively disables
+  -- "smart" mode, and forces auto-jump to be on or off.
+  safe_labels = labels,
+  labels = labels,
+  cycle_group_fwd_key = '<space>',
+  cycle_group_bwd_key = '<tab>',
+
+  -- f/t
+  limit_ft_matches = 4,
+  repeat_ft_with_target_char = false,
+}
+EOF
+" }}} lightspeed.nvim
 
 " firenvim {{{
 " TODO: extract to 1.detection and 2.effect
