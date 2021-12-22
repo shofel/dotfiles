@@ -565,6 +565,16 @@ nnoremap <Leader>~ :tabe +Terminal\
 
 " lightspeed.nvim {{{
 lua <<EOF
+--[[ To contribute:
+- [ ] why do they differ: labels and safe_labels?
+- [ ] explain auto-jump. (is it:? https://github.com/ggandor/lightspeed.nvim#jump-on-partial-input)
+- [ ] explain `smart mode` https://github.com/ggandor/lightspeed.nvim#other-quality-of-life-features
+- [ ] I copy pasted default config and have been having a hard time trying to figure out why there are no labels
+- [ ] readme:`grouping matches by distance`: reference to mapping name
+- [ ] a table with labels for different use cases. I mean staggered or ortholinear keyboard, and various layouts (starting with qwerty and dvorak)
+- [ ] list the keys, which are considered frequently used right after jump: -another jump; -insertion. They should be either excluded or moved to the end of the list
+--]]
+
 local labels = {
   -- 1. strong fingers
   -- 1.2 left hand
