@@ -579,7 +579,7 @@ local labels = {
   -- 1. strong fingers
   -- 1.2 left hand
   "p", "u", "k", -- index finger
-  ".", "e", "j", -- middle finger
+       "e", "j", -- middle finger
   "y", "i", "x", -- inner column of index finger
   -- 1.3 right hand
   "g", "h", "m", -- index finger
@@ -587,11 +587,11 @@ local labels = {
   "f", "d", "b", -- inner column of index finger
   -- 2. weak fingers
   -- 1.2 left hand
-  "a", -- pinky
-  ",","o","q", -- ring finger
+       "a",      -- pinky
+  ",", "o", "q", -- ring finger
   -- 1.3 right hand
-  "r","n","v", -- pinky
-  "l","s","z", -- ring finger
+  "r", "n", "v", -- pinky
+  "l", "s", "z", -- ring finger
 }
 
 require'lightspeed'.setup {
