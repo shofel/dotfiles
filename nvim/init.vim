@@ -1,11 +1,11 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
-" TODO a key which: 1.reads termname 2.executes Term
-
 " TODO next: tabs:
 " - tag tabs with a custom name
 " - switch between them fuzzy find by that title
 " - better contrast on tabline and inactive statusline
+
+" TODO remap g; and g, to just ; and ,
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -587,11 +587,15 @@ lua <<EOF
   ?: should we use capitals?
      + pros: get more labels
      - cons: they are effectively a chords, not a single keys
+
+  ?: should we use punctuation?
+     + pros: get more labels (only a little bit)
+     - cons: ? letters are better to pronounce ?
 --]]
 
 local function labels ()
   -- TODO group them by easiness of use
-  -- TODO tables for other layouts
+  -- TODO tables for other layouts (take into acc altering hands)
   local all_keys = {
     -- 1. strong fingers
     -- 1.2 left hand
@@ -615,23 +619,51 @@ local function labels ()
 
   -- TODO group edits, motions, and others how likely they are to be used right after the jump
 
+  -- ??? : unsafe_labels are those which clash with commands likely to be used right after auto-jump ???
+
+  --[[ UX
+  -- 1. look at the target. Identify the two letters xy
+  -- 2. press sxy
+  -- 3. already arrived? then probably edit something. Otherwise:
+  -- 4. read the label and press it.
+  --]]
+
   local edits = {
     'p', 'y', -- paste and copy
     '.', -- repeat
     'd', 'x', 'r', -- delete and replace
     'a', 'i', 'o', 'c', -- enter insert mode
-    'u', 
   }
 
   local motions = {
     'h', 'j', 'k', 'l', -- charwise
-    's', 'f', 't', ',', ';', -- bread and butter of lightspeed
+    'f', 't', ',', ';', -- bread and butter of lightspeed
+    's', -- the bread and butter too?
     'n', -- search
     'b', 'e', 'w', -- wordwise
   }
 
+  local edits_grouped = {
+    {'d', 'c', 'a', 'i', 'o'}, -- very common right after a jump (proof?)
+    {'r', 'x', 'p', 'y', '.'}, -- maybe a bit less common (proof?)
+  }
+
+  local motions_grouped = {
+    {'h', 'l', -- correcting a by-one error
+     'k', 'j', -- maybe when hunting for an empty line?
+    },
+    {'b', 'e', 'w', 'n', -- looks meaningless after a jump. When correcting a selection?
+     ',', ';', -- non-sense: repeat one-letter search in the middle of two-letter-one
+     'f', 't', -- non-sense: start a search right in the middle of a search? Nah!:)
+    },
+  }
+
   local others = {
-    'g', 'm', 'q', 'v', 'z'
+    {'g', -- likely to be used. At least `gd`
+     'z', -- also a start of many commands. Suggest for spelling fixes z=
+     'v', 'q', 'm', -- why not?
+    },
+    {'u'}, -- unlikely to undo right after a jump, as well as after any motion
   }
 
   return all_keys
