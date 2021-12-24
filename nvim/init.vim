@@ -242,6 +242,7 @@ augroup END
 
 " vman {{{
 function! s:vmanSettings()
+  setlocal nonumber
   setlocal signcolumn=no
   setlocal showtabline=0
   setlocal ruler
@@ -249,6 +250,7 @@ function! s:vmanSettings()
 endfunction
 
 augroup vmanSettings
+  autocmd!
   autocmd Filetype man call s:vmanSettings()
 augroup END
 " }}}
@@ -352,8 +354,8 @@ nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
   autocmd!
-  " open files in a vertical split.
-  autocmd Filetype fugitive nmap <buffer> <cr> gO
+  " where to open files. See fugitive_gO and below
+  autocmd Filetype fugitive nmap <buffer> <cr> <cr>
   " `s` for lightspeed
   autocmd Filetype fugitive nmap <buffer> s <Plug>Lightspeed_s
   autocmd Filetype fugitive xmap <buffer> s <Plug>Lightspeed_s
@@ -416,7 +418,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<Leader>ds', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<Leader>dh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '<Leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'K',          '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '<Leader>dR', '<cmd>Rg! <c-r><c-w><CR>', opts)
   -- diagnostic
   buf_set_keymap('n', '<Leader>dk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -429,8 +430,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<Leader>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<Leader>Wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   -- buf
-  buf_set_keymap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<Leader>r',  '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<Leader>da', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  -- reassign some native mappings
+  buf_set_keymap('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 end
 
 require'lspconfig'.powershell_es.setup{
