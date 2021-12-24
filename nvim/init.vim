@@ -575,28 +575,70 @@ lua <<EOF
 - [ ] list the keys, which are considered frequently used right after jump: -another jump; -insertion. They should be either excluded or moved to the end of the list
 --]]
 
-local labels = {
-  -- 1. strong fingers
-  -- 1.2 left hand
-  "p", "u", "k", -- index finger
-       "e", "j", -- middle finger
-  "y", "i", "x", -- inner column of index finger
-  -- 1.3 right hand
-  "g", "h", "m", -- index finger
-  "c", "t", "w", -- middle finger
-  "f", "d", "b", -- inner column of index finger
-  -- 2. weak fingers
-  -- 1.2 left hand
-       "a",      -- pinky
-  ",", "o", "q", -- ring finger
-  -- 1.3 right hand
-  "r", "n", "v", -- pinky
-  "l", "s", "z", -- ring finger
-}
+--[[ Choose the best labels:
+  1. Sort all the letters from easy to hard (to reach)
+  2. Safe labels are those represent motions: one unlikely need a motion right after a jump
+  3. Unsafe labels are those represent editing: obviously you make a jump to edit there
+
+  ?: should we use capitals?
+     + pros: get more labels
+     - cons: they are effectively a chords, not a single keys
+--]]
+
+local function labels ()
+  -- TODO group them by easiness of use
+  -- TODO tables for other layouts
+  local all_keys = {
+    -- 1. strong fingers
+    -- 1.2 left hand
+    'p', 'u', 'k', -- index finger
+    '.', 'e', 'j', -- middle finger
+    'y', 'i', 'x', -- inner column of index finger
+    -- 1.3 right hand
+    'g', 'h', 'm', -- index finger
+    'c', 't', 'w', -- middle finger
+    'f', 'd', 'b', -- inner column of index finger
+    -- 2. weak fingers
+    -- 1.2 left hand
+    "'", 'a', ';', -- pinky
+    ',', 'o', 'q', -- ring finger
+    -- 1.3 right hand
+    'r', 'n', 'v', -- pinky
+    'l', 's', 'z', -- ring finger
+  }
+
+  local nonletters = {"'", ',', ';', '.'}
+
+  -- TODO group edits, motions, and others how likely they are to be used right after the jump
+
+  local edits = {
+    'p', 'y', -- paste and copy
+    '.', -- repeat
+    'd', 'x', 'r', -- delete and replace
+    'a', 'i', 'o', 'c', -- enter insert mode
+    'u', 
+  }
+
+  local motions = {
+    'h', 'j', 'k', 'l', -- charwise
+    's', 'f', 't', ',', ';', -- bread and butter of lightspeed
+    'n', -- search
+    'b', 'e', 'w', -- wordwise
+  }
+
+  local others = {
+    'g', 'm', 'q', 'v', 'z'
+  }
+
+  return all_keys
+end
 
 require'lightspeed'.setup {
   ignore_case = false,
-  exit_after_idle_msecs = { labeled = nil, unlabeled = 1000 },
+  exit_after_idle_msecs = {
+    labeled = nil,
+    unlabeled = 2000,
+  },
 
   -- s/x
   grey_out_search_area = true,
@@ -606,8 +648,8 @@ require'lightspeed'.setup {
   substitute_chars = { ['\r'] = '¬' },
   -- Leaving the appropriate list empty effectively disables
   -- "smart" mode, and forces auto-jump to be on or off.
-  safe_labels = labels,
-  labels = labels,
+  safe_labels = labels(),
+  labels = labels(),
   cycle_group_fwd_key = '<space>',
   cycle_group_bwd_key = '<tab>',
 
