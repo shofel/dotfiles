@@ -573,14 +573,13 @@ lua <<EOF
 - [ ] why do they differ: labels and safe_labels?
 - [ ] explain auto-jump. (is it:? https://github.com/ggandor/lightspeed.nvim#jump-on-partial-input)
 - [ ] explain `smart mode` https://github.com/ggandor/lightspeed.nvim#other-quality-of-life-features
-- [ ] I copy pasted default config and have been having a hard time trying to figure out why there are no labels
 - [ ] readme:`grouping matches by distance`: reference to mapping name
-- [ ] a table with labels for different use cases. I mean staggered or ortholinear keyboard, and various layouts (starting with qwerty and dvorak)
-- [ ] list the keys, which are considered frequently used right after jump: -another jump; -insertion. They should be either excluded or moved to the end of the list
 --]]
 
 --[[ Choose the best labels:
   1. Sort all the letters from easy to hard (to reach)
+  1.1. staggered or ortholinear
+  1.2. layout (qwerty dvorak colemak workman)
   2. Safe labels are those represent motions: one unlikely need a motion right after a jump
   3. Unsafe labels are those represent editing: obviously you make a jump to edit there
 
@@ -588,12 +587,58 @@ lua <<EOF
      + pros: get more labels
      - cons: they are effectively a chords, not a single keys
 
+  ?: what if not mix caps with lowercase, but exclusively use caps?
+     + pros: significantly less likely to clash with a command right after jump
+
   ?: should we use punctuation?
      + pros: get more labels (only a little bit)
      - cons: ? letters are better to pronounce ?
+ 
+- [ ] list the keys, which are considered frequently used right after jump: -another jump; -insertion. They should be either excluded or moved to the end of the list
 --]]
 
 local function labels ()
+  local keyboard = {
+    staggered = '
+      4 2 2 3 4 5 3 2 2 4
+       1 1 1 1 3 3 1 1 1 1
+        4 4 3 2 5 3 2 3 4 4
+    ',
+    ortholinear = '
+      4 2 2 3 4 4 3 2 2 4
+      1 1 1 1 3 3 1 1 1 1
+      4 4 3 2 4 4 2 3 4 4
+    ',
+    dactyl = '
+      4 2 2 3 3   3 3 2 2 4
+      1 1 1 1 3   3 1 1 1 1
+      4 4 3 2 3   3 2 3 4 4
+    ',
+  }
+
+  local layout = {
+    qwerty = '
+      q w e r t y u i o p
+      a s d f g h j k l ;
+      z x c v b n m , . /
+    ',
+    dvorak = '
+     \' , . p y f g c r l
+      a o e u i d h t n s
+      ; q j k x b m w v z
+    ',
+    colemak = '
+      q w f p g j l u y ;
+      a r s t d h n e i o
+      z x c v b k m , . /
+    ',
+    workman = '
+      q d r w b j f u p ;
+      a s h t g y n e o i
+      z x m c v k l , . /
+    ',
+  }
+
   -- TODO group them by easiness of use
   -- TODO tables for other layouts (take into acc altering hands)
   local all_keys = {
@@ -673,7 +718,7 @@ require'lightspeed'.setup {
   ignore_case = false,
   exit_after_idle_msecs = {
     labeled = nil,
-    unlabeled = 2000,
+    unlabeled = 1500,
   },
 
   -- s/x
