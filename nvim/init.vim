@@ -262,7 +262,7 @@ abbr retrun return
 " keys {{{
 
 let mapleader="\<Space>"
-let maplocalleader="\<Space>l"
+let maplocalleader="\<Space>\<Space>"
 
 " edit .vimrc
 nnoremap <Leader>ve :tabe $MYVIMRC<Return>
