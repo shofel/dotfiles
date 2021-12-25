@@ -599,70 +599,58 @@ lua <<EOF
 
 local function labels ()
   local keyboard = {
-    staggered = '
+    staggered = [[
       4 2 2 3 4 5 3 2 2 4
        1 1 1 1 3 3 1 1 1 1
         4 4 3 2 5 3 2 3 4 4
-    ',
-    ortholinear = '
+    ]],
+    ortholinear = [[
       4 2 2 3 4 4 3 2 2 4
       1 1 1 1 3 3 1 1 1 1
       4 4 3 2 4 4 2 3 4 4
-    ',
-    dactyl = '
+    ]],
+    dactyl = [[
       4 2 2 3 3   3 3 2 2 4
       1 1 1 1 3   3 1 1 1 1
       4 4 3 2 3   3 2 3 4 4
-    ',
+    ]],
   }
 
   local layout = {
-    qwerty = '
+    qwerty = [[
       q w e r t y u i o p
       a s d f g h j k l ;
       z x c v b n m , . /
-    ',
-    dvorak = '
+    ]],
+    dvorak = [[
      \' , . p y f g c r l
       a o e u i d h t n s
       ; q j k x b m w v z
-    ',
-    colemak = '
+    ]],
+    colemak = [[
       q w f p g j l u y ;
       a r s t d h n e i o
       z x c v b k m , . /
-    ',
-    workman = '
+    ]],
+    workman = [[
       q d r w b j f u p ;
       a s h t g y n e o i
       z x m c v k l , . /
-    ',
-  }
-
-  -- TODO group them by easiness of use
-  -- TODO tables for other layouts (take into acc altering hands)
-  local all_keys = {
-    -- 1. strong fingers
-    -- 1.2 left hand
-    'p', 'u', 'k', -- index finger
-    '.', 'e', 'j', -- middle finger
-    'y', 'i', 'x', -- inner column of index finger
-    -- 1.3 right hand
-    'g', 'h', 'm', -- index finger
-    'c', 't', 'w', -- middle finger
-    'f', 'd', 'b', -- inner column of index finger
-    -- 2. weak fingers
-    -- 1.2 left hand
-    "'", 'a', ';', -- pinky
-    ',', 'o', 'q', -- ring finger
-    -- 1.3 right hand
-    'r', 'n', 'v', -- pinky
-    'l', 's', 'z', -- ring finger
+    ]],
   }
 
   local nonletters = {"'", ',', ';', '.'}
 
-  -- TODO group edits, motions, and others how likely they are to be used right after the jump
+  --[[ TODO build a table with labels
+            1. combine keyboard and layout
+            2. sort by effort
+            3. ? cut by effort ?
+            4. remove nonletters
+  --]]
+
+
+  -- NOTE safe_jump is to be followed by esc or lookup
+  --      it is almost like `esc` is the first jump label
 
   -- ??? : unsafe_labels are those which clash with commands likely to be used right after auto-jump ???
 
@@ -711,7 +699,7 @@ local function labels ()
     {'u'}, -- unlikely to undo right after a jump, as well as after any motion
   }
 
-  return all_keys
+  return nil
 end
 
 require'lightspeed'.setup {
