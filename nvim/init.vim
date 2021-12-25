@@ -67,7 +67,7 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'tpope/vim-fireplace',    {'for': 'clojure'}
+Plug 'Olical/conjure'
 " Web Dev
 Plug 'mattn/emmet-vim'
 Plug 'kmonad/kmonad-vim'
