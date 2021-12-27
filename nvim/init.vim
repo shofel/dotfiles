@@ -7,6 +7,24 @@
 
 " TODO remap g; and g, to just ; and ,
 
+" TODO telescope
+"      + switch wins and tabs
+"      + also notice g<tab> to switch between latest tabs
+"      + a tree of mappings
+"      + live grep (:Rg)
+
+" TODO maybe better terminal mgmt
+
+" TODO separators in statusline : coherent with kitty's tabline
+
+" TODO clipboard mgmt:
+"      + look up history
+"      + inspect what's in registers
+"      + toggle blackhole deletion a-la unimpared
+
+" TODO migrate to packer
+"      + switch to init.lua
+
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
