@@ -43,9 +43,11 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
-" guttor
+" gutter
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'mhinz/vim-signify'
+""""
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 
 " statusline and tabline
 Plug 'nvim-lualine/lualine.nvim'
@@ -144,7 +146,6 @@ set foldmethod=marker
 set nobackup
 set backupcopy=yes
 set noswapfile
-set updatetime=300 " set for vim-signify active mode
 
 " default indentation settings
 set smartindent
@@ -317,6 +318,7 @@ augroup END
 " Windows : <Leader>+arrow
 
 " switch tab {{{
+" TODO ? turn them to numbered bookmarks ? 
 nnoremap <Leader>th <cmd>tabprevious<Return>
 nnoremap <Leader>tl <cmd>tabnext<Return>
 nnoremap <Leader>1 <cmd>tabn 1<Return>
@@ -331,10 +333,10 @@ nnoremap <Leader>9 <cmd>tabn 9<Return>
 " }}}
 
 " switch window {{{
-nnoremap <Leader>h       <C-w><C-h>
-nnoremap <Leader>l       <C-w><C-l>
-nnoremap <Leader><Down>  <C-w><C-j>
-nnoremap <Leader><Up>    <C-w><C-k>
+nnoremap <M-Left>   <C-w><C-h>
+nnoremap <M-Right>  <C-w><C-l>
+nnoremap <M-Down>   <C-w><C-j>
+nnoremap <M-Up>     <C-w><C-k>
 " }}}
 
 " some commands
@@ -348,7 +350,6 @@ nnoremap <Leader>ga <cmd>Gwrite<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
 nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
-nnoremap <Leader>gu <cmd>SignifyHunkUndo<Return>
 nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
 
@@ -365,10 +366,6 @@ nmap <Leader>j ]
 " Navigate between signs in signcolumn
 nmap [d <cmd>lua vim.diagnostic.goto_prev()<cr>
 nmap ]d <cmd>lua vim.diagnostic.goto_next()<cr>
-nmap [c <Plug>(signify-prev-hunk)
-nmap ]c <Plug>(signify-next-hunk)
-
-nnoremap <Leader>gd :SignifyHunkDiff<cr>
 
 augroup shovel-fugitive
   autocmd!
@@ -497,15 +494,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 " }}} TS TreeSitter
 
-" Signify {{{
-let g:signify_vcs_list = [ 'git', 'hg' ]
-let g:signify_realtime = 1
-
-omap ic <Plug>(signify-motion-inner-pending)
-xmap ic <Plug>(signify-motion-inner-visual)
-omap ac <Plug>(signify-motion-outer-pending)
-xmap ac <Plug>(signify-motion-outer-visual)
-" }}}
+lua require('gitsigns').setup()
 
 " various plugins {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -603,8 +592,8 @@ require'lightspeed'.setup {
   substitute_chars = { ['\r'] = '¬' },
   -- Leaving the appropriate list empty effectively disables
   -- "smart" mode, and forces auto-jump to be on or off.
-  safe_labels = labels(),
-  labels = labels(),
+  safe_labels = nil,
+  labels = {},
   cycle_group_fwd_key = '<space>',
   cycle_group_bwd_key = '<tab>',
 
