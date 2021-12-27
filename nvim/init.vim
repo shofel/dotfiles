@@ -126,6 +126,9 @@ Plug 'rakr/vim-one' " one
 " Plug 'yankcrime/direwolf'
 " Plug 'endel/vim-github-colorscheme'
 " Plug 'reedes/vim-colors-pencil'
+"
+" Everforest is a green based color scheme, it's designed to be warm and soft in order to protect developers' eyes.
+" Plug 'sainnhe/everforest'
 " }}}
 
 call plug#end()
