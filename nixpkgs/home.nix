@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 # DOC: man home-configuration.nix
+# !nix-shell '<home-manager>' -A install
 
 {
   # Let Home Manager install and manage itself.
@@ -17,7 +18,7 @@
     let
       main = with pkgs; [ htop ssh-askpass-fullscreen
                           neovim gh bat fd ripgrep rnix-lsp
-                          git
+                          git lazygit
                         ];
       node = with pkgs.nodePackages; [ vim-language-server
                                        vscode-langservers-extracted

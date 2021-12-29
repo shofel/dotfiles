@@ -2,10 +2,8 @@
 
 " TODO next: tabs:
 " - tag tabs with a custom name
-" - switch between them fuzzy find by that title
-" - better contrast on tabline and inactive statusline
 
-" TODO remap g; and g, to just ; and ,
+" TODO ? use , as a leader key ?
 
 " TODO telescope
 "      + switch wins and tabs
@@ -14,6 +12,8 @@
 "      + live grep (:Rg)
 
 " TODO maybe better terminal mgmt
+
+" TODO discoverable keys
 
 " TODO separators in statusline : coherent with kitty's tabline
 
@@ -24,6 +24,11 @@
 
 " TODO migrate to packer
 "      + switch to init.lua
+
+" TODO autocomplete
+" TODO colors for treesitter
+
+" TODO explore mini.nvim collection https://github.com/echasnovski/mini.nvim
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -70,26 +75,25 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dbakker/vim-projectroot'
-
-" Testing
-Plug 'janko-m/vim-test'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Git
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'rhysd/git-messenger.vim'
 
 " Languages {{{
-Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'neovim/nvim-lspconfig'
-" Plug 'p00f/nvim-ts-rainbow'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'rhysd/reply.vim'
+Plug 'sheerun/vim-polyglot'
 
+Plug 'folke/trouble.nvim'
 
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'Olical/conjure'
-" Web Dev
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': ['css', 'scss', 'html'] }
 Plug 'kmonad/kmonad-vim'
 " }}} Languages
 
@@ -99,9 +103,9 @@ Plug 'gyim/vim-boxdraw'
 " embed to browser
 Plug 'glacambre/firenvim'
 
-" trying right now
 Plug 'jez/vim-superman'
-Plug 'rhysd/reply.vim'
+
+Plug 'akinsho/toggleterm.nvim'
 
 " my favourite colors
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
@@ -189,11 +193,6 @@ highlight EndOfBuffer guifg=bg guibg=none
 " bold exchange.vim
 highlight link ExchangeRegion Folded
 
-" colorizer
-lua  <<EOF
-require'colorizer'.setup()
-EOF
-
 " }}}
 
 " statusline and tabline {{{
@@ -212,8 +211,8 @@ require'lualine'.setup {
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_a = {'branch'},
+    lualine_b = {'diff', 'diagnostics'},
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
@@ -227,8 +226,15 @@ require'lualine'.setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = { hide_tabline() },
-  extensions = {'fugitive'}
+  tabline = {
+    lualine_a = {'tabs'},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {'mode'}
+  },
+  extensions = {'fugitive', 'toggleterm'}
 }
 EOF
 " }}}
@@ -286,6 +292,8 @@ abbr retrun return
 let mapleader="\<Space>"
 let maplocalleader="\<Space>\<Space>"
 
+nnoremap ; g;
+
 " edit .vimrc
 nnoremap <Leader>ve :tabe $MYVIMRC<Return>
 nnoremap <Leader>vs :source $MYVIMRC<Return>
@@ -306,34 +314,11 @@ nnoremap <Leader>E :Repl<Return>
 
 nnoremap <M-s> :set number! relativenumber!<Return>
 
-" emmet {{{
+let g:user_emmet_leader_key = '<Leader>e'
 let g:user_emmet_install_global = 0
-
 augroup ShovelEmmet
-  autocmd FileType css EmmetInstall
-  autocmd FileType html EmmetInstall
-  autocmd FileType htmldjango EmmetInstall
+  autocmd FileType html,css,scss EmmetInstall
 augroup END
-" }}}
-
-" Switch tabs and windows.
-" Tabs : <Leader>+number
-" Windows : <Leader>+arrow
-
-" switch tab {{{
-" TODO ? turn them to numbered bookmarks ? 
-nnoremap <Leader>th <cmd>tabprevious<Return>
-nnoremap <Leader>tl <cmd>tabnext<Return>
-nnoremap <Leader>1 <cmd>tabn 1<Return>
-nnoremap <Leader>2 <cmd>tabn 2<Return>
-nnoremap <Leader>3 <cmd>tabn 3<Return>
-nnoremap <Leader>4 <cmd>tabn 4<Return>
-nnoremap <Leader>5 <cmd>tabn 5<Return>
-nnoremap <Leader>6 <cmd>tabn 6<Return>
-nnoremap <Leader>7 <cmd>tabn 7<Return>
-nnoremap <Leader>8 <cmd>tabn 8<Return>
-nnoremap <Leader>9 <cmd>tabn 9<Return>
-" }}}
 
 " switch window {{{
 nnoremap <M-Left>   <C-w><C-h>
@@ -497,12 +482,10 @@ require'nvim-treesitter.configs'.setup {
 EOF
 " }}} TS TreeSitter
 
-lua require('gitsigns').setup()
+lua require'gitsigns'.setup()
+lua require'trouble'.setup { icons = false }
+lua require'colorizer'.setup()
 
-" various plugins {{{
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-let test#strategy = 'dispatch'
-" }}}
 
 " search and replace {{{
 set ignorecase
@@ -513,69 +496,62 @@ nnoremap <Leader>n :nohlsearch<cr>
 nnoremap / /\v
 " }}}
 
-" fzf {{{
-" @see https://www.freecodecamp.org/news/fzf-a-command-line-fuzzy-finder-missing-demo-a7de312403ff/
-"
-" Changes
-" - search files in git repo of the current file
-"   (Files->PFiles, GFiles->PGFiles, Rg)
-" - Rg: with preview
-" - Commits: the way fzf.vim determines gitroot is unmodifiable :/
-"
-" These changes depend on
-" - fdfind:  https://github.com/sharkdp/fd
-" - ripgrep: https://github.com/BurntSushi/ripgrep
+" toggleterm {{{
+lua<<EOF
+require("toggleterm").setup{
+  direction = 'float',
+  hidden = true,
+}
 
-if (!executable('fd'))  | echoerr 'fd (fd-find) executable not found'  | endif
-if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
-" https://github.com/junegunn/fzf.vim/commit/29db9ea1408d6cdaeed2a8b212fb3896392a8631
-" let g:fzf_buffers_jump = 1
+local Terminal = require('toggleterm.terminal').Terminal
 
-" Files inside gitroot of the current file.
-function! PFiles()
-  call fzf#run(fzf#wrap('files',
-      \ {'source': 'fd --type=file --hidden --no-ignore',
-      \  'dir': projectroot#get() }))
-endfunction
+local fish  = Terminal:new {cmd = 'fish', hidden = false}
+local git   = Terminal:new {cmd = 'lazygit'}
+local serve = Terminal:new {cmd = 'fish'}
 
-" GFiles inside gitroot of the current file.
-function! PGFiles()
-  call fzf#run(fzf#wrap('gfiles',
-      \ {'source': 'fd --type=file',
-      \  'dir': projectroot#get() }))
-endfunction
+function shovel_terminal_fish()  fish:toggle(); end
+function shovel_terminal_git()   git:toggle(); end
+function shovel_terminal_serve() serve:toggle(); end
 
-" Rg with preview
-" @see https://sidneyliebrand.io/blog/how-fzf-and-ripgrep-improved-my-workflow
-" +edited: set dir to gitroot.
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'dir': projectroot#get()}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'dir': projectroot#get()}, 'right:50%:hidden', '?'),
-  \   <bang>0)
+vim.api.nvim_set_keymap('n', '<leader>tg', '<cmd>lua shovel_terminal_git()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gt', '<leader>tg', {noremap = false})
+vim.api.nvim_set_keymap('n', '<leader>ts', '<cmd>lua shovel_terminal_fish()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>tf', '<cmd>lua shovel_terminal_fish()<cr>', {noremap = true, silent = true})
 
-command! PGFiles call PGFiles()
-command! PFiles  call PFiles()
+vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>ToggleTermToggleAll<cr>',        {noremap = true, silent = true})
+EOF
+" }}} toggleterm
 
-nnoremap <Leader>f <cmd>PGFiles<Return>
-nnoremap <Leader>F <cmd>PFiles<Return>
-nnoremap <Leader>b <cmd>Buffers<Return>
+" telescope {{{
+
+" from the readme
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" my custom
+nnoremap <Leader>f: <cmd>Telescope command_history<cr>
+nnoremap <Leader>f? <cmd>Telescope builtin<cr>
+nnoremap <Leader>fc <cmd>Telescope commands<cr>
+nnoremap <Leader>fm <cmd>Telescope marks<cr>
+nnoremap <leader>fB <cmd>Telescope file_browser<cr>
+nnoremap <leader>fF <cmd>Telescope find_files hidden=true<cr>
+nnoremap <leader>fk <cmd>Telescope keymaps<cr>
+
+" short keys, without the `f` prefix
+nnoremap <leader>b  <cmd>Telescope buffers<cr>
+nnoremap <Leader>/  <cmd>Telescope current_buffer_fuzzy_find<cr>
+
+" TODO replace this one with telescope
 nnoremap <Leader>w <cmd>Windows<Return>
-nnoremap <Leader>/ <cmd>BLines<Return>
-nnoremap <Leader>: <cmd>Commands<Return>
-" }}}
+" TODO implement a finder for fd --no-ignore --hidden
 
-" terminals {{{
+" TODO map <esc> to <esc><esc>
+" TODO map / to <cr> in file_browser
 
-command! -bar BarTerm term
-
-command! -nargs=1 -bar Terminal
-      \ BarTerm |
-      \ file term:<args>
-
-nnoremap <Leader>~ :tabe +Terminal\ 
-" }}}
+if (!executable('fd')) | echoerr 'fd (fd-find) executable not found' | endif
+if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
+" }}} telescope
 
 " lightspeed.nvim {{{
 lua <<EOF
@@ -623,7 +599,9 @@ function! OnUIEnter(event)
 endfunction
 
 " invoke onuienter
-autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+augroup shovel_firenvim
+  autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+augroup END
 " }}}
 
 " markdown-preview.nvim {{{
