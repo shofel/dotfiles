@@ -7,14 +7,13 @@
 
 " TODO discoverable keys
 
-" TODO separators in statusline : coherent with kitty's tabline
-
 " TODO migrate to packer
 "      + switch to init.lua
 
 " TODO easy-keys.fnl
 
 " TODO autocomplete
+
 " TODO colors for treesitter
 
 " TODO explore mini.nvim collection https://github.com/echasnovski/mini.nvim
@@ -194,8 +193,8 @@ require'lualine'.setup {
   options = {
     icons_enabled = true,
     theme = 'onelight',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = ' ', right = ' '},
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
   },
