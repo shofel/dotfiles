@@ -1,17 +1,9 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
 " TODO next: tabs:
-" - tag tabs with a custom name
+" - tag tabs with a custom names
 
-" TODO ? use , as a leader key ?
-
-" TODO telescope
-"      + switch wins and tabs
-"      + also notice g<tab> to switch between latest tabs
-"      + a tree of mappings
-"      + live grep (:Rg)
-
-" TODO maybe better terminal mgmt
+" TODO ? use , as a localleader ?
 
 " TODO discoverable keys
 
@@ -19,6 +11,8 @@
 
 " TODO migrate to packer
 "      + switch to init.lua
+
+" TODO easy-keys.fnl
 
 " TODO autocomplete
 " TODO colors for treesitter
