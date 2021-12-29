@@ -17,11 +17,6 @@
 
 " TODO separators in statusline : coherent with kitty's tabline
 
-" TODO clipboard mgmt:
-"      + look up history
-"      + inspect what's in registers
-"      + toggle blackhole deletion a-la unimpared
-
 " TODO migrate to packer
 "      + switch to init.lua
 
@@ -367,14 +362,16 @@ augroup END
 nnoremap <Leader>c  :checkt<Return>
 nnoremap <Leader>s  :write<Return>
 
+" clipboard {{{
 " X clipboard
-xnoremap <Leader>y "+y<Return>
-nnoremap <Leader>p "+]p<Return>
-xnoremap <Leader>p "+]p<Return>
+xmap <Leader>y "+y<Return>
+nmap <Leader>p "+]p<Return>
+xmap <Leader>p "+]p<Return>
 " X selection
-xnoremap <Leader>Y "*y<Return>
-nnoremap <Leader>P "*]p<Return>
-xnoremap <Leader>P "*]p<Return>
+xmap <Leader>Y "*y<Return>
+nmap <Leader>P "*]p<Return>
+xmap <Leader>P "*]p<Return>
+" }}} clipboard
 
 " Insert random string
 function! Shovel_insert_random()
@@ -485,7 +482,6 @@ EOF
 lua require'gitsigns'.setup()
 lua require'trouble'.setup { icons = false }
 lua require'colorizer'.setup()
-
 
 " search and replace {{{
 set ignorecase
