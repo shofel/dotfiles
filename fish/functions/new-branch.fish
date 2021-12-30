@@ -1,13 +1,17 @@
-function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument branch
+function new-branch \
+   --description 'Set up new branch: 1.create 2.push 3.MergeRequest' \
+   --argument-names topic issue
   set -l date (date +%Y-%m-%d)
-  set -l branch_name x-0-$branch-$date
 
-  echo TODO: make an empty `noci` commit to avoid useless pipeline
-  echo TODO: '? start from fresh master ?'
+  if test -z $issue
+    set -l issue x-0
+  end
 
-  git switch -c $branch_name
+  set -l branch $issue-$topic-$date
 
-  git push -u origin $branch_name 2>&1 |
+  git switch -c $branch
+
+  git push -o ci.skip -u origin $branch 2>&1 |
     grep merge_requests/new |
     awk '{print $2}' |
     xargs xdg-open
