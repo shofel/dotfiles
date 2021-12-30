@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 # DOC: man home-configuration.nix
-# !nix-shell '<home-manager>' -A install
+# <leader>r to rebuild configuration and switch
 
 {
   # Let Home Manager install and manage itself.
@@ -59,7 +59,7 @@
           set -U VISUAL ${pkgs.neovim}/bin/nvim
 
           # ssh ask pass program
-          set -Ux SUDO_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
+          set -Ux SSH_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
 
           # kitty and some other programs
           fish_add_path ~/opt/bin

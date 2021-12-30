@@ -582,6 +582,10 @@ augroup shovel_firenvim
 augroup END
 " }}}
 
+augroup shovel_home.nix
+  autocmd BufRead home.nix nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch<cr>
+augroup END
+
 " markdown-preview.nvim {{{
 let g:mkdp_browser = 'google-chrome-beta'
 augroup markdown-preview.nvim
