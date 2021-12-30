@@ -197,7 +197,7 @@ require'lualine'.setup {
   },
   sections = {
     lualine_a = {'branch'},
-    lualine_b = {'diff', 'diagnostics'},
+    lualine_b = {'b:gitsigns_status', 'diagnostics'},
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
@@ -217,7 +217,7 @@ require'lualine'.setup {
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {'mode'}
+    lualine_z = {'b:gitsigns_status_dict.root'}
   },
   extensions = {'fugitive', 'toggleterm'}
 }
