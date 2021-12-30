@@ -42,11 +42,10 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 
-" statusline and tabline
-Plug 'nvim-lualine/lualine.nvim'
-
-" text decorations
+Plug 'folke/trouble.nvim'
+Plug 'gennaro-tedesco/nvim-peekup'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'nvim-lualine/lualine.nvim'
 
 " more editing
 Plug 'tommcdo/vim-exchange'
@@ -75,8 +74,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'rhysd/reply.vim'
 Plug 'sheerun/vim-polyglot'
-
-Plug 'folke/trouble.nvim'
 
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -324,17 +321,9 @@ nnoremap <Leader>kk  <cmd>bdelete!<Return>
 nnoremap <Leader>gs <cmd>vert Git<Return>
 nnoremap <Leader>ga <cmd>Gwrite<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
-nnoremap <Leader>gf <cmd>Dispatch git fetch --all --prune<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
-nnoremap <Leader>gv <cmd>call Shovel_glog()<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
-
-function! Shovel_glog() abort
-  exe('tabe +term\ glog')
-  exe('setlocal bufhidden=wipe')
-  exe('tnoremap <buffer> q <c-\><c-n>:bdelete!<cr>')
-  exe('startinsert')
-endfun
+nnoremap <Leader>gv <cmd>TermExec cmd='glog; exit'<cr>
 
 " Another access to unimpaired
 nmap <Leader>k [
@@ -494,20 +483,20 @@ require("toggleterm").setup{
 
 local Terminal = require('toggleterm.terminal').Terminal
 
+--[ terminals
+
 local fish  = Terminal:new {cmd = 'fish', hidden = false}
-local git   = Terminal:new {cmd = 'lazygit'}
 local serve = Terminal:new {cmd = 'fish'}
 
 function shovel_terminal_fish()  fish:toggle(); end
-function shovel_terminal_git()   git:toggle(); end
 function shovel_terminal_serve() serve:toggle(); end
 
-vim.api.nvim_set_keymap('n', '<leader>tg', '<cmd>lua shovel_terminal_git()<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gt', '<leader>tg', {noremap = false})
 vim.api.nvim_set_keymap('n', '<leader>ts', '<cmd>lua shovel_terminal_fish()<cr>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>tf', '<cmd>lua shovel_terminal_fish()<cr>', {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>ToggleTermToggleAll<cr>',        {noremap = true, silent = true})
+--] terminals
+
+vim.api.nvim_set_keymap('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>',        {noremap = true, silent = true})
 EOF
 " }}} toggleterm
 
@@ -520,7 +509,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " my custom
 nnoremap <Leader>f: <cmd>Telescope command_history<cr>
-nnoremap <Leader>f? <cmd>Telescope builtin<cr>
+nnoremap <Leader>fb <cmd>Telescope builtin<cr>
 nnoremap <Leader>fc <cmd>Telescope commands<cr>
 nnoremap <Leader>fm <cmd>Telescope marks<cr>
 nnoremap <leader>fB <cmd>Telescope file_browser<cr>
