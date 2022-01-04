@@ -44,6 +44,22 @@
 
   programs.command-not-found.enable = true;
 
+  # neovim
+  #
+  home.file."plug.vim" = {
+    target = ".local/share/nvim/site/autoload/plug.vim";
+    source = (builtins.fetchGit {
+      url = "https://github.com/junegunn/vim-plug";
+      ref = "refs/tags/0.11.0";
+    }) + "/plug.vim";
+  };
+  #
+  home.file."init.vim" = {
+    target = ".config/nvim/init.vim";
+    source =       ../nvim/init.vim;
+    onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
+  };
+
     # Fish
 
     home.file = {

@@ -127,7 +127,7 @@ call plug#end()
 set encoding=utf-8
 scriptencoding=utf-8
 
-set shell=/usr/bin/fish
+set shell=fish
 
 set signcolumn=yes
 set nonumber " see also vim-numbertoggle plugin
