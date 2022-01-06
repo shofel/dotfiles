@@ -511,6 +511,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <Leader>f: <cmd>Telescope command_history<cr>
 nnoremap <Leader>fb <cmd>Telescope builtin<cr>
 nnoremap <Leader>fc <cmd>Telescope commands<cr>
+nnoremap <Leader>fC <cmd>Telescope colorscheme<cr>
 nnoremap <Leader>fm <cmd>Telescope marks<cr>
 nnoremap <leader>fB <cmd>Telescope file_browser<cr>
 nnoremap <leader>fF <cmd>Telescope find_files hidden=true<cr>
@@ -583,7 +584,7 @@ augroup END
 " }}}
 
 augroup shovel_home.nix
-  autocmd BufRead home.nix nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch<cr>
+  autocmd BufRead home.nix,init.vim nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch<cr>
 augroup END
 
 " markdown-preview.nvim {{{
