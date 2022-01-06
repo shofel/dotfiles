@@ -1,5 +1,8 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
+" TODO adopt workspaces and sessions
+"      + edit init.vim as a part of workspace/dotfiles project
+
 " TODO next: tabs:
 " - tag tabs with a custom names
 
