@@ -96,11 +96,11 @@
  @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
   XX   XX   ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
- @XX   XX   q    j    k    x                    b    m    w    v    z   @XX
+ @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
        XX   XX  @nav @lsym                         @rsym @nav @fkey XX
 
-                           @wm  C-v    C-k   @kitty
-                     @num lsft  spc     spc  rsft spc
+                           @wm  C-v     C-k  @kitty
+                     @num lsft  @ctl   @ctl  rsft spc
                                 ret     ret
 )
 
