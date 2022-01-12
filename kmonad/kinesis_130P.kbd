@@ -25,7 +25,7 @@
    Keyboard is to be prepared like this:
    1. Reset memory: `Program+Control+F10`
    2. Switch to Dvorak: `Program+Control+F5`
-   3. Swap Escape and CapsLock: `Program+F12 Esc CapsLock CapsLock Esc Program+F12`
+   3. Swap Escape and CapsLock: `Program+F12 Esc CapsLock CapsLock Esc Program+F12` # TODO do we need it?
 
    Kinesis cheatsheet: http://web.mit.edu/jmorzins/Public/kinesisCheatSheet.html
 
@@ -94,7 +94,7 @@
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX    XX   XX   XX   XX  @qwe_ @sus
 
  @scr  !    @    #    $    %                    ^    &    *    XX   XX   XX
-  XX   XX   ,    .    p    y                    f    g    c    r    l    /
+  XX   '    ,    .    p    y                    f    g    c    r    l    /
   XX   a    o    e    u    i                    d    h    t    n    s    -
  @XX   ;    q    j    k    x                    b    m    w    v    z   @XX
        XX   XX  @nav @lsym                         @rsym @nav @fkey XX
@@ -119,10 +119,6 @@
    The home row contains braces of all kinds
    - use the left half to open a brace
    - use the right half to close a brace
-
-   § Return
-
-   One can press Return with the left hand.
 
    § Escape
 
@@ -224,7 +220,7 @@
 
   _    _    _    _    _    _                    _    _    _    _    _    _
   _    _    _    _    _    del                  del  7    8    9    :    _
-  _    _    _    @alt @ctl bspc                 bspc 4    5    6    .    _
+  _    _    @sft @alt @ctl bspc                 bspc 4    5    6    .    _
   _    _    _    tab  _    _                    0    1    2    3    0    _
        _    _    _    _                              up   down _    _
 
@@ -246,7 +242,8 @@
 
    § Select and Delete
 
-   Backspace on the navigation layer is useful to delete some selected text:
+   Backspace on the navigation layer (big thumb keys) is useful to delete some
+   selected text:
    - with the first hand activate the layer and the Shift modifier
    - use the second hand to move cursor around, and select some text
    - press bspc with the second hand
