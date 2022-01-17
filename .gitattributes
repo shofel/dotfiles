@@ -1,2 +1,0 @@
-fish/functions/fisher.fish filter=lfs diff=lfs merge=lfs -text
-fish/completions/fisher.fish filter=lfs diff=lfs merge=lfs -text

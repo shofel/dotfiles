@@ -14,8 +14,6 @@
   home.username = "shovel";
   home.homeDirectory = "/home/shovel";
 
-  # Home Manager
-  # TODO kitty @see https://github.com/NixOS/nixpkgs/issues/80936
   home.packages =
     let
       main = with pkgs; [ htop ssh-askpass-fullscreen
@@ -27,6 +25,11 @@
                                        yaml-language-server
                                      ];
     in  main ++ node;
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   programs.bat = {
     enable = true;

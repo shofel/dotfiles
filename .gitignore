@@ -1,16 +1,9 @@
-fishd.*
-nvim/plugged
-.netrwhist
-
-## To track a file, `git add` it explicitly.
-fish/completions/
-fish/functions/
-fish/conf.d/
-fish/fish_variables
-
 ## emacs
 .emacs.d/amx-items
 .emacs.d/auto-save-list
 .emacs.d/elpa
 .emacs.d/network-security.data
 .emacs.d/recentf
+
+## vim
+.netrwhist
