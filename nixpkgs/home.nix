@@ -69,15 +69,19 @@
     onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
   };
 
-  # Fish
-
-  home.file = {
-    ".config/fish/functions" = {
-      source = ../fish/functions;
-      recursive = true;
-    };
+  # kitty
+  home.file.".config/kitty" = {
+    source =      ../kitty;
+    recursive = true;
   };
 
+  # Fish
+  #
+  home.file.".config/fish/functions" = {
+    source =      ../fish/functions;
+    recursive = true;
+  };
+  #
   programs.fish =
     let
       configExtra = ''
