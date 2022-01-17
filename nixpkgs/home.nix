@@ -9,11 +9,6 @@
 
   programs.command-not-found.enable = true;
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = "shovel";
-  home.homeDirectory = "/home/shovel";
-
   home.packages =
     let
       main = with pkgs; [ htop ssh-askpass-fullscreen
@@ -57,14 +52,6 @@
   };
 
   # neovim
-  #
-  home.file."plug.vim" = {
-    target = ".local/share/nvim/site/autoload/plug.vim";
-    source = (builtins.fetchGit {
-      url = "https://github.com/junegunn/vim-plug";
-      ref = "refs/tags/0.11.0";
-    }) + "/plug.vim";
-  };
   #
   home.file."init.vim" = {
     target = ".config/nvim/init.vim";

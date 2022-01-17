@@ -1,0 +1,65 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1642379981,
+        "narHash": "sha256-FE0RIZmrG2ScKGRthNzcFAssLW7MgMLun0g7Qg2zZMA=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "f71d41ba360cd49b3647bf91402c7479e859fd2e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1642130244,
+        "narHash": "sha256-/5FhZkZFQCRQIRFosUQW1zmDrsNHVOJIB/+XgRPHiPU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "bc59ba15b64d0a0ee1d1764f18b4f3480d2c3e5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs",
+        "vim-plug": "vim-plug"
+      }
+    },
+    "vim-plug": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641218708,
+        "narHash": "sha256-6HVwA69fXZ7KkZFbSr+hOZ2epkQoT1BBN6HYMGxTzy0=",
+        "owner": "junegunn",
+        "repo": "vim-plug",
+        "rev": "e300178a0e2fb04b56de8957281837f13ecf0b27",
+        "type": "github"
+      },
+      "original": {
+        "owner": "junegunn",
+        "repo": "vim-plug",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
