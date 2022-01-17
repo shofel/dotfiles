@@ -71,16 +71,16 @@
 
   # kitty
   home.file.".config/kitty" = {
-    source =      ../kitty;
-    recursive = true;
-  };
+    source =      ../kitty; recursive = true; };
+
+  # stumpwm
+  home.file.".config/stumpwm" = {
+    source =      ../stumpwm; recursive = true; };
 
   # Fish
   #
   home.file.".config/fish/functions" = {
-    source =      ../fish/functions;
-    recursive = true;
-  };
+    source =      ../fish/functions; recursive = true; };
   #
   programs.fish =
     let
