@@ -17,8 +17,8 @@
   home.packages =
     let
       main = with pkgs; [ htop ssh-askpass-fullscreen
-                          neovim gh bat fd ripgrep rnix-lsp
-                          git lazygit
+                          neovim gh bat fd ripgrep
+                          rnix-lsp
                         ];
       node = with pkgs.nodePackages; [ vim-language-server
                                        vscode-langservers-extracted

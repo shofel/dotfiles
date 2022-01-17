@@ -20,6 +20,7 @@
 " TODO colors for treesitter
 
 " TODO explore mini.nvim collection https://github.com/echasnovski/mini.nvim
+" TODO keymap tree <leader>v to input digraphs
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
