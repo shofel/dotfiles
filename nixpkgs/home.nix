@@ -86,6 +86,7 @@
         # ssh ask pass program
         set -Ux SSH_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
 
+        # TODO kitty is ok on nixos, and the other programs too
         # kitty and some other programs
         fish_add_path ~/opt/bin
 
