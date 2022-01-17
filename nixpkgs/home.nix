@@ -99,7 +99,7 @@
 
         # Nix
         #
-        fish_add_path /nix/var/nix/profiles/per-user/shovel/profile/bin
+        fish_add_path ~/.nix-profile/bin
         set -x --unpath NIX_PATH (string join ':' \
           home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
           nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
