@@ -17,7 +17,7 @@
   home.packages =
     let
       main = with pkgs; [ htop ssh-askpass-fullscreen
-                          neovim gh bat fd ripgrep
+                          neovim gh fd ripgrep
                           rnix-lsp
                         ];
       node = with pkgs.nodePackages; [ vim-language-server
@@ -25,6 +25,15 @@
                                        yaml-language-server
                                      ];
     in  main ++ node;
+
+  programs.bat = {
+    enable = true;
+    config = {
+      map-syntax = [ "*.json5:JavaScript (Babel)" ];
+      style = "numbers";
+      theme ="Monokai Extended Light";
+    };
+  };
 
   programs.git = {
     enable = true;
