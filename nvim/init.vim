@@ -68,6 +68,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'dbakker/vim-projectroot'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " Git
 Plug 'junegunn/gv.vim', {'on': 'GV'}
@@ -529,11 +530,12 @@ nnoremap <Leader>/  <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <Leader>w <cmd>Windows<Return>
 " TODO implement a finder for fd --no-ignore --hidden
 
-" TODO map <esc> to <esc><esc>
 " TODO map / to <cr> in file_browser
 
 if (!executable('fd')) | echoerr 'fd (fd-find) executable not found' | endif
 if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
+
+lua require'telescope'.load_extension 'file_browser'
 " }}} telescope
 
 " lightspeed.nvim {{{
