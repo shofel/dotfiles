@@ -3,6 +3,9 @@
 # DOC: man home-configuration.nix
 # <leader>r to rebuild configuration and switch
 
+let
+  bat-theme = "Monokai Extended Light";
+in
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -31,7 +34,7 @@
     config = {
       map-syntax = [ "*.json5:JavaScript (Babel)" ];
       style = "numbers";
-      theme ="Monokai Extended Light";
+      theme = bat-theme;
     };
   };
 
@@ -42,14 +45,15 @@
     userName = "Slava";
     userEmail = "visla.vvi@gmail.com";
 
+    delta = {
+      enable = true;
+      options = { syntax-theme = bat-theme; }; };
+
     extraConfig = {
       pull = { rebase = true; };
       core = {
         editor = "nvim";
-        excludesfile = "/home/shovel/.config/git/gitignore_global";
-      };
-    };
-  };
+        excludesfile = "/home/shovel/.config/git/gitignore_global"; }; }; };
 
   # neovim
   #
