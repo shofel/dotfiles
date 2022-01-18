@@ -496,12 +496,12 @@ local serve = Terminal:new {cmd = 'fish'}
 function shovel_terminal_fish()  fish:toggle(); end
 function shovel_terminal_serve() serve:toggle(); end
 
-vim.api.nvim_set_keymap('n', '<leader>ts', '<cmd>lua shovel_terminal_fish()<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tf', '<cmd>lua shovel_terminal_fish()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ts', '<cmd>lua shovel_terminal_serve()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>tf', '<cmd>lua shovel_terminal_fish()<cr>',  {noremap = true, silent = true})
 
 --] terminals
 
-vim.api.nvim_set_keymap('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>',        {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>', {noremap = true, silent = true})
 EOF
 " }}} toggleterm
 
