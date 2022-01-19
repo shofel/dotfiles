@@ -1,9 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 #       man page: Man home-configuration.nix
 # search options: https://mipmip.github.io/home-manager-option-search/
 #
 # <leader>r to rebuild configuration and switch
+#
+# TODO kmonad
 
 let
   bat-theme = "Monokai Extended Light";
@@ -73,6 +75,64 @@ in
   home.file.".config/stumpwm" = {
     source =      ../stumpwm; recursive = true; };
 
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      add_newline = false;
+      scan_timeout = 10;
+      nix_shell = {
+        format = "[\\[nix\\]](blue) ";
+      };
+      git_branch = {
+        format = "[$symbol$branch](bold purple)";
+      };
+      git_status = {
+        style = "bold blue";
+        format = lib.concatStrings [
+          " ["
+          "$conflicted"
+          "$stashed"
+          "$deleted"
+          "$renamed"
+          "$modified"
+          "$staged"
+          "$untracked"
+
+          "$ahead$ahead_count"
+          "$behind$behind_count"
+          " ]"
+          "($style)"
+        ];
+        ahead =  "↑";
+        behind = "↓";
+        diverged = "⇅";
+        stashed = "";
+      };
+      directory = {
+        style = "bold green";
+        fish_style_pwd_dir_length = 1;
+        repo_root_style = "$style";
+      };
+      character = {
+        success_symbol = "[➤](green)";
+        error_symbol = "[➤](red)";
+      };
+      format = lib.concatStrings [
+        "$nix_shell"
+        "$username"
+        "$hostname"
+        "$directory"
+        "$git_branch"
+        "$git_state"
+        "$git_status"
+        "$cmd_duration"
+        "$python"
+        "$character"
+      ];
+    };
+  };
+
   # Fish
   #
   home.file.".config/fish/functions" = {
@@ -107,7 +167,6 @@ in
         gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
         gb = "git switch (git branch | string trim | fzf)";
         gBFG = "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
-        ga = "git add";
         gamend = "git commit --amend --no-edit";
         gcb = "git switch -c";
         gcd = "cd (git rev-parse --show-toplevel)";
