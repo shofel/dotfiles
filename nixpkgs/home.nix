@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-# DOC: man home-configuration.nix
+#       man page: Man home-configuration.nix
+# search options: https://mipmip.github.io/home-manager-option-search/
+#
 # <leader>r to rebuild configuration and switch
 
 let
