@@ -7,7 +7,7 @@ function new-branch \
     set -l issue x-0
   end
 
-  set -l branch $issue-$topic-$date
+  set -l branch (string join '-' $issue $topic $date)
 
   git switch -c $branch
 
