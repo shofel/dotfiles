@@ -7,26 +7,34 @@
 #
 # TODO kmonad
 
-let
-  bat-theme = "Monokai Extended Light";
-in
-{
+let bat-theme = "Monokai Extended Light";
+in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.command-not-found.enable = true;
 
-  home.packages =
-    let
-      main = with pkgs; [ htop ssh-askpass-fullscreen
-                          neovim gh fd ripgrep
-                          rnix-lsp
-                        ];
-      node = with pkgs.nodePackages; [ vim-language-server
-                                       vscode-langservers-extracted
-                                       yaml-language-server
-                                     ];
-    in  main ++ node;
+  # home.packages {{{
+  home.packages = let
+    main = with pkgs; [
+      gh
+      fd
+      ripgrep
+
+      htop
+      ssh-askpass-fullscreen
+      neovim
+
+      rnix-lsp
+      nixfmt
+    ];
+    node = with pkgs.nodePackages; [
+      vim-language-server
+      vscode-langservers-extracted
+      yaml-language-server
+    ];
+  in main ++ node;
+  # }}} home.packages
 
   programs.fzf = {
     enable = true;
@@ -42,6 +50,7 @@ in
     };
   };
 
+  # git {{{
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -51,42 +60,48 @@ in
 
     delta = {
       enable = true;
-      options = { syntax-theme = bat-theme; }; };
+      options = { syntax-theme = bat-theme; };
+    };
 
     extraConfig = {
       pull = { rebase = true; };
       core = {
         editor = "nvim";
-        excludesfile = "/home/shovel/.config/git/gitignore_global"; }; }; };
+        excludesfile = "/home/shovel/.config/git/gitignore_global";
+      };
+    };
+  };
+  # }}} git 
 
   # neovim
   #
   home.file."init.vim" = {
     target = ".config/nvim/init.vim";
-    source =       ../nvim/init.vim;
+    source = ../nvim/init.vim;
     onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
   };
 
   # kitty
   home.file.".config/kitty" = {
-    source =      ../kitty; recursive = true; };
+    source = ../kitty;
+    recursive = true;
+  };
 
   # stumpwm
   home.file.".config/stumpwm" = {
-    source =      ../stumpwm; recursive = true; };
+    source = ../stumpwm;
+    recursive = true;
+  };
 
+  # starship {{{
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
     settings = {
       add_newline = false;
       scan_timeout = 10;
-      nix_shell = {
-        format = "[\\[nix\\]](blue) ";
-      };
-      git_branch = {
-        format = "[$symbol$branch](bold purple)";
-      };
+      nix_shell = { format = "[\\[nix\\]](blue) "; };
+      git_branch = { format = "[$symbol$branch](bold purple)"; };
       git_status = {
         style = "bold blue";
         format = lib.concatStrings [
@@ -104,7 +119,7 @@ in
           " ]"
           "($style)"
         ];
-        ahead =  "↑";
+        ahead = "↑";
         behind = "↓";
         diverged = "⇅";
         stashed = "";
@@ -132,81 +147,90 @@ in
       ];
     };
   };
+  # }}} starship
 
-  # Fish
+  # fish {{{
   #
   home.file.".config/fish/functions" = {
-    source =      ../fish/functions; recursive = true; };
+    source = ../fish/functions;
+    recursive = true;
+  };
   #
-  programs.fish =
-    let
-      configExtra = ''
-        set -U VISUAL ${pkgs.neovim}/bin/nvim
+  programs.fish = let
+    configExtra = ''
+      set -U VISUAL ${pkgs.neovim}/bin/nvim
 
-        # ssh ask pass program
-        set -Ux SSH_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
+      # ssh ask pass program
+      set -Ux SSH_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
 
-        # TODO kitty is ok on nixos, and the other programs too
-        # kitty and some other programs
-        fish_add_path ~/opt/bin
+      # TODO kitty is ok on nixos, and the other programs too
+      # kitty and some other programs
+      fish_add_path ~/opt/bin
 
-        # HiDPI
-        set -Ux GDK_SCALE 2
+      # HiDPI
+      set -Ux GDK_SCALE 2
 
-        # Nix
-        #
-        fish_add_path ~/.nix-profile/bin
-        set -x --unpath NIX_PATH (string join ':' \
-          home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
-          nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
-      '';
-      shellAbbrs = {
-        dc = "docker-compose";
-        execlip = "fish -c (xclip -o)";
-        # git
-        gB = "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
-        gb = "git switch (git branch | string trim | fzf)";
-        gBFG = "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
-        gamend = "git commit --amend --no-edit";
-        gcb = "git switch -c";
-        gcd = "cd (git rev-parse --show-toplevel)";
-        gclean = "git clean -fd";
-        gcom = "git commit";
-        gd = "git diff";
-        gdca = "git diff --cached";
-        gfa = "git fetch --all --prune --tags";
-        ghash = "git rev-parse --short HEAD";
-        ginit = "git init ;and git commit -m 'root' --allow-empty";
-        gl = "git pull";
-        gp = "git push";
-        gpf = "git push --force-with-lease";
-        gpu = "git push -u origin (git branch | grep '*' | awk '{print \$2}')";
-        grba = "git rebase --abort";
-        grbc = "git rebase --continue";
-        grbs = "git rebase --skip";
-        gsm = "git switch master";
-        gst = "git status --short --branch";
-        gsw = "git switch";
-        #
-        nocaps = "setxkbmap -option ctrl:nocaps";
-        suspend = "systemctl suspend";
-        v = "nvim '+Term fish'";
-        weather = "curl wttr.in/guangzhou";
-      };
-    in {
-      enable = true;
-      interactiveShellInit =
-        configExtra +
-        builtins.readFile ../fish/ssh-agent.fish;
-      shellAbbrs = shellAbbrs;
+      # Nix
+      #
+      fish_add_path ~/.nix-profile/bin
+      set -x --unpath NIX_PATH (string join ':' \
+        home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
+        nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
+    '';
+    shellAbbrs = {
+      dc = "docker-compose";
+      execlip = "fish -c (xclip -o)";
+      # git
+      gB =
+        "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
+      gb = "git switch (git branch | string trim | fzf)";
+      gBFG =
+        "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+      gamend = "git commit --amend --no-edit";
+      gcb = "git switch -c";
+      gcd = "cd (git rev-parse --show-toplevel)";
+      gclean = "git clean -fd";
+      gcom = "git commit";
+      gd = "git diff";
+      gdca = "git diff --cached";
+      gfa = "git fetch --all --prune --tags";
+      ghash = "git rev-parse --short HEAD";
+      ginit = "git init ;and git commit -m 'root' --allow-empty";
+      gl = "git pull";
+      gp = "git push";
+      gpf = "git push --force-with-lease";
+      gpu = "git push -u origin (git branch | grep '*' | awk '{print $2}')";
+      grba = "git rebase --abort";
+      grbc = "git rebase --continue";
+      grbs = "git rebase --skip";
+      gsm = "git switch master";
+      gst = "git status --short --branch";
+      gsw = "git switch";
+      #
+      nocaps = "setxkbmap -option ctrl:nocaps";
+      suspend = "systemctl suspend";
+      v = "nvim '+Term fish'";
+      weather = "curl wttr.in/guangzhou";
     };
+  in {
+    enable = true;
+    interactiveShellInit = configExtra
+      + builtins.readFile ../fish/ssh-agent.fish;
+    shellAbbrs = shellAbbrs;
+  };
+  # }}} fish
 
+  # redshift {{{
   services.redshift = {
     enable = true;
     latitude = 56.83;
-    longitude = 60.60;
-    temperature = { day = 6500; night = 3000; };
+    longitude = 60.6;
+    temperature = {
+      day = 6500;
+      night = 3000;
+    };
   };
+  # }}} redshift
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
