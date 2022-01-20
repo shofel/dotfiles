@@ -21,6 +21,7 @@
 
 " TODO explore mini.nvim collection https://github.com/echasnovski/mini.nvim
 " TODO keymap tree <leader>v to input digraphs
+" TODO preserve layout when killing a buffer
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
