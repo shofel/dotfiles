@@ -33,6 +33,12 @@
             source = inputs.vim-plug + "/plug.vim";
           };
 
+          home.file."plug-refresh" = {
+            target = "/dev/null";
+            source = ./nvim/init.vim;
+            onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
+          };
+
           programs.neovim = {
             enable = true;
             package = inputs.neovim.packages.${system}.neovim;
