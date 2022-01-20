@@ -101,13 +101,13 @@ in {
       add_newline = false;
       scan_timeout = 10;
       nix_shell = { format = "[\\[nix\\]](blue) "; };
+
       git_branch = { format = "[$symbol$branch](bold purple)"; };
       git_status = {
-        style = "bold blue";
+        style = "bold red";
         format = lib.concatStrings [
-          " ["
+          "["
           "$conflicted"
-          "$stashed"
           "$deleted"
           "$renamed"
           "$modified"
@@ -116,7 +116,7 @@ in {
 
           "$ahead$ahead_count"
           "$behind$behind_count"
-          " ]"
+          "]"
           "($style)"
         ];
         ahead = "↑";
@@ -124,14 +124,15 @@ in {
         diverged = "⇅";
         stashed = "";
       };
+
       directory = {
         style = "bold green";
         fish_style_pwd_dir_length = 1;
         repo_root_style = "$style";
       };
       character = {
-        success_symbol = "[➤](green)";
-        error_symbol = "[➤](red)";
+        success_symbol = "[ ➤](green)";
+        error_symbol = "[ ➤](red)";
       };
       format = lib.concatStrings [
         "$nix_shell"
@@ -142,7 +143,6 @@ in {
         "$git_state"
         "$git_status"
         "$cmd_duration"
-        "$python"
         "$character"
       ];
     };
