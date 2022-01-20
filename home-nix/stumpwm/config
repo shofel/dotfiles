@@ -1,5 +1,10 @@
 ;; vim: set ft=lisp:
 ;;
+;; TODO use the same font as in kitty
+;; TODO use shell program from home-manager
+;;
+;; @see stumpwm config in a flake
+;;      https://github.com/TLATER/dotfiles/blob/master/dotfiles/stumpwm/config
 
 (in-package :stumpwm)
 
@@ -19,15 +24,17 @@
 ;          Yes, you should install StumpWM from sources to make this work.
 
 ;;;
-;;; Fonts.
+;;; Fonts {{{
 ;;;
 (load-module "ttf-fonts")
 (xft:cache-fonts)
 (set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 13))
+;;; }}} Fonts
 
 ;;;
-;;; Keys.
+;;; Keys {{{
 ;;;
+
 ;;; @see `stumpwm/keysyms.lisp` for the list of key names
 ;;; @see https://stumpwm.github.io/git/stumpwm-git_2.html#Binding-Keys
 
@@ -95,6 +102,7 @@
 (define-key *root-map* (kbd "y") (-exec-browser-command "yandex-browser-beta"))
 (define-key *root-map* (kbd "b") (-exec-browser-command "google-chrome-beta"))
 (define-key *root-map* (kbd "B") (-exec-browser-command "google-chrome"))
+;; }}} 
 
 ;;
 ;; Restore.
