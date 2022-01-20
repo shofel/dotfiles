@@ -1,6 +1,7 @@
 # TODO try removich channels from fish init
 # TODO manage kmonad
 # TODO proper x start
+# TODO install kitty on nixos
 {
   description = "Shovel's Home Manager flake";
 
@@ -180,11 +181,10 @@
               set -U VISUAL ${neovim-package}/bin/nvim
 
               # ssh ask pass program
-              set -Ux SSH_ASKPASS ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
+              set -Ux SSH_ASKPASS  ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
+              set -Ux SUDO_ASKPASS $SSH_ASKPASS
 
-              # TODO kitty is ok on nixos, and the other programs too
-              # kitty and some other programs
-              fish_add_path ~/opt/bin
+              fish_add_path ~/opt/kitty.app/bin/
 
               # HiDPI
               set -Ux GDK_SCALE 2
