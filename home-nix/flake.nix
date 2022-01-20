@@ -170,32 +170,38 @@
           # }}} starship
 
           # fish {{{
-          #
           home.file.".config/fish/functions" = {
             source = ./fish/functions;
             recursive = true;
           };
-          #
-          programs.fish = let
-            configExtra = ''
-              set -U VISUAL ${neovim-package}/bin/nvim
 
-              # ssh ask pass program
-              set -Ux SSH_ASKPASS  ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
-              set -Ux SUDO_ASKPASS $SSH_ASKPASS
+          programs.fish = {
+            enable = true;
+            interactiveShellInit =
+              # configExtra {{{
+              ''
+                set -U VISUAL ${neovim-package}/bin/nvim
 
-              fish_add_path ~/opt/kitty.app/bin/
+                # ssh ask pass program
+                set -Ux SSH_ASKPASS  ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
+                set -Ux SUDO_ASKPASS $SSH_ASKPASS
 
-              # HiDPI
-              set -Ux GDK_SCALE 2
+                fish_add_path ~/opt/kitty.app/bin/
 
-              # Nix
-              #
-              fish_add_path ~/.nix-profile/bin
-              set -x --unpath NIX_PATH (string join ':' \
-                home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
-                nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
-            '';
+                # HiDPI
+                set -Ux GDK_SCALE 2
+
+                # Nix
+                #
+                fish_add_path ~/.nix-profile/bin
+                set -x --unpath NIX_PATH (string join ':' \
+                  home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
+                  nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
+              ''
+              # }}} configExtra
+              + builtins.readFile ./fish/ssh-agent.fish;
+
+            # shellAbbrs {{{
             shellAbbrs = {
               dc = "docker-compose";
               execlip = "fish -c (xclip -o)";
@@ -232,13 +238,8 @@
               v = "nvim '+Term fish'";
               weather = "curl wttr.in/guangzhou";
             };
-          in {
-            enable = true;
-            interactiveShellInit = configExtra
-              + builtins.readFile ./fish/ssh-agent.fish;
-            shellAbbrs = shellAbbrs;
-          };
-          # }}} fish
+            # }}} shellAbbrs
+          }; # }}} fish
 
           # redshift {{{
           services.redshift = {
