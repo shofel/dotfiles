@@ -1,3 +1,5 @@
+# nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
+#
 # TODO try removich channels from fish init
 # TODO manage kmonad
 # TODO proper x start
@@ -15,6 +17,11 @@
       flake = false;
     };
     neovim.url = "github:neovim/neovim?dir=contrib";
+
+    forgit = {
+      url = "github:wfxr/forgit";
+      flake = false;
+    };
   };
 
   outputs = inputs: {
@@ -177,6 +184,12 @@
 
           programs.fish = {
             enable = true;
+
+            plugins = [{
+              name = "forgit";
+              src = inputs.forgit;
+            }];
+
             interactiveShellInit =
               # configExtra {{{
               ''
@@ -204,46 +217,47 @@
             # shellAbbrs {{{
             shellAbbrs = {
               dc = "docker-compose";
-              execlip = "fish -c (xclip -o)";
-              # git
-              gB = ''
-                git switch (
-                 git fetch --all 1>/dev/null
-                 and git branch --all \
-                   | string replace 'remotes/origin/' "" \
-                   | string trim | sort | uniq | fzf
-               )'';
+
               gb = "git switch (git branch | string trim | fzf)";
+              gB = ''
+                 git switch (
+                  git fetch --all 1>/dev/null
+                  and git branch --all \
+                    | string replace 'remotes/origin/' "" \
+                    | string trim | sort | uniq | fzf
+                )'';
+
               gBFG =
                 "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+
               gamend = "git commit --amend --no-edit";
-              gcb = "git switch -c";
-              gcd = "cd (git rev-parse --show-toplevel)";
-              gclean = "git clean -fd";
               gcom = "git commit";
-              gd = "git diff";
-              gdca = "git diff --cached";
+
               gfa = "git fetch --all --prune --tags";
-              ghash = "git rev-parse --short HEAD";
-              ginit = "git init ;and git commit -m 'root' --allow-empty";
-              gl = "git pull";
-              gp = "git push";
               gpf = "git push --force-with-lease";
               gpu =
                 "git push -u origin (git branch | grep '*' | awk '{print $2}')";
+
+              gcd = "cd (git rev-parse --show-toplevel)";
+              ghash = "git rev-parse --short HEAD";
+              gclean = "git clean -fd";
+
+              ginit = "git init ;and git commit -m 'root' --allow-empty";
+
               grba = "git rebase --abort";
               grbc = "git rebase --continue";
               grbs = "git rebase --skip";
+
               gsm = "git switch master";
               gst = "git status --short --branch";
-              gsw = "git switch";
+
               #
-              nocaps = "setxkbmap -option ctrl:nocaps";
               suspend = "systemctl suspend";
               v = "nvim '+Term fish'";
               weather = "curl wttr.in/guangzhou";
             };
             # }}} shellAbbrs
+
           }; # }}} fish
 
           # redshift {{{
