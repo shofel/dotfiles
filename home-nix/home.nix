@@ -23,7 +23,6 @@ in {
 
       htop
       ssh-askpass-fullscreen
-      neovim
 
       rnix-lsp
       nixfmt
@@ -72,14 +71,6 @@ in {
     };
   };
   # }}} git 
-
-  # neovim
-  #
-  home.file."init.vim" = {
-    target = ".config/nvim/init.vim";
-    source = ./nvim/init.vim;
-    onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
-  };
 
   # kitty
   home.file.".config/kitty" = {
