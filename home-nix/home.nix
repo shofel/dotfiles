@@ -77,19 +77,19 @@ in {
   #
   home.file."init.vim" = {
     target = ".config/nvim/init.vim";
-    source = ../nvim/init.vim;
+    source = ./nvim/init.vim;
     onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
   };
 
   # kitty
   home.file.".config/kitty" = {
-    source = ../kitty;
+    source = ./kitty;
     recursive = true;
   };
 
   # stumpwm
   home.file.".config/stumpwm" = {
-    source = ../stumpwm;
+    source = ./stumpwm;
     recursive = true;
   };
 
@@ -152,7 +152,7 @@ in {
   # fish {{{
   #
   home.file.".config/fish/functions" = {
-    source = ../fish/functions;
+    source = ./fish/functions;
     recursive = true;
   };
   #
@@ -215,7 +215,7 @@ in {
   in {
     enable = true;
     interactiveShellInit = configExtra
-      + builtins.readFile ../fish/ssh-agent.fish;
+      + builtins.readFile ./fish/ssh-agent.fish;
     shellAbbrs = shellAbbrs;
   };
   # }}} fish
