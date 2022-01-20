@@ -95,8 +95,8 @@ in {
 
   # starship {{{
   programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
+    enable = false;
+    enableFishIntegration = false;
     settings = {
       add_newline = false;
       scan_timeout = 10;
