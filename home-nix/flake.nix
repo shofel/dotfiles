@@ -206,8 +206,13 @@
               dc = "docker-compose";
               execlip = "fish -c (xclip -o)";
               # git
-              gB =
-                "git switch (git fetch --all 1>/dev/null ;and git branch --all | string replace 'remotes/origin/' '' | string trim | sort | uniq | fzf)";
+              gB = ''
+                git switch (
+                 git fetch --all 1>/dev/null
+                 and git branch --all \
+                   | string replace 'remotes/origin/' "" \
+                   | string trim | sort | uniq | fzf
+               )'';
               gb = "git switch (git branch | string trim | fzf)";
               gBFG =
                 "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
