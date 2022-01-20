@@ -587,7 +587,7 @@ augroup END
 " }}}
 
 augroup shovel_home.nix
-  autocmd BufRead home.nix,init.vim nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./nixpkgs/<cr>
+  autocmd BufRead home.nix,init.vim nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
 augroup END
 
 " markdown-preview.nvim {{{
