@@ -1,11 +1,14 @@
-function new-branch \
-   --description 'Set up new branch: 1.create 2.push 3.MergeRequest' \
-   --argument-names topic issue
-  set -l date (date +%Y-%m-%d)
+# Defined in /run/user/1000/fish.sETpPI/new-branch.fish @ line 2
+function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument topic issue
+  if test -z $topic
+    echo >&2 Usage: new-branch topic [issue]
+  end
 
   if test -z $issue
     set -l issue x-0
   end
+
+  set -l date (date +%Y-%m-%d)
 
   set -l branch (string join '-' $issue $topic $date)
 
