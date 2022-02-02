@@ -224,11 +224,16 @@
                   git fetch --all 1>/dev/null
                   and git branch --all \
                     | string replace 'remotes/origin/' "" \
-                    | string trim | sort | uniq | fzf
+                    | string trim | sort | uniq \
+                    | fzf
                 )'';
 
               gBFG =
                 "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+
+              gd = forgit::diff;
+              gdca = "forgit::diff --cached";
+              ga = forgit::add;
 
               gamend = "git commit --amend --no-edit";
               gcom = "git commit";
