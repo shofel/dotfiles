@@ -1,7 +1,8 @@
 # Defined in /run/user/1000/fish.sETpPI/new-branch.fish @ line 2
 function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument topic issue
   if test -z $topic
-    echo >&2 Usage: new-branch topic [issue]
+    echo >&2 'Usage:   new-branch topic [issue]'
+    echo >&2 'Example: new-branch cool-feature ACME-112'
     return
   end
 
