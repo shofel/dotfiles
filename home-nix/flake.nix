@@ -243,7 +243,8 @@
               gpu =
                 "git push -u origin (git branch | grep '*' | awk '{print $2}')";
 
-              gcd = "cd (git rev-parse --show-toplevel)";
+              gtop = "git rev-parse --show-toplevel";
+              gcd  = "cd (git rev-parse --show-toplevel)";
               ghash = "git rev-parse --short HEAD";
               gclean = "git clean -fd";
 
