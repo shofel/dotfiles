@@ -2,6 +2,7 @@
 function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument topic issue
   if test -z $topic
     echo >&2 Usage: new-branch topic [issue]
+    return
   end
 
   if test -z $issue
