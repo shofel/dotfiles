@@ -12,7 +12,7 @@
 (setf *input-window-gravity* :center)
 (setf *window-border-style* :thin)
 
-(setf *mouse-focus-policy* :sloppy) ; :ignore :sloppy :click
+(setf *mouse-focus-policy* :ignore) ; :ignore :sloppy :click
 
 (setf *shell-program* "/usr/bin/fish")
 
