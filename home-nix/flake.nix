@@ -240,8 +240,7 @@
 
               gfa = "git fetch --all --prune --tags";
               gpf = "git push --force-with-lease";
-              gpu =
-                "git push -u origin (git branch | grep '*' | awk '{print $2}')";
+              gpu = "git push -u origin HEAD";
 
               gtop = "git rev-parse --show-toplevel";
               gcd  = "cd (git rev-parse --show-toplevel)";
