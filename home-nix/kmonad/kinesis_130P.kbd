@@ -322,6 +322,7 @@
   -------------------------------------------------------------------------- |#
 
 (deflayer template-effort
+ #| Inspired by https://workmanlayout.org#:~:text=Keys%20graded |#
   x    x    x    x    x    x    x    x    x    x     x    x    x    x    x    x
 
   x    _    _    _    _    _                    _    _    _    _    _    x
