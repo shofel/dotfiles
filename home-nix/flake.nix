@@ -28,14 +28,14 @@
     homeConfigurations = let
       lib = inputs.nixpkgs.lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      system = "x86_64-linux";
+      system = "x86_64-darwin"; # TODO x86_64-linux
       bat-theme = "Monokai Extended Light";
       neovim-package = inputs.neovim.packages.${system}.neovim;
     in {
-      shovel = inputs.home-manager.lib.homeManagerConfiguration {
+      slava = inputs.home-manager.lib.homeManagerConfiguration {
         system = system;
-        homeDirectory = "/home/shovel";
-        username = "shovel";
+        homeDirectory = "/Users/slava"; # TODO linux /home/slava
+        username = "slava";
         stateVersion = "21.05";
 
         configuration = {
@@ -52,7 +52,6 @@
               ripgrep
 
               htop
-              ssh-askpass-fullscreen
 
               rnix-lsp
               nixfmt
@@ -98,19 +97,46 @@
 
             extraConfig = {
               pull = { rebase = true; };
-              core = {
-                editor = "nvim";
-                excludesfile = "/home/shovel/.config/git/gitignore_global";
-              };
+              core = { editor = "nvim"; };
             };
+
+            ignores = [ ".DS_Store" "*.sw?" ];
           };
-          # }}} git 
+          # }}} git
+
+          # ssh {{{
+          programs.ssh = {
+            enable = true;
+            extraConfig = ''
+            Host *
+              AddKeysToAgent yes
+              IdentityFile ~/.ssh/id_ed25519'';
+          };
+          # }}} ssh
 
           # kitty {{{
-          home.file.".config/kitty" = {
-            source = ./kitty;
-            recursive = true;
+          home.file.".config/kitty/kitty.conf" = {
+            source = ./kitty/kitty.conf;
           };
+
+          home.file.".config/kitty/startup_session".text = ''
+            new_tab student
+            cd ~/10-19-Computer/11-Examus/11.01-student-web/
+            launch nix-shell --run "nvim +'Term fish'"
+
+            new_tab compose
+            launch fish -c 'nvim ~/20-29-/drafts-(date +%Y-%m-%-d)'
+
+            new_tab dotfiles
+            cd ~/10-19-Computer/12-Tools/12.01-dotfiles/
+            launch nvim +'Term fish'
+          '';
+
+          home.file.".config/kitty/empty_session".text = ''
+            new_tab tab
+            cd
+            launch nvim +'Term fish'
+          '';
           # }}} kitty
 
           # stumpwm {{{
@@ -190,28 +216,12 @@
               src = inputs.forgit;
             }];
 
-            interactiveShellInit =
-              # configExtra {{{
-              ''
-                set -U VISUAL ${neovim-package}/bin/nvim
+            interactiveShellInit = ''
+              set -U VISUAL ${neovim-package}/bin/nvim
+            '';
 
-                # ssh ask pass program
-                set -Ux SSH_ASKPASS  ${pkgs.ssh-askpass-fullscreen}/bin/ssh-askpass-fullscreen
-                set -Ux SUDO_ASKPASS $SSH_ASKPASS
-
-                fish_add_path ~/opt/kitty.app/bin/
-
-                # HiDPI
-                set -Ux GDK_SCALE 2
-
-                # Nix
-                #
-                fish_add_path ~/.nix-profile/bin
-                set -x --unpath NIX_PATH (string join ':' \
-                  home-manager=/home/shovel/.nix-defexpr/channels/home-manager \
-                  nixpkgs=/home/shovel/.nix-defexpr/channels/nixpkgs)
-              ''
-              # }}} configExtra
+            loginShellInit =
+              '' fish_add_path ~/.nix-profile/bin ''
               + builtins.readFile ./fish/ssh-agent.fish;
 
             # shellAbbrs {{{
@@ -267,7 +277,7 @@
 
           # redshift {{{
           services.redshift = {
-            enable = true;
+            enable = false; # TODO linux->true macos->false
             latitude = 56.83;
             longitude = 60.6;
             temperature = {
@@ -295,6 +305,7 @@
             package = neovim-package;
             extraConfig = builtins.readFile ./nvim/init.vim;
           };
+
           # }}} neovim
 
         };

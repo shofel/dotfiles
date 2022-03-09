@@ -1,0 +1,10 @@
+#!/bin/sh
+
+RESULT=result/activate
+
+home-manager build --flake .
+sudo chmod a+w $RESULT
+
+vim +':%s/nix-env -i /nix profile upgrade /' +wq $RESULT
+nix profile remove home-manager
+$RESULT
