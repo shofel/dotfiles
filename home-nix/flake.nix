@@ -55,6 +55,8 @@
 
               rnix-lsp
               nixfmt
+
+              fira-code # for kitty
             ];
             node = with pkgs.nodePackages; [
               vim-language-server
@@ -119,23 +121,24 @@
             source = ./kitty/kitty.conf;
           };
 
+          # fish -lc is to setup env
           home.file.".config/kitty/startup_session".text = ''
             new_tab student
             cd ~/10-19-Computer/11-Examus/11.01-student-web/
-            launch nix-shell --run "nvim +'Term fish'"
+            launch fish -lc 'nix-shell --run nvim'
 
             new_tab compose
-            launch fish -c 'nvim ~/20-29-/drafts-(date +%Y-%m-%-d)'
+            launch fish -lc 'nvim ~/20-29-/drafts-(date +%Y-%m-%-d)'
 
             new_tab dotfiles
             cd ~/10-19-Computer/12-Tools/12.01-dotfiles/
-            launch nvim +'Term fish'
+            launch fish -lc nvim
           '';
 
           home.file.".config/kitty/empty_session".text = ''
             new_tab tab
             cd
-            launch nvim +'Term fish'
+            launch fish -lc nvim
           '';
           # }}} kitty
 
@@ -208,70 +211,74 @@
             recursive = true;
           };
 
-          programs.fish = {
-            enable = true;
+          programs.fish =
+            let
+              shellInit = ""
+                + "set -U VISUAL ${neovim-package}/bin/nvim"
+                + ''
+                  set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
+                  fish_add_path /nix/var/nix/profiles/default/bin
+                  fish_add_path ~/.nix-profile/bin
+                  '';
+            in {
+              enable = true;
 
-            plugins = [{
-              name = "forgit";
-              src = inputs.forgit;
-            }];
+              plugins = [{
+                name = "forgit";
+                src = inputs.forgit;
+              }];
 
-            interactiveShellInit = ''
-              set -U VISUAL ${neovim-package}/bin/nvim
-            '';
+              interactiveShellInit = shellInit;
+              loginShellInit = shellInit;
 
-            loginShellInit =
-              '' fish_add_path ~/.nix-profile/bin ''
-              + builtins.readFile ./fish/ssh-agent.fish;
+              # shellAbbrs {{{
+              shellAbbrs = {
+                dc = "docker-compose";
 
-            # shellAbbrs {{{
-            shellAbbrs = {
-              dc = "docker-compose";
+                gb = "git switch (git branch | string trim | fzf)";
+                gB = ''
+                   git switch (
+                    git fetch --all 1>/dev/null
+                    and git branch --all \
+                      | string replace 'remotes/origin/' "" \
+                      | string trim | sort | uniq \
+                      | fzf
+                  )'';
 
-              gb = "git switch (git branch | string trim | fzf)";
-              gB = ''
-                 git switch (
-                  git fetch --all 1>/dev/null
-                  and git branch --all \
-                    | string replace 'remotes/origin/' "" \
-                    | string trim | sort | uniq \
-                    | fzf
-                )'';
+                gBFG =
+                  "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
 
-              gBFG =
-                "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+                gd = forgit::diff;
+                gdca = "forgit::diff --cached";
+                ga = forgit::add;
 
-              gd = forgit::diff;
-              gdca = "forgit::diff --cached";
-              ga = forgit::add;
+                gamend = "git commit --amend --no-edit";
+                gcom = "git commit";
 
-              gamend = "git commit --amend --no-edit";
-              gcom = "git commit";
+                gfa = "git fetch --all --prune --tags";
+                gpf = "git push --force-with-lease";
+                gpu = "git push -u origin HEAD";
 
-              gfa = "git fetch --all --prune --tags";
-              gpf = "git push --force-with-lease";
-              gpu = "git push -u origin HEAD";
+                gtop = "git rev-parse --show-toplevel";
+                gcd  = "cd (git rev-parse --show-toplevel)";
+                ghash = "git rev-parse --short HEAD";
+                gclean = "git clean -fd";
 
-              gtop = "git rev-parse --show-toplevel";
-              gcd  = "cd (git rev-parse --show-toplevel)";
-              ghash = "git rev-parse --short HEAD";
-              gclean = "git clean -fd";
+                ginit = "git init ;and git commit -m 'root' --allow-empty";
 
-              ginit = "git init ;and git commit -m 'root' --allow-empty";
+                grba = "git rebase --abort";
+                grbc = "git rebase --continue";
+                grbs = "git rebase --skip";
 
-              grba = "git rebase --abort";
-              grbc = "git rebase --continue";
-              grbs = "git rebase --skip";
+                gsm = "git switch master";
+                gst = "git status --short --branch";
 
-              gsm = "git switch master";
-              gst = "git status --short --branch";
-
-              #
-              suspend = "systemctl suspend";
-              v = "nvim '+Term fish'";
-              weather = "curl wttr.in/guangzhou";
-            };
-            # }}} shellAbbrs
+                #
+                suspend = "systemctl suspend";
+                v = "nvim '+Term fish'";
+                weather = "curl wttr.in/guangzhou";
+              };
+              # }}} shellAbbrs
 
           }; # }}} fish
 

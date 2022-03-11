@@ -18,5 +18,5 @@ function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeReq
   git push -o ci.skip -u origin $branch 2>&1 |
     grep merge_requests/new |
     awk '{print $2}' |
-    xargs xdg-open
+    xargs open
 end
