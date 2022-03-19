@@ -1,6 +1,5 @@
 # nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
 #
-# TODO try removich channels from fish init
 # TODO manage kmonad
 # TODO proper x start
 # TODO install kitty on nixos
@@ -9,6 +8,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -17,6 +17,7 @@
       flake = false;
     };
     neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "nixpkgs";
 
     forgit = {
       url = "github:wfxr/forgit";
@@ -248,8 +249,6 @@
                 gBFG =
                   "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
 
-                gd = forgit::diff;
-                gdca = "forgit::diff --cached";
                 ga = forgit::add;
 
                 gamend = "git commit --amend --no-edit";
