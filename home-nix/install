@@ -3,8 +3,13 @@
 RESULT=result/activate
 
 home-manager build --flake .
-sudo chmod a+w $RESULT
 
-vim +':%s/nix-env -i /nix profile upgrade /' +wq $RESULT
+# 
+sudo chmod a+w $RESULT
+nvim $RESULT +':%s/nix-env -i /nix profile install /' +wq!
+sudo chmod a-w $RESULT
+
 nix profile remove home-manager
 $RESULT
+
+rm $RESULT
