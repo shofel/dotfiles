@@ -113,7 +113,13 @@
             extraConfig = ''
             Host *
               AddKeysToAgent yes
-              IdentityFile ~/.ssh/id_ed25519'';
+              IdentityFile ~/.ssh/id_ed25519
+
+            Host student
+              Hostname student.examus.net
+              User ci
+              IdentityFile ~/.ssh/id_student
+            '';
           };
           # }}} ssh
 
@@ -129,7 +135,7 @@
             launch fish -lc 'nix-shell --run nvim'
 
             new_tab compose
-            launch fish -lc 'nvim ~/20-29-/drafts-(date +%Y-%m-%-d)'
+            launch fish -lc 'nvim ~/10-19-Computer/13-Scratchpad/13.01-Text/(date +%Y-%m-%-d)-drafts'
 
             new_tab dotfiles
             cd ~/10-19-Computer/12-Tools/12.01-dotfiles/

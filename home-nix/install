@@ -12,4 +12,4 @@ sudo chmod a-w $RESULT
 nix profile remove home-manager
 $RESULT
 
-rm $RESULT
+sudo rm $RESULT
