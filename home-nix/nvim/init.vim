@@ -448,6 +448,7 @@ require'lspconfig'.stylelint_lsp.setup{
 
 require'lspconfig'.hls.setup{}
 require'lspconfig'.rnix.setup{}
+require'lspconfig'.terraformls.setup{}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.yamlls.setup{}
 EOF

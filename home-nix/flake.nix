@@ -63,6 +63,7 @@
               vim-language-server
               vscode-langservers-extracted
               yaml-language-server
+              terraform-ls
             ];
           in main ++ node;
           # }}} home.packages
