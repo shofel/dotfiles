@@ -54,8 +54,9 @@
 
               htop
 
-              rnix-lsp
               nixfmt
+              rnix-lsp
+              terraform-ls
 
               fira-code # for kitty
             ];
@@ -63,7 +64,6 @@
               vim-language-server
               vscode-langservers-extracted
               yaml-language-server
-              terraform-ls
             ];
           in main ++ node;
           # }}} home.packages
