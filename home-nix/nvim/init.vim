@@ -63,13 +63,12 @@ Plug 'ggandor/lightspeed.nvim'
 " follow conventions
 Plug 'editorconfig/editorconfig-vim'
 
-" search files and inside files
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'dbakker/vim-projectroot'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-file-browser.nvim'
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
+
+Plug 'dbakker/vim-projectroot' " ??
+Plug 'nvim-lua/plenary.nvim'   " ??
 
 " Git
 Plug 'junegunn/gv.vim', {'on': 'GV'}
@@ -87,6 +86,7 @@ Plug 'Olical/conjure'
 Plug 'mattn/emmet-vim', { 'for': ['css', 'scss', 'html'] }
 Plug 'kmonad/kmonad-vim'
 " }}} Languages
+
 
 " draw ascii diagrams
 Plug 'gyim/vim-boxdraw'
@@ -507,38 +507,26 @@ vim.api.nvim_set_keymap('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>', {nore
 EOF
 " }}} toggleterm
 
-" telescope {{{
+" fzf {{{
+" TODO command_center
 
-" from the readme
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-" my custom
-nnoremap <Leader>f: <cmd>Telescope command_history<cr>
-nnoremap <Leader>fb <cmd>Telescope builtin<cr>
-nnoremap <Leader>fc <cmd>Telescope commands<cr>
-nnoremap <Leader>fC <cmd>Telescope colorscheme<cr>
-nnoremap <Leader>fm <cmd>Telescope marks<cr>
-nnoremap <leader>fB <cmd>Telescope file_browser<cr>
-nnoremap <leader>fF <cmd>Telescope find_files hidden=true<cr>
-nnoremap <leader>fk <cmd>Telescope keymaps<cr>
+nnoremap <leader>ff <cmd>FzfLua git_files<cr>
+nnoremap <leader>fF <cmd>lua require('fzf-lua').files({fd_opts = '--no-ignore --hidden'})<cr>
+nnoremap <leader>fg <cmd>FzfLua live_grep<cr>
+nnoremap <leader>fh <cmd>FzfLua help_tags<cr>
+nnoremap <Leader>fch <cmd>FzfLua command_history<cr>
+nnoremap <Leader>fcl <cmd>FzfLua commands<cr>
+nnoremap <Leader>fcb <cmd>FzfLua builtin<cr>
+nnoremap <Leader>f' <cmd>FzfLua marks<cr>
+nnoremap <leader>fk <cmd>FzfLua keymaps<cr>
+nnoremap <leader>f. <cmd>FzfLua resume<cr>
 
-" short keys, without the `f` prefix
-nnoremap <leader>b  <cmd>Telescope buffers<cr>
-nnoremap <Leader>/  <cmd>Telescope current_buffer_fuzzy_find<cr>
-
-" TODO replace this one with telescope
-nnoremap <Leader>w <cmd>Windows<Return>
-" TODO implement a finder for fd --no-ignore --hidden
-
-" TODO map / to <cr> in file_browser
+nnoremap <Leader>/  <cmd>FzfLua blines<cr>
+nnoremap <Leader>b  <cmd>FzfLua tabs<cr>
 
 if (!executable('fd')) | echoerr 'fd (fd-find) executable not found' | endif
 if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
-
-lua require'telescope'.load_extension 'file_browser'
-" }}} telescope
+" }}} fzf
 
 " lightspeed.nvim {{{
 lua <<EOF
