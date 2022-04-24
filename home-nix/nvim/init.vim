@@ -80,6 +80,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'rhysd/reply.vim'
 Plug 'sheerun/vim-polyglot'
 
+Plug 'simrat39/symbols-outline.nvim'
+
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'Olical/conjure'
@@ -102,6 +104,9 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'rakr/vim-one' " one
+
+" Tweak
+Plug 'dstein64/vim-startuptime'
 
 " {{{ alternative colors
 " dark themes
@@ -509,20 +514,23 @@ EOF
 
 " fzf {{{
 " TODO command_center
+lua <<LUA
 
-nnoremap <leader>ff <cmd>FzfLua git_files<cr>
-nnoremap <leader>fF <cmd>lua require('fzf-lua').files({fd_opts = '--no-ignore --hidden'})<cr>
-nnoremap <leader>fg <cmd>FzfLua live_grep<cr>
-nnoremap <leader>fh <cmd>FzfLua help_tags<cr>
-nnoremap <Leader>fch <cmd>FzfLua command_history<cr>
-nnoremap <Leader>fcc <cmd>FzfLua commands<cr>
-nnoremap <Leader>fcf <cmd>FzfLua builtin<cr>
-nnoremap <Leader>f' <cmd>FzfLua marks<cr>
-nnoremap <leader>fk <cmd>FzfLua keymaps<cr>
-nnoremap <leader>f. <cmd>FzfLua resume<cr>
+vim.keymap.set({'n'}, '<leader>ff',  require('fzf-lua').git_files)
+vim.keymap.set({'n'}, '<leader>fF',  function() require('fzf-lua').files({fd_opts = '--no-ignore --hidden'}) end)
+vim.keymap.set({'n'}, '<leader>fg',  require('fzf-lua').live_grep)
+vim.keymap.set({'n'}, '<leader>fh',  require('fzf-lua').help_tags)
+vim.keymap.set({'n'}, '<leader>fch', require('fzf-lua').command_history)
+vim.keymap.set({'n'}, '<leader>fcc', require('fzf-lua').commands)
+vim.keymap.set({'n'}, '<leader>fcf', require('fzf-lua').builtin)
+vim.keymap.set({'n'}, "<leader>f'",  require('fzf-lua').marks)
+vim.keymap.set({'n'}, '<leader>fk',  require('fzf-lua').keymaps)
+vim.keymap.set({'n'}, '<leader>f.',  require('fzf-lua').resume)
 
-nnoremap <Leader>/  <cmd>FzfLua blines<cr>
-nnoremap <Leader>b  <cmd>FzfLua tabs<cr>
+vim.keymap.set({'n'},  '<leader>/',  require('fzf-lua').blines)
+vim.keymap.set({'n'},  '<leader>b',  require('fzf-lua').tabs)
+
+LUA
 
 if (!executable('fd')) | echoerr 'fd (fd-find) executable not found' | endif
 if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
