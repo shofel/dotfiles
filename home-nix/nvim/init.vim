@@ -515,8 +515,8 @@ nnoremap <leader>fF <cmd>lua require('fzf-lua').files({fd_opts = '--no-ignore --
 nnoremap <leader>fg <cmd>FzfLua live_grep<cr>
 nnoremap <leader>fh <cmd>FzfLua help_tags<cr>
 nnoremap <Leader>fch <cmd>FzfLua command_history<cr>
-nnoremap <Leader>fcl <cmd>FzfLua commands<cr>
-nnoremap <Leader>fcb <cmd>FzfLua builtin<cr>
+nnoremap <Leader>fcc <cmd>FzfLua commands<cr>
+nnoremap <Leader>fcf <cmd>FzfLua builtin<cr>
 nnoremap <Leader>f' <cmd>FzfLua marks<cr>
 nnoremap <leader>fk <cmd>FzfLua keymaps<cr>
 nnoremap <leader>f. <cmd>FzfLua resume<cr>
