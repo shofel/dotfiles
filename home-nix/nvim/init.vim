@@ -516,19 +516,25 @@ EOF
 " TODO command_center
 lua <<LUA
 
-vim.keymap.set({'n'}, '<leader>ff',  require('fzf-lua').git_files)
-vim.keymap.set({'n'}, '<leader>fF',  function() require('fzf-lua').files({fd_opts = '--no-ignore --hidden'}) end)
-vim.keymap.set({'n'}, '<leader>fg',  require('fzf-lua').live_grep)
-vim.keymap.set({'n'}, '<leader>fh',  require('fzf-lua').help_tags)
-vim.keymap.set({'n'}, '<leader>fH', require('fzf-lua').command_history)
-vim.keymap.set({'n'}, '<leader>fc', require('fzf-lua').commands)
-vim.keymap.set({'n'}, '<leader>f<leader>', require('fzf-lua').builtin)
-vim.keymap.set({'n'}, "<leader>f'",  require('fzf-lua').marks)
-vim.keymap.set({'n'}, '<leader>fk',  require('fzf-lua').keymaps)
-vim.keymap.set({'n'}, '<leader>f.',  require('fzf-lua').resume)
+local fzf = require('fzf-lua')
 
-vim.keymap.set({'n'},  '<leader>/',  require('fzf-lua').blines)
-vim.keymap.set({'n'},  '<leader>b',  require('fzf-lua').tabs)
+local fzf_files = function()
+  fzf.files({fd_opts = '--no-ignore --hidden'})
+end
+
+vim.keymap.set({'n'}, '<leader>ff',  fzf.git_files)
+vim.keymap.set({'n'}, '<leader>fF',  fzf_files)
+vim.keymap.set({'n'}, '<leader>fg',  fzf.live_grep)
+vim.keymap.set({'n'}, '<leader>fh',  fzf.help_tags)
+vim.keymap.set({'n'}, '<leader>fH',  fzf.command_history)
+vim.keymap.set({'n'}, '<leader>fc',  fzf.commands)
+vim.keymap.set({'n'}, '<leader>f<leader>', fzf.builtin)
+vim.keymap.set({'n'}, "<leader>f'",  fzf.marks)
+vim.keymap.set({'n'}, '<leader>fk',  fzf.keymaps)
+vim.keymap.set({'n'}, '<leader>f.',  fzf.resume)
+
+vim.keymap.set({'n'},  '<leader>/',  fzf.blines)
+vim.keymap.set({'n'},  '<leader>b',  fzf.tabs)
 
 LUA
 
