@@ -92,6 +92,8 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
 Plug 'https://github.com/rebelot/kanagawa.nvim'
 
+Plug 'https://github.com/dstein64/vim-startuptime'
+
 call plug#end()
 " }}}
 
@@ -159,6 +161,7 @@ require'lualine'.setup {
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
+    globalstatus = true,
   },
   sections = {
     lualine_a = {'branch'},
