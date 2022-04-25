@@ -3,11 +3,6 @@
 " TODO adopt workspaces and sessions
 "      + edit init.vim as a part of workspace/dotfiles project
 
-" TODO next: tabs:
-" - tag tabs with a custom names
-
-" TODO ? use , as a localleader ?
-
 " TODO discoverable keys
 
 " TODO migrate to packer
@@ -26,9 +21,6 @@
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
-" read local .vimrc files
-Plug 'MarcWeber/vim-addon-local-vimrc'
-
 " tpope
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -41,34 +33,33 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
+" mini
+Plug 'echasnovski/mini.nvim'
+
 " gutter
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-""""
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'folke/trouble.nvim'
-Plug 'gennaro-tedesco/nvim-peekup'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lualine/lualine.nvim'
 
 " more editing
-Plug 'tommcdo/vim-exchange'
-Plug 'jiangmiao/auto-pairs'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-" motion
-Plug 'ggandor/lightspeed.nvim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tommcdo/vim-exchange' " gbprod/substitute.nvim
 
 " follow conventions
 Plug 'editorconfig/editorconfig-vim'
 
+" ide
+Plug 'simrat39/symbols-outline.nvim'
+
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
-
-Plug 'dbakker/vim-projectroot' " ??
-Plug 'nvim-lua/plenary.nvim'   " ??
 
 " Git
 Plug 'junegunn/gv.vim', {'on': 'GV'}
@@ -79,8 +70,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'rhysd/reply.vim'
 Plug 'sheerun/vim-polyglot'
-
-Plug 'simrat39/symbols-outline.nvim'
 
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -96,40 +85,11 @@ Plug 'gyim/vim-boxdraw'
 " embed to browser
 Plug 'glacambre/firenvim'
 
-Plug 'jez/vim-superman'
-
 Plug 'akinsho/toggleterm.nvim'
 
 " my favourite colors
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'rakr/vim-one' " one
-
-" Tweak
-Plug 'dstein64/vim-startuptime'
-
-" {{{ alternative colors
-" dark themes
-" Plug 'joshdick/onedark.vim'
-" Plug 'ErichDonGubler/vim-sublime-monokai'
-" Plug 'abra/vim-obsidian'
-
-" a framework and a huge collection of themes
-" Plug 'chriskempson/base16-vim'
-
-" also good colors
-" Plug 'frankier/neovim-colors-solarized-truecolor-only'
-" Plug 'NLKNguyen/papercolor-theme' " PaperColor
-" Plug 'rakr/vim-colors-rakr'
-
-" colorschemes without colors
-" Plug 'yankcrime/direwolf'
-" Plug 'endel/vim-github-colorscheme'
-" Plug 'reedes/vim-colors-pencil'
-"
-" Everforest is a green based color scheme, it's designed to be warm and soft in order to protect developers' eyes.
-" Plug 'sainnhe/everforest'
-" }}}
+Plug 'https://github.com/rebelot/kanagawa.nvim'
 
 call plug#end()
 " }}}
@@ -171,9 +131,6 @@ set imsearch=0
 " colors {{{
 
 " tune colorschemes
-let g:quantum_italics=1
-let g:quantum_black=1
-let g:one_allow_italics = 1
 let g:two_firewatch_italics=1
 
 " init colors
@@ -193,10 +150,6 @@ highlight link ExchangeRegion Folded
 
 " statusline and tabline {{{
 lua <<EOF
-local function hide_tabline()
-  vim.go.showtabline = 0
-end
-
 require'lualine'.setup {
   options = {
     icons_enabled = true,
@@ -264,29 +217,10 @@ augroup initvim
 augroup END
 " }}}
 
-" vman {{{
-function! s:vmanSettings()
-  setlocal nonumber
-  setlocal signcolumn=no
-  setlocal showtabline=0
-  setlocal ruler
-  nnoremap <buffer> q <cmd>q!<cr>
-endfunction
-
-augroup vmanSettings
-  autocmd!
-  autocmd Filetype man call s:vmanSettings()
-augroup END
-" }}}
-
-" abbreviations {{{
-abbr retrun return
-" }}}
-
 " keys {{{
 
 let mapleader="\<Space>"
-let maplocalleader="\<Space>\<Space>"
+let maplocalleader=","
 
 nnoremap ; g;
 
@@ -461,15 +395,25 @@ EOF
 
 " TS TreeSitter {{{
 lua  <<EOF
---[[
 require'nvim-treesitter.configs'.setup {
-  rainbow = {
+  ensure_installed = "all",
+  sync_install = false, 
+  ignore_install = { "" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true, -- false will disable the whole extension
+    disable = { "" }, -- list of language that will be disabled
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
     enable = true,
+    disable = { "yaml" }
+  },
+  rainbow = {
+    enable = false,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
   }
 }
-]]
 EOF
 " }}} TS TreeSitter
 
@@ -513,7 +457,6 @@ EOF
 " }}} toggleterm
 
 " fzf {{{
-" TODO command_center
 lua <<LUA
 
 local fzf = require('fzf-lua')
@@ -532,9 +475,10 @@ vim.keymap.set({'n'}, '<leader>f<leader>', fzf.builtin)
 vim.keymap.set({'n'}, "<leader>f'",  fzf.marks)
 vim.keymap.set({'n'}, '<leader>fk',  fzf.keymaps)
 vim.keymap.set({'n'}, '<leader>f.',  fzf.resume)
+vim.keymap.set({'n'}, '<leader>fr',  fzf.resume)
 
 vim.keymap.set({'n'},  '<leader>/',  fzf.blines)
-vim.keymap.set({'n'},  '<leader>b',  fzf.tabs)
+vim.keymap.set({'n'},  '<leader>b',  fzf.buffers)
 
 LUA
 
