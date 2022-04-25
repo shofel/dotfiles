@@ -18,6 +18,8 @@
 " TODO keymap tree <leader>v to input digraphs
 " TODO preserve layout when killing a buffer
 
+" TODO not yank on delete
+
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -69,7 +71,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'rhysd/reply.vim'
-Plug 'sheerun/vim-polyglot'
 
 Plug 'georgewitteman/vim-fish'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
