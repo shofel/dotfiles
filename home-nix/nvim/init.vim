@@ -397,7 +397,52 @@ EOF
 " TS TreeSitter {{{
 lua  <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+  -- list of parsers {{{
+  ensure_installed = {
+    "bash",
+    "clojure",
+    "cmake",
+    "comment",
+    "commonlisp",
+    "css",
+    "dart",
+    "dockerfile",
+    "erlang",
+    "fennel",
+    "fish",
+    "go",
+    "html",
+    "http",
+    "javascript",
+    "jsdoc",
+    "json",
+    "json5",
+    "latex",
+    "lua",
+    "make",
+    "markdown",
+    "ninja",
+    "nix",
+    "org",
+    "pascal",
+    "perl",
+    "php",
+    "python",
+    "regex",
+    "ruby",
+    "rust",
+    "scheme",
+    "scss",
+    "teal",
+    "toml",
+    "tsx",
+    "typescript",
+    "vim",
+    "vue",
+    "yaml",
+    },
+  -- }}}
+
   sync_install = false, 
   ignore_install = { "" }, -- List of parsers to ignore installing
   highlight = {
