@@ -476,29 +476,26 @@ nnoremap <Leader>n :nohlsearch<cr>
 nnoremap / /\v
 " }}}
 
+lua<<EOF
+  -- `x` in visual modes does not save the deleted text
+  vim.keymap.set({'n', 'v', 'x'}, 'x', '"_x')
+EOF
+
 " toggleterm {{{
 lua<<EOF
 require("toggleterm").setup{
   direction = 'float',
-  hidden = true,
 }
 
 local Terminal = require('toggleterm.terminal').Terminal
 
---[ terminals
-
 local fish  = Terminal:new {cmd = 'fish', hidden = false}
 local serve = Terminal:new {cmd = 'fish'}
 
-function shovel_terminal_fish()  fish:toggle(); end
-function shovel_terminal_serve() serve:toggle(); end
+vim.keymap.set({'n'}, '<leader>ts', fish:toggle)
+vim.keymap.set({'n'}, '<leader>tf', serve:toggle)
 
-vim.api.nvim_set_keymap('n', '<leader>ts', '<cmd>lua shovel_terminal_serve()<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tf', '<cmd>lua shovel_terminal_fish()<cr>',  {noremap = true, silent = true})
-
---] terminals
-
-vim.api.nvim_set_keymap('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>')
 EOF
 " }}} toggleterm
 
