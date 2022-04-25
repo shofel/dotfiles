@@ -1,5 +1,6 @@
 # nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
 #
+# TODO converge command and control keys on macos
 # TODO manage kmonad
 # TODO proper x start
 # TODO install kitty on nixos

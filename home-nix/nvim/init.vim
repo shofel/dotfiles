@@ -328,41 +328,35 @@ local util = require'lspconfig'.util
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local opts = { noremap=true, silent=true }
+  local opts = {buffer = bufnr}
 
   -- navigation and doc
-  buf_set_keymap('n', '<Leader>dec', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', '<Leader>def', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<Leader>di', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<Leader>ds', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dR', '<cmd>Rg! <c-r><c-w><CR>', opts)
+  vim.keymap.set({'n'}, '<Leader>dec', vim.lsp.buf.declaration, opts)
+  vim.keymap.set({'n'}, '<Leader>def', vim.lsp.buf.definition, opts)
+  vim.keymap.set({'n'}, '<Leader>di', vim.lsp.buf.implementation, opts)
+  vim.keymap.set({'n'}, '<Leader>dt', vim.lsp.buf.type_definition, opts)
+  vim.keymap.set({'n'}, '<Leader>ds', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set({'n'}, '<Leader>dh', vim.lsp.buf.hover, opts)
+  vim.keymap.set({'n'}, '<Leader>dr', vim.lsp.buf.references, opts)
   -- diagnostic
-  buf_set_keymap('n', '<Leader>dk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dw', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '<Leader>dq', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  buf_set_keymap('n', '<Leader>df', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.keymap.set({'n'}, '<Leader>dk', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set({'n'}, '<Leader>dj', vim.diagnostic.goto_next, opts)
+  vim.keymap.set({'n'}, '<Leader>dw', vim.diagnostic.open_float, opts)
+  vim.keymap.set({'n'}, '<Leader>dq', vim.diagnostic.setloclist, opts)
+  vim.keymap.set({'n'}, '<Leader>df', vim.lsp.buf.formatting, opts)
   -- workspace
-  buf_set_keymap('n', '<Leader>Wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<Leader>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<Leader>Wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.keymap.set({'n'}, '<Leader>Wa', vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set({'n'}, '<Leader>Wr', vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set({'n'}, '<Leader>Wl', print(vim.inspect(vim.lsp.buf.list_workspace_folders())), opts)
   -- buf
-  buf_set_keymap('n', '<Leader>r',  '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<Leader>da', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.keymap.set({'n'}, '<Leader>r',  vim.lsp.buf.rename, opts)
+  vim.keymap.set({'n'}, '<Leader>da', vim.lsp.buf.code_action, opts)
   -- reassign some native mappings
-  buf_set_keymap('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.keymap.set({'n'}, 'K',  vim.lsp.buf.hover, opts)
+  vim.keymap.set({'n'}, 'gd', vim.lsp.buf.definition, opts)
 end
 
 require'lspconfig'.powershell_es.setup{
