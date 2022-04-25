@@ -476,7 +476,7 @@ lua<<EOF
 EOF
 
 " toggleterm {{{
-lua<<EOF
+lua <<EOF
 require("toggleterm").setup{
   direction = 'float',
 }
@@ -486,11 +486,13 @@ local Terminal = require('toggleterm.terminal').Terminal
 local fish  = Terminal:new {cmd = 'fish', hidden = false}
 local serve = Terminal:new {cmd = 'fish'}
 
-vim.keymap.set({'n'}, '<leader>ts', fish:toggle)
-vim.keymap.set({'n'}, '<leader>tf', serve:toggle)
+vim.keymap.set({'n'}, '<leader>ts', function () fish:toggle() end)
+vim.keymap.set({'n'}, '<leader>tf', function () serve:toggle() end)
 
-vim.keymap.set('n', '<leader>th', '<cmd>ToggleTermToggleAll<cr>')
+vim.keymap.set({'n'}, '<leader>th', '<cmd>ToggleTermToggleAll<cr>')
+
 EOF
+
 " }}} toggleterm
 
 " fzf {{{
