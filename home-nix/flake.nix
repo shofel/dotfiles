@@ -49,6 +49,7 @@
           # home.packages {{{
           home.packages = let
             main = with pkgs; [
+              jq
               gh
               fd
               ripgrep
