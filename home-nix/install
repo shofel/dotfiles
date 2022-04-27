@@ -11,12 +11,8 @@ if test ! -e $RESULT; then
   exit 1
 fi
 
-# 
-sudo chmod a+w $RESULT
-nvim $RESULT +':%s/nix-env -i /nix profile install /' +wq!
-sudo chmod a-w $RESULT
 
-nix profile remove home-manager
+nix profile remove 0 1 2 3 4 5 6 7 8 9 10
 $RESULT
 
 sudo rm $RESULT
