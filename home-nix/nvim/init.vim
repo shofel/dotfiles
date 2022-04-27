@@ -18,8 +18,6 @@
 " TODO keymap tree <leader>v to input digraphs
 " TODO preserve layout when killing a buffer
 
-" TODO not yank on delete
-
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -259,6 +257,10 @@ nnoremap <M-Left>   <C-w><C-h>
 nnoremap <M-Right>  <C-w><C-l>
 nnoremap <M-Down>   <C-w><C-j>
 nnoremap <M-Up>     <C-w><C-k>
+nnoremap <M-h>  <C-w><C-h>
+nnoremap <M-n>  <C-w><C-n>
+nnoremap <M-t>  <C-w><C-j>
+nnoremap <M-c>  <C-w><C-k>
 " }}}
 
 " some commands
@@ -507,20 +509,21 @@ local fzf_files = function()
   fzf.files({fd_opts = '--no-ignore --hidden'})
 end
 
-vim.keymap.set({'n'}, '<leader>ff',  fzf.git_files)
-vim.keymap.set({'n'}, '<leader>fF',  fzf_files)
-vim.keymap.set({'n'}, '<leader>fg',  fzf.live_grep)
-vim.keymap.set({'n'}, '<leader>fh',  fzf.help_tags)
-vim.keymap.set({'n'}, '<leader>fH',  fzf.command_history)
-vim.keymap.set({'n'}, '<leader>fc',  fzf.commands)
-vim.keymap.set({'n'}, '<leader>f<leader>', fzf.builtin)
-vim.keymap.set({'n'}, "<leader>f'",  fzf.marks)
-vim.keymap.set({'n'}, '<leader>fk',  fzf.keymaps)
-vim.keymap.set({'n'}, '<leader>f.',  fzf.resume)
-vim.keymap.set({'n'}, '<leader>fr',  fzf.resume)
+vim.keymap.set({'n'}, '<leader>ff', fzf.git_files)
+vim.keymap.set({'n'}, '<leader>fF', fzf_files)
+vim.keymap.set({'n'}, '<leader>fg', fzf.live_grep)
+vim.keymap.set({'n'}, '<leader>fh', fzf.help_tags)
+vim.keymap.set({'n'}, '<leader>fH', fzf.command_history)
+vim.keymap.set({'n'}, '<leader>fc', fzf.commands)
+vim.keymap.set({'n'}, '<leader>f,', fzf.builtin)
+vim.keymap.set({'n'}, "<leader>f'", fzf.marks)
+vim.keymap.set({'n'}, '<leader>fk', fzf.keymaps)
+vim.keymap.set({'n'}, '<leader>f.', fzf.resume)
+vim.keymap.set({'n'}, '<leader>fw', fzf.grep_cword)
+vim.keymap.set({'n'}, '<leader>fW', fzf.grep_cWORD)
 
-vim.keymap.set({'n'},  '<leader>/',  fzf.blines)
-vim.keymap.set({'n'},  '<leader>b',  fzf.buffers)
+vim.keymap.set({'n'},  '<leader>/', fzf.blines)
+vim.keymap.set({'n'},  '<leader>b', fzf.buffers)
 
 LUA
 
