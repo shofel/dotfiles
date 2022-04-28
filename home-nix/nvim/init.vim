@@ -477,10 +477,11 @@ nnoremap / /\v
 
 lua<<EOF
   -- `x` in visual modes does not save the deleted text
-  vim.keymap.set({'n', 'v', 'x'}, 'x', '"_x')
+  vim.keymap.set({'v', 'x'}, 'x', '"_x')
 EOF
 
 " toggleterm {{{
+" TODO persist terminals across sourcing vimrc
 lua <<EOF
 require("toggleterm").setup{
   direction = 'float',
