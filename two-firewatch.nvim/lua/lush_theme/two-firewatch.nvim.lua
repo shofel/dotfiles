@@ -49,6 +49,29 @@ local hsl = lush.hsl
 -- support an annotation like the following. Consult your server documentation.
 ---@diagnostic disable: undefined-global
 local theme = lush(function()
+
+  -- First color.
+  local uno1 = hsl(40, 90, 20)
+  local uno2 = hsl(40, 75, 55)
+  local uno3 = hsl(40, 45, 70)
+  local uno4 = hsl(40, 20, 60)
+
+  -- Second color.
+  local duo1 = hsl(210, 90, 50)
+  local duo2 = hsl(210, 60, 80)
+  local duo3 = hsl(210,  5, 60)
+
+  local fg               = uno_2
+  local bg               = hsl(36, 2, 98)
+
+  local error            = hsl(0, 40, 80)
+
+  local accent           = uno_2
+  local selection        = hsl(40, 10, 90)
+  local signcolumn       = hsl(40,  5, 92)
+  local fold_bg          = hsl(40, 10, 80)
+  local cursor_line      = hsl(40,  5, 95)
+
   return {
     -- The following are all the Neovim default highlight groups from the docs
     -- as of 0.5.0-nightly-446, to aid your theme creation. Your themes should
@@ -62,21 +85,23 @@ local theme = lush(function()
     -- styling for that group (meaning they mostly get styled as Normal)
     -- or leave them commented to apply vims default colouring or linking.
 
-    -- Comment      { }, -- any comment
+    Comment      { fg = uno4.darken(50) }, -- any comment
     -- ColorColumn  { }, -- used for the columns set with 'colorcolumn'
-    -- Conceal      { }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    -- Cursor       { }, -- character under the cursor
+    Conceal      { }, -- placeholder characters substituted for concealed text (see 'conceallevel')
+    Cursor       { fg = bg, bg = uno2}, -- character under the cursor
     -- lCursor      { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     { }, -- like Cursor, but used when in IME mode |CursorIM|
     -- CursorColumn { }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     -- CursorLine   { }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
-    -- Directory    { }, -- directory names (and other special names in listings)
-    -- DiffAdd      { }, -- diff mode: Added line |diff.txt|
-    -- DiffChange   { }, -- diff mode: Changed line |diff.txt|
-    -- DiffDelete   { }, -- diff mode: Deleted line |diff.txt|
-    -- DiffText     { }, -- diff mode: Changed text within a changed line |diff.txt|
-    -- EndOfBuffer  { }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
-    -- TermCursor   { }, -- cursor in a focused terminal
+    Directory    { fg = uno1 }, -- directory names (and other special names in listings)
+    DiffAdd      { bg = '#c9e6c9' }, -- diff mode: Added line |diff.txt|
+    DiffChange   { bg = '#cdcdfd' }, -- diff mode: Changed line |diff.txt|
+    DiffDelete   { bg = '#ffcddc' }, -- diff mode: Deleted line |diff.txt|
+    DiffText     { bg = '#b6f2b6' }, -- diff mode: Changed text within a changed line |diff.txt|
+    DiffAdded    { DiffAdd }, -- fugitive,
+    DiffRemoved  { DiffDelete }, -- fugitive,
+    EndOfBuffer  { fg = bg }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
+    -- TermCursor   { Cursor }, -- cursor in a focused terminal
     -- TermCursorNC { }, -- cursor in an unfocused terminal
     -- ErrorMsg     { }, -- error messages on the command line
     -- VertSplit    { }, -- the column separating vertically split windows
@@ -126,12 +151,12 @@ local theme = lush(function()
     -- default,
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    -- Constant       { }, -- (preferred) any constant
-    -- String         { }, --   a string constant: "this is a string"
-    -- Character      { }, --  a character constant: 'c', '\n'
-    -- Number         { }, --   a number constant: 234, 0xff
-    -- Boolean        { }, --  a boolean constant: TRUE, false
-    -- Float          { }, --    a floating point constant: 2.3e10
+    Constant       { fg = duo3 }, -- (preferred) any constant
+    String         { fg = duo1 }, --   a string constant: "this is a string"
+    Character      { Constant }, --  a character constant: 'c', '\n'
+    Number         { Constant }, --   a number constant: 234, 0xff
+    Boolean        { Constant }, --  a boolean constant: TRUE, false
+    Float          { Constant }, --    a floating point constant: 2.3e10
 
     -- Identifier     { }, -- (preferred) any variable name
     -- Function       { }, -- function name (also: methods for classes)

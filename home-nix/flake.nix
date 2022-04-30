@@ -58,6 +58,7 @@
 
               nixfmt
               rnix-lsp
+              sumneko-lua-language-server
               terraform-ls
 
               fira-code # for kitty
