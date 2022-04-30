@@ -88,6 +88,7 @@ Plug 'akinsho/toggleterm.nvim'
 " my favourite colors
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
 Plug 'https://github.com/rebelot/kanagawa.nvim'
+Plug 'https://github.com/rktjmp/lush.nvim'
 
 Plug 'https://github.com/dstein64/vim-startuptime'
 
