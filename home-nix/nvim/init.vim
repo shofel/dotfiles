@@ -1,9 +1,9 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
+" TODO fennel to loop and etc
+
 " TODO adopt workspaces and sessions
 "      + edit init.vim as a part of workspace/dotfiles project
-
-" TODO discoverable keys
 
 " TODO migrate to packer
 "      + switch to init.lua
@@ -14,8 +14,7 @@
 
 " TODO colors for treesitter
 
-" TODO explore mini.nvim collection https://github.com/echasnovski/mini.nvim
-" TODO keymap tree <leader>v to input digraphs
+" mini.nvim
 " TODO preserve layout when killing a buffer
 
 " plugins {{{
@@ -267,6 +266,7 @@ nnoremap <M-c>  <C-w><C-k>
 nnoremap <Leader>s   <cmd>w<Return>
 nnoremap <Leader>o   <cmd>only<Return>
 nnoremap <Leader>kk  <cmd>bdelete!<Return>
+nnoremap <Leader>kc  <cmd>lua require('mini.bufremove').delete()<Return>
 
 " git & bufsync
 nnoremap <Leader>gs <cmd>vert Git<Return>
@@ -296,14 +296,16 @@ nnoremap <Leader>c  :checkt<Return>
 nnoremap <Leader>s  :write<Return>
 
 " clipboard {{{
-" X clipboard
-xmap <Leader>y "+y<Return>
-nmap <Leader>p "+]p<Return>
-xmap <Leader>p "+]p<Return>
-" X selection
-xmap <Leader>Y "*y<Return>
-nmap <Leader>P "*]p<Return>
-xmap <Leader>P "*]p<Return>
+lua <<EOF
+  -- `x` in visual modes does not save the deleted text
+  vim.keymap.set({'v', 'x'},         'x', '"_x')
+  -- X clipboard
+  vim.keymap.set({     'x'}, '<Leader>y', '"+y' , {remap = true})
+  vim.keymap.set({'n', 'x'}, '<Leader>p', '"+]p', {remap = true})
+  -- X selection
+  vim.keymap.set({     'x'}, '<Leader>Y', '"*y' , {remap = true})
+  vim.keymap.set({'n', 'x'}, '<Leader>P', '"*]p', {remap = true})
+EOF
 " }}} clipboard
 
 " Insert random string
@@ -475,11 +477,6 @@ nnoremap <Leader>n :nohlsearch<cr>
 nnoremap / /\v
 " }}}
 
-lua<<EOF
-  -- `x` in visual modes does not save the deleted text
-  vim.keymap.set({'v', 'x'}, 'x', '"_x')
-EOF
-
 " toggleterm {{{
 " TODO persist terminals across sourcing vimrc
 lua <<EOF
@@ -505,6 +502,10 @@ EOF
 lua <<LUA
 
 local fzf = require('fzf-lua')
+
+fzf.setup({
+  border = 'single',
+})
 
 local fzf_files = function()
   fzf.files({fd_opts = '--no-ignore --hidden'})
