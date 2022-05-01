@@ -41,6 +41,10 @@
 --  or
 --
 --  `:lua require('lush').ify()`
+--
+--
+-- Convert two-firewatch.vim to lush:
+-- s/call <sid>X('\([a-zA-z]\+\)',\s\+\([':_0-9a-zA-z]\+\),\s\+\([':_0-9a-zA-z]\+\),\s\+\([':_0-9a-zA-z]\+\))/\1 { fg = \2, bg = \3, gui = \4 }
 
 local lush = require('lush')
 local hsl = lush.hsl
@@ -68,16 +72,15 @@ local theme = lush(function()
   local neu3 = hsl(40, 0, 55)
   local neu4 = hsl(40, 0, 80)
 
-  local fg               = uno_2
-  local bg               = hsl(36, 2, 98)
+  local fg               = uno2
+  local bg               = hsl(0, 0, 95)
 
   local error            = hsl(0, 40, 80)
 
-  local accent           = uno_2
+  local accent           = uno2
   local selection        = hsl(40, 10, 90)
   local signcolumn       = hsl(40,  5, 92)
   local fold_bg          = hsl(40, 10, 80)
-  local cursor_line      = hsl(40,  5, 95)
 
   return {
     -- The following are all the Neovim default highlight groups from the docs
@@ -92,34 +95,34 @@ local theme = lush(function()
     -- styling for that group (meaning they mostly get styled as Normal)
     -- or leave them commented to apply vims default colouring or linking.
 
-    Comment      { fg = uno4.darken(50) }, -- any comment
+    Comment      { fg = duo4.mix(duo1, 50) }, -- any comment
     -- ColorColumn  { }, -- used for the columns set with 'colorcolumn'
-    Conceal      { }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor       { fg = bg, bg = uno2}, -- character under the cursor
+    -- Conceal      { }, -- placeholder characters substituted for concealed text (see 'conceallevel')
+    Cursor       { fg = bg, bg = uno4 }, -- character under the cursor
     -- lCursor      { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     { }, -- like Cursor, but used when in IME mode |CursorIM|
-    -- CursorColumn { }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    -- CursorLine   { }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorColumn { bg = signcolumn.lighten(20) }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
+    CursorLine   { CursorColumn }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory    { fg = uno1 }, -- directory names (and other special names in listings)
-    DiffAdd      { bg = '#c9e6c9' }, -- diff mode: Added line |diff.txt|
+    DiffAdd      { fg = bg, bg = '#c9e6c9' }, -- diff mode: Added line |diff.txt|
     DiffChange   { bg = '#cdcdfd' }, -- diff mode: Changed line |diff.txt|
     DiffDelete   { bg = '#ffcddc' }, -- diff mode: Deleted line |diff.txt|
     DiffText     { bg = '#b6f2b6' }, -- diff mode: Changed text within a changed line |diff.txt|
     DiffAdded    { DiffAdd }, -- fugitive,
     DiffRemoved  { DiffDelete }, -- fugitive,
     EndOfBuffer  { fg = bg }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
-    -- TermCursor   { Cursor }, -- cursor in a focused terminal
-    -- TermCursorNC { }, -- cursor in an unfocused terminal
-    -- ErrorMsg     { }, -- error messages on the command line
-    -- VertSplit    { }, -- the column separating vertically split windows
-    -- Folded       { }, -- line used for closed folds
-    -- FoldColumn   { }, -- 'foldcolumn'
-    -- SignColumn   { }, -- column where |signs| are displayed
-    -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    TermCursor   { Cursor }, -- cursor in a focused terminal
+    TermCursorNC { bg = neu4 }, -- cursor in an unfocused terminal
+    ErrorMsg     { fg = error, bg = bg }, -- error messages on the command line
+    VertSplit    { fg = fold_bg }, -- the column separating vertically split windows
+    Folded       { fg = uno1, bg = fold_bg }, -- line used for closed folds
+    FoldColumn   { Folded }, -- 'foldcolumn'
+    SignColumn   { bg = signcolumn }, -- column where |signs| are displayed
+    IncSearch    { fg = bg, bg = uno4 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     -- Substitute   { }, -- |:substitute| replacement text highlighting
-    -- LineNr       { }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-    -- CursorLineNr { }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    -- MatchParen   { }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+    LineNr       { fg = neu3 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    CursorLineNr { fg = neu1 }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    MatchParen   { fg = neu1, bg = duo4, gui = 'bold' }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     -- ModeMsg      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea      { }, -- Area for messages and cmdline
     -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -194,9 +197,9 @@ local theme = lush(function()
     -- SpecialComment { }, -- special things inside a comment
     -- Debug          { }, --    debugging statements
 
-    -- Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
-    -- Bold       { gui = "bold" },
-    -- Italic     { gui = "italic" },
+    Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
+    Bold       { gui = "bold" },
+    Italic     { gui = "italic" },
 
     -- ("Ignore", below, may be invisible...)
     -- Ignore         { }, -- (preferred) left blank, hidden  |hl-Ignore|
