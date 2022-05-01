@@ -51,15 +51,22 @@ local hsl = lush.hsl
 local theme = lush(function()
 
   -- First color.
-  local uno1 = hsl(40, 90, 20)
-  local uno2 = hsl(40, 75, 55)
-  local uno3 = hsl(40, 45, 70)
-  local uno4 = hsl(40, 20, 60)
+  local uno1 = hsl(40, 99, 20)
+  local uno2 = hsl(40, 60, 50)
+  local uno3 = hsl(40, 55, 70)
+  local uno4 = hsl(40, 25, 80)
 
   -- Second color.
-  local duo1 = hsl(210, 90, 50)
-  local duo2 = hsl(210, 60, 80)
-  local duo3 = hsl(210,  5, 60)
+  local duo1 = hsl(210, 90, 30)
+  local duo2 = hsl(210, 75, 50)
+  local duo3 = hsl(210, 55, 70)
+  local duo4 = hsl(210, 25, 80)
+
+  -- Gray color.
+  local neu1 = hsl(40, 0, 25)
+  local neu2 = hsl(40, 0, 40)
+  local neu3 = hsl(40, 0, 55)
+  local neu4 = hsl(40, 0, 80)
 
   local fg               = uno_2
   local bg               = hsl(36, 2, 98)
