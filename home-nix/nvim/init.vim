@@ -12,10 +12,7 @@
 
 " TODO autocomplete
 
-" TODO colors for treesitter
-
-" mini.nvim
-" TODO preserve layout when killing a buffer
+" TODO look at the symbol under the cursor
 
 " plugins {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -86,7 +83,8 @@ Plug 'glacambre/firenvim'
 Plug 'akinsho/toggleterm.nvim'
 
 " my favourite colors
-Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
+" https://github.com/mcchrish/vim-no-color-collections
+Plug 'https://github.com/shofel/vim-two-firewatch' " my fork
 Plug 'https://github.com/mcchrish/zenbones.nvim'
 Plug 'https://github.com/rktjmp/lush.nvim'
 
@@ -133,9 +131,9 @@ set imsearch=0
 
 " init colors
 if (!v:vim_did_enter)
-  set background=light
+  set background=dark
   set termguicolors
-  colorscheme two-firewatch
+  colorscheme two-firebones
 endif
 
 " hide tildas after the end of file
@@ -277,9 +275,12 @@ nnoremap <Leader>gv <cmd>TermExec cmd='glog; exit'<cr>
 " Another access to unimpaired
 nmap <Leader>k [
 nmap <Leader>j ]
-" Navigate between signs in signcolumn
+" Navigate diagnostics
 nmap [d <cmd>lua vim.diagnostic.goto_prev()<cr>
 nmap ]d <cmd>lua vim.diagnostic.goto_next()<cr>
+" Navigate git hunks
+nmap ]h <cmd>lua require('gitsigns').next_hunk({preview = true})<cr>
+nmap [h <cmd>lua require('gitsigns').prev_hunk({preview = true})<cr>
 
 augroup shovel-fugitive
   autocmd!
@@ -386,7 +387,15 @@ require'lspconfig'.stylelint_lsp.setup{
 }
 
 require'lspconfig'.hls.setup{}
-require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.sumneko_lua.setup{
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
+}
 require'lspconfig'.rnix.setup{}
 require'lspconfig'.terraformls.setup{}
 require'lspconfig'.vimls.setup{}
