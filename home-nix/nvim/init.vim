@@ -87,7 +87,7 @@ Plug 'akinsho/toggleterm.nvim'
 
 " my favourite colors
 Plug 'https://github.com/shofel/vim-two-firewatch.git' " my fork
-Plug 'https://github.com/rebelot/kanagawa.nvim'
+Plug 'https://github.com/mcchrish/zenbones.nvim'
 Plug 'https://github.com/rktjmp/lush.nvim'
 
 Plug 'https://github.com/dstein64/vim-startuptime'
@@ -131,9 +131,6 @@ set imsearch=0
 
 " colors {{{
 
-" tune colorschemes
-let g:two_firewatch_italics=1
-
 " init colors
 if (!v:vim_did_enter)
   set background=light
@@ -154,7 +151,7 @@ lua <<EOF
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'onelight',
+    theme = 'one' .. vim.go.background, -- onelight or onedark -- TODO autocmd on Colorscheme
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
