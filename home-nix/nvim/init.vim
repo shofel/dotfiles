@@ -23,6 +23,8 @@
 " TODO look at the symbol under the cursor
 
 " plugins {{{
+lua <<EOF
+vim.cmd([[
 call plug#begin('~/.config/nvim/plugged')
 
 " tpope
@@ -99,6 +101,8 @@ Plug 'https://github.com/rktjmp/lush.nvim'
 Plug 'https://github.com/dstein64/vim-startuptime'
 
 call plug#end()
+]])
+EOF
 " }}}
 
 scriptencoding=utf-8
@@ -199,7 +203,12 @@ EOF
 " }}}
 
 " syntax and filetypes {{{
-let g:javascript_plugin_flow = 1
+
+lua <<EOF
+
+vim.cmd([[
+  let g:javascript_plugin_flow = 1
+
 augroup initvim
   autocmd!
 
@@ -225,10 +234,15 @@ augroup initvim
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
+]])
+EOF
 " }}}
 
 " keys {{{
 
+lua <<EOF
+
+vim.cmd([[
 let mapleader="\<Space>"
 let maplocalleader=","
 
@@ -282,6 +296,7 @@ nnoremap <Leader>gs <cmd>vert Git<Return>
 nnoremap <Leader>ga <cmd>Gwrite<Return>
 nnoremap <Leader>gp <cmd>Dispatch git push<Return>
 nnoremap <Leader>gP <cmd>Dispatch git push --force-with-lease<Return>
+nnoremap <Leader>gm <cmd>GitMessenger<cr>
 nnoremap <Leader>gV <cmd>GV!<Return>
 nnoremap <Leader>gv <cmd>TermExec cmd='glog; exit'<cr>
 
@@ -307,6 +322,9 @@ augroup END
 nnoremap <Leader>c  :checkt<Return>
 nnoremap <Leader>s  :write<Return>
 
+]])
+EOF
+
 " clipboard {{{
 lua <<EOF
   -- `x` in visual modes does not save the deleted text
@@ -329,14 +347,7 @@ endfunction
 
 nnoremap <Leader>R <cmd>call Shovel_insert_random()<cr>
 
-" in terminal
-" @see http://neovim.io/doc/user/nvim_terminal_emulator.html
-" @see https://github.com/junegunn/fzf.vim/issues/544
-" map <c-g> for fzf is because it closes fzf window faster than <Esc>.
-tnoremap <expr> <Esc> (&filetype == "fzf") ? "<c-g>" : "<c-\><c-n>"
-
 " Git messager
-nnoremap <Leader>gm <cmd>GitMessenger<cr>
 " }}}
 
 " Neovim LSP {{{
@@ -490,12 +501,16 @@ lua require'trouble'.setup { icons = false }
 lua require'colorizer'.setup()
 
 " search and replace {{{
+lua <<EOF
+vim.cmd([[
 set ignorecase
 set smartcase
 set incsearch
 set inccommand=nosplit
 nnoremap <Leader>n :nohlsearch<cr>
 nnoremap / /\v
+]])
+EOF
 " }}}
 
 " toggleterm {{{
@@ -580,6 +595,8 @@ require'lightspeed'.setup {
 EOF
 " }}} lightspeed.nvim
 
+lua <<EOF
+--[[
 " firenvim {{{
 " TODO: extract to 1.detection and 2.effect
 " TODO: commit back to firenvim repo.
@@ -617,5 +634,8 @@ augroup END
 function! Synstack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+--]]
+EOF
 
 " vim: set fdm=marker :
