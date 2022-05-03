@@ -310,6 +310,11 @@
             source = inputs.vim-plug + "/plug.vim";
           };
 
+          home.file."color" = {
+            target = ".config/nvim/colors/two-firebones.lua";
+            source = ./nvim/colors/two-firebones.lua;
+          };
+
           home.file."plug-refresh" = {
             target = "/dev/null";
             source = ./nvim/init.vim;

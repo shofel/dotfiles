@@ -5,7 +5,7 @@ local lush = require "lush"
 local hsl = lush.hsl
 local util = require "zenbones.util"
 
-local bg = vim.opt.background:get()
+local bg = vim.opt.background
 
 -- Define a palette. Use `palette_extend` to fill unspecified colors
 -- Based on https://github.com/gruvbox-community/gruvbox#palette
