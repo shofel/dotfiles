@@ -5,7 +5,9 @@ local lush = require "lush"
 local hsl = lush.hsl
 local util = require "zenbones.util"
 
-local bg = vim.opt.background
+---@diagnostic disable: undefined-field
+local bg = vim.o.background:get()
+---@diagnostic enable: undefined-field
 
 -- Define a palette. Use `palette_extend` to fill unspecified colors
 -- Based on https://github.com/gruvbox-community/gruvbox#palette
@@ -55,7 +57,7 @@ lush(specs)
 
 -- TODO generate lualine theme
 require("lualine").setup {
-  options = { theme = "onelight" },
+  options = { theme = "one" .. bg },
 }
 
 -- Optionally set term colors

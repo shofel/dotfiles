@@ -61,6 +61,8 @@
               sumneko-lua-language-server
               terraform-ls
 
+              neovim-package
+
               fira-code # for kitty
             ];
             node = with pkgs.nodePackages; [
@@ -310,21 +312,16 @@
             source = inputs.vim-plug + "/plug.vim";
           };
 
-          home.file."color" = {
-            target = ".config/nvim/colors/two-firebones.lua";
-            source = ./nvim/colors/two-firebones.lua;
+          home.file."nvim" = {
+            target = ".config/nvim/";
+            source = ./nvim;
+            recursive = true;
           };
 
           home.file."plug-refresh" = {
             target = "/dev/null";
-            source = ./nvim/init.vim;
+            source = ./nvim/init.lua;
             onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
-          };
-
-          programs.neovim = {
-            enable = true;
-            package = neovim-package;
-            extraConfig = builtins.readFile ./nvim/init.vim;
           };
 
           # }}} neovim

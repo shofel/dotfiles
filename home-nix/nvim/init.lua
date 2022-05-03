@@ -1,29 +1,39 @@
-" Shovel's init.vim file (<visla.vvi@gmail.com>)
+-- Shovel's init.lua file (<visla.vvi@gmail.com>)
+-- vim: set fdm=marker :
 
-" TODO
-"     1 convert to blocks of lua
-"     2 rename to init.lua
-"     3 bootstrap with nyoom to get support of fennel
-"
-" TODO colors
-"   : a single file or modules? => template is lush or zenbones
-"   1 copy-paste all the old colors
-"   2 diffrent cursor colors fon language-mapping
+--[[
+  TODO the config
+      1 convert to blocks of lua
+      2 rename to init.lua
+      3 bootstrap with nyoom to get support of fennel
+      4 extract a file with plugins to watch correctly
 
-" TODO adopt workspaces and sessions
-"      + edit init.vim as a part of workspace/dotfiles project
+  TODO plugins
+      1 manage keys with which-key
+      2 preview markdown https://github.com/ellisonleao/glow.nvim
 
-" TODO migrate to packer
-"      + switch to init.lua
+  TODO fixup regressions of config
+      1 random string of 8 chars by <Leader>R
 
-" TODO easy-keys.fnl
+  TODO colors
+    : a single file or modules? => template is lush or zenbones
+    1 copy-paste all the old colors
+    2 diffrent cursor colors fon language-mapping
 
-" TODO autocomplete
+  TODO adopt workspaces and sessions
+       + edit init.vim as a part of workspace/dotfiles project
 
-" TODO look at the symbol under the cursor
+  TODO migrate to packer
+       + switch to init.lua
 
-" plugins {{{
-lua <<EOF
+  TODO easy-keys.fnl
+
+  TODO autocomplete
+
+  TODO look at the symbol under the cursor
+]]
+
+-- plugins {{{
 vim.cmd([[
 call plug#begin('~/.config/nvim/plugged')
 
@@ -73,7 +83,8 @@ Plug 'rhysd/git-messenger.vim'
 
 " Languages {{{
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rhysd/reply.vim'
 
 Plug 'georgewitteman/vim-fish'
@@ -94,7 +105,8 @@ Plug 'akinsho/toggleterm.nvim'
 
 " my favourite colors
 " https://github.com/mcchrish/vim-no-color-collections
-Plug 'https://github.com/shofel/vim-two-firewatch' " my fork
+" my fork of vim-two-firewatch
+Plug 'https://github.com/shofel/vim-two-firewatch'
 Plug 'https://github.com/mcchrish/zenbones.nvim'
 Plug 'https://github.com/rktjmp/lush.nvim'
 
@@ -102,13 +114,9 @@ Plug 'https://github.com/dstein64/vim-startuptime'
 
 call plug#end()
 ]])
-EOF
-" }}}
+-- }}}
 
-scriptencoding=utf-8
-
-" general {{{
-lua <<EOF
+-- general {{{
 vim.o.shell='fish'
 
 vim.o.signcolumn = 'yes'
@@ -143,12 +151,9 @@ vim.o.imsearch=0
 
 -- colors {{{
 
--- init colors
-if (not vim.v.vim_did_enter) then
-  vim.o.background = 'dark'
-  vim.o.termguicolors = true
-  vim.cmd([[colorscheme two-firebones]])
-end
+vim.o.termguicolors = true
+vim.o.background = 'dark'
+vim.cmd("colorscheme two-firebones")
 
 vim.cmd([[
   " hide tildas after the end of file
@@ -157,12 +162,9 @@ vim.cmd([[
   " bold exchange.vim
   highlight link ExchangeRegion Folded
 ]])
+-- }}}
 
-EOF
-" }}}
-
-" statusline and tabline {{{
-lua <<EOF
+-- statusline and tabline {{{
 require'lualine'.setup {
   options = {
     icons_enabled = true,
@@ -199,12 +201,9 @@ require'lualine'.setup {
   },
   extensions = {'fugitive', 'toggleterm'}
 }
-EOF
-" }}}
+-- }}}
 
-" syntax and filetypes {{{
-
-lua <<EOF
+-- syntax and filetypes {{{
 
 vim.cmd([[
   let g:javascript_plugin_flow = 1
@@ -235,12 +234,9 @@ augroup initvim
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
 ]])
-EOF
-" }}}
+-- }}}
 
-" keys {{{
-
-lua <<EOF
+-- keys {{{
 
 vim.cmd([[
 let mapleader="\<Space>"
@@ -321,45 +317,30 @@ augroup END
 
 nnoremap <Leader>c  :checkt<Return>
 nnoremap <Leader>s  :write<Return>
-
 ]])
-EOF
 
-" clipboard {{{
-lua <<EOF
-  -- `x` in visual modes does not save the deleted text
-  vim.keymap.set({'v', 'x'},         'x', '"_x')
-  -- X clipboard
-  vim.keymap.set({     'x'}, '<Leader>y', '"+y' , {remap = true})
-  vim.keymap.set({'n', 'x'}, '<Leader>p', '"+]p', {remap = true})
-  -- X selection
-  vim.keymap.set({     'x'}, '<Leader>Y', '"*y' , {remap = true})
-  vim.keymap.set({'n', 'x'}, '<Leader>P', '"*]p', {remap = true})
-EOF
-" }}} clipboard
+-- clipboard {{{
 
-" Insert random string
-function! Shovel_insert_random()
-  let l:x = systemlist('pwgen 8 1')
-  " echom map(l:x, "'|' . v:val . '|'")
-  execute 'normal! a' . join(l:x)
-endfunction
+-- `x` in visual modes does not save the deleted text
+vim.keymap.set({'v', 'x'},         'x', '"_x')
+-- X clipboard
+vim.keymap.set({     'x'}, '<Leader>y', '"+y' , {remap = true})
+vim.keymap.set({'n', 'x'}, '<Leader>p', '"+]p', {remap = true})
+-- X selection
+vim.keymap.set({     'x'}, '<Leader>Y', '"*y' , {remap = true})
+vim.keymap.set({'n', 'x'}, '<Leader>P', '"*]p', {remap = true})
 
-nnoremap <Leader>R <cmd>call Shovel_insert_random()<cr>
+-- }}} clipboard
 
-" Git messager
-" }}}
-
-" Neovim LSP {{{
-" @see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-lua <<EOF
+-- Neovim LSP {{{
+-- @see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local util = require'lspconfig'.util
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = {buffer = bufnr}
 
@@ -424,11 +405,9 @@ require'lspconfig'.rnix.setup{}
 require'lspconfig'.terraformls.setup{}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.yamlls.setup{}
-EOF
-" }}}
+-- }}}
 
-" TS TreeSitter {{{
-lua  <<EOF
+-- TS TreeSitter {{{
 require'nvim-treesitter.configs'.setup {
   -- list of parsers {{{
   ensure_installed = {
@@ -476,7 +455,7 @@ require'nvim-treesitter.configs'.setup {
     },
   -- }}}
 
-  sync_install = false, 
+  sync_install = false,
   ignore_install = { "" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
@@ -493,15 +472,13 @@ require'nvim-treesitter.configs'.setup {
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
   }
 }
-EOF
-" }}} TS TreeSitter
+-- }}} TS TreeSitter
 
-lua require'gitsigns'.setup()
-lua require'trouble'.setup { icons = false }
-lua require'colorizer'.setup()
+require'gitsigns'.setup()
+require'trouble'.setup { icons = false }
+require'colorizer'.setup()
 
-" search and replace {{{
-lua <<EOF
+-- search and replace {{{
 vim.cmd([[
 set ignorecase
 set smartcase
@@ -510,12 +487,10 @@ set inccommand=nosplit
 nnoremap <Leader>n :nohlsearch<cr>
 nnoremap / /\v
 ]])
-EOF
-" }}}
+-- }}}
 
-" toggleterm {{{
-" TODO persist terminals across sourcing vimrc
-lua <<EOF
+-- toggleterm {{{
+-- TODO persist terminals across sourcing vimrc
 require("toggleterm").setup{
   direction = 'float',
 }
@@ -530,13 +505,9 @@ vim.keymap.set({'n'}, '<leader>tf', function () serve:toggle() end)
 
 vim.keymap.set({'n'}, '<leader>th', '<cmd>ToggleTermToggleAll<cr>')
 
-EOF
+-- }}} toggleterm
 
-" }}} toggleterm
-
-" fzf {{{
-lua <<LUA
-
+-- fzf {{{
 local fzf = require('fzf-lua')
 
 fzf.setup({
@@ -563,14 +534,13 @@ vim.keymap.set({'n'}, '<leader>fW', fzf.grep_cWORD)
 vim.keymap.set({'n'},  '<leader>/', fzf.blines)
 vim.keymap.set({'n'},  '<leader>b', fzf.buffers)
 
-LUA
-
+vim.cmd([[
 if (!executable('fd')) | echoerr 'fd (fd-find) executable not found' | endif
 if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
-" }}} fzf
+]])
+-- }}} fzf
 
-" lightspeed.nvim {{{
-lua <<EOF
+-- lightspeed.nvim {{{
 
 require'lightspeed'.setup {
   ignore_case = false,
@@ -592,10 +562,9 @@ require'lightspeed'.setup {
   limit_ft_matches = 4,
   repeat_ft_with_target_char = false,
 }
-EOF
-" }}} lightspeed.nvim
 
-lua <<EOF
+-- }}} lightspeed.nvim
+
 --[[
 " firenvim {{{
 " TODO: extract to 1.detection and 2.effect
@@ -612,6 +581,14 @@ function! OnUIEnter(event)
     endif
 endfunction
 
+" Insert random string
+function! Shovel_insert_random()
+  let l:x = systemlist('pwgen 8 1')
+  " echom map(l:x, "'|' . v:val . '|'")
+  execute 'normal! a' . join(l:x)
+endfunction
+
+nnoremap <Leader>R <cmd>call Shovel_insert_random()<cr>
 " invoke onuienter
 augroup shovel_firenvim
   autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
@@ -636,6 +613,3 @@ function! Synstack()
 endfunc
 
 --]]
-EOF
-
-" vim: set fdm=marker :
