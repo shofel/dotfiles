@@ -1,6 +1,14 @@
 " Shovel's init.vim file (<visla.vvi@gmail.com>)
 
-" TODO fennel to loop and etc
+" TODO
+"     1 convert to blocks of lua
+"     2 rename to init.lua
+"     3 bootstrap with nyoom to get support of fennel
+"
+" TODO colors
+"   : a single file or modules? => template is lush or zenbones
+"   1 copy-paste all the old colors
+"   2 diffrent cursor colors fon language-mapping
 
 " TODO adopt workspaces and sessions
 "      + edit init.vim as a part of workspace/dotfiles project
@@ -116,9 +124,9 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
-set guicursor=n-v-ve:block-Cursor
-            \,i-c-ci-cr:ver100-Cursor
-            \,o-r:hor100-Cursor
+set guicursor=n-v-ve:block-Cursor/CursorIM
+            \,i-c-ci-cr:ver100-Cursor/CursorIM
+            \,o-r:hor100-Cursor/CursorIM
 set mouse=a
 
 " russian
