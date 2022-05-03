@@ -101,55 +101,60 @@ Plug 'https://github.com/dstein64/vim-startuptime'
 call plug#end()
 " }}}
 
-" general {{{
-set encoding=utf-8
 scriptencoding=utf-8
 
-set shell=fish
+" general {{{
+lua <<EOF
+vim.o.shell='fish'
 
-set signcolumn=yes
-set nonumber " see also vim-numbertoggle plugin
-set hidden
-set list
-set foldmethod=marker
+vim.o.signcolumn = 'yes'
+vim.o.number = false
+vim.o.hidden = true
+vim.o.list = true
+vim.o.foldmethod='marker'
 
-set nobackup
-set backupcopy=yes
-set noswapfile
+vim.o.backup = false
+vim.o.backupcopy = 'yes'
+vim.o.swapfile = false
 
-" default indentation settings
-set smartindent
-set expandtab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+-- default indentation settings
+vim.o.smartindent = true
+vim.o.expandtab = true
+vim.o.tabstop=2
+vim.o.softtabstop=2
+vim.o.shiftwidth=2
 
-set guicursor=n-v-ve:block-Cursor/CursorIM
-            \,i-c-ci-cr:ver100-Cursor/CursorIM
-            \,o-r:hor100-Cursor/CursorIM
-set mouse=a
+vim.o.guicursor = ''
+   .. 'n-v-ve:block-Cursor,'
+   .. 'i-c-ci-cr:ver100-Cursor,'
+   .. 'o-r:hor100-Cursor'
 
-" russian
-set keymap=russian-dvorak
-set iminsert=0
-set imsearch=0
-" }}}
+vim.o.mouse='a'
 
-" colors {{{
+-- russian
+vim.o.keymap='russian-dvorak'
+vim.o.iminsert=0
+vim.o.imsearch=0
+-- }}}
 
-" init colors
-if (!v:vim_did_enter)
-  set background=dark
-  set termguicolors
-  colorscheme two-firebones
-endif
+-- colors {{{
 
-" hide tildas after the end of file
-highlight EndOfBuffer guifg=bg guibg=none
+-- init colors
+if (not vim.v.vim_did_enter) then
+  vim.o.background = 'dark'
+  vim.o.termguicolors = true
+  vim.cmd([[colorscheme two-firebones]])
+end
 
-" bold exchange.vim
-highlight link ExchangeRegion Folded
+vim.cmd([[
+  " hide tildas after the end of file
+  highlight EndOfBuffer guifg=bg guibg=none
 
+  " bold exchange.vim
+  highlight link ExchangeRegion Folded
+]])
+
+EOF
 " }}}
 
 " statusline and tabline {{{
