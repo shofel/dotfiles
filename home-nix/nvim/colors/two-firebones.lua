@@ -5,9 +5,7 @@ local lush = require "lush"
 local hsl = lush.hsl
 local util = require "zenbones.util"
 
----@diagnostic disable: undefined-field
-local bg = vim.o.background:get()
----@diagnostic enable: undefined-field
+local bg = vim.o.background
 
 -- Define a palette. Use `palette_extend` to fill unspecified colors
 -- Based on https://github.com/gruvbox-community/gruvbox#palette
@@ -24,7 +22,7 @@ if bg == "light" then
     leaf    = hsl(210, 45, 70),
     blossom = hsl(  0, 60, 55),
   }, bg)
-else
+elseif bg == "dark" then
   palette = util.palette_extend({
     bg      = hsl(220, 15, 15),
     wood    = hsl(210, 45, 50),
@@ -35,6 +33,8 @@ else
     leaf    = hsl(  0, 45, 70),
     blossom = hsl(  0, 60, 55),
   }, bg)
+else
+  error("unexpected bg" .. bg)
 end
 
 -- Generate the lush specs using the generator util
@@ -65,7 +65,7 @@ require("lualine").setup {
 
 -- Terminal colors {{{
 vim.g.terminal_color_0  = ''
-vim.g.terminal_color_8  = ''
+vim.g.terminal_color_8  = '#4d4d4d'
 vim.g.terminal_color_1  = '#e06c75'
 vim.g.terminal_color_9  = '#e06c75'
 vim.g.terminal_color_2  = '#98c379'
@@ -78,18 +78,12 @@ vim.g.terminal_color_5  = '#c678dd'
 vim.g.terminal_color_13 = '#c678dd'
 vim.g.terminal_color_6  = '#56b6c2'
 vim.g.terminal_color_14 = '#56b6c2'
-vim.g.terminal_color_7  = ''
-vim.g.terminal_color_15 = ''
+vim.g.terminal_color_7  = '#737780'
+vim.g.terminal_color_15 = '#a1a7b3'
 
 if bg == 'light' then
   vim.g.terminal_color_0  = '#282c34'
-  vim.g.terminal_color_8  = '#4d4d4d'
-  vim.g.terminal_color_7  = '#737780'
-  vim.g.terminal_color_15 = '#a1a7b3'
 else -- Dark
   vim.g.terminal_color_0  = '#000000'
-  vim.g.terminal_color_8  = '#4d4d4d'
-  vim.g.terminal_color_7  = '#737780'
-  vim.g.terminal_color_15 = '#a1a7b3'
 end
 -- }}}

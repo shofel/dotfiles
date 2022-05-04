@@ -3,8 +3,6 @@
 
 --[[
   TODO the config
-      1 convert to blocks of lua
-      2 rename to init.lua
       3 bootstrap with nyoom to get support of fennel
       4 extract a file with plugins to watch correctly
 
@@ -24,7 +22,6 @@
        + edit init.vim as a part of workspace/dotfiles project
 
   TODO migrate to packer
-       + switch to init.lua
 
   TODO easy-keys.fnl
 
@@ -65,7 +62,7 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tommcdo/vim-exchange' " gbprod/substitute.nvim
+Plug 'tommcdo/vim-exchange' " TODO gbprod/substitute.nvim
 
 " follow conventions
 Plug 'editorconfig/editorconfig-vim'
@@ -88,7 +85,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rhysd/reply.vim'
 
 Plug 'georgewitteman/vim-fish'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'Olical/conjure'
 Plug 'mattn/emmet-vim', { 'for': ['css', 'scss', 'html'] }
 Plug 'kmonad/kmonad-vim'
@@ -212,7 +208,7 @@ augroup initvim
   autocmd!
 
   " Vimscript
-  autocmd Filetype vim nnoremap <buffer> <Leader>gf :!open https://github.com/<c-r><c-f><cr>
+  autocmd Filetype lua nnoremap <buffer> <Leader>gf :!open https://github.com/<c-r><c-f><cr>
 
   " Javascript
   autocmd BufRead,BufNewFile *.js.flow setfiletype typescript
@@ -245,8 +241,8 @@ let maplocalleader=","
 nnoremap ; g;
 
 " edit .vimrc
-nnoremap <Leader>ve :tabe $MYVIMRC<Return>
-nnoremap <Leader>vs :source $MYVIMRC<Return>
+nnoremap <Leader>ve <cmd>tabe ~/.config/nvim/init.lua<cr>
+nnoremap <Leader>vs <cmd>source ~/.config/nvim/init.lua<cr>
 
 " get to execute visually selected text
 vnoremap <F6> y:"
@@ -475,7 +471,7 @@ require'nvim-treesitter.configs'.setup {
 -- }}} TS TreeSitter
 
 require'gitsigns'.setup()
-require'trouble'.setup { icons = false }
+require'trouble'.setup({ icons = false })
 require'colorizer'.setup()
 
 -- search and replace {{{
@@ -598,13 +594,6 @@ augroup END
 augroup shovel_home.nix
   autocmd BufRead home.nix,init.vim nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
 augroup END
-
-" markdown-preview.nvim {{{
-let g:mkdp_browser = 'google-chrome-beta'
-augroup markdown-preview.nvim
-  autocmd Filetype markdown  nnoremap <buffer> <Leader>fp <cmd>MarkdownPreview<cr>
-augroup END
-" }}}
 
 " Debug highlighing.
 " @see https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
