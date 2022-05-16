@@ -6,9 +6,9 @@
       3 bootstrap with nyoom to get support of fennel
       4 extract a file with plugins to watch correctly
 
-  TODO plugins
+  DONE plugins
       1 manage keys with which-key
-      2 preview markdown https://github.com/ellisonleao/glow.nvim
+      x preview markdown https://github.com/ellisonleao/glow.nvim
 
   TODO fixup regressions of config
       1 random string of 8 chars by <Leader>R
@@ -18,14 +18,11 @@
     1 copy-paste all the old colors
     2 diffrent cursor colors fon language-mapping
 
-  TODO adopt workspaces and sessions
-       + edit init.vim as a part of workspace/dotfiles project
-
-  TODO migrate to packer
+  DONE migrate to packer
 
   TODO easy-keys.fnl
 
-  TODO autocomplete
+  DONE autocomplete
 
   TODO look at the symbol under the cursor
 ]]
@@ -112,39 +109,6 @@ call plug#end()
 ]])
 -- }}}
 
--- general {{{
-vim.o.shell='fish'
-
-vim.o.signcolumn = 'yes'
-vim.o.number = false
-vim.o.hidden = true
-vim.o.list = true
-vim.o.foldmethod='marker'
-
-vim.o.backup = false
-vim.o.backupcopy = 'yes'
-vim.o.swapfile = false
-
--- default indentation settings
-vim.o.smartindent = true
-vim.o.expandtab = true
-vim.o.tabstop=2
-vim.o.softtabstop=2
-vim.o.shiftwidth=2
-
-vim.o.guicursor = ''
-   .. 'n-v-ve:block-Cursor,'
-   .. 'i-c-ci-cr:ver100-Cursor,'
-   .. 'o-r:hor100-Cursor'
-
-vim.o.mouse='a'
-
--- russian
-vim.o.keymap='russian-dvorak'
-vim.o.iminsert=0
-vim.o.imsearch=0
--- }}}
-
 -- colors {{{
 
 vim.o.termguicolors = true
@@ -160,45 +124,6 @@ vim.cmd([[
 ]])
 -- }}}
 
--- statusline and tabline {{{
-require'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'one' .. vim.go.background, -- onelight or onedark -- TODO autocmd on Colorscheme
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-    globalstatus = true,
-  },
-  sections = {
-    lualine_a = {'branch'},
-    lualine_b = {'b:gitsigns_status', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {
-    lualine_a = {'tabs'},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {'b:gitsigns_status_dict.root'}
-  },
-  extensions = {'fugitive', 'toggleterm'}
-}
--- }}}
-
 -- syntax and filetypes {{{
 
 vim.cmd([[
@@ -211,21 +136,11 @@ augroup initvim
   autocmd Filetype lua nnoremap <buffer> <Leader>gf :!open https://github.com/<c-r><c-f><cr>
 
   " Javascript
-  autocmd BufRead,BufNewFile *.js.flow setfiletype typescript
-  autocmd Filetype javascript let b:commentary_format = "/* %s */"
-  autocmd Filetype javascript let b:textwidth=80
   autocmd Filetype javascript nnoremap <buffer> K :!x-www-browser mdn.io/<c-r><c-w><Return>
   autocmd Filetype javascript xnoremap <buffer> K "0y:!x-www-browser mdn.io/<c-r><c-r>0<Return>
   autocmd Filetype javascript nnoremap <buffer> <Leader>t :w<cr>:!yarn ava %<cr>
   autocmd Filetype javascript nnoremap <buffer> <Leader>T :w<cr>:Dispatch yarn ava<cr>
   autocmd BufNewFile,BufRead *.json5 set filetype=json5
-
-  autocmd Filetype clojure let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
-  autocmd Filetype clojure nnoremap <buffer> <Leader>r :Dispatch lein run<cr>
-  autocmd Filetype clojure nnoremap <buffer> <Leader>e :Eval<cr>
-
-  autocmd Filetype ps1 let b:AutoPairs = {'{':'}', '(':')', '"':'"'}
-  autocmd Filetype vim let b:AutoPairs = {'{':'}', '(':')', "'":"'"}
 
   autocmd TermOpen * setlocal nonumber | setlocal norelativenumber
 augroup END
@@ -403,193 +318,7 @@ require'lspconfig'.vimls.setup{}
 require'lspconfig'.yamlls.setup{}
 -- }}}
 
--- TS TreeSitter {{{
-require'nvim-treesitter.configs'.setup {
-  -- list of parsers {{{
-  ensure_installed = {
-    "bash",
-    "clojure",
-    "cmake",
-    "comment",
-    "commonlisp",
-    "css",
-    "dart",
-    "dockerfile",
-    "erlang",
-    "fennel",
-    "fish",
-    "go",
-    "html",
-    "http",
-    "javascript",
-    "jsdoc",
-    "json",
-    "json5",
-    "latex",
-    "lua",
-    "make",
-    "markdown",
-    "ninja",
-    "nix",
-    "org",
-    "pascal",
-    "perl",
-    "php",
-    "python",
-    "regex",
-    "ruby",
-    "rust",
-    "scheme",
-    "scss",
-    "teal",
-    "toml",
-    "tsx",
-    "typescript",
-    "vim",
-    "vue",
-    "yaml",
-    },
-  -- }}}
-
-  sync_install = false,
-  ignore_install = { "" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = { "" }, -- list of language that will be disabled
-    additional_vim_regex_highlighting = true,
-  },
-  indent = {
-    enable = true,
-    disable = { "yaml" }
-  },
-  rainbow = {
-    enable = false,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  }
-}
--- }}} TS TreeSitter
-
-require'gitsigns'.setup()
-require'trouble'.setup({ icons = false })
-require'colorizer'.setup()
-
--- search and replace {{{
-vim.cmd([[
-set ignorecase
-set smartcase
-set incsearch
-set inccommand=nosplit
-nnoremap <Leader>n :nohlsearch<cr>
-nnoremap / /\v
-]])
--- }}}
-
--- toggleterm {{{
--- TODO persist terminals across sourcing vimrc
-require("toggleterm").setup{
-  direction = 'float',
-}
-
-local Terminal = require('toggleterm.terminal').Terminal
-
-local fish  = Terminal:new {cmd = 'fish', hidden = false}
-local serve = Terminal:new {cmd = 'fish'}
-
-vim.keymap.set({'n'}, '<leader>ts', function () fish:toggle() end)
-vim.keymap.set({'n'}, '<leader>tf', function () serve:toggle() end)
-
-vim.keymap.set({'n'}, '<leader>th', '<cmd>ToggleTermToggleAll<cr>')
-
--- }}} toggleterm
-
--- fzf {{{
-local fzf = require('fzf-lua')
-
-fzf.setup({
-  border = 'single',
-})
-
-local fzf_files = function()
-  fzf.files({fd_opts = '--no-ignore --hidden'})
-end
-
-vim.keymap.set({'n'}, '<leader>ff', fzf.git_files)
-vim.keymap.set({'n'}, '<leader>fF', fzf_files)
-vim.keymap.set({'n'}, '<leader>fg', fzf.live_grep)
-vim.keymap.set({'n'}, '<leader>fh', fzf.help_tags)
-vim.keymap.set({'n'}, '<leader>fH', fzf.command_history)
-vim.keymap.set({'n'}, '<leader>fc', fzf.commands)
-vim.keymap.set({'n'}, '<leader>f,', fzf.builtin)
-vim.keymap.set({'n'}, "<leader>f'", fzf.marks)
-vim.keymap.set({'n'}, '<leader>fk', fzf.keymaps)
-vim.keymap.set({'n'}, '<leader>f.', fzf.resume)
-vim.keymap.set({'n'}, '<leader>fw', fzf.grep_cword)
-vim.keymap.set({'n'}, '<leader>fW', fzf.grep_cWORD)
-
-vim.keymap.set({'n'},  '<leader>/', fzf.blines)
-vim.keymap.set({'n'},  '<leader>b', fzf.buffers)
-
-vim.cmd([[
-if (!executable('fd')) | echoerr 'fd (fd-find) executable not found' | endif
-if (!executable('rg')) | echoerr 'rg (ripgrep) executable not found' | endif
-]])
--- }}} fzf
-
--- lightspeed.nvim {{{
-
-require'lightspeed'.setup {
-  ignore_case = false,
-  exit_after_idle_msecs = {
-    labeled = nil,
-    unlabeled = 1500,
-  },
-
-  -- s/x
-  jump_to_unique_chars = true,
-  match_only_the_start_of_same_char_seqs = true,
-  substitute_chars = { ['\r'] = '¬' },
-  -- Leaving the appropriate list empty effectively disables
-  -- "smart" mode, and forces auto-jump to be on or off.
-  safe_labels = nil,
-  labels = nil,
-
-  -- f/t
-  limit_ft_matches = 4,
-  repeat_ft_with_target_char = false,
-}
-
--- }}} lightspeed.nvim
-
 --[[
-" firenvim {{{
-" TODO: extract to 1.detection and 2.effect
-" TODO: commit back to firenvim repo.
-function! OnUIEnter(event)
-    let l:ui = nvim_get_chan_info(a:event.chan)
-    if has_key(l:ui, 'client') && has_key(l:ui.client, 'name')
-      if l:ui.client.name ==? 'Firenvim'
-        set signcolumn=no
-        set laststatus=0
-        set showtabline=1
-        set nowrap
-      endif
-    endif
-endfunction
-
-" Insert random string
-function! Shovel_insert_random()
-  let l:x = systemlist('pwgen 8 1')
-  " echom map(l:x, "'|' . v:val . '|'")
-  execute 'normal! a' . join(l:x)
-endfunction
-
-nnoremap <Leader>R <cmd>call Shovel_insert_random()<cr>
-" invoke onuienter
-augroup shovel_firenvim
-  autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-augroup END
-" }}}
 
 augroup shovel_home.nix
   autocmd BufRead home.nix,init.vim nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
