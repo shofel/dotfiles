@@ -30,13 +30,13 @@
     homeConfigurations = let
       lib = inputs.nixpkgs.lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      system = "x86_64-darwin"; # TODO x86_64-linux
+      system = "x86_64-linux";
       bat-theme = "Monokai Extended Light";
       neovim-package = inputs.neovim.packages.${system}.neovim;
     in {
       slava = inputs.home-manager.lib.homeManagerConfiguration {
         system = system;
-        homeDirectory = "/Users/slava"; # TODO linux /home/slava
+        homeDirectory = "/home/slava"; # TODO linux /home/slava
         username = "slava";
         stateVersion = "21.05";
 
@@ -295,7 +295,7 @@
 
           # redshift {{{
           services.redshift = {
-            enable = false; # TODO linux->true macos->false
+            enable = true; # TODO linux->true macos->false
             latitude = 56.83;
             longitude = 60.6;
             temperature = {
