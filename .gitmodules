@@ -1,3 +1,0 @@
-[submodule "home-nix/nvim"]
-	path = home-nix/nvim
-	url = git@github.com:shofel/nyoom.nvim.git

@@ -13,6 +13,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nyoom = {
+      url = "github:shofel/nyoom.nvim";
+      flake = false;
+    };
     vim-plug = {
       url = "github:junegunn/vim-plug";
       flake = false;
@@ -306,24 +310,7 @@
           # }}} redshift
 
           # neovim {{{
-
-          home.file."plug.vim" = {
-            target = ".local/share/nvim/site/autoload/plug.vim";
-            source = inputs.vim-plug + "/plug.vim";
-          };
-
-          home.file."nvim" = {
-            target = ".config/nvim/";
-            source = ./nvim;
-            recursive = true;
-          };
-
-          home.file."plug-refresh" = {
-            target = "/dev/null";
-            source = ./nvim/init.lua;
-            onChange = "nvim --headless +PlugClean! +PlugInstall +qa";
-          };
-
+          home.file.".config/nvim" = inputs.nyoom;
           # }}} neovim
 
         };

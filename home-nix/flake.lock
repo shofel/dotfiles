@@ -90,12 +90,29 @@
         "type": "github"
       }
     },
+    "nyoom": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1652624489,
+        "narHash": "sha256-6y23imjgFJOxoDigeLUyDYsFzgm0AkcUGUyhXoBClxE=",
+        "owner": "shofel",
+        "repo": "nyoom.nvim",
+        "rev": "a63a45ff8546588c33a8d283cc2cb6fc8d39d90d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shofel",
+        "repo": "nyoom.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "forgit": "forgit",
         "home-manager": "home-manager",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
+        "nyoom": "nyoom",
         "vim-plug": "vim-plug"
       }
     },
