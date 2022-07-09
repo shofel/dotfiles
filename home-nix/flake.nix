@@ -13,14 +13,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nyoom = {
-      url = "github:shofel/nyoom.nvim";
-      flake = false;
-    };
-    vim-plug = {
-      url = "github:junegunn/vim-plug";
-      flake = false;
-    };
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -308,11 +300,6 @@
             };
           };
           # }}} redshift
-
-          # neovim {{{
-          home.file.".config/nvim" = inputs.nyoom;
-          # }}} neovim
-
         };
       };
     };
