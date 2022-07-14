@@ -1,5 +1,0 @@
-#
-
-new_tab tab
-cd
-launch nvim +'Term fish'
