@@ -217,6 +217,12 @@
             };
             # }}} starship
 
+            # nvim {{{
+              home.file.".config/nvim/fnl/home-managed/gcc-path.fnl".text = ''
+                  "${pkgs.gcc}/bin/gcc"
+              '';
+            # }}} nvim
+
             # fish {{{
             home.file.".config/fish/functions" = {
               source = ./fish/functions;
