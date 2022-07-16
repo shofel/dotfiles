@@ -26,7 +26,7 @@
       lib = inputs.nixpkgs.lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       system = "x86_64-linux";
-      bat-theme = "Monokai Extended Light";
+      bat-theme = "Coldark-Dark";
       neovim-package = inputs.neovim.packages.${system}.neovim;
     in {
       slava = inputs.home-manager.lib.homeManagerConfiguration {
