@@ -106,6 +106,7 @@
               extraConfig = {
                 init = { defaultBranch = "master"; };
                 pull = { rebase = true; };
+                push = { autoSetupRemote = true; default = "current"; };
                 core = { editor = "nvim"; };
               };
 
