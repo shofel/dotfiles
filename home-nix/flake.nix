@@ -61,8 +61,6 @@
 
                 neovim-package
                 xclip
-
-                fira-code # for kitty
               ];
               node = with pkgs.nodePackages; [
                 vim-language-server
@@ -129,6 +127,13 @@
               '';
             };
             # }}} ssh
+
+            # Fonts {{{
+            # The workaround for https://github.com/NixOS/nixpkgs/issues/8318
+            home.file.".local/share/fonts" = {
+              source = "${pkgs.nerdfonts}/share/fonts/opentype/NerdFonts/";
+            };
+            # }}}
 
             # kitty {{{
             home.file.".config/kitty/kitty.conf" = {
