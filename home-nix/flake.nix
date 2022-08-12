@@ -146,11 +146,24 @@
               cd ~/10-19-Computer/11-Examus/11.01-student-web/
               launch fish -lc 'nix-shell --run nvim'
 
-              new_tab compose
-              launch fish -lc 'nvim ~/10-19-Computer/13-Scratchpad/13.01-Text/(date +%Y-%m-%-d)-drafts'
+              new_tab cdn
+              cd ~/10-19-Computer/11-Examus/11.02-terraform-cdn/
+              launch fish -lc 'nix-shell -p awscli --run fish'
+
+              new_tab notes
+              cd ~/10-19-Computer/14-Notes/
+              launch fish -lc nvim
+
+              new_tab gtd
+              cd ~/10-19-Computer/15-GTD/
+              launch fish -lc nvim index.norg
 
               new_tab dotfiles
-              cd ~/10-19-Computer/12-Tools/12.01-dotfiles/
+              cd ~/10-19-Computer/12-Tooling/12.01-shofel-dotfiles/
+              launch fish -lc nvim
+
+              new_tab nyoom
+              cd ~/10-19-Computer/12-Tooling/13.03-nyoom.nvim/
               launch fish -lc nvim
             '';
 
@@ -238,13 +251,14 @@
 
             programs.fish =
               let
-                shellInit = ""
-                  + "set -U VISUAL ${neovim-package}/bin/nvim"
-                  + ''
-                    set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
-                    fish_add_path /nix/var/nix/profiles/default/bin
-                    fish_add_path ~/.nix-profile/bin
-                    '';
+                shellInit =
+                  ''
+                  set -U VISUAL ${neovim-package}/bin/nvim
+
+                  set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
+                  fish_add_path /nix/var/nix/profiles/default/bin
+                  fish_add_path ~/.nix-profile/bin
+                  '';
               in {
                 enable = true;
 
