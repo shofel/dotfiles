@@ -141,11 +141,14 @@
                 + "\n" + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf"
                 + "\n" + "allow_remote_control yes"
                 + "\n" + ''
-                active_tab_foreground   #282c34
-                active_tab_background   #98c379
-                inactive_tab_foreground #abb2bf
-                inactive_tab_background #303446
-                tab_bar_background #303446
+                inactive_tab_font_style normal
+                active_tab_font_style   normal
+
+                active_tab_foreground   #222
+                active_tab_background   #faf8f5
+                inactive_tab_foreground #444
+                inactive_tab_background #bbb
+                tab_bar_background      #bbb
                 ''
 
                 ;
