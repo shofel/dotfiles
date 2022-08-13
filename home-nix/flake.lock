@@ -15,19 +15,19 @@
         "type": "github"
       }
     },
-    "forgit": {
+    "fzf_fish": {
       "flake": false,
       "locked": {
-        "lastModified": 1660097279,
-        "narHash": "sha256-zyDp8tswi+6WuHgJkSIz1OE6s314qycK1975vk8FbMM=",
-        "owner": "wfxr",
-        "repo": "forgit",
-        "rev": "f6040b21a0db895d0e0ec110fecdc72274a20417",
+        "lastModified": 1660000546,
+        "narHash": "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=",
+        "owner": "PatrickF1",
+        "repo": "fzf.fish",
+        "rev": "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7",
         "type": "github"
       },
       "original": {
-        "owner": "wfxr",
-        "repo": "forgit",
+        "owner": "PatrickF1",
+        "repo": "fzf.fish",
         "type": "github"
       }
     },
@@ -93,7 +93,7 @@
     },
     "root": {
       "inputs": {
-        "forgit": "forgit",
+        "fzf_fish": "fzf_fish",
         "home-manager": "home-manager",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs"

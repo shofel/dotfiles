@@ -15,10 +15,7 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
-    forgit = {
-      url = "github:wfxr/forgit";
-      flake = false;
-    };
+    fzf_fish = { url = "github:PatrickF1/fzf.fish"; flake = false; };
   };
 
   outputs = inputs: {
@@ -265,8 +262,9 @@
                 enable = true;
 
                 plugins = [{
-                  name = "forgit";
-                  src = inputs.forgit;
+                  # https://github.com/PatrickF1/fzf.fish
+                  name = "fzf_fish";
+                  src = inputs.fzf_fish;
                 }];
 
                 interactiveShellInit = shellInit;
@@ -289,7 +287,7 @@
                   gBFG =
                     "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
 
-                  ga = forgit::add;
+                  ga = "git add";
 
                   gamend = "git commit --amend --no-edit";
                   gcom = "git commit";
