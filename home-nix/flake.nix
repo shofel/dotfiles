@@ -15,6 +15,7 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
+    catppuccin-kitty = { url = "github:catppuccin/kitty"; flake = false; };
   };
 
   outputs = inputs: {
@@ -135,7 +136,9 @@
 
             # kitty {{{
             home.file.".config/kitty/kitty.conf" = {
-              source = ./kitty/kitty.conf;
+              text = ""
+                + "\n" + builtins.readFile ./kitty/kitty.conf
+                + "\n" + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf";
             };
 
             # fish -lc is to setup env

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "catppuccin-kitty": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1655764355,
+        "narHash": "sha256-E56dJD6v8bNbB7/+CjZntNmNA0MkMccBCtJ72e90ZW0=",
+        "owner": "catppuccin",
+        "repo": "kitty",
+        "rev": "ad38e5bb1b1ab04e7d2cf86ded289c455df62908",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "kitty",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1644229661,
@@ -12,22 +28,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "fzf_fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660000546,
-        "narHash": "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=",
-        "owner": "PatrickF1",
-        "repo": "fzf.fish",
-        "rev": "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "PatrickF1",
-        "repo": "fzf.fish",
         "type": "github"
       }
     },
@@ -93,7 +93,7 @@
     },
     "root": {
       "inputs": {
-        "fzf_fish": "fzf_fish",
+        "catppuccin-kitty": "catppuccin-kitty",
         "home-manager": "home-manager",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs"
