@@ -158,7 +158,7 @@
 
               new_tab gtd
               cd ~/10-19-Computer/15-GTD/
-              launch fish -lc nvim index.norg
+              launch fish -lc 'nvim index.norg'
 
               new_tab dotfiles
               cd ~/10-19-Computer/12-Tooling/12.01-shofel-dotfiles/
