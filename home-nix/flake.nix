@@ -59,6 +59,8 @@
                 sumneko-lua-language-server
                 terraform-ls
 
+                terraform
+
                 neovim-package
                 xclip
               ];
