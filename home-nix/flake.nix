@@ -1,8 +1,5 @@
 # nnoremap <buffer> <leader>r <cmd>Dispatch home-manager switch --flake ./home-nix/<cr>
 #
-# TODO manage kmonad
-# TODO proper x start
-# TODO install kitty on nixos
 {
   description = "Shovel's Home Manager flake";
 
@@ -33,7 +30,7 @@
           {
             home = {
               username = "slava";
-              homeDirectory = "/home/slava"; # TODO linux /home/slava
+              homeDirectory = "/home/slava";
               stateVersion = "21.05";
             };
           }
@@ -320,7 +317,7 @@
 
             # redshift {{{
             services.redshift = {
-              enable = true; # TODO linux->true macos->false
+              enable = true;
               latitude = 56.83;
               longitude = 60.6;
               temperature = {
