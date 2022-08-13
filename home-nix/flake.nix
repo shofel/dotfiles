@@ -15,7 +15,6 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
-    fzf_fish = { url = "github:PatrickF1/fzf.fish"; flake = false; };
   };
 
   outputs = inputs: {
@@ -261,11 +260,7 @@
               in {
                 enable = true;
 
-                plugins = [{
-                  # https://github.com/PatrickF1/fzf.fish
-                  name = "fzf_fish";
-                  src = inputs.fzf_fish;
-                }];
+                plugins = [];
 
                 interactiveShellInit = shellInit;
                 loginShellInit = shellInit;
