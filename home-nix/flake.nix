@@ -138,7 +138,17 @@
             home.file.".config/kitty/kitty.conf" = {
               text = ""
                 + "\n" + builtins.readFile ./kitty/kitty.conf
-                + "\n" + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf";
+                + "\n" + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf"
+                + "\n" + "allow_remote_control yes"
+                + "\n" + ''
+                active_tab_foreground   #282c34
+                active_tab_background   #98c379
+                inactive_tab_foreground #abb2bf
+                inactive_tab_background #303446
+                tab_bar_background #303446
+                ''
+
+                ;
             };
 
             # fish -lc is to setup env
