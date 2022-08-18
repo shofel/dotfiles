@@ -1,7 +1,7 @@
-function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument topic issue
+function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument issue topic
   if test -z $topic
-    echo >&2 'Usage:   new-branch topic [issue]'
-    echo >&2 'Example: new-branch cool-feature ACME-112'
+    echo >&2 'Usage:   new-branch issue topic'
+    echo >&2 'Example: new-branch acme-112 make-a-good-thing'
     return
   end
 
