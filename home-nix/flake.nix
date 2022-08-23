@@ -22,12 +22,12 @@
 
   outputs = inputs: {
     homeConfigurations = let
-      lib = inputs.nixpkgs.lib;
+      inherit (inputs.nixpkgs) lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       system = "x86_64-linux";
       bat-theme = "Coldark-Dark";
-      neovim-package = inputs.neovim.packages.${system}.neovim;
-      language-servers-packages = inputs.language-servers.packages.${system};
+      inherit (inputs.neovim.packages.${system}) neovim;
+      inherit (inputs.language-servers.packages.${system}) typescript-language-server;
     in {
       slava = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -66,9 +66,9 @@
                 pkgs.nodePackages.vscode-langservers-extracted
                 pkgs.nodePackages.yaml-language-server
 
-                language-servers-packages.typescript-language-server
+                typescript-language-server
               ];
-            in tools ++ apps ++ language-tools ++ [neovim-package];
+            in tools ++ apps ++ language-tools ++ [neovim];
             # }}} home.packages
 
             # {{{ fzf
@@ -256,7 +256,7 @@
 
             programs.fish = let
               shellInit = ''
-                set -U VISUAL ${neovim-package}/bin/nvim
+                set -U VISUAL ${neovim}/bin/nvim
 
                 set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
                 fish_add_path /nix/var/nix/profiles/default/bin
