@@ -12,7 +12,10 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
-    catppuccin-kitty = { url = "github:catppuccin/kitty"; flake = false; };
+    catppuccin-kitty = {
+      url = "github:catppuccin/kitty";
+      flake = false;
+    };
   };
 
   outputs = inputs: {
@@ -40,30 +43,27 @@
 
             # home.packages {{{
             home.packages = let
-              main = with pkgs; [
-                jq
-                gh
-                fd
-                ripgrep
+              tools = [
+                pkgs.fd
+                pkgs.gh
+                pkgs.jq
+                pkgs.ripgrep
 
-                htop
-
-                nixfmt
-                rnix-lsp
-                sumneko-lua-language-server
-                terraform-ls
-
-                terraform
-
-                neovim-package
-                xclip
+                pkgs.htop
+                pkgs.xclip
               ];
-              node = with pkgs.nodePackages; [
-                vim-language-server
-                vscode-langservers-extracted
-                yaml-language-server
+              apps = [ pkgs.terraform ];
+              language-tools = [
+                pkgs.nixfmt
+                pkgs.rnix-lsp
+                pkgs.sumneko-lua-language-server
+                pkgs.terraform-ls
+
+                pkgs.nodePackages.vim-language-server
+                pkgs.nodePackages.vscode-langservers-extracted
+                pkgs.nodePackages.yaml-language-server
               ];
-            in main ++ node;
+            in tools ++ apps ++ language-tools ++ neovim-package;
             # }}} home.packages
 
             # {{{ fzf
@@ -100,7 +100,10 @@
               extraConfig = {
                 init = { defaultBranch = "master"; };
                 pull = { rebase = true; };
-                push = { autoSetupRemote = true; default = "current"; };
+                push = {
+                  autoSetupRemote = true;
+                  default = "current";
+                };
                 core = { editor = "nvim"; };
               };
 
@@ -112,14 +115,14 @@
             programs.ssh = {
               enable = true;
               extraConfig = ''
-              Host *
-                AddKeysToAgent yes
-                IdentityFile ~/.ssh/id_ed25519
+                Host *
+                  AddKeysToAgent yes
+                  IdentityFile ~/.ssh/id_ed25519
 
-              Host student
-                Hostname student.examus.net
-                User ci
-                IdentityFile ~/.ssh/id_student
+                Host student
+                  Hostname student.examus.net
+                  User ci
+                  IdentityFile ~/.ssh/id_student
               '';
             };
             # }}} ssh
@@ -133,10 +136,8 @@
 
             # kitty {{{
             home.file.".config/kitty/kitty.conf" = {
-              text = ""
-                + "\n" + builtins.readFile ./kitty/kitty.conf
-                + "\n" + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf"
-                ;
+              text = "" + "\n" + builtins.readFile ./kitty/kitty.conf + "\n"
+                + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf";
             };
 
             # fish -lc is to setup env
@@ -237,9 +238,9 @@
             # }}} starship
 
             # nvim {{{
-              home.file.".config/nvim/fnl/home-managed/gcc-path.fnl".text = ''
-                  "${pkgs.gcc}/bin/gcc"
-              '';
+            home.file.".config/nvim/fnl/home-managed/gcc-path.fnl".text = ''
+              "${pkgs.gcc}/bin/gcc"
+            '';
             # }}} nvim
 
             # fish {{{
@@ -248,70 +249,68 @@
               recursive = true;
             };
 
-            programs.fish =
-              let
-                shellInit =
-                  ''
-                  set -U VISUAL ${neovim-package}/bin/nvim
+            programs.fish = let
+              shellInit = ''
+                set -U VISUAL ${neovim-package}/bin/nvim
 
-                  set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
-                  fish_add_path /nix/var/nix/profiles/default/bin
-                  fish_add_path ~/.nix-profile/bin
-                  '';
-              in {
-                enable = true;
+                set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
+                fish_add_path /nix/var/nix/profiles/default/bin
+                fish_add_path ~/.nix-profile/bin
+              '';
+            in {
+              enable = true;
 
-                plugins = [];
+              plugins = [ ];
 
-                interactiveShellInit = shellInit;
-                loginShellInit = shellInit;
+              interactiveShellInit = shellInit;
+              loginShellInit = shellInit;
 
-                # shellAbbrs {{{
-                shellAbbrs = {
-                  dc = "docker-compose";
+              # shellAbbrs {{{
+              shellAbbrs = {
+                dc = "docker-compose";
 
-                  gb = "git switch (git branch | string trim | fzf)";
-                  gB = ''
-                     git switch (
-                      git fetch --all 1>/dev/null
-                      and git branch --all \
-                        | string replace 'remotes/origin/' "" \
-                        | string trim | sort | uniq \
-                        | fzf
-                    )'';
+                gb = "git switch (git branch | string trim | fzf)";
+                gB = ''
+                   git switch (
+                    git fetch --all 1>/dev/null
+                    and git branch --all \
+                      | string replace 'remotes/origin/' "" \
+                      | string trim | sort | uniq \
+                      | fzf
+                  )'';
 
-                  gBFG =
-                    "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+                gBFG =
+                  "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
 
-                  ga = "git add";
+                ga = "git add";
 
-                  gamend = "git commit --amend --no-edit";
-                  gcom = "git commit";
+                gamend = "git commit --amend --no-edit";
+                gcom = "git commit";
 
-                  gfa = "git fetch --all --prune --tags";
-                  gpf = "git push --force-with-lease";
-                  gpu = "git push -u origin HEAD";
+                gfa = "git fetch --all --prune --tags";
+                gpf = "git push --force-with-lease";
+                gpu = "git push -u origin HEAD";
 
-                  gtop = "git rev-parse --show-toplevel";
-                  gcd  = "cd (git rev-parse --show-toplevel)";
-                  ghash = "git rev-parse --short HEAD";
-                  gclean = "git clean -fd";
+                gtop = "git rev-parse --show-toplevel";
+                gcd = "cd (git rev-parse --show-toplevel)";
+                ghash = "git rev-parse --short HEAD";
+                gclean = "git clean -fd";
 
-                  ginit = "git init ;and git commit -m 'root' --allow-empty";
+                ginit = "git init ;and git commit -m 'root' --allow-empty";
 
-                  grba = "git rebase --abort";
-                  grbc = "git rebase --continue";
-                  grbs = "git rebase --skip";
+                grba = "git rebase --abort";
+                grbc = "git rebase --continue";
+                grbs = "git rebase --skip";
 
-                  gsm = "git switch master";
-                  gst = "git status --short --branch";
+                gsm = "git switch master";
+                gst = "git status --short --branch";
 
-                  #
-                  suspend = "systemctl suspend";
-                  v = "nvim '+Term fish'";
-                  weather = "curl wttr.in/guangzhou";
-                };
-                # }}} shellAbbrs
+                #
+                suspend = "systemctl suspend";
+                v = "nvim '+Term fish'";
+                weather = "curl wttr.in/guangzhou";
+              };
+              # }}} shellAbbrs
 
             }; # }}} fish
 
