@@ -18,6 +18,21 @@
     },
     "flake-utils": {
       "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1644229661,
         "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
         "owner": "numtide",
@@ -52,9 +67,28 @@
         "type": "github"
       }
     },
-    "neovim": {
+    "language-servers": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1660485599,
+        "narHash": "sha256-TmZZ5Zqcm1Zd2G+dbDgnd2tMX7YNd4FfeKHDPfyX5io=",
+        "ref": "master",
+        "rev": "5e69f33d98af9d8dac96772f8f3403b1ae6e70fb",
+        "revCount": 7,
+        "type": "git",
+        "url": "https://git.sr.ht/~bwolf/language-servers.nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.sr.ht/~bwolf/language-servers.nix"
+      }
+    },
+    "neovim": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -77,6 +111,21 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1659107414,
+        "narHash": "sha256-ASIVMNu/fTlgVvDJEJJ1xAysKGg6xX/wFcu4RTb2R3Y=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "69a3aff98b02b91b64e9f728f2e1e30ead8ecd52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1660227034,
         "narHash": "sha256-bXMlG/YU0IjAod6M625XT1YbUG+/3L9ypk9llYpKeuM=",
         "owner": "nixos",
@@ -95,8 +144,9 @@
       "inputs": {
         "catppuccin-kitty": "catppuccin-kitty",
         "home-manager": "home-manager",
+        "language-servers": "language-servers",
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "utils": {

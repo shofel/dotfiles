@@ -55,7 +55,7 @@
                 pkgs.htop
                 pkgs.xclip
               ];
-              apps = [ pkgs.terraform ];
+              apps = [ pkgs.terraform pkgs.awscli ];
               language-tools = [
                 pkgs.nixfmt
                 pkgs.rnix-lsp
@@ -67,9 +67,8 @@
                 pkgs.nodePackages.yaml-language-server
 
                 language-servers-packages.typescript-language-server
-                language-servers-packages.vscode-langservers-extracted
               ];
-            in tools ++ apps ++ language-tools ++ neovim-package;
+            in tools ++ apps ++ language-tools ++ [neovim-package];
             # }}} home.packages
 
             # {{{ fzf
