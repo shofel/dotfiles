@@ -12,6 +12,8 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
+    language-servers.url = git+https://git.sr.ht/~bwolf/language-servers.nix;
+
     catppuccin-kitty = {
       url = "github:catppuccin/kitty";
       flake = false;
@@ -25,6 +27,7 @@
       system = "x86_64-linux";
       bat-theme = "Coldark-Dark";
       neovim-package = inputs.neovim.packages.${system}.neovim;
+      language-servers-packages = inputs.language-servers.packages.${system};
     in {
       slava = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -62,6 +65,9 @@
                 pkgs.nodePackages.vim-language-server
                 pkgs.nodePackages.vscode-langservers-extracted
                 pkgs.nodePackages.yaml-language-server
+
+                language-servers-packages.typescript-language-server
+                language-servers-packages.vscode-langservers-extracted
               ];
             in tools ++ apps ++ language-tools ++ neovim-package;
             # }}} home.packages
