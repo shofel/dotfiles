@@ -186,62 +186,6 @@
             };
             # }}} stumpwm
 
-            # starship {{{
-            programs.starship = {
-              enable = false;
-              enableFishIntegration = false;
-              settings = {
-                add_newline = false;
-                scan_timeout = 10;
-                nix_shell = { format = "[\\[nix\\]](blue) "; };
-
-                git_branch = { format = "[$symbol$branch](bold purple)"; };
-                git_status = {
-                  style = "bold red";
-                  format = lib.concatStrings [
-                    "["
-                    "$conflicted"
-                    "$deleted"
-                    "$renamed"
-                    "$modified"
-                    "$staged"
-                    "$untracked"
-
-                    "$ahead$ahead_count"
-                    "$behind$behind_count"
-                    "]"
-                    "($style)"
-                  ];
-                  ahead = "↑";
-                  behind = "↓";
-                  diverged = "⇅";
-                  stashed = "";
-                };
-
-                directory = {
-                  style = "bold green";
-                  fish_style_pwd_dir_length = 1;
-                  repo_root_style = "$style";
-                };
-                character = {
-                  success_symbol = "[ ➤](green)";
-                  error_symbol = "[ ➤](red)";
-                };
-                format = lib.concatStrings [
-                  "$nix_shell"
-                  "$username"
-                  "$hostname"
-                  "$directory"
-                  "$git_branch"
-                  "$git_state"
-                  "$git_status"
-                  "$cmd_duration"
-                  "$character"
-                ];
-              };
-            };
-            # }}} starship
-
             # nvim {{{
             home.file.".config/nvim/fnl/home-managed/gcc-path.fnl".text = ''
               "${pkgs.gcc}/bin/gcc"
