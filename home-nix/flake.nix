@@ -199,13 +199,15 @@
             };
 
             programs.fish = let
-              shellInit = ''
+              shellInit = toString [''
                 set -U VISUAL ${neovim}/bin/nvim
 
                 set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
                 fish_add_path /nix/var/nix/profiles/default/bin
-                fish_add_path ~/.nix-profile/bin
-              '';
+                fish_add_path ~/.nix-profile/bin''
+              "\n"
+              (builtins.readFile ./fish/ssh-agent.fish)
+              ];
             in {
               enable = true;
 
