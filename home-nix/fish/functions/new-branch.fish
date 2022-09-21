@@ -1,12 +1,8 @@
 function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeRequest' --argument issue topic
-  if test -z $topic
+  if test -z $issue -o -z $topic
     echo >&2 'Usage:   new-branch issue topic'
     echo >&2 'Example: new-branch acme-112 make-a-good-thing'
     return
-  end
-
-  if test -z $issue
-    set -l issue x-0
   end
 
   set -l date (date +%Y-%m-%d)
