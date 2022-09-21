@@ -12,7 +12,7 @@
     neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
-    language-servers.url = git+https://git.sr.ht/~bwolf/language-servers.nix;
+    language-servers.url = "git+https://git.sr.ht/~bwolf/language-servers.nix";
 
     catppuccin-kitty = {
       url = "github:catppuccin/kitty";
@@ -27,7 +27,8 @@
       system = "x86_64-linux";
       bat-theme = "Coldark-Dark";
       inherit (inputs.neovim.packages.${system}) neovim;
-      inherit (inputs.language-servers.packages.${system}) typescript-language-server;
+      inherit (inputs.language-servers.packages.${system})
+        typescript-language-server;
     in {
       slava = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -55,7 +56,6 @@
                 pkgs.htop
                 pkgs.xclip
               ];
-              apps = [ pkgs.terraform pkgs.awscli ];
               language-tools = [
                 pkgs.nixfmt
                 pkgs.rnix-lsp
@@ -68,7 +68,9 @@
 
                 typescript-language-server
               ];
-            in tools ++ apps ++ language-tools ++ [neovim];
+            in tools
+               ++ ([ neovim ] ++ language-tools)
+               ++ [ pkgs.terraform pkgs.awscli ];
             # }}} home.packages
 
             # {{{ fzf
@@ -199,14 +201,15 @@
             };
 
             programs.fish = let
-              shellInit = toString [''
-                set -U VISUAL ${neovim}/bin/nvim
+              shellInit = toString [
+                ''
+                  set -U VISUAL ${neovim}/bin/nvim
 
-                set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
-                fish_add_path /nix/var/nix/profiles/default/bin
-                fish_add_path ~/.nix-profile/bin''
-              "\n"
-              (builtins.readFile ./fish/ssh-agent.fish)
+                  set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
+                  fish_add_path /nix/var/nix/profiles/default/bin
+                  fish_add_path ~/.nix-profile/bin''
+                "\n"
+                (builtins.readFile ./fish/ssh-agent.fish)
               ];
             in {
               enable = true;
