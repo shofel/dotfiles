@@ -52,6 +52,8 @@
                 pkgs.gh
                 pkgs.jq
                 pkgs.ripgrep
+                pkgs.sd
+                pkgs.tealdeer
 
                 pkgs.htop
                 pkgs.xclip
