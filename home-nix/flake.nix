@@ -57,6 +57,7 @@
 
                 pkgs.htop
                 pkgs.xclip
+                pkgs.scrot
               ];
               language-tools = [
                 pkgs.nixfmt
