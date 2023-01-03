@@ -231,7 +231,7 @@
                   git switch (
                     git for-each-ref --sort=-committerdate refs/heads/ \
                       --format="%(refname:short)" \
-                    | string trim
+                    | string trim \
                     | fzf)'';
 
                 gBFG =
