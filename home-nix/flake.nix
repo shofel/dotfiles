@@ -154,15 +154,15 @@
             home.file.".config/kitty/startup_session".text = ''
               new_tab student
               cd ~/10-19-Computer/11-Examus/11.01-student-web/
-              launch fish -lc 'nix-shell --run nvim'
+              launch fish -lc 'nix-shell --run fish'
 
               new_tab cdn
               cd ~/10-19-Computer/11-Examus/11.02-terraform-cdn/
-              launch fish -lc 'nix-shell -p awscli --run fish'
+              launch fish -l
 
               new_tab notes
               cd ~/10-19-Computer/14-Notes/
-              launch fish -lc nvim
+              launch fish -l
 
               new_tab gtd
               cd ~/10-19-Computer/15-GTD/
