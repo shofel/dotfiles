@@ -147,7 +147,7 @@
             # kitty {{{
             home.file.".config/kitty/kitty.conf" = {
               text = "" + "\n" + builtins.readFile ./kitty/kitty.conf + "\n"
-                + builtins.readFile "${inputs.catppuccin-kitty}/frappe.conf";
+                + builtins.readFile "${inputs.catppuccin-kitty}/themes/frappe.conf";
             };
 
             # fish -lc is to setup env
