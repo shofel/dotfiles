@@ -58,6 +58,8 @@
                 pkgs.htop
                 pkgs.xclip
                 pkgs.scrot
+
+                (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
               ];
               language-tools = [
                 pkgs.nixfmt
@@ -75,6 +77,8 @@
                ++ ([ neovim ] ++ language-tools)
                ++ [ pkgs.terraform pkgs.awscli ];
             # }}} home.packages
+
+            fonts.fontconfig.enable = true;
 
             # {{{ fzf
             programs.fzf = {
@@ -136,13 +140,6 @@
               '';
             };
             # }}} ssh
-
-            # Fonts {{{
-            # The workaround for https://github.com/NixOS/nixpkgs/issues/8318
-            home.file.".local/share/fonts" = {
-              source = "${pkgs.nerdfonts}/share/fonts/opentype/NerdFonts/";
-            };
-            # }}}
 
             # kitty {{{
             home.file.".config/kitty/kitty.conf" = {
