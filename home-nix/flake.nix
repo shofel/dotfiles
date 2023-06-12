@@ -18,6 +18,11 @@
       url = "github:catppuccin/kitty";
       flake = false;
     };
+
+    catppuccin-bat = {
+      url = "github:catppuccin/bat";
+      flake = false;
+    };
   };
 
   outputs = inputs: {
@@ -25,7 +30,7 @@
       inherit (inputs.nixpkgs) lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       system = "x86_64-linux";
-      bat-theme = "Coldark-Dark";
+      bat-catppucin-frappe = "Catppuccin-frappe";
       inherit (inputs.neovim.packages.${system}) neovim;
       inherit (inputs.language-servers.packages.${system})
         typescript-language-server;
@@ -94,9 +99,11 @@
               config = {
                 map-syntax = [ "*.json5:JavaScript (Babel)" ];
                 style = "numbers";
-                theme = bat-theme;
+                theme = bat-catppucin-frappe;
               };
             };
+            home.file.".config/bat/themes/Catppuccin-frappe.tmTheme".text =
+              builtins.readFile "${inputs.catppuccin-bat}/Catppuccin-frappe.tmTheme";
             # }}} bat
 
             # git {{{
@@ -109,7 +116,7 @@
 
               delta = {
                 enable = true;
-                options = { syntax-theme = bat-theme; };
+                options = { syntax-theme = bat-catppucin-frappe; };
               };
 
               extraConfig = {
