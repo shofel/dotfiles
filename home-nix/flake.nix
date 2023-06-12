@@ -59,7 +59,9 @@
                 pkgs.xclip
                 pkgs.scrot
 
-                (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+                (pkgs.nerdfonts.override {
+                  fonts = [ "FiraCode" "DroidSansMono" ];
+                })
               ];
               language-tools = [
                 pkgs.nixfmt
@@ -73,9 +75,8 @@
 
                 typescript-language-server
               ];
-            in tools
-               ++ ([ neovim ] ++ language-tools)
-               ++ [ pkgs.terraform pkgs.awscli ];
+            in tools ++ ([ neovim ] ++ language-tools)
+            ++ [ pkgs.terraform pkgs.awscli ];
             # }}} home.packages
 
             fonts.fontconfig.enable = true;
@@ -142,11 +143,11 @@
             # }}} ssh
 
             # kitty {{{
-            home.file.".config/kitty/kitty.conf" = {
-              text = ""
-                + "\n" + builtins.readFile ./kitty/kitty.conf
-                + "\n" + builtins.readFile "${inputs.catppuccin-kitty}/themes/frappe.conf";
-            };
+            home.file.".config/kitty/kitty.conf" = let
+              conf = builtins.readFile ./kitty/kitty.conf;
+              colors = builtins.readFile
+                "${inputs.catppuccin-kitty}/themes/frappe.conf";
+            in { text = conf + "\n" + colors; };
 
             # fish -lc is to setup env
             home.file.".config/kitty/startup_session".text = ''
