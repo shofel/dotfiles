@@ -102,8 +102,9 @@
                 theme = bat-catppucin-frappe;
               };
             };
-            home.file.".config/bat/themes/Catppuccin-frappe.tmTheme".text =
-              builtins.readFile "${inputs.catppuccin-bat}/Catppuccin-frappe.tmTheme";
+            xdg.configFile."bat/themes/Catppuccin-frappe.tmTheme".text =
+              builtins.readFile
+              "${inputs.catppuccin-bat}/Catppuccin-frappe.tmTheme";
             # }}} bat
 
             # git {{{
@@ -150,14 +151,14 @@
             # }}} ssh
 
             # kitty {{{
-            home.file.".config/kitty/kitty.conf" = let
+            xdg.configFile."kitty/kitty.conf" = let
               conf = builtins.readFile ./kitty/kitty.conf;
               colors = builtins.readFile
                 "${inputs.catppuccin-kitty}/themes/frappe.conf";
             in { text = conf + "\n" + colors; };
 
             # fish -lc is to setup env
-            home.file.".config/kitty/startup_session".text = ''
+            xdg.configFile."kitty/startup_session".text = ''
               new_tab student
               cd ~/10-19-Computer/11-Examus/11.01-student-web/
               launch fish -lc 'nix-shell --run fish'
@@ -183,7 +184,7 @@
               launch fish -lc nvim
             '';
 
-            home.file.".config/kitty/empty_session".text = ''
+            xdg.configFile."kitty/empty_session".text = ''
               new_tab tab
               cd
               launch fish -lc nvim
@@ -191,20 +192,20 @@
             # }}} kitty
 
             # stumpwm {{{
-            home.file.".config/stumpwm" = {
+            xdg.configFile."stumpwm" = {
               source = ./stumpwm;
               recursive = true;
             };
             # }}} stumpwm
 
             # nvim {{{
-            home.file.".config/nvim/fnl/home-managed/gcc-path.fnl".text = ''
+            xdg.configFile."nvim/fnl/home-managed/gcc-path.fnl".text = ''
               "${pkgs.gcc}/bin/gcc"
             '';
             # }}} nvim
 
             # fish {{{
-            home.file.".config/fish/functions" = {
+            xdg.configFile."fish/functions" = {
               source = ./fish/functions;
               recursive = true;
             };
