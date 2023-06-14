@@ -23,6 +23,11 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
+
+    catppuccin-fish = {
+      url = "github:catppuccin/fish";
+      flake = false;
+    };
   };
 
   outputs = inputs: {
@@ -132,6 +137,30 @@
 
               ignores = [ ".DS_Store" "*.sw?" ];
             };
+
+            programs.lazygit = {
+              enable = true;
+              settings = {
+                # Copy-pasted from github:catppuccin/lazygit
+                theme = let
+                  green = "#a6d189";
+                  text = "#c6d0f5";
+                  blue = "#090909";
+                  surface0 = "#414559";
+                  teal = "#81c8be";
+                in {
+                  lightTheme = false;
+                  activeBorderColor = [ green "bold" ];
+                  inactiveBorderColor = [ text ];
+                  optionsTextColor = [ blue ];
+                  selectedLineBgColor = [ surface0 "default" ];
+                  selectedRangeBgColor = [ surface0 ];
+                  cherryPickedCommitBgColor = [ teal ];
+                  cherryPickedCommitFgColor = [ blue ];
+                  unstagedChangesColor = [ "red" ];
+                };
+              };
+            };
             # }}} git
 
             # ssh {{{
@@ -210,6 +239,11 @@
               recursive = true;
             };
 
+            xdg.configFile."fish/themes/" = {
+              source = "${inputs.catppuccin-fish}/themes";
+              recursive = true;
+            };
+
             programs.fish = let
               shellInit = toString [
                 ''
@@ -220,6 +254,8 @@
                   fish_add_path ~/.nix-profile/bin''
                 "\n"
                 (builtins.readFile ./fish/ssh-agent.fish)
+                "\n"
+                "fish_config theme set 'Catppuccin Frappe'"
               ];
             in {
               enable = true;
