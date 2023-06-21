@@ -69,6 +69,7 @@
                 })
               ];
               language-tools = [
+                pkgs.jsonnet-language-server
                 pkgs.nixfmt
                 pkgs.rnix-lsp
                 pkgs.sumneko-lua-language-server

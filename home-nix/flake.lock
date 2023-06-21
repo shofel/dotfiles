@@ -16,22 +16,6 @@
         "type": "github"
       }
     },
-    "catppuccin-fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1682585691,
-        "narHash": "sha256-l9V7YMfJWhKDL65dNbxaddhaM6GJ0CFZ6z+4R6MJwBA=",
-        "owner": "catppuccin",
-        "repo": "fish",
-        "rev": "91e6d6721362be05a5c62e235ed8517d90c567c9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "fish",
-        "type": "github"
-      }
-    },
     "catppuccin-kitty": {
       "flake": false,
       "locked": {
@@ -177,7 +161,6 @@
     "root": {
       "inputs": {
         "catppuccin-bat": "catppuccin-bat",
-        "catppuccin-fish": "catppuccin-fish",
         "catppuccin-kitty": "catppuccin-kitty",
         "home-manager": "home-manager",
         "language-servers": "language-servers",
