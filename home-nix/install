@@ -4,7 +4,7 @@ cd $(dirname $0)
 
 RESULT=result/activate
 
-home-manager build --flake .
+NIXPKGS_ALLOW_UNFREE=1 home-manager --impure build --flake .
 
 if test ! -e $RESULT; then
   echo >&2 ERROR: failed to build home configuration
