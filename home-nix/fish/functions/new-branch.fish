@@ -16,8 +16,8 @@ function new-branch --description 'Set up new branch: 1.create 2.push 3.MergeReq
   git fetch origin master ;or git fetch origin main
   git rebase origin/master ;or git rebase origin/main
 
-  git push -o ci.skip -u origin $branch 2>&1 |
-    grep merge_requests/new |
-    awk '{print $2}' |
-    xargs open
+  git push -u origin $branch 2>&1 \
+    -o ci.skip -o merge_request.create \
+    -o merge_request.draft \
+    -o merge_request.title="$issue $topic"
 end
