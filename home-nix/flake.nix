@@ -82,7 +82,7 @@
                 typescript-language-server
               ];
             in tools ++ ([ neovim ] ++ language-tools)
-            ++ [ pkgs.terraform pkgs.awscli ];
+            ++ [ pkgs.kitty pkgs.vial pkgs.terraform pkgs.awscli ];
             # }}} home.packages
 
             fonts.fontconfig.enable = true;
