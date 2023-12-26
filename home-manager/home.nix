@@ -68,11 +68,39 @@
     pkgs.scrot
     
     pkgs-unstable.helix
+    pkgs-unstable.kitty
 
     (pkgs.nerdfonts.override {
       fonts = [ "FiraCode" "DroidSansMono" ];
     })
+
+    # TODO neovim
+
+    pkgs.firefox
   ];
+
+  # TODO ?obsolete?
+  fonts.fontconfig.enable = true;
+
+  # {{{ fzf
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  # }}} fzf
+
+  # {{{ bat
+  programs.bat = {
+    enable = true;
+    config = {
+      map-syntax = [ "*.json5:JavaScript (Babel)" ];
+      style = "numbers";
+      theme = outputs.catppuccin-bat.name;
+    };
+  };
+  xdg.configFile."bat/themes/${outputs.catppuccin-bat.name}.tmTheme".text =
+    outputs.catppuccin-bat.text;
+  # }}} bat
 
   # git {{{
   programs.git = {
@@ -84,8 +112,7 @@
 
     delta = {
       enable = true;
-      # TODO theme for delta
-      # options = { syntax-theme = bat-catppucin-frappe; };
+      options = { syntax-theme = outputs.catppuccin-bat.name; };
     };
 
     extraConfig = {
@@ -102,9 +129,182 @@
 
     ignores = [ ".DS_Store" "*.sw?" ];
   };
-  # git }}}
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      # Copy-pasted from github:catppuccin/lazygit
+      # TODO source from base16 via nix-colors
+      gui = {
+        theme = let 
+          green = "#a6d189";
+          text = "#c6d0f5";
+          blue = "#090909";
+          surface0 = "#414559";
+          teal = "#81c8be";
+        in {
+          activeBorderColor = [ green "bold" ];
+          inactiveBorderColor = [ text ];
+          optionsTextColor = [ blue ];
+          selectedLineBgColor = [ surface0 "default" ];
+          selectedRangeBgColor = [ surface0 ];
+          cherryPickedCommitBgColor = [ teal ];
+          cherryPickedCommitFgColor = [ blue ];
+          unstagedChangesColor = [ "red" ];
+        };
+      };
+    };
+  };
+  # }}} git
+
+  # ssh {{{
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        AddKeysToAgent yes
+        IdentityFile ~/.ssh/id_ed25519
+
+      Host student
+        Hostname student.examus.net
+        User ci
+        IdentityFile ~/.ssh/id_student
+    '';
+  };
+  # }}} ssh
+
+  # kitty {{{
+  xdg.configFile."kitty/kitty.conf" = let
+    conf = builtins.readFile ./kitty/kitty.conf;
+    colors = builtins.readFile
+      "${inputs.catppuccin-kitty}/themes/frappe.conf";
+  in { text = conf + "\n" + colors; };
+
+  # fish -lc is to setup env
+  xdg.configFile."kitty/startup_session".text = ''
+    new_tab notes
+    cd ~/10-19-Computer/14-Notes/
+    launch fish -l
+
+    new_tab gtd
+    cd ~/10-19-Computer/15-GTD/
+    launch fish -lc 'nvim index.norg'
+
+    new_tab dotfiles
+    cd ~/10-19-Computer/12-Tooling/12.01-shofel-dotfiles/
+    launch fish -lc nvim
+
+    new_tab nyoom
+    cd ~/10-19-Computer/12-Tooling/13.03-nyoom.nvim/
+    launch fish -lc nvim
+  '';
+
+  xdg.configFile."kitty/empty_session".text = ''
+    new_tab tab
+    cd
+    launch fish -lc nvim
+  '';
+  # }}} kitty
+
+  # stumpwm {{{
+  xdg.configFile."stumpwm" = {
+    source = ./stumpwm;
+    recursive = true;
+  };
+  # }}} stumpwm
+
+  # nvim {{{
+  xdg.configFile."nvim/fnl/home-managed/gcc-path.fnl".text = ''
+    "${pkgs.gcc}/bin/gcc"
+  '';
+  # }}} nvim
+
+  # fish {{{
+  xdg.configFile."fish/functions" = {
+    source = ./fish/functions;
+    recursive = true;
+  };
+
+  programs.fish = let
+    shellInit = toString [
+      ''
+        set -U VISUAL ${inputs.neovim}/bin/nvim
+
+        set -Ux NIX_PROFILES /nix/var/nix/profiles/default $HOME/.nix-profile
+        fish_add_path /nix/var/nix/profiles/default/bin
+        fish_add_path ~/.nix-profile/bin''
+      "\n"
+      (builtins.readFile ./fish/ssh-agent.fish)
+    ];
+  in {
+    enable = true;
+
+    plugins = [ ];
+
+    interactiveShellInit = shellInit;
+    loginShellInit = shellInit;
+
+    # shellAbbrs {{{
+    shellAbbrs = {
+      dc = "docker-compose";
+
+      # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
+      gb = ''
+        git switch (
+          git for-each-ref --sort=-committerdate refs/heads/ \
+            --format="%(refname:short)" \
+          | string trim \
+          | fzf)'';
+
+      gBFG =
+        "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
+
+      ga = "git add";
+
+      gamend = "git commit --amend --no-edit";
+      gcom = "git commit";
+
+      gfa = "git fetch --all --prune --tags";
+      gpf = "git push --force-with-lease";
+      gpu = "git push -u origin HEAD";
+
+      gtop = "git rev-parse --show-toplevel";
+      gcd = "cd (git rev-parse --show-toplevel)";
+      ghash = "git rev-parse --short HEAD";
+      gclean = "git clean -fd";
+
+      ginit = "git init ;and git commit -m 'root' --allow-empty";
+
+      grba = "git rebase --abort";
+      grbc = "git rebase --continue";
+      grbs = "git rebase --skip";
+
+      gsm = "git switch master";
+      gst = "git status --short --branch";
+
+      #
+      suspend = "systemctl suspend";
+      v = "nvim '+Term fish'";
+      weather = "curl wttr.in/guangzhou";
+    };
+    # }}} shellAbbrs
+
+  }; # }}} fish
+
+  # redshift {{{
+  services.redshift = {
+    enable = true;
+    latitude = 56.83;
+    longitude = 60.6;
+    temperature = {
+      day = 6500;
+      night = 3000;
+    };
+  };
+  # }}} redshift
 
   programs.home-manager.enable = true;
+  programs.command-not-found.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
