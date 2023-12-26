@@ -16,11 +16,18 @@
     # TODO language servers
     # language-servers.url = "git+https://git.sr.ht/~bwolf/language-servers.nix";
 
-    # TODO neovim
+    neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "nixpkgs";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
+
+    catppuccin-bat.url = "github:catppuccin/bat";
+    catppuccin-bat.flake = false;
+
+    catppuccin-kitty.url = "github:catppuccin/kitty";
+    catppuccin-kitty.flake = false;
   };
 
   outputs = {
@@ -77,6 +84,12 @@
           ./home-manager/home.nix
         ];
       };
+    };
+
+    # prepare things for home-manager config
+    catppuccin-bat = {
+      name = "catppuccin";
+      text = builtins.readFile "${inputs.catppuccin-bat}/Catppuccin-frappe.tmTheme";
     };
   };
 }
