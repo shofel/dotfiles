@@ -63,6 +63,8 @@
                 pkgs.htop
                 pkgs.xclip
                 pkgs.scrot
+                
+                pkgs.helix
 
                 (pkgs.nerdfonts.override {
                   fonts = [ "FiraCode" "DroidSansMono" ];
@@ -75,14 +77,14 @@
                 pkgs.sumneko-lua-language-server
                 pkgs.terraform-ls
 
-                pkgs.nodePackages.vim-language-server
-                pkgs.nodePackages.vscode-langservers-extracted
-                pkgs.nodePackages.yaml-language-server
+                # pkgs.nodePackages.vim-language-server
+                # pkgs.nodePackages.vscode-langservers-extracted
+                # pkgs.nodePackages.yaml-language-server
 
-                typescript-language-server
+                # typescript-language-server
               ];
             in tools ++ ([ neovim ] ++ language-tools)
-            ++ [ pkgs.kitty pkgs.vial pkgs.terraform pkgs.awscli ];
+            ++ [ pkgs.kitty pkgs.vial pkgs.qmk pkgs.terraform pkgs.awscli ];
             # }}} home.packages
 
             fonts.fontconfig.enable = true;
@@ -123,6 +125,8 @@
 
               extraConfig = {
                 init = { defaultBranch = "master"; };
+                diff = { submodule = "log"; };
+                submodule = { recurse = true; };
                 pull = { rebase = true; };
                 push = {
                   autoSetupRemote = true;
