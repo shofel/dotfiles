@@ -14,7 +14,7 @@
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -46,6 +46,8 @@
       allowUnfreePredicate = _: true;
     };
   };
+
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
 
   home = {
     username = "slava";
@@ -133,24 +135,28 @@
   programs.lazygit = {
     enable = true;
     settings = {
-      # Copy-pasted from github:catppuccin/lazygit
-      # TODO source from base16 via nix-colors
+      # @see from github:catppuccin/lazygit
       gui = {
-        theme = let 
-          green = "#a6d189";
-          text = "#c6d0f5";
-          blue = "#090909";
-          surface0 = "#414559";
-          teal = "#81c8be";
+        theme = let
+          color = x: "#${builtins.getAttr x config.colorScheme.colors}";
+          green = color "base0B";
+          text = color "base05";
+          blue = color "base0D";
+          surface0 = color "base02";
+          teal = color "base0C";
+          yellow = color "base0A";
+          flamingo = color "base0F";
         in {
           activeBorderColor = [ green "bold" ];
           inactiveBorderColor = [ text ];
+          searchingActiveBorderColor = [ flamingo ];
           optionsTextColor = [ blue ];
           selectedLineBgColor = [ surface0 "default" ];
           selectedRangeBgColor = [ surface0 ];
           cherryPickedCommitBgColor = [ teal ];
           cherryPickedCommitFgColor = [ blue ];
-          unstagedChangesColor = [ "red" ];
+          unstagedChangesColor = [ yellow ];
+          defaultFgColor = [ text ];
         };
       };
     };
