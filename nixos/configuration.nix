@@ -78,10 +78,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  programs.fish.enable = true;
+
   users.users = {
     slava = {
       isNormalUser = true;
       description = "slava";
+      shell = pkgs.fish;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
@@ -167,14 +170,14 @@
     #media-session.enable = true;
   };
 
-  # temporary hacks?
-  #
-
   environment.systemPackages = with pkgs; [
     helix
     git
   ];
     
+  # temporary hacks?
+  #
+
   # mount ntfs volumes
   # environment.etc."udisks2/mount_options.conf".text = ''
   #   [defaults]
