@@ -22,6 +22,14 @@
 
     catppuccin-kitty.url = "github:catppuccin/kitty";
     catppuccin-kitty.flake = false;
+
+    # Neovim
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.11";
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      # url = "github:nix-community/nixvim/nixos-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

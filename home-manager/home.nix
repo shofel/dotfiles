@@ -15,6 +15,7 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     inputs.nix-colors.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -70,7 +71,7 @@
     pkgs.htop
     pkgs.xclip
     pkgs.scrot
-    
+
     pkgs-unstable.helix
     pkgs-unstable.kitty
 
@@ -212,9 +213,58 @@
   # }}} stumpwm
 
   # nvim {{{
-  xdg.configFile."nvim/fnl/home-managed/gcc-path.fnl".text = ''
-    "${pkgs.gcc}/bin/gcc"
-  '';
+  # TODO ? extract file ?
+  programs.nixvim = {
+    enable = true;
+
+    # TODO lsp dap treesitter
+    # TODO remap x d as in helix
+
+    # TODO: bright comments
+    colorschemes.catppuccin = {
+      enable = true;
+      flavour = "frappe";
+    };
+
+    extraConfigLua = builtins.readFile ./nvim/options.lua;
+
+    plugins.lsp.servers = {
+      lua-ls.enable = true;
+    };
+
+    plugins.lsp.keymaps.lspBuf = {
+      K = "hover";
+      gD = "references";
+      gd = "definition";
+      gi = "implementation";
+      # gt = "type_definition";
+    };
+
+    plugins.lualine = {
+      enable = true;
+      iconsEnabled = true;
+      theme = "catppuccin";
+      componentSeparators = { left = ""; right = ""; };
+      sectionSeparators   = { left = ""; right = ""; };
+    };
+
+    plugins.mini.enable = true;
+    plugins.mini.modules = {
+      comment = {};
+      surround = {
+        n_lines = 50;
+        mappings = {
+          add = "sa";
+          delete = "sd";
+          find = "st";
+          find_left = "sf";
+          highlght = "sh";
+          replace = "sr";
+          update_n_lines = "sn";
+        };
+      };
+    };
+  };
   # }}} nvim
 
   # fish {{{
