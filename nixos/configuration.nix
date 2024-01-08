@@ -196,9 +196,9 @@
   # '';
 
   virtualisation = {
-    docker = {
+    podman = {
       enable = true;
-      storageDriver = "btrfs";
+      dockerCompat = true;
     };
   };
 }

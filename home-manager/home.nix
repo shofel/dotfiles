@@ -58,12 +58,14 @@
     # TODO extract `system`
     pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages."x86_64-linux";
   in [
-    pkgs.fd
+    # Modern and fancy
+    pkgs.fd # find
+    pkgs.ripgrep
+    pkgs.sd # sed
+
+    pkgs.tealdeer
     pkgs.gh
     pkgs.jq
-    pkgs.ripgrep
-    pkgs.sd
-    pkgs.tealdeer
 
     pkgs.htop
     pkgs.xclip
@@ -75,8 +77,6 @@
     (pkgs.nerdfonts.override {
       fonts = [ "FiraCode" "DroidSansMono" ];
     })
-
-    # TODO neovim
 
     pkgs.firefox
   ];
@@ -138,24 +138,17 @@
       gui = {
         theme = let
           color = x: "#${builtins.getAttr x config.colorScheme.colors}";
-          green = color "base0B";
-          text = color "base05";
-          blue = color "base0D";
-          surface0 = color "base02";
-          teal = color "base0C";
-          yellow = color "base0A";
-          flamingo = color "base0F";
         in {
-          activeBorderColor = [ green "bold" ];
-          inactiveBorderColor = [ text ];
-          searchingActiveBorderColor = [ flamingo ];
-          optionsTextColor = [ blue ];
-          selectedLineBgColor = [ surface0 "default" ];
-          selectedRangeBgColor = [ surface0 ];
-          cherryPickedCommitBgColor = [ teal ];
-          cherryPickedCommitFgColor = [ blue ];
-          unstagedChangesColor = [ yellow ];
-          defaultFgColor = [ text ];
+          activeBorderColor          = [ (color base0B) "bold" ];
+          inactiveBorderColor        = [ (color base05) ];
+          searchingActiveBorderColor = [ (color base0F) ];
+          optionsTextColor           = [ (color base0D) ];
+          selectedLineBgColor        = [ (color base02) "default" ];
+          selectedRangeBgColor       = [ (color base02) ];
+          cherryPickedCommitBgColor  = [ (color base0C) ];
+          cherryPickedCommitFgColor  = [ (color base0D) ];
+          unstagedChangesColor       = [ (color base0A) ];
+          defaultFgColor             = [ (color base05) ];
         };
       };
     };
@@ -288,8 +281,8 @@
   # redshift {{{
   services.redshift = {
     enable = true;
-    latitude = 56.83;
-    longitude = 60.6;
+    latitude = 41;
+    longitude = 29;
     temperature = {
       day = 6500;
       night = 3000;
