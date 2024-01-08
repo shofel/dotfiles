@@ -139,16 +139,16 @@
         theme = let
           color = x: "#${builtins.getAttr x config.colorScheme.colors}";
         in {
-          activeBorderColor          = [ (color base0B) "bold" ];
-          inactiveBorderColor        = [ (color base05) ];
-          searchingActiveBorderColor = [ (color base0F) ];
-          optionsTextColor           = [ (color base0D) ];
-          selectedLineBgColor        = [ (color base02) "default" ];
-          selectedRangeBgColor       = [ (color base02) ];
-          cherryPickedCommitBgColor  = [ (color base0C) ];
-          cherryPickedCommitFgColor  = [ (color base0D) ];
-          unstagedChangesColor       = [ (color base0A) ];
-          defaultFgColor             = [ (color base05) ];
+          activeBorderColor          = [ (color "base0B") "bold" ];
+          inactiveBorderColor        = [ (color "base05") ];
+          searchingActiveBorderColor = [ (color "base0F") ];
+          optionsTextColor           = [ (color "base0D") ];
+          selectedLineBgColor        = [ (color "base02") "default" ];
+          selectedRangeBgColor       = [ (color "base02") ];
+          cherryPickedCommitBgColor  = [ (color "base0C") ];
+          cherryPickedCommitFgColor  = [ (color "base0D") ];
+          unstagedChangesColor       = [ (color "base0A") ];
+          defaultFgColor             = [ (color "base05") ];
         };
       };
     };
@@ -281,8 +281,8 @@
   # redshift {{{
   services.redshift = {
     enable = true;
-    latitude = 41;
-    longitude = 29;
+    latitude = 41.0;
+    longitude = 29.0;
     temperature = {
       day = 6500;
       night = 3000;
