@@ -217,6 +217,7 @@
   programs.nixvim = {
     enable = true;
 
+    # TODO fzf-lua
     # TODO lsp dap treesitter
     # TODO remap x d as in helix
 
@@ -243,9 +244,21 @@
     plugins.lualine = {
       enable = true;
       iconsEnabled = true;
-      theme = "catppuccin";
       componentSeparators = { left = ""; right = ""; };
       sectionSeparators   = { left = ""; right = ""; };
+      alwaysDivideMiddle = true;
+      globalstatus = true;
+      sections = {
+        lualine_a = ["branch"];
+        lualine_b = ["diff" "diagnostics"];
+        lualine_c = ["filename"];
+        lualine_x = ["filetype"];
+        lualine_y = ["progress"];
+        lualine_z = ["location"];
+      };
+      tabline.lualine_a = [
+        {name = "tabs"; extraConfig.mode = 2;}
+      ];
     };
 
     plugins.mini.enable = true;
