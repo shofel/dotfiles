@@ -80,6 +80,7 @@
     })
 
     pkgs.firefox
+    pkgs.onlyoffice-bin
   ];
 
   fonts.fontconfig.enable = true;

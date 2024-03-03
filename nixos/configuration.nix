@@ -185,7 +185,7 @@
     helix
     git
   ];
-    
+
   # temporary hacks?
   #
 
