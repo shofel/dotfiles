@@ -127,7 +127,7 @@
 
 
   # Set your time zone.
-  time.timeZone = "Europe/Istanbul";
+  services.automatic-timezoned.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "C.UTF-8";
