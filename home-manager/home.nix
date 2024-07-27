@@ -139,7 +139,7 @@
       # @see from github:catppuccin/lazygit
       gui = {
         theme = let
-          color = x: "#${builtins.getAttr x config.colorScheme.colors}";
+          color = x: "#${builtins.getAttr x config.colorScheme.palette}";
         in {
           activeBorderColor          = [ (color "base0B") "bold" ];
           inactiveBorderColor        = [ (color "base05") ];
