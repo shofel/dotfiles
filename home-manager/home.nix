@@ -218,7 +218,6 @@
   programs.nixvim = {
     enable = true;
 
-    # TODO fzf-lua
     # TODO lsp dap treesitter
     # TODO remap x d as in helix
 
@@ -229,6 +228,10 @@
     };
 
     extraConfigLua = builtins.readFile ./nvim/options.lua;
+
+    plugins.fzf-lua = {
+      enable = true;
+    };
 
     plugins.lsp.servers = {
       lua-ls.enable = true;
