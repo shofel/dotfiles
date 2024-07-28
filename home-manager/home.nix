@@ -225,7 +225,7 @@
     # TODO: bright comments
     colorschemes.catppuccin = {
       enable = true;
-      flavour = "frappe";
+      settings.flavour = "frappe";
     };
 
     extraConfigLua = builtins.readFile ./nvim/options.lua;
