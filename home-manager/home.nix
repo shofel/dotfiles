@@ -74,6 +74,7 @@
 
     pkgs-unstable.helix
     pkgs-unstable.kitty
+    pkgs.devenv
 
     (pkgs.nerdfonts.override {
       fonts = [ "FiraCode" "DroidSansMono" ];
