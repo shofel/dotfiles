@@ -72,6 +72,7 @@
     experimental-features = "nix-command flakes";
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
+    trusted-users = ["root" "slava"];
   };
 
   networking.hostName = "e15";
