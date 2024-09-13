@@ -234,10 +234,10 @@
 
     extraConfigLua = builtins.readFile ./nvim/options.lua;
 
-    # TODO enable when nixvim is ready
-    # plugins.fzf-lua = {
-    #   enable = true;
-    # };
+    # TODO set up keys
+    plugins.fzf-lua = {
+      enable = true;
+    };
 
     plugins.lsp.servers = {
       lua-ls.enable = true;
