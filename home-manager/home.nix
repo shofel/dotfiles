@@ -131,7 +131,7 @@
       core = { editor = "nvim"; };
     };
 
-    ignores = [ ".DS_Store" "*.sw?" ];
+    ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
   };
 
   programs.lazygit = {
@@ -176,7 +176,6 @@
 
   programs.direnv = {
     enable = true;
-    enableFishIntegration = true;
   };
 
   # kitty {{{
