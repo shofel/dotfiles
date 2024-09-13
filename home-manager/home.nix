@@ -174,6 +174,11 @@
   };
   # }}} ssh
 
+  programs.direnv = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   # kitty {{{
   xdg.configFile."kitty/kitty.conf" = let
     conf = builtins.readFile ./kitty/kitty.conf;
