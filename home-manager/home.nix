@@ -234,10 +234,13 @@
 
     extraConfigLua = builtins.readFile ./nvim/options.lua;
 
-    # TODO set up keys
     plugins.fzf-lua = {
       enable = true;
+
     };
+    keymaps = [
+      { key = "<space>f"; action = "<cmd>FzfLua files<cr>"; }
+    ];
 
     plugins.lsp.servers = {
       lua-ls.enable = true;
