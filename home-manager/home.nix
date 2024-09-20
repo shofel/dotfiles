@@ -225,7 +225,7 @@
     fzf-lua.spec = { enable = true; };
     fzf-lua.keys = [
       { key = "<space>f"; action = "<cmd>FzfLua files<cr>"; }
-      { key = "<space>F"; action = "<cmd>FzfLua builtins<cr>"; }
+      { key = "<space>F"; action = "<cmd>FzfLua builtin<cr>"; }
     ];
 
     leap.spec = { enable = true; };
