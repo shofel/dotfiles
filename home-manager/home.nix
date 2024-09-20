@@ -220,7 +220,26 @@
 
   # nvim {{{
   # TODO ? extract file ?
-  programs.nixvim = {
+  programs.nixvim =
+  let
+    fzf-lua.spec = { enable = true; };
+    fzf-lua.keys = [
+      { key = "<space>f"; action = "<cmd>FzfLua files<cr>"; }
+      { key = "<space>F"; action = "<cmd>FzfLua builtins<cr>"; }
+    ];
+
+    leap.spec = { enable = true; };
+    leap.extraPlugins = with pkgs.vimPlugins; [ vim-repeat flit-nvim ];
+    leap.extraConfigLua = "require('flit').setup()";
+    leap.keys = [
+      { key = "l"; mode = ["n" "x" "o"]; action = "<Plug>(leap-forward)"; }
+      { key = "h"; mode = ["n" "x" "o"]; action = "<Plug>(leap-backward)"; }
+      { key = "S"; mode = ["n" "x" "o"]; action = "<Plug>(leap-from-window)"; }
+    ];
+
+    guess-indent.extraPlugins = with pkgs.vimPlugins; [ guess-indent-nvim ];
+    guess-indent.extraConfigLua = "require('guess-indent').setup()";
+  in {
     enable = true;
 
     # TODO lsp dap treesitter
@@ -232,22 +251,12 @@
       settings.flavour = "frappe";
     };
 
-    extraConfigLua = builtins.readFile ./nvim/options.lua;
-
-    plugins.fzf-lua = {
-      enable = true;
-
-    };
-    keymaps = [
-      { key = "<space>f"; action = "<cmd>FzfLua files<cr>"; }
-    ];
-
     plugins.lsp.servers = {
       lua-ls.enable = true;
     };
 
     plugins.lsp.keymaps.lspBuf = {
-      K = "hover";
+      K  = "hover";
       gD = "references";
       gd = "definition";
       gi = "implementation";
@@ -274,20 +283,28 @@
       ];
     };
 
+    extraConfigLua = ""
+      + builtins.readFile ./nvim/options.lua
+      + guess-indent.extraConfigLua
+      + leap.extraConfigLua;
+
+    extraPlugins = []
+      ++ guess-indent.extraPlugins
+      ++ leap.extraPlugins;
+
+    plugins.fzf-lua = fzf-lua.spec;
+    plugins.leap = leap.spec;
+
+    keymaps = []
+      ++ fzf-lua.keys
+      ++ leap.keys;
+
     plugins.mini.enable = true;
     plugins.mini.modules = {
+      pairs = {};
       comment = {};
       surround = {
         n_lines = 50;
-        mappings = {
-          add = "sa";
-          delete = "sd";
-          find = "st";
-          find_left = "sf";
-          highlght = "sh";
-          replace = "sr";
-          update_n_lines = "sn";
-        };
       };
     };
   };
