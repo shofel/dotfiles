@@ -183,24 +183,21 @@
     conf = builtins.readFile ./kitty/kitty.conf;
     colors = builtins.readFile
       "${inputs.catppuccin-kitty}/themes/frappe.conf";
-  in { text = conf + "\n" + colors; };
+    session = "startup_session ./startup_session";
+  in { text = conf + "\n" + colors + session; };
 
   # fish -lc is to setup env
   xdg.configFile."kitty/startup_session".text = ''
-    new_tab notes
-    cd ~/10-19-Computer/14-Notes/
-    launch fish -l
-
-    new_tab gtd
-    cd ~/10-19-Computer/15-GTD/
-    launch fish -lc 'nvim index.norg'
-
     new_tab dotfiles
-    cd ~/10-19-Computer/12-Tooling/12.01-shofel-dotfiles/
+    cd ~/workspaces-one/dotfiles/
     launch fish -lc nvim
 
-    new_tab nyoom
-    cd ~/10-19-Computer/12-Tooling/13.03-nyoom.nvim/
+    new_tab kbd
+    cd ~/workspaces-one/keyboards/
+    launch fish -lc nvim
+
+    new_tab shovel-qr
+    cd ~/workspaces-one/30-portfolio/30.01-django-qr/
     launch fish -lc nvim
   '';
 
