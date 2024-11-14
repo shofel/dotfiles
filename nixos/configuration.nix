@@ -145,6 +145,11 @@
     LC_TIME = "C.UTF-8";
   };
 
+  services.kmscon = {
+    enable = true;
+    hwRender = true;
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
