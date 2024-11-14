@@ -153,7 +153,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   # FIXME
   services.xserver.displayManager.gdm.settings = {
@@ -166,8 +165,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
+    xkb.layout = "us,ru";
+    xkb.variant = ",winkeys";
   };
 
   # Enable sound with pipewire.
