@@ -318,7 +318,9 @@
 
     plugins = [ ];
 
-    interactiveShellInit = '''';
+    interactiveShellInit = ''
+      set -gx XCURSOR_THEME Adwaita
+    '';
     loginShellInit = '''';
 
     # shellAbbrs {{{
