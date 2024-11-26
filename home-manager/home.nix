@@ -236,6 +236,9 @@
 
     guess-indent.extraPlugins = with pkgs.vimPlugins; [ guess-indent-nvim ];
     guess-indent.extraConfigLua = "require('guess-indent').setup()";
+
+    typescript-tools.spec = { enable = true; };
+    typescript-tools.extraConfigLua = "require('typescript-tools').setup({})";
   in {
     enable = true;
 
@@ -283,7 +286,9 @@
     extraConfigLua = ""
       + builtins.readFile ./nvim/options.lua
       + guess-indent.extraConfigLua
-      + leap.extraConfigLua;
+      + leap.extraConfigLua
+      + typescript-tools.extraConfigLua
+      ;
 
     extraPlugins = []
       ++ guess-indent.extraPlugins
@@ -291,6 +296,7 @@
 
     plugins.fzf-lua = fzf-lua.spec;
     plugins.leap = leap.spec;
+    plugins.typescript-tools = typescript-tools.spec;
 
     keymaps = []
       ++ fzf-lua.keys
