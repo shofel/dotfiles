@@ -252,7 +252,7 @@
     };
 
     plugins.lsp.servers = {
-      lua-ls.enable = true;
+      lua_ls.enable = true;
     };
 
     plugins.lsp.keymaps.lspBuf = {
@@ -265,22 +265,26 @@
 
     plugins.lualine = {
       enable = true;
-      iconsEnabled = true;
-      componentSeparators = { left = ""; right = ""; };
-      sectionSeparators   = { left = ""; right = ""; };
-      alwaysDivideMiddle = true;
-      globalstatus = true;
-      sections = {
-        lualine_a = ["branch"];
-        lualine_b = ["diff" "diagnostics"];
-        lualine_c = ["filename"];
-        lualine_x = ["filetype"];
-        lualine_y = ["progress"];
-        lualine_z = ["location"];
+      settings = {
+        options = {
+          icons_enabled = true;
+          component_separators = { left = ""; right = ""; };
+          section_separators   = { left = ""; right = ""; };
+          always_divide_middle = true;
+          globalstatus = true;
+        };
+        sections = {
+          lualine_a = ["branch"];
+          lualine_b = ["diff" "diagnostics"];
+          lualine_c = ["filename"];
+          lualine_x = ["filetype"];
+          lualine_y = ["progress"];
+          lualine_z = ["location"];
+        };
+        tabline.lualine_a = [
+          {__unkeyed-1 = "tabs"; mode = 2;}
+        ];
       };
-      tabline.lualine_a = [
-        {name = "tabs"; extraConfig.mode = 2;}
-      ];
     };
 
     extraConfigLua = ""
