@@ -239,6 +239,17 @@
 
     typescript-tools.spec = { enable = true; };
     typescript-tools.extraConfigLua = "require('typescript-tools').setup({})";
+
+    emmet.spec = {
+      enable = true;
+      settings.install_global = false;
+    };
+    emmet.extraConfigLua = ''
+      vim.api.nvim_create_autocmd({"FileType"}, {
+          pattern = {"css", "html"},
+          command = "EmmetInstall",
+      })
+    '';
   in {
     enable = true;
 
@@ -292,6 +303,7 @@
       + guess-indent.extraConfigLua
       + leap.extraConfigLua
       + typescript-tools.extraConfigLua
+      + emmet.extraConfigLua
       ;
 
     extraPlugins = []
@@ -301,6 +313,7 @@
     plugins.fzf-lua = fzf-lua.spec;
     plugins.leap = leap.spec;
     plugins.typescript-tools = typescript-tools.spec;
+    plugins.emmet = emmet.spec;
 
     keymaps = []
       ++ fzf-lua.keys
