@@ -72,11 +72,5 @@
         ];
       };
     };
-
-    # prepare things for home-manager config
-    catppuccin-bat = {
-      name = "catppuccin";
-      text = builtins.readFile "${inputs.catppuccin-bat}/themes/Catppuccin Frappe.tmTheme";
-    };
   };
 }

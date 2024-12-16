@@ -99,11 +99,15 @@
     config = {
       map-syntax = [ "*.json5:JavaScript (Babel)" ];
       style = "numbers";
-      theme = outputs.catppuccin-bat.name;
+      theme = "catppuccin";
+    };
+    themes = {
+      catppuccin = {
+        src = inputs.catppuccin-bat;
+        file = "themes/Catppuccin Frappe.tmTheme";
+      };
     };
   };
-  xdg.configFile."bat/themes/${outputs.catppuccin-bat.name}.tmTheme".text =
-    outputs.catppuccin-bat.text;
   # }}} bat
 
   # git {{{
@@ -116,7 +120,7 @@
 
     delta = {
       enable = true;
-      options = { syntax-theme = outputs.catppuccin-bat.name; };
+      options = { syntax-theme = "catppuccin"; }; # see `bat.themes`
     };
 
     extraConfig = {
