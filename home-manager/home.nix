@@ -15,7 +15,6 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     inputs.nix-colors.homeManagerModules.default
-    inputs.nixvim.homeManagerModules.nixvim
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -31,6 +30,7 @@
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
+      inputs.nvim.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -82,6 +82,8 @@
 
     pkgs.firefox
     pkgs.onlyoffice-bin
+
+    pkgs.nvim-shovel
   ];
 
   fonts.fontconfig.enable = true;
@@ -218,122 +220,6 @@
     recursive = true;
   };
   # }}} stumpwm
-
-  # nvim {{{
-  # TODO ? extract file ?
-  programs.nixvim =
-  let
-    fzf-lua.spec = { enable = true; };
-    fzf-lua.keys = [
-      { key = "<space>f"; action = "<cmd>FzfLua files<cr>"; }
-      { key = "<space>F"; action = "<cmd>FzfLua builtin<cr>"; }
-    ];
-
-    leap.spec = { enable = true; };
-    leap.extraPlugins = with pkgs.vimPlugins; [ vim-repeat flit-nvim ];
-    leap.extraConfigLua = "require('flit').setup()";
-    leap.keys = [
-      { key = "l"; mode = ["n" "x" "o"]; action = "<Plug>(leap-forward)"; }
-      { key = "h"; mode = ["n" "x" "o"]; action = "<Plug>(leap-backward)"; }
-      { key = "S"; mode = ["n" "x" "o"]; action = "<Plug>(leap-from-window)"; }
-    ];
-
-    guess-indent.extraPlugins = with pkgs.vimPlugins; [ guess-indent-nvim ];
-    guess-indent.extraConfigLua = "require('guess-indent').setup()";
-
-    typescript-tools.spec = { enable = true; };
-    typescript-tools.extraConfigLua = "require('typescript-tools').setup({})";
-
-    emmet.spec = {
-      enable = true;
-      settings.install_global = false;
-    };
-    emmet.extraConfigLua = ''
-      vim.api.nvim_create_autocmd({"FileType"}, {
-          pattern = {"css", "html"},
-          command = "EmmetInstall",
-      })
-    '';
-  in {
-    enable = true;
-
-    # TODO lsp dap treesitter
-    # TODO remap x d as in helix
-
-    # TODO: bright comments
-    colorschemes.catppuccin = {
-      enable = true;
-      settings.flavour = "frappe";
-    };
-
-    plugins.lsp.servers = {
-      lua_ls.enable = true;
-      gopls.enable = true;
-    };
-
-    plugins.lsp.keymaps.lspBuf = {
-      K  = "hover";
-      gD = "references";
-      gd = "definition";
-      gi = "implementation";
-      # gt = "type_definition";
-    };
-
-    plugins.lualine = {
-      enable = true;
-      settings = {
-        options = {
-          icons_enabled = true;
-          component_separators = { left = ""; right = ""; };
-          section_separators   = { left = ""; right = ""; };
-          always_divide_middle = true;
-          globalstatus = true;
-        };
-        sections = {
-          lualine_a = ["branch"];
-          lualine_b = ["diff" "diagnostics"];
-          lualine_c = ["filename"];
-          lualine_x = ["filetype"];
-          lualine_y = ["progress"];
-          lualine_z = ["location"];
-        };
-        tabline.lualine_a = [
-          {__unkeyed-1 = "tabs"; mode = 2;}
-        ];
-      };
-    };
-
-    extraConfigLua = ""
-      + builtins.readFile ./nvim/options.lua
-      + guess-indent.extraConfigLua
-      + leap.extraConfigLua
-      + typescript-tools.extraConfigLua
-      + emmet.extraConfigLua
-      ;
-
-    extraPlugins = []
-      ++ guess-indent.extraPlugins
-      ++ leap.extraPlugins;
-
-    plugins.fzf-lua = fzf-lua.spec;
-    plugins.leap = leap.spec;
-    plugins.typescript-tools = typescript-tools.spec;
-    plugins.emmet = emmet.spec;
-
-    keymaps = []
-      ++ fzf-lua.keys
-      ++ leap.keys;
-
-    plugins.mini.enable = true;
-    plugins.mini.modules = {
-      pairs = {};
-      comment = {};
-      surround = {
-        n_lines = 50;
-      };
-    };
-  };
-  # }}} nvim
 
   # fish {{{
   xdg.configFile."fish/functions" = {
