@@ -339,14 +339,17 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1734528017,
-        "narHash": "sha256-J6dkiaFG9+1UDHybLui75uoS8oMJ0o51Ud05uP8Hefw=",
-        "path": "/home/slava/workspaces-one/25-dotfiles/25.02-nvim-flake",
-        "type": "path"
+        "lastModified": 1734529355,
+        "narHash": "sha256-iJowD5O1uOpXZILK6YDYaKYflCXbkv8WynW8o3JMNj4=",
+        "owner": "shofel",
+        "repo": "nvim-flake",
+        "rev": "650c6c7d89507c2948a65a1fd2fb1b9428fe9966",
+        "type": "github"
       },
       "original": {
-        "path": "/home/slava/workspaces-one/25-dotfiles/25.02-nvim-flake",
-        "type": "path"
+        "owner": "shofel",
+        "repo": "nvim-flake",
+        "type": "github"
       }
     },
     "root": {
