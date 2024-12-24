@@ -172,10 +172,10 @@
         AddKeysToAgent yes
         IdentityFile ~/.ssh/id_ed25519
 
-      Host student
-        Hostname student.examus.net
-        User ci
-        IdentityFile ~/.ssh/id_student
+      Host tropical
+        Hostname 138.124.103.185
+        User root
+        IdentityFile ~/.ssh/id_aeza_tropical
     '';
   };
   # }}} ssh
