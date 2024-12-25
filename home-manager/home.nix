@@ -190,7 +190,11 @@
     colors = builtins.readFile
       "${inputs.catppuccin-kitty}/themes/frappe.conf";
     session = "startup_session ./startup_session";
-  in { text = conf + "\n" + colors + session; };
+  in {
+    text = builtins.concatStringsSep "\n" [
+      conf colors session
+    ];
+  };
 
   # fish -lc is to setup env
   xdg.configFile."kitty/startup_session".text = ''
@@ -242,43 +246,43 @@
       dc = "docker-compose";
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
-      gb = ''
+      gb = /* bash */ ''
         git switch (
           git for-each-ref --sort=-committerdate refs/heads/ \
             --format="%(refname:short)" \
           | string trim \
           | fzf)'';
 
-      gBFG =
+      gBFG = /* bash */
         "git for-each-ref --format '%(refname:short)' refs/heads | grep -v master | xargs git branch -D";
 
-      ga = "git add";
+      ga = /* bash */ "git add";
 
-      gamend = "git commit --amend --no-edit";
-      gcom = "git commit";
+      gamend = /* bash */ "git commit --amend --no-edit";
+      gcom = /* bash */ "git commit";
 
-      gfa = "git fetch --all --prune --tags";
-      gpf = "git push --force-with-lease";
-      gpu = "git push -u origin HEAD";
+      gfa = /* bash */ "git fetch --all --prune --tags";
+      gpf = /* bash */ "git push --force-with-lease";
+      gpu = /* bash */ "git push -u origin HEAD";
 
-      gtop = "git rev-parse --show-toplevel";
-      gcd = "cd (git rev-parse --show-toplevel)";
-      ghash = "git rev-parse --short HEAD";
-      gclean = "git clean -fd";
+      gtop = /* bash */ "git rev-parse --show-toplevel";
+      gcd = /* bash */ "cd (git rev-parse --show-toplevel)";
+      ghash = /* bash */ "git rev-parse --short HEAD";
+      gclean = /* bash */ "git clean -fd";
 
-      ginit = "git init ;and git commit -m 'root' --allow-empty";
+      ginit = /* bash */ "git init ;and git commit -m 'root' --allow-empty";
 
-      grba = "git rebase --abort";
-      grbc = "git rebase --continue";
-      grbs = "git rebase --skip";
+      grba = /* bash */ "git rebase --abort";
+      grbc = /* bash */ "git rebase --continue";
+      grbs = /* bash */ "git rebase --skip";
 
-      gsm = "git switch master";
-      gst = "git status --short --branch";
+      gsm = /* bash */ "git switch master";
+      gst = /* bash */ "git status --short --branch";
 
       #
-      suspend = "systemctl suspend";
-      v = "nvim '+Term fish'";
-      weather = "curl wttr.in/guangzhou";
+      suspend = /* bash */ "systemctl suspend";
+      v = /* bash */ "nvim '+Term fish'";
+      weather = /* bash */ "curl -s wttr.in/valencia";
     };
     # }}} shellAbbrs
 
