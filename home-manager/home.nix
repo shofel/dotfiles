@@ -197,21 +197,25 @@
   };
 
   # fish -lc is to setup env
-  xdg.configFile."kitty/startup_session".text = ''
+  xdg.configFile."kitty/startup_session".text = /* bash */ ''
     new_tab dotfiles
-    cd ~/workspaces-one/dotfiles/
+    cd ~/workspaces-one/25-dotfiles/25.01-dotfiles/
     launch fish -lc nvim
 
-    new_tab kbd
+    new_tab nvim
+    cd ~/workspaces-one/25-dotfiles/25.02-nvim-flake/
+    launch fish -lc nvim
+
+    new_tab cantor
     cd ~/workspaces-one/keyboards/
     launch fish -lc nvim
 
-    new_tab shovel-qr
-    cd ~/workspaces-one/30-portfolio/30.01-django-qr/
+    new_tab go
+    cd ~/workspaces-one/34-cources/34.01-practicum-go/
     launch fish -lc nvim
   '';
 
-  xdg.configFile."kitty/empty_session".text = ''
+  xdg.configFile."kitty/empty_session".text = /* bash */ ''
     new_tab tab
     cd
     launch fish -lc nvim
