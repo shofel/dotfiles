@@ -340,11 +340,11 @@
         "vim-kitty": "vim-kitty"
       },
       "locked": {
-        "lastModified": 1735218359,
-        "narHash": "sha256-azdw/GT8ksiKhs6KV+gpgZs/CGrpUErxljCsjDKvNA0=",
+        "lastModified": 1735290989,
+        "narHash": "sha256-tzSce/saAkUB6Myo3eklqce+VmnZjBOjLRQPSWCOi40=",
         "owner": "shofel",
         "repo": "nvim-flake",
-        "rev": "68686144c930ac1ed2c054e56d071a722bfac9eb",
+        "rev": "9a899c58ffe0628e239a788a4e74b2bebb464896",
         "type": "github"
       },
       "original": {
