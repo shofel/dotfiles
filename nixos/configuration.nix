@@ -24,7 +24,7 @@
     ./hardware-configuration.nix
 
     # Import home-manager's NixOS module
-    inputs.home-manager.nixosModules.home-manager    
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   nixpkgs = {
@@ -92,7 +92,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = ["networkmanager" "wheel"];
     };
     nixosvmtest = {
       isSystemUser = true;
@@ -104,7 +104,7 @@
   users.groups.nixosvmtest = {};
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
     users = {
       # Import your home-manager configuration
       slava = import ../home-manager/home.nix;
@@ -125,7 +125,6 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
-
 
   # Set your time zone.
   services.automatic-timezoned.enable = true;
