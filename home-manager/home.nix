@@ -249,6 +249,7 @@
     # shellAbbrs {{{
     shellAbbrs = {
       dc = "docker-compose";
+      lg = "lazygit";
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
       gb = /* bash */ ''
