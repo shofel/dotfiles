@@ -306,24 +306,6 @@
   };
   # }}} redshift
 
-  # {{{ shadowsocks client
-  systemd.user.services.sslocal = {
-    Unit.Description = "Shadowsocks-rust sslocal client";
-
-    # TODO manage the config file
-    # TODO liveness probe
-    Service = {
-      ExecStart = "${pkgs.shadowsocks-rust}/bin/sslocal -c /home/slava/workspaces-one/33-orange-hosting/ssclient.json";
-      SyslogIdentifier = "shadowsocks-rust.sslocal";
-      Restart = "on-failure"; ## TODO
-      TimeoutStopSec = 30;
-      Type = "simple";
-    };
-
-    Install.WantedBy = [ "default.target" ];
-  };
-  # }}} shadowsocks
-
   #
   programs.home-manager.enable = true;
   programs.command-not-found.enable = true;
