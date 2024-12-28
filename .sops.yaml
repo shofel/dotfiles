@@ -1,0 +1,7 @@
+keys:
+  - &target_e15 age1xytsp6lwcz6knlm8yg502mp8n4tclqq42gskjauuj8r53mw39yfsaq2d7y
+creation_rules:
+  - path_regex: secrets/.+\.(yaml|yml|json|env|ini)$
+    key_groups:
+    - age:
+      - *target_e15

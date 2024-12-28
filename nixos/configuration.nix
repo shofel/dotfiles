@@ -11,7 +11,7 @@
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
+    outputs.nixosModules.xray
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -25,6 +25,8 @@
 
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
+
+    inputs.sops-nix.nixosModules.sops
   ];
 
   nixpkgs = {
@@ -83,6 +85,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   programs.fish.enable = true;
+  environment.variables.EDITOR = "${inputs.nvim}/bin/nvim";
 
   users.users = {
     slava = {
@@ -109,6 +112,19 @@
       # Import your home-manager configuration
       slava = import ../home-manager/home.nix;
     };
+  };
+
+  services.nscd.enableNsncd = true;
+  sops.age.keyFile = "/home/slava/.config/sops/age/keys.txt";
+  sops.secrets.xray_config = {
+    sopsFile = ../secrets/xray-client.json;
+    format = "json";
+    key = "";
+  };
+
+  services.xray' = {
+    enable = true;
+    settingsFile = config.sops.secrets.xray_config.path;
   };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
