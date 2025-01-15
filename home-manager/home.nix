@@ -212,7 +212,7 @@
     launch fish -lc nvim
 
     new_tab go
-    cd ~/workspaces-one/34-cources/34.01-practicum-go/
+    cd ~/workspaces-one/34-courses/34.01-practicum-go/
     launch fish -lc nvim
   '';
 
