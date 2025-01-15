@@ -114,7 +114,6 @@
     };
   };
 
-  services.nscd.enableNsncd = true;
   sops.age.keyFile = "/home/slava/.config/sops/age/keys.txt";
   sops.secrets.xray_config = {
     sopsFile = ../secrets/xray-client.json;
