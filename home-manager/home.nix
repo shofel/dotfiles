@@ -308,7 +308,10 @@
 
   #
   programs.home-manager.enable = true;
-  programs.command-not-found.enable = true;
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
