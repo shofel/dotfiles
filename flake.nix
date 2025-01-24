@@ -32,6 +32,10 @@
 
     nvim.url = "github:shofel/nvim-flake";
     # nvim.url = "path:///home/slava/workspaces-one/25-dotfiles/25.02-nvim-flake";
+
+    # for command-not-found
+    programsdb.url = "github:wamserma/flake-programs-sqlite";
+    programsdb.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -41,7 +45,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
+    forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
   in {
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
