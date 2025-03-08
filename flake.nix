@@ -31,7 +31,6 @@
     catppuccin-kitty.flake = false;
 
     nvim.url = "github:shofel/nvim-flake";
-    # nvim.url = "path:///home/slava/workspaces-one/25-dotfiles/25.02-nvim-flake";
 
     # for command-not-found
     programsdb.url = "github:wamserma/flake-programs-sqlite";
