@@ -181,7 +181,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    helix
+    nvim
     git
   ];
 
