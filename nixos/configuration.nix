@@ -75,6 +75,7 @@
 
   networking.hostName = "e15";
   networking.networkmanager.enable = true;
+  networking.nameservers = ["9.9.9.9" "149.112.112.112"];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
