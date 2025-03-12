@@ -10,7 +10,6 @@
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Manage secrets
     sops-nix.url = "github:Mic92/sops-nix";
@@ -31,6 +30,7 @@
     catppuccin-kitty.flake = false;
 
     nvim.url = "github:shofel/nvim-flake";
+    # nvim.url = "path:///home/slava/workspaces-one/25-dotfiles/25.02-nvim-flake";
 
     # for command-not-found
     programsdb.url = "github:wamserma/flake-programs-sqlite";
