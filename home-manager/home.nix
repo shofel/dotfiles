@@ -134,7 +134,8 @@
         autoSetupRemote = true;
         default = "current";
       };
-      core = { editor = "nvim"; };
+      core.editor = "nvim";
+      core.quotePath = false;
     };
 
     ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
