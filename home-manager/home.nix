@@ -28,16 +28,10 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-      inputs.nvim.overlays.default
+      #
+      (import ../neovim/neovim-overlay.nix {inherit inputs;}) 
 
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      # Or define it inline
     ];
     # Configure your nixpkgs instance
     config = {

@@ -23,18 +23,21 @@
     # everything match nicely? Try nix-colors!
     nix-colors.url = "github:misterio77/nix-colors";
 
+    # TODO use catppuccin/nix
     catppuccin-bat.url = "github:catppuccin/bat";
     catppuccin-bat.flake = false;
 
     catppuccin-kitty.url = "github:catppuccin/kitty";
     catppuccin-kitty.flake = false;
 
-    nvim.url = "github:shofel/nvim-flake";
-    # nvim.url = "path:///home/slava/workspaces-one/25-dotfiles/25.02-nvim-flake";
-
     # for command-not-found
     programsdb.url = "github:wamserma/flake-programs-sqlite";
     programsdb.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Vim plugins from outside the nixpkgs
+    vim-kitty.url = "github:fladson/vim-kitty";
+    vim-kitty.flake = false;
+    neoclip.url = "github:neoclip-nvim/neoclip-flake";
   };
 
   outputs = {

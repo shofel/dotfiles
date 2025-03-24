@@ -11,6 +11,7 @@
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
+    # TODO switch to mainstream
     outputs.nixosModules.xray
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -37,19 +38,13 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+      #
+      (import ../neovim/neovim-overlay.nix {inherit inputs;}) 
 
       # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
@@ -82,7 +77,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   programs.fish.enable = true;
-  environment.variables.EDITOR = "${inputs.nvim}/bin/nvim";
+  environment.variables.EDITOR = "${pkgs.nvim-shovel-sealed}/bin/nvim";
 
   users.users = {
     slava = {
