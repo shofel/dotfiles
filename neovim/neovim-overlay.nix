@@ -21,7 +21,12 @@ with final.pkgs.lib; let
     let
       start = x: {plugin = x; optional = false;};
       opt = x: {plugin = x; optional = true;};
-      luaconfig = x: {config = "lua <<EOF\n" + x + "\nEOF\n";};
+      luaconfig = x: {config = "lua <<EOF\n" + x + "\nEOF";};
+      /* Treesitter:
+       * - start with all grammars.
+       * To fine-tune pick specific grammars.
+       */
+      # treesitter = pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       /* @see supported languages: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages */
       listGrammars = p: pattern:
                      (optional
@@ -37,9 +42,8 @@ with final.pkgs.lib; let
         bash
         c
         go
-        lua
-        markdown
-        markdown_inline
+        lua luadoc luap luau
+        markdown markdown_inline
         nix
         norg
         python
@@ -51,7 +55,11 @@ with final.pkgs.lib; let
      with pkgs.vimPlugins; [
 
      (start lze) # lazy-load plugins https://github.com/BirdeeHub/lze
-     (start treesitter)
+
+     (start treesitter) # TODO treesitter config
+     (start nvim-treesitter-context)
+     # nvim-ts-context-commentstring
+     # nvim-treesitter-textobjects
 
      # adds around 50ms to startup time
      (start catppuccin-nvim)
