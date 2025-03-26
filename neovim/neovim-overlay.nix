@@ -22,9 +22,18 @@ with final.pkgs.lib; let
       start = x: {plugin = x; optional = false;};
       opt = x: {plugin = x; optional = true;};
       luaconfig = x: {config = "lua <<EOF\n" + x + "\nEOF\n";};
+      /* @see supported languages: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages */
+      listGrammars = p: pattern:
+                     (optional
+                      (pattern != "")
+                      (trace (filter (x: isList (match pattern x))
+                                     (builtins.attrNames p))
+                             p.c)); # p.c is anything; just to not brake
       treesitter =
       (pkgs.vimPlugins.nvim-treesitter.withPlugins
-       (p: with p; [
+       (p: with p;
+        /* To search for grammars, change "" to a regex and run the build. */
+        (listGrammars p "") ++ [
         bash
         c
         go
