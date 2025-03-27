@@ -5,7 +5,15 @@ TODO : make in-nix plugin config consistent, and independent of `wrapRc`
 ## Features
 - tweak the config as easy as without nix
 - run the same config as any user and on any machine with nix
-- technical detail: works with both `wrapRc=true` and `wrapRc=false`
+- works with both `wrapRc=true` and `wrapRc=false`
+
+- edit your config directory as if it were a `~/.config/nvim/`
+
+
+## Questions
+- why `withSqlite`
+- why `after/` is not special, but not just `plugin/after/`
+- ftplugin ordering is sourced: https://github.com/neovim/neovim/pull/23801
 
 
 ## Explanations
@@ -53,6 +61,8 @@ TODO: use AI to query about nixpkgs code
 #### Pick Treesitter Grammars
 
 ### Develop Plugins
+
+### Filter-out files from config directory
 
 ### Ways to Configure Plugins
 
