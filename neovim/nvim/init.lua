@@ -1,20 +1,11 @@
 vim.loader.enable()
 
 local cmd = vim.cmd
-local fn = vim.fn
 local opt = vim.o
-local g = vim.g
 
--- A convention instead of mapleader
--- <leader>      is <Space>
--- <localleader> is ,
-
-opt.compatible = false
-
--- Enable true colour support
-if fn.has('termguicolors') then
-  opt.termguicolors = true
-end
+-- I suspect they are broken
+vim.g.mapleader = '<Space>'
+vim.g.localleader = ','
 
 -- See :h <option> to see what the options do
 
