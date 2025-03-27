@@ -1,12 +1,11 @@
-if vim.g.did_load_catppuccin_plugin then
-  return
-end
+if vim.g.did_load_catppuccin_plugin then return end
 vim.g.did_load_catppuccin_plugin = true
 
 vim.cmd.colorscheme 'catppuccin-frappe'
 
 vim.schedule(
   function ()
+    vim.cmd.packadd 'catppuccin'
     require('catppuccin').setup({
       flavour = "frappe",
       custom_highlights = function(colors)

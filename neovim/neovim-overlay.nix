@@ -90,8 +90,7 @@ with final.pkgs.lib; let
      # nvim-ts-context-commentstring
      # nvim-treesitter-textobjects
 
-     # adds around 50ms to startup time
-     (start catppuccin-nvim)
+     (opt catppuccin-nvim)
      lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
 
      #
