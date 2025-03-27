@@ -15,7 +15,7 @@ snacks.setup({
   quickfile = { enabled = true },
   scope = { enabled = true },
   scroll = { enabled = false },
-  statuscolumn = {},
+  statuscolumn = { enabled = false },
   terminal = {},
   words = { enabled = true },
   styles = {

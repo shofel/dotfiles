@@ -65,6 +65,18 @@ with final.pkgs.lib; let
      (start catppuccin-nvim)
      lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
 
+     #
+     # Gutter # plugin/gutter.lua
+     #
+
+     statuscol-nvim # https://github.com/luukvbaal/statuscol.nvim 
+     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
+     nvim-ufo # https://github.com/kevinhwang91/nvim-ufo
+
+     #
+     #
+     #
+
      (start nvim-luadev) # nvim lua repl  https://github.com/bfredl/nvim-luadev
      (start lazydev-nvim)
 
@@ -89,10 +101,9 @@ with final.pkgs.lib; let
      #      })
      #  ''))
 
-      gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
-
       # https://github.com/nmac427/guess-indent.nvim/
       ((opt guess-indent-nvim) //
+       # TODO how wrapRc=false excludes these strings from config
        (luaconfig /* lua */ ''
          require('lze').load({
            "guess-indent.nvim",
@@ -102,7 +113,7 @@ with final.pkgs.lib; let
        ''))
 
       leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
-
+ 
       # https://github.com/nvim-neorg/neorg
       ((start neorg) // # load on start, and setup after ui ready
        (luaconfig /* lua */ ''
@@ -132,7 +143,9 @@ in {
   nvim-shovel = mkNeovim {
     inherit plugins;
     inherit extraPackages;
-    wrapRc = false;
+    wrapRc = true; # TODO make it wrapRc=true and impure at the same time
+                   # ? as a plugin/rc.lua ?
+                   # ? mk a wrapped init.lua which sets rtp^=.config/nvim and requires .config/nvim/init.lua
   };
 
   # Uses configs, with which it was compiled
