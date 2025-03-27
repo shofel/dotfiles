@@ -49,36 +49,13 @@ with lib;
     # Add a "vim" binary to the build output as an alias?
     vimAlias ? appName == null || appName == "nvim",
   }: let
-    # This is the structure of a plugin definition.
-    # Each plugin in the `plugins` argument list can also be defined as this attrset
-    defaultPlugin = {
-      plugin = null; # e.g. nvim-lspconfig
-      config = null; # plugin config
-      # If `optional` is set to `false`, the plugin is installed in the 'start' packpath
-      # set to `true`, it is installed in the 'opt' packpath, and can be lazy loaded with
-      # ':packadd! {plugin-name}
-      optional = false;
-      runtime = {};
-    };
 
     externalPackages = extraPackages ++ (optionals withSqlite [sqlite]);
-
-    # TODO it's already in "pkgs/applications/editors/neovim/utils.nix"
-    # Map all plugins to an attrset { plugin = <plugin>; config = <config>; optional = <tf>; ... }
-    normalizedPlugins = map (x:
-      defaultPlugin
-      // (
-        if x ? plugin
-        then x
-        else {plugin = x;}
-      ))
-    plugins;
 
     # This nixpkgs util function creates an attrset
     # that pkgs.wrapNeovimUnstable uses to configure the Neovim build.
     neovimConfig = neovimUtils.makeNeovimConfig {
-      inherit extraPython3Packages withPython3 withRuby withNodeJs viAlias vimAlias;
-      plugins = normalizedPlugins;
+      inherit plugins extraPython3Packages withPython3 withRuby withNodeJs viAlias vimAlias;
     };
 
     # This uses the ignoreConfigRegexes list to filter

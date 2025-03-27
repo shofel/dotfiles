@@ -23,7 +23,8 @@ with final.pkgs.lib; let
     let
       start = x: {plugin = x; optional = false;};
       opt = x: {plugin = x; optional = true;};
-      luaconfig = x: {config = "lua <<EOF\n" + x + "\nEOF";};
+      mkLua = x: "lua <<EOF\n" + x + "\nEOF";
+      luaconfig = x: {config = mkLua x;};
       /* Treesitter:
        * - start with all grammars.
        * To fine-tune pick specific grammars.
@@ -56,7 +57,33 @@ with final.pkgs.lib; let
      in
      with pkgs.vimPlugins; [
 
-     (start lze) # lazy-load plugins https://github.com/BirdeeHub/lze
+     /**
+      * Plugin can be a derivation or an attrset
+      *
+      * Here are the default options:
+      * {
+      *   plugin = null;
+      *   config = null; # Plugin config (string with vimScript code)
+      *   optional = false; # Put to `start/` or `opt/`. See `:h packages`
+      * };
+      */
+
+     # Example 1: just a derivation
+     lze # lazy-load plugins https://github.com/BirdeeHub/lze
+
+     # Example 2: optional plugin with config
+     # https://github.com/nmac427/guess-indent.nvim/
+     {
+       plugin = guess-indent-nvim;
+       optional = true;
+       config = mkLua /* lua */ ''
+         require('lze').load({
+           "guess-indent.nvim",
+           event = 'DeferredUIEnter',
+           after = function() require('guess-indent').setup() end
+         })
+       '';
+     }
 
      (start treesitter) # TODO treesitter config
      (start nvim-treesitter-context)
@@ -102,17 +129,6 @@ with final.pkgs.lib; let
      #        -- after = function() vim.notify('noice11') end
      #      })
      #  ''))
-
-      # https://github.com/nmac427/guess-indent.nvim/
-      ((opt guess-indent-nvim) //
-       # TODO how wrapRc=false excludes these strings from config
-       (luaconfig /* lua */ ''
-         require('lze').load({
-           "guess-indent.nvim",
-           event = 'DeferredUIEnter',
-           after = function() require('guess-indent').setup() end
-         })
-       ''))
 
       leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
  
