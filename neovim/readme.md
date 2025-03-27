@@ -7,7 +7,10 @@ TODO : make in-nix plugin config consistent, and independent of `wrapRc`
 - run the same config as any user and on any machine with nix
 - works with both `wrapRc=true` and `wrapRc=false`
 
-- edit your config directory as if it were a `~/.config/nvim/`
+- edit your config directory as if it were a `~/.config/nvim/` (needs for homeManager)
+
+## Done
+`vim.loader.enable()` in `init.lua`
 
 
 ## Questions

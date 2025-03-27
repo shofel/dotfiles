@@ -70,12 +70,10 @@ with lib;
       '';
     };
 
-    # The final init.lua content that we pass to the Neovim wrapper.
-    # It wraps the user init.lua, prepends the lua lib directory to the RTP
-    # and prepends the nvim and after directory to the RTP
+    # It works almost as if `./nvim/` would be at `~/.config/nvim/`.
+    # The difference is that in `~/.config/nvim/` can be more files
     initLua = ""
       + /* lua */ ''
-        vim.loader.enable()
         vim.opt.rtp:prepend('${configDir}')
       ''
       + (builtins.readFile ./nvim/init.lua);
