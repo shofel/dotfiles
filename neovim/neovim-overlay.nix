@@ -161,12 +161,10 @@ in {
   nvim-shovel = mkNeovim {
     inherit plugins;
     inherit extraPackages;
-    wrapRc = true; # TODO make it wrapRc=true and impure at the same time
-                   # ? as a plugin/rc.lua ?
-                   # ? mk a wrapped init.lua which sets rtp^=.config/nvim and requires .config/nvim/init.lua
+    wrapRc = true;
   };
 
-  # Uses configs, with which it was compiled
+  # Uses configs saved to nix store
   nvim-shovel-sealed = mkNeovim {
     inherit plugins;
     inherit extraPackages;
