@@ -31,3 +31,9 @@ vim.keymap.set('n', '<space>fu', fzf.buffers,          {desc = 'buffers'})
 
 vim.keymap.set('n', '<space>/', fzf.blines,      {desc = 'blines'})
 vim.keymap.set('v', '<space>f', fzf.grep_visual, {desc = 'grep visual'})
+
+-- In case some other plugin requires fzf. Let's say `:NoiceFzf`
+require('lze').load({
+  'fzf-lua',
+  on_require = 'fzf'
+})
