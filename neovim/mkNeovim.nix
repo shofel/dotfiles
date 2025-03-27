@@ -24,6 +24,7 @@ with lib;
     # NVIM_APPNAME -- `:help $NVIM_APPNAME`
     # This will also rename the binary.
     appName ? null,
+    withSqlite ? true, # Add sqlite? This is a dependency for some plugins
 
     # Args inherited from `wrapNeovimUnstable`
     #
@@ -36,7 +37,6 @@ with lib;
     withPython3 ? true, # Build Neovim with Python 3 support?
     withRuby ? false, # Build Neovim with Ruby support?
     withNodeJs ? false, # Build Neovim with NodeJS support?
-    withSqlite ? true, # Add sqlite? This is a dependency for some plugins
     autoconfigure ? true, # include `plugin.passthru.initLua` to the final config
 
     # You probably don't want to create vi or vim aliases
