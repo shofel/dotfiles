@@ -1,26 +1,40 @@
 # Function for creating a Neovim derivation
 {
-  pkgs,
+  sqlite,
+  git,
   lib,
   stdenv,
-  # Set by the overlay to ensure we use a compatible version of `wrapNeovimUnstable`
-  pkgs-wrapNeovim ? pkgs,
+  neovim-unwrapped,
+  neovimUtils,
+  # TODO assert `wrapNeovimUnstable` is compatible
+  wrapNeovimUnstable,
 }:
 with lib;
   {
-    # NVIM_APPNAME - Defaults to 'nvim' if not set.
-    # If set to something else, this will also rename the binary.
-    appName ? null,
-    # The Neovim package to wrap
-    neovim-unwrapped ? pkgs-wrapNeovim.neovim-unwrapped,
+    # The most used args
+    #
     plugins ? [], # List of plugins
-    # List of dev plugins (will be bootstrapped) - useful for plugin developers
-    # { name = <plugin-name>; url = <git-url>; }
-    devPlugins ? [],
+    # When false, then nvim will read the config from ~/.config/nvim
+    # When true, then nvim reads the config from the nix store
+    wrapRc,
+
+    # Extra args, which are not defined in `wrapNeovimUnstable`
+    #
+    # NVIM_APPNAME -- `:help $NVIM_APPNAME`
+    # This will also rename the binary.
+    appName ? null,
     # Regexes for config files to ignore, relative to the nvim directory.
     # e.g. [ "^plugin/neogit.lua" "^ftplugin/.*.lua" ]
     ignoreConfigRegexes ? [],
+    # List of dev plugins (will be bootstrapped) - useful for plugin developers
+    # { name = <plugin-name>; url = <git-url>; }
+    devPlugins ? [],
+    # TODO replace with wrapper:`autowrapRuntimeDeps` and `plugin.runtimeDeps`
     extraPackages ? [], # Extra runtime dependencies (e.g. ripgrep, ...)
+
+    # Args inherited from `wrapNeovimUnstable`
+    #
+
     # The below arguments can typically be left as their defaults
     # Additional lua packages (not plugins), e.g. from luarocks.org.
     # e.g. p: [p.jsregexp]
@@ -30,13 +44,14 @@ with lib;
     withRuby ? false, # Build Neovim with Ruby support?
     withNodeJs ? false, # Build Neovim with NodeJS support?
     withSqlite ? true, # Add sqlite? This is a dependency for some plugins
+    autoconfigure ? true, # include `plugin.passthru.initLua` to the final config
+
     # You probably don't want to create vi or vim aliases
     # if the appName is something different than "nvim"
     # Add a "vi" binary to the build output as an alias?
     viAlias ? appName == null || appName == "nvim",
     # Add a "vim" binary to the build output as an alias?
     vimAlias ? appName == null || appName == "nvim",
-    wrapRc,
   }: let
     # This is the structure of a plugin definition.
     # Each plugin in the `plugins` argument list can also be defined as this attrset
@@ -50,8 +65,9 @@ with lib;
       runtime = {};
     };
 
-    externalPackages = extraPackages ++ (optionals withSqlite [pkgs.sqlite]);
+    externalPackages = extraPackages ++ (optionals withSqlite [sqlite]);
 
+    # TODO it's already in "pkgs/applications/editors/neovim/utils.nix"
     # Map all plugins to an attrset { plugin = <plugin>; config = <config>; optional = <tf>; ... }
     normalizedPlugins = map (x:
       defaultPlugin
@@ -64,7 +80,7 @@ with lib;
 
     # This nixpkgs util function creates an attrset
     # that pkgs.wrapNeovimUnstable uses to configure the Neovim build.
-    neovimConfig = pkgs-wrapNeovim.neovimUtils.makeNeovimConfig {
+    neovimConfig = neovimUtils.makeNeovimConfig {
       inherit extraPython3Packages withPython3 withRuby withNodeJs viAlias vimAlias;
       plugins = normalizedPlugins;
     };
@@ -135,11 +151,12 @@ with lib;
         ''
         + strings.concatMapStringsSep
         "\n"
+        # TODO delete and replace with a recipe
         (plugin: ''
           dev_plugin_path = dev_plugins_dir .. '/${plugin.name}'
           if vim.fn.empty(vim.fn.glob(dev_plugin_path)) > 0 then
             vim.notify('Bootstrapping dev plugin ${plugin.name} ...', vim.log.levels.INFO)
-            vim.cmd('!${pkgs.git}/bin/git clone ${plugin.url} ' .. dev_plugin_path)
+            vim.cmd('!${git}/bin/git clone ${plugin.url} ' .. dev_plugin_path)
           end
           vim.cmd('packadd! ${plugin.name}')
         '')
@@ -165,10 +182,10 @@ with lib;
         ''--prefix PATH : "${makeBinPath externalPackages}"'')
       # Set the LIBSQLITE_CLIB_PATH if sqlite is enabled
       ++ (optional withSqlite
-        ''--set LIBSQLITE_CLIB_PATH "${pkgs.sqlite.out}/lib/libsqlite3.so"'')
+        ''--set LIBSQLITE_CLIB_PATH "${sqlite.out}/lib/libsqlite3.so"'')
       # Set the LIBSQLITE environment variable if sqlite is enabled
       ++ (optional withSqlite
-        ''--set LIBSQLITE "${pkgs.sqlite.out}/lib/libsqlite3.so"'')
+        ''--set LIBSQLITE "${sqlite.out}/lib/libsqlite3.so"'')
     );
 
     luaPackages = neovim-unwrapped.lua.pkgs;
@@ -185,7 +202,7 @@ with lib;
       ''--suffix LUA_PATH ";" "${concatMapStringsSep ";" luaPackages.getLuaPath resolvedExtraLuaPackages}"'';
 
     # wrapNeovimUnstable is the nixpkgs utility function for building a Neovim derivation.
-    neovim-wrapped = pkgs-wrapNeovim.wrapNeovimUnstable neovim-unwrapped (neovimConfig
+    neovim-wrapped = wrapNeovimUnstable neovim-unwrapped (neovimConfig
       // {
         luaRcContent = initLua;
         wrapperArgs =
