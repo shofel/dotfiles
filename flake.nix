@@ -54,6 +54,12 @@
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
 
+   packages = forAllSystems (system:
+      let overlay = (import ./neovim/neovim-overlay.nix {inherit inputs;});
+          x = nixpkgs.legacyPackages.${system}.extend overlay;
+      in {
+        nvim = x.nvim-shovel;});
+
     # To apply a nixos configuration: 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       e15 = nixpkgs.lib.nixosSystem {
