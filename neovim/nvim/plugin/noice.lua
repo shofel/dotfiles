@@ -1,7 +1,7 @@
-if vim.g.did_load_noice_config then
-  return
-end
+if vim.g.shovelnoiceloaded then return end
+vim.g.shovelnoiceloaded = true
 
+local f = function ()
 require("noice").setup({
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -19,4 +19,11 @@ require("noice").setup({
     inc_rename = false, -- enables an input dialog for inc-rename.nvim
     lsp_doc_border = false, -- add a border to hover docs and signature help
   },
+})
+end
+
+require('lze').load({
+  "noice.nvim",
+  keys = {':', '/', '?'},
+  after = f,
 })

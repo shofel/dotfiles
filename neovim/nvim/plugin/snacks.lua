@@ -1,3 +1,6 @@
+if vim.g.ks_snacks_loaded then return end
+vim.g.ks_snacks_loaded = true
+
 local snacks = require('snacks')
 
 snacks.setup({

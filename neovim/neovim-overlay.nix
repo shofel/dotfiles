@@ -119,34 +119,15 @@ with final.pkgs.lib; let
 
      (start which-key-nvim)
 
-     (start noice-nvim)
-     # ((opt noice-nvim) // # https://github.com/folke/noice.nvim
-     #  (luaconfig /* lua */ ''
-     #      require('lze').load({
-     #        "noice-nvim",
-     #        keys = {':', '/', '?'},
-     #        after = function () require'plugins.noice' end
-     #        -- after = function() vim.notify('noice11') end
-     #      })
-     #  ''))
+     (opt noice-nvim)
 
-      leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
+     leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
  
-      # https://github.com/nvim-neorg/neorg
-      ((start neorg) // # load on start, and setup after ui ready
-       (luaconfig /* lua */ ''
-         require('lze').load({
-           "neorg",
-           event = 'DeferredUIEnter',
-           after = function() require('user.neorg') end
-         })
-       ''))
+     (opt neorg) # https://github.com/nvim-neorg/neorg
+     neoclip # https://github.com/matveyt/neoclip
+     vim-kitty # https://github.com/fladson/vim-kitty
 
-      neoclip # https://github.com/matveyt/neoclip
-
-      vim-kitty # https://github.com/fladson/vim-kitty
-
-      (start nvim-unception)
+     nvim-unception # run nvim from nvim terminal
   ];
 
   extraPackages = with pkgs; [

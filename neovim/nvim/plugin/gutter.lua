@@ -1,3 +1,5 @@
+if vim.g.shovel_gutter_loaded then return end
+vim.g.shovel_gutter_loaded = true
 
 -- gitsigns
 -- TODO do better than schedule
