@@ -23,15 +23,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-
-      #
       (import ../neovim/neovim-overlay.nix {inherit inputs;}) 
-
-      # Or define it inline
     ];
     # Configure your nixpkgs instance
     config = {
