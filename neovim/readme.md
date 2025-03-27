@@ -1,6 +1,9 @@
 #
 
-TODO : make in-nix plugin config consistent, and independent of `wrapRc`
+TODO (nice to have): make in-nix plugin config consistent, and independent of `wrapRc`
+TODO : ?autorequire files from dir?
+TODO : explain plugins/ and their header
+
 
 ## Features
 - tweak the config as easy as without nix
