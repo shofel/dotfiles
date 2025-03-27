@@ -13,8 +13,9 @@ with lib;
   {
     # The most used args
     #
-    plugins ? [], # List of plugins
-    # When false, then nvim will read the config from ~/.config/nvim
+    plugins ? [],
+    extraPackages ? [],
+    # When false, then nvim reads the config from ~/.config/nvim
     # When true, then nvim reads the config from the nix store
     wrapRc,
 
@@ -26,8 +27,6 @@ with lib;
     # Regexes for config files to ignore, relative to the nvim directory.
     # e.g. [ "^plugin/neogit.lua" "^ftplugin/.*.lua" ]
     ignoreConfigRegexes ? [],
-    # TODO replace with wrapper:`autowrapRuntimeDeps` and `plugin.runtimeDeps`
-    extraPackages ? [], # Extra runtime dependencies (e.g. ripgrep, ...)
 
     # Args inherited from `wrapNeovimUnstable`
     #

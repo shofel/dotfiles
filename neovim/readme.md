@@ -2,8 +2,6 @@
 
 TODO : make in-nix plugin config consistent, and independent of `wrapRc`
 
-TODO: replace `extraPackages` with wrapper:`autowrapRuntimeDeps` and `plugin.runtimeDeps`
-
 ## Features
 - tweak the config as easy as without nix
 - run the same config as any user and on any machine with nix

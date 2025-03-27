@@ -134,11 +134,11 @@ with final.pkgs.lib; let
   ];
 
   extraPackages = with pkgs; [
-    # language servers, etc.
+    # language servers
     lua-language-server
-    nil # nix LSP
-    gopls # go lsp
-    basedpyright # python lsp
+    nil # nix
+    gopls # go
+    basedpyright # python
   ];
 in {
   # Uses configs from `~/.config/nvim`
