@@ -37,7 +37,7 @@ with lib;
     withPython3 ? true, # Build Neovim with Python 3 support?
     withRuby ? false, # Build Neovim with Ruby support?
     withNodeJs ? false, # Build Neovim with NodeJS support?
-    autoconfigure ? true, # include `plugin.passthru.initLua` to the final config
+    autoconfigure ? false, # Include `plugin.passthru.initLua` to the config?
 
     # You probably don't want to create vi or vim aliases
     # if the appName is something different than "nvim"
