@@ -5,7 +5,7 @@ vim.cmd.colorscheme 'catppuccin-frappe'
 
 vim.schedule(
   function ()
-    vim.cmd.packadd 'catppuccin'
+    vim.cmd.packadd 'catppuccin-nvim'
     require('catppuccin').setup({
       flavour = "frappe",
       custom_highlights = function(colors)
