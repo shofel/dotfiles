@@ -18,6 +18,8 @@ local root_files = {
   '.git',
 }
 
+require('lazydev').setup()
+
 vim.lsp.start {
   name = 'luals',
   cmd = { lua_ls_cmd },
