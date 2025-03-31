@@ -57,24 +57,59 @@ with lib;
 
     # Save config directory to nix store
     # See also: https://neovim.io/doc/user/starting.html
-    configDir = stdenv.mkDerivation {
+    configStored = stdenv.mkDerivation {
       name = "neovim-config";
       src = ./nvim;
-
-      buildPhase = ''
-        rm init.lua
-      '';
-
-      installPhase = ''
-        cp -r . $out
-      '';
+      installPhase = "cp -r . $out";
     };
 
-    # It works almost as if `./nvim/` would be at `~/.config/nvim/`.
-    # The difference is that in `~/.config/nvim/` can be more files
+    # TODO receive as an arg
+    configMutable = ./nvim;
+
+    # Let it work as if `./nvim/` would be at `~/.config/nvim/`.
     initLua = ""
       + /* lua */ ''
-        vim.opt.rtp:prepend('${configDir}')
+        -- Cleanup rtp and packpath. Remove everything except for
+        -- 1. `neovim-unwrapped` - runtime files shipped with neovim
+        -- 2. `vim-pack-dir` - packages prepared by a nix neovim wrapper
+        function cleanupRuntime()
+          local vimPackDir = 'vim[-]pack[-]dir'
+          local neovimRuntime = 'neovim[-]unwrapped'
+
+          local packpath = vim.opt.packpath:get()
+          local rtp = vim.opt.rtp:get()
+
+          vim.opt.packpath = {}
+          vim.opt.rtp = {}
+
+          for _, v in pairs(packpath) do
+            if string.match(v, vimPackDir) or string.match(v, neovimRuntime) then
+              vim.opt.packpath:append(v)
+            end
+          end
+
+          for _, v in pairs(rtp) do
+            if string.match(v, vimPackDir) or string.match(v, neovimRuntime) then
+              vim.opt.rtp:append(v)
+            end
+          end
+        end
+        cleanupRuntime()
+      ''
+      + (
+        let config = if wrapRc
+                     then configStored
+                     else configMutable;
+        in /* lua */ '';
+        function appendConfig()
+          vim.opt.rtp:prepend("${config}")
+          vim.opt.rtp:append("${config}/after")
+        end
+        appendConfig()
+      '')
+      + /* lua */ '';
+        vim.print('packpath: |', vim.opt.packpath:get(), '|')
+        vim.print('rtp: |', vim.opt.rtp:get(), '|')
       ''
       + (builtins.readFile ./nvim/init.lua);
 
