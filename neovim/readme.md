@@ -1,8 +1,30 @@
 #
 
+## Motivation and Goals
+
+- keep easiness and dynamic nature of neovim
+-- install plugins and LSP servers with nix
+-- configure with .lua
+- Iterate on lua config without rebuild. Just restart nvim
+
+- nixCats-nvim is more customizable. Kickstart-nix.nvim is simpler
+- you still need to bring your plugins though
+
+
 TODO (nice to have): make in-nix plugin config consistent, and independent of `wrapRc`
 TODO : ?autorequire files from dir?
 TODO : explain plugins/ and their header
+TODO : cleanup rtp
+TODO : option for aliases (vi, vim, nvim, ksnvim)
+TODO : vim.loader both in nix and lua
+TODO : easier to install. Import function, and call it
+
+TODO : thread on kickstart about clean rtp
+
+
+## Gotchas
+### Initialization Order
+- can't require from plugin/ directory
 
 
 ## Features
