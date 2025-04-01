@@ -71,7 +71,7 @@ with lib;
       + /* lua */ ''
         -- Cleanup rtp and packpath. Remove everything except for
         -- 1. `neovim-unwrapped` - runtime files shipped with neovim
-        -- 2. `vim-pack-dir` - packages prepared by a nix neovim wrapper
+        -- 2. `vim-pack-dir` - package with plugins prepared by a nix neovim wrapper
         function cleanupRuntime()
           local vimPackDir = 'vim[-]pack[-]dir'
           local neovimRuntime = 'neovim[-]unwrapped'
@@ -106,12 +106,12 @@ with lib;
           vim.opt.rtp:append("${config}/after")
         end
         appendConfig()
+        dofile("${config}/init.lua")
       '')
       + /* lua */ '';
         vim.print('packpath: |', vim.opt.packpath:get(), '|')
         vim.print('rtp: |', vim.opt.rtp:get(), '|')
-      ''
-      + (builtins.readFile ./nvim/init.lua);
+      '';
 
     # Add arguments to the Neovim wrapper script
     extraMakeWrapperArgs = builtins.concatStringsSep " " (
