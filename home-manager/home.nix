@@ -2,20 +2,13 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
-  outputs,
-  lib,
   config,
   pkgs,
   ...
 }: {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    inputs.nix-colors.homeManagerModules.default
-
+    inputs.catppuccin.homeModules.catppuccin
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
   ];
@@ -34,17 +27,12 @@
     };
   };
 
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
-
   home = {
     username = "slava";
     homeDirectory = "/home/slava";
   };
 
-  home.packages = let
-    # TODO extract `system`
-    pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages."x86_64-linux";
-  in [
+  home.packages =  [
     # Modern and fancy
     pkgs.fd # find
     pkgs.ripgrep
@@ -58,18 +46,16 @@
     pkgs.xclip
     pkgs.scrot
 
-    pkgs-unstable.helix
-    pkgs-unstable.kitty
     pkgs.devenv
 
-    (pkgs.nerdfonts.override {
-      fonts = [ "FiraCode" "DroidSansMono" ];
-    })
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.droid-sans-mono
 
     pkgs.firefox
     pkgs.onlyoffice-bin
 
-    pkgs.nvim-shovel
+    pkgs.nvim-shovel-mutable
+    pkgs.nvim-shovel-neorg
   ];
 
   fonts.fontconfig.enable = true;
@@ -87,15 +73,9 @@
     config = {
       map-syntax = [ "*.json5:JavaScript (Babel)" ];
       style = "numbers";
-      theme = "catppuccin";
-    };
-    themes = {
-      catppuccin = {
-        src = inputs.catppuccin-bat;
-        file = "themes/Catppuccin Frappe.tmTheme";
-      };
     };
   };
+  catppuccin.bat.enable = true;
   # }}} bat
 
   # git {{{
@@ -104,12 +84,9 @@
     lfs.enable = true;
 
     userName = "Slava";
-    userEmail = "visla.vvi@gmail.com";
+    userEmail = "slava.istomin@tuta.io";
 
-    delta = {
-      enable = true;
-      options = { syntax-theme = "catppuccin"; }; # see `bat.themes`
-    };
+    delta.enable = true;
 
     extraConfig = {
       init = { defaultBranch = "master"; };
@@ -126,30 +103,11 @@
 
     ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
   };
-
-  programs.lazygit = {
-    enable = true;
-    settings = {
-      # @see from github:catppuccin/lazygit
-      gui = {
-        theme = let
-          color = x: "#${builtins.getAttr x config.colorScheme.palette}";
-        in {
-          activeBorderColor          = [ (color "base0B") "bold" ];
-          inactiveBorderColor        = [ (color "base05") ];
-          searchingActiveBorderColor = [ (color "base0F") ];
-          optionsTextColor           = [ (color "base0D") ];
-          selectedLineBgColor        = [ (color "base02") "default" ];
-          selectedRangeBgColor       = [ (color "base02") ];
-          cherryPickedCommitBgColor  = [ (color "base0C") ];
-          cherryPickedCommitFgColor  = [ (color "base0D") ];
-          unstagedChangesColor       = [ (color "base0A") ];
-          defaultFgColor             = [ (color "base05") ];
-        };
-      };
-    };
-  };
+  catppuccin.delta.enable = true;
   # }}} git
+
+  programs.lazygit.enable = true;
+  catppuccin.lazygit.enable = true;
 
   # ssh {{{
   programs.ssh = {
@@ -172,20 +130,22 @@
     nix-direnv.enable = true;
   };
 
+  # nvim {{{
+
+  # }}}
+
   # kitty {{{
-  xdg.configFile."kitty/kitty.conf" = let
-    conf = builtins.readFile ./kitty/kitty.conf;
-    colors = builtins.readFile
-      "${inputs.catppuccin-kitty}/themes/frappe.conf";
-    session = "startup_session ./startup_session";
-  in {
-    text = builtins.concatStringsSep "\n" [
-      conf colors session
-    ];
+  programs.kitty = {
+    enable = true;
+    extraConfig = ""
+     + builtins.readFile ./kitty/kitty.conf
+     + "startup_session ./startup_session";
   };
 
+  catppuccin.kitty.enable = true;
+
   # fish -lc is to setup env
-  xdg.configFile."kitty/startup_session".text = /* bash */ ''
+  xdg.configFile."kitty/startup_session".text = /* sh */ ''
     new_tab dotfiles
     cd ~/workspaces-one/25-dotfiles/25.01-dotfiles/
     launch fish -lc nvim

@@ -6,23 +6,18 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Manage secrets
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    nix-colors.url = "github:misterio77/nix-colors";
-
+    catppuccin.url = "github:catppuccin/nix";
+    
     # TODO use catppuccin/nix
     catppuccin-bat.url = "github:catppuccin/bat";
     catppuccin-bat.flake = false;
@@ -35,8 +30,7 @@
     programsdb.inputs.nixpkgs.follows = "nixpkgs";
 
     # Vim plugins from outside the nixpkgs
-    vim-kitty.url = "github:fladson/vim-kitty";
-    vim-kitty.flake = false;
+    vim-kitty = {url = "github:fladson/vim-kitty"; flake = false; };
     neoclip.url = "github:neoclip-nvim/neoclip-flake";
   };
 
