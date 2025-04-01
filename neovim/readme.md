@@ -20,6 +20,9 @@ TODO : vim.loader both in nix and lua
 TODO : easier to install. Import function, and call it
 
 TODO : thread on kickstart about clean rtp
+TODO : check snacks.nvim profiler to troubleshoot startup time
+
+TODO : test the `outOfStoreConfig` option
 
 
 ## Gotchas
@@ -83,6 +86,10 @@ TODO: use AI to query about nixpkgs code
 ## Sophistications
 
 ### :zap: Optimise Startup Time
+
+#### Measure
+
+https://github.com/folke/snacks.nvim/blob/main/docs/profiler.md#profiling-neovim-startup
 
 #### Lazy-load Plugins
 
