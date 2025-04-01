@@ -142,8 +142,12 @@ in {
   nvim-shovel = mkNeovim {
     inherit plugins;
     inherit extraPackages;
-    configPath = ./nvim;
-    mutableConfig = true;
+    # A string with an absolute path. To bypass the nix store.
+    # Bootstrap the symlink: ``` sh
+    # cd neovim/nvim
+    # ln -vsfT (pwd) ~/.local/state/yjz6v-nvim-config
+    # ```
+    outOfStoreConfig = "/home/slava/.local/state/yjz6v-nvim-config";
   };
 
   # Uses config files saved in nix store
@@ -152,6 +156,5 @@ in {
     inherit plugins;
     inherit extraPackages;
     configPath = ./nvim;
-    mutableConfig = false;
   };
 }

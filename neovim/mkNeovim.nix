@@ -8,6 +8,7 @@
   neovimUtils,
   # TODO assert `wrapNeovimUnstable` is compatible
   wrapNeovimUnstable,
+  runCommandLocal,
 }:
 with lib;
   {
@@ -15,10 +16,10 @@ with lib;
     #
     plugins ? [],
     extraPackages ? [],
-    configPath,
+    configPath ? null,
     # When true, then nvim reads the config from ~/.config/nvim
     # When false, then nvim reads the config from the nix store
-    mutableConfig,
+    outOfStoreConfig ? null,
 
     # Extra args, which are not defined in `wrapNeovimUnstable`
     #
@@ -46,8 +47,19 @@ with lib;
     viAlias ? appName == null || appName == "nvim",
     # Add a "vim" binary to the build output as an alias?
     vimAlias ? appName == null || appName == "nvim",
-  }: let
+  }:
 
+  assert (isNull configPath || isNull outOfStoreConfig)
+         && !(!(isNull configPath) && !(isNull outOfStoreConfig))
+  || throw "Either configPath or outOfStoreConfig must be passed. Exactly one of them";
+
+  assert (isNull configPath || isPath configPath)
+  || throw "configPath must be a path. Or not passed at all";
+
+  assert (isNull outOfStoreConfig || isString outOfStoreConfig)
+  || throw "outOfStoreConfig must be a string. Or not passed at all";
+
+let
     externalPackages = extraPackages ++ (optionals withSqlite [sqlite]);
 
     # This nixpkgs util function creates an attrset
@@ -56,13 +68,11 @@ with lib;
       inherit plugins extraPython3Packages withPython3 withRuby withNodeJs viAlias vimAlias;
     };
 
-    # Save config directory to nix store
-    # See also: https://neovim.io/doc/user/starting.html
-    configStored = stdenv.mkDerivation {
-      name = "neovim-config";
-      src = configPath;
-      installPhase = "cp -r . $out";
-    };
+    nvimConfig =
+      if isPath configPath
+      then configPath
+      else runCommandLocal "kickstart-config-symlink" {}
+                           ''ln -s ${lib.escapeShellArg outOfStoreConfig} $out'';
 
     # Let it work as if `./nvim/` would be at `~/.config/nvim/`.
     initLua = ""
@@ -94,21 +104,13 @@ with lib;
         end
         cleanupRuntime()
       ''
-      + (
-        let config = if mutableConfig
-                     then configPath
-                     else configStored;
-        in /* lua */ '';
+      + /* lua */ '';
         function appendConfig()
-          vim.opt.rtp:prepend("${config}")
-          vim.opt.rtp:append("${config}/after")
+          vim.opt.rtp:prepend("${nvimConfig}")
+          vim.opt.rtp:append("${nvimConfig}/after")
         end
         appendConfig()
-        dofile("${config}/init.lua")
-      '')
-      + /* lua */ '';
-        vim.print('packpath: |', vim.opt.packpath:get(), '|')
-        vim.print('rtp: |', vim.opt.rtp:get(), '|')
+        dofile("${nvimConfig}/init.lua")
       '';
 
     # Add arguments to the Neovim wrapper script
