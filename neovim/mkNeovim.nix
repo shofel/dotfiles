@@ -15,9 +15,10 @@ with lib;
     #
     plugins ? [],
     extraPackages ? [],
-    # When false, then nvim reads the config from ~/.config/nvim
-    # When true, then nvim reads the config from the nix store
-    wrapRc,
+    configPath,
+    # When true, then nvim reads the config from ~/.config/nvim
+    # When false, then nvim reads the config from the nix store
+    mutableConfig,
 
     # Extra args, which are not defined in `wrapNeovimUnstable`
     #
@@ -59,19 +60,16 @@ with lib;
     # See also: https://neovim.io/doc/user/starting.html
     configStored = stdenv.mkDerivation {
       name = "neovim-config";
-      src = ./nvim;
+      src = configPath;
       installPhase = "cp -r . $out";
     };
-
-    # TODO receive as an arg
-    configMutable = ./nvim;
 
     # Let it work as if `./nvim/` would be at `~/.config/nvim/`.
     initLua = ""
       + /* lua */ ''
         -- Cleanup rtp and packpath. Remove everything except for
-        -- 1. `neovim-unwrapped` - runtime files shipped with neovim
-        -- 2. `vim-pack-dir` - package with plugins prepared by a nix neovim wrapper
+        -- 1. `neovim-unwrapped` - files shipped with neovim
+        -- 2. `vim-pack-dir` - plugins prepared by a nix neovim wrapper
         function cleanupRuntime()
           local vimPackDir = 'vim[-]pack[-]dir'
           local neovimRuntime = 'neovim[-]unwrapped'
@@ -97,9 +95,9 @@ with lib;
         cleanupRuntime()
       ''
       + (
-        let config = if wrapRc
-                     then configStored
-                     else configMutable;
+        let config = if mutableConfig
+                     then configPath
+                     else configStored;
         in /* lua */ '';
         function appendConfig()
           vim.opt.rtp:prepend("${config}")
@@ -151,7 +149,7 @@ with lib;
           + " " + extraMakeWrapperArgs
           + " " + extraMakeWrapperLuaCArgs
           + " " + extraMakeWrapperLuaArgs;
-        inherit wrapRc;
+        wrapRc = true;
       });
 
     isCustomAppName = appName != null && appName != "nvim";

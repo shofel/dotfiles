@@ -137,17 +137,21 @@ with final.pkgs.lib; let
     basedpyright # python
   ];
 in {
-  # Uses configs from `~/.config/nvim`
+  # Uses config files directly from `configPath`
+  # Restart nvim to apply changes in config
   nvim-shovel = mkNeovim {
     inherit plugins;
     inherit extraPackages;
-    wrapRc = true;
+    configPath = ./nvim;
+    mutableConfig = true;
   };
 
-  # Uses configs saved to nix store
+  # Uses config files saved in nix store
+  # Rebuild to apply changes in config. TODO: how exactly
   nvim-shovel-sealed = mkNeovim {
     inherit plugins;
     inherit extraPackages;
-    wrapRc = true;
+    configPath = ./nvim;
+    mutableConfig = false;
   };
 }
