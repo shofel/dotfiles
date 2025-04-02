@@ -16,7 +16,7 @@ with lib;
     #
     plugins ? [],
     extraPackages ? [],
-    configPath ? null,
+    immutableConfig ? null,
     # When true, then nvim reads the config from ~/.config/nvim
     # When false, then nvim reads the config from the nix store
     outOfStoreConfig ? null,
@@ -49,11 +49,11 @@ with lib;
     vimAlias ? appName == null || appName == "nvim",
   }:
 
-  assert (isNull configPath || isNull outOfStoreConfig)
-         && !(!(isNull configPath) && !(isNull outOfStoreConfig))
+  assert (isNull immutableConfig || isNull outOfStoreConfig)
+         && !(!(isNull immutableConfig) && !(isNull outOfStoreConfig))
   || throw "Either configPath or outOfStoreConfig must be passed. Exactly one of them";
 
-  assert (isNull configPath || isPath configPath)
+  assert (isNull immutableConfig || isPath immutableConfig)
   || throw "configPath must be a path. Or not passed at all";
 
   assert (isNull outOfStoreConfig || isString outOfStoreConfig)
@@ -69,8 +69,8 @@ let
     };
 
     nvimConfig =
-      if isPath configPath
-      then configPath
+      if isPath immutableConfig
+      then immutableConfig
       else runCommandLocal "kickstart-config-symlink" {}
                            ''ln -s ${lib.escapeShellArg outOfStoreConfig} $out'';
 

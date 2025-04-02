@@ -52,7 +52,7 @@
       let overlay = (import ./neovim/neovim-overlay.nix {inherit inputs;});
           x = nixpkgs.legacyPackages.${system}.extend overlay;
       in {
-        nvim = x.nvim-shovel;});
+        nvim = x.nvim-shovel-sealed;});
 
     # To apply a nixos configuration: 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {

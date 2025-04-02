@@ -136,25 +136,27 @@ with final.pkgs.lib; let
     gopls # go
     basedpyright # python
   ];
+
+  immutableConfig = ./nvim;
+
+  # A string with an absolute path. To bypass the nix store.
+  # Bootstrap the symlink: ``` sh
+  # cd neovim/nvim
+  # ln -vsfT (pwd) ~/.local/state/yjz6v-nvim-config
+  # ```
+  outOfStoreConfig = "/home/slava/.local/state/yjz6v-nvim-config";
 in {
   # Uses config files directly from `configPath`
   # Restart nvim to apply changes in config
-  nvim-shovel = mkNeovim {
-    inherit plugins;
-    inherit extraPackages;
-    # A string with an absolute path. To bypass the nix store.
-    # Bootstrap the symlink: ``` sh
-    # cd neovim/nvim
-    # ln -vsfT (pwd) ~/.local/state/yjz6v-nvim-config
-    # ```
-    outOfStoreConfig = "/home/slava/.local/state/yjz6v-nvim-config";
+  nvim-shovel-mutable = mkNeovim {
+    inherit plugins extraPackages;
+    inherit outOfStoreConfig;
   };
 
   # Uses config files saved in nix store
   # Rebuild to apply changes in config. TODO: how exactly
   nvim-shovel-sealed = mkNeovim {
-    inherit plugins;
-    inherit extraPackages;
-    configPath = ./nvim;
+    inherit plugins extraPackages;
+    inherit immutableConfig;
   };
 }
