@@ -27,6 +27,7 @@ with lib;
     # This will also rename the binary.
     appName ? null,
     withSqlite ? true, # Add sqlite? This is a dependency for some plugins
+    aliases ? [],
 
     # Args inherited from `wrapNeovimUnstable`
     #
@@ -40,13 +41,6 @@ with lib;
     withRuby ? false, # Build Neovim with Ruby support?
     withNodeJs ? false, # Build Neovim with NodeJS support?
     autoconfigure ? false, # Include `plugin.passthru.initLua` to the config?
-
-    # You probably don't want to create vi or vim aliases
-    # if the appName is something different than "nvim"
-    # Add a "vi" binary to the build output as an alias?
-    viAlias ? appName == null || appName == "nvim",
-    # Add a "vim" binary to the build output as an alias?
-    vimAlias ? appName == null || appName == "nvim",
   }:
 
   assert (isNull immutableConfig || isNull outOfStoreConfig)
@@ -65,7 +59,7 @@ let
     # This nixpkgs util function creates an attrset
     # that pkgs.wrapNeovimUnstable uses to configure the Neovim build.
     neovimConfig = neovimUtils.makeNeovimConfig {
-      inherit plugins extraPython3Packages withPython3 withRuby withNodeJs viAlias vimAlias;
+      inherit plugins extraPython3Packages withPython3 withRuby withNodeJs;
     };
 
     nvimConfig =
@@ -172,7 +166,13 @@ let
         # If a custom NVIM_APPNAME has been set, rename the `nvim` binary
         + lib.optionalString isCustomAppName ''
           mv $out/bin/nvim $out/bin/${lib.escapeShellArg appName}
-        '';
+        '' +
+        # Add aliases
+        (let
+          orig = "$out/bin/${lib.escapeShellArg appName}";
+          alias = (x: "$out/bin/${lib.escapeShellArg x}");
+          cmds = map (x: "ln -s ${orig} ${alias x}") aliases;
+        in (concatStringsSep ";\n" cmds));
       meta.mainProgram 
         = if isCustomAppName 
             then appName 

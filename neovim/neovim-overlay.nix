@@ -162,5 +162,6 @@ in {
     inherit plugins extraPackages;
     inherit immutableConfig;
     appName = "nvim-sealed";
+    aliases = ["vi" "vim"];
   };
 }
