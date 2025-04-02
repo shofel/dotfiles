@@ -1,8 +1,3 @@
-if vim.g.did_load_leap_plugin then
-  return
-end
-vim.g.did_load_leap_plugin = true
-
 local leap = require('leap')
 leap.opts.case_sensitive = true
 leap.opts.labels = 'oesrtnaicu,fdlw.xhmkz/-vgzqbp'

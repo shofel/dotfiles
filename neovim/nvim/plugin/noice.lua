@@ -1,6 +1,3 @@
-if vim.g.shovelnoiceloaded then return end
-vim.g.shovelnoiceloaded = true
-
 local f = function ()
 require("noice").setup({
   lsp = {

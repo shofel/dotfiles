@@ -1,6 +1,3 @@
-if vim.g.shovelfzfloaded then return end
-vim.g.shovelfzfloaded = true
-
 -- create a proxy table to postpone access to fzf-lua
 local fzf = {}
 local mt = {
