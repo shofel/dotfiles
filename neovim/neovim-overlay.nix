@@ -88,8 +88,8 @@ with final.pkgs.lib; let
 
      (start treesitter) # TODO treesitter config
      (start nvim-treesitter-context)
-     # nvim-ts-context-commentstring
-     # nvim-treesitter-textobjects
+     nvim-ts-context-commentstring
+     nvim-treesitter-textobjects
 
      (opt catppuccin-nvim)
      lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
