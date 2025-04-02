@@ -77,6 +77,16 @@ let
     # Let it work as if `./nvim/` would be at `~/.config/nvim/`.
     initLua = ""
       + /* lua */ ''
+        if vim.env.PROF then
+          require("snacks.profiler").startup({
+            startup = {
+              event = "VimEnter", -- stop profiler on this event
+              -- event = "UIEnter",
+            },
+          })
+        end
+      ''
+      + /* lua */ ''
         -- Cleanup rtp and packpath. Remove everything except for
         -- 1. `neovim-unwrapped` - files shipped with neovim
         -- 2. `vim-pack-dir` - plugins prepared by a nix neovim wrapper
