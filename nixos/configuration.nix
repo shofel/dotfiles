@@ -11,8 +11,7 @@
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
-    # TODO switch to mainstream
-    outputs.nixosModules.xray
+    # outputs.nixosModules.xray
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -105,7 +104,7 @@
     key = "";
   };
 
-  services.xray' = {
+  services.xray = {
     enable = true;
     settingsFile = config.sops.secrets.xray_config.path;
   };
