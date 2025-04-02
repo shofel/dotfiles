@@ -102,6 +102,7 @@
     sopsFile = ../secrets/xray-client.json;
     format = "json";
     key = "";
+    restartUnits = ["xray.service"];
   };
 
   services.xray = {
