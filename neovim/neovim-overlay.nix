@@ -97,7 +97,6 @@ with final.pkgs.lib; let
      #
      # Gutter # plugin/gutter.lua
      #
-
      statuscol-nvim # https://github.com/luukvbaal/statuscol.nvim 
      gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
      nvim-ufo # https://github.com/kevinhwang91/nvim-ufo
@@ -110,14 +109,13 @@ with final.pkgs.lib; let
      (start lazydev-nvim)
 
      (opt fzf-lua) # https://github.com/ibhagwan/fzf-lua
+     (opt noice-nvim)
+
+     (start blink-cmp) # https://cmp.saghen.dev/configuration/general.html
 
      (start mini-nvim) # https://github.com/echasnovski/mini.nvim
-
      (start snacks-nvim) # https://github.com/folke/snacks.nvim
-
      (start which-key-nvim)
-
-     (opt noice-nvim)
 
      leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
  

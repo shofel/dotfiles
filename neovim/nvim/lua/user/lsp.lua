@@ -10,10 +10,9 @@ local M = {}
 ---Extends the object with capabilities provided by plugins.
 ---@return lsp.ClientCapabilities
 function M.make_client_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- Add any additional plugin capabilities here.
-  -- Make sure to follow the instructions provided in the plugin's docs.
-  return capabilities
+  -- https://cmp.saghen.dev/installation.html#merging-lsp-capabilities
+  local capabilities = {}
+  capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 end
 
 return M

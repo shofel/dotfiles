@@ -8,5 +8,4 @@ require('mini.pairs').setup()
 require('mini.surround').setup()
 vim.keymap.set('n', 's', '<nop>') -- `s` is spoiled anyways
 
-require('mini.completion').setup()
 require('mini.sessions').setup()
