@@ -152,6 +152,12 @@ in {
     inherit outOfStoreConfig;
   };
 
+  nvim-shovel-neorg = mkNeovim {
+    inherit plugins extraPackages;
+    inherit outOfStoreConfig;
+    appName = "neorg";
+  };
+
   # Uses config files saved in nix store
   # Rebuild to apply changes in config. TODO: how exactly
   nvim-shovel-sealed = mkNeovim {

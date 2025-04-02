@@ -1,5 +1,4 @@
-if vim.g.did_load_shovel_neorg then return end
-vim.g.did_load_shovel_neorg = true
+if vim.env.NVIM_APPNAME ~= "neorg" then return end
 
 vim.cmd 'packadd neorg'
 
