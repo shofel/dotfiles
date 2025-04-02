@@ -53,6 +53,7 @@ with final.pkgs.lib; let
         typescript
        ]));
        neoclip = inputs.neoclip.packages.${pkgs.system}.default;
+       # TODO group, map, and spread
        vim-kitty = mkNvimPlugin inputs.vim-kitty "vim-kitty";
      in
      with pkgs.vimPlugins; [
@@ -112,9 +113,7 @@ with final.pkgs.lib; let
 
      (start mini-nvim) # https://github.com/echasnovski/mini.nvim
 
-     # @config nvim/plugin/snacks.lua
-     # @url https://github.com/folke/snacks.nvim
-     (start snacks-nvim)
+     (start snacks-nvim) # https://github.com/folke/snacks.nvim
 
      (start which-key-nvim)
 
