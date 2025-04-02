@@ -50,22 +50,6 @@
         "type": "github"
       }
     },
-    "ex-colors": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1743346060,
-        "narHash": "sha256-zbE9WcxLw5vn2TM8CrgACkzX7ZOKHmuzrxyTBrzI4eM=",
-        "owner": "aileot",
-        "repo": "ex-colors.nvim",
-        "rev": "5edcaee2aea26e243dc4191c94026da437196db9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "aileot",
-        "repo": "ex-colors.nvim",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -196,30 +180,12 @@
         "catppuccin": "catppuccin",
         "catppuccin-bat": "catppuccin-bat",
         "catppuccin-kitty": "catppuccin-kitty",
-        "ex-colors": "ex-colors",
         "home-manager": "home-manager",
         "neoclip": "neoclip",
         "nixpkgs": "nixpkgs_3",
         "programsdb": "programsdb",
-        "snacks-nvim": "snacks-nvim",
         "sops-nix": "sops-nix",
         "vim-kitty": "vim-kitty"
-      }
-    },
-    "snacks-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1740868622,
-        "narHash": "sha256-Gw0Bp2YeoESiBLs3NPnqke3xwEjuiQDDU1CPofrhtig=",
-        "owner": "folke",
-        "repo": "snacks.nvim",
-        "rev": "bc0630e43be5699bb94dadc302c0d21615421d93",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "snacks.nvim",
-        "type": "github"
       }
     },
     "sops-nix": {
