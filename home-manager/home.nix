@@ -162,6 +162,10 @@
     new_tab go
     cd ~/workspaces-one/34-courses/34.01-practicum-go/
     launch fish -lc nvim
+
+    new_tab forks
+    cd ~/workspaces-one/forks/
+    launch fish -lc nvim
   '';
 
   xdg.configFile."kitty/empty_session".text = /* bash */ ''
