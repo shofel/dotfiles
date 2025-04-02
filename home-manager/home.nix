@@ -55,6 +55,7 @@
     pkgs.onlyoffice-bin
 
     pkgs.nvim-shovel-mutable
+    pkgs.nvim-shovel-sealed
     pkgs.nvim-shovel-neorg
   ];
 

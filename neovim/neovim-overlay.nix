@@ -161,5 +161,6 @@ in {
   nvim-shovel-sealed = mkNeovim {
     inherit plugins extraPackages;
     inherit immutableConfig;
+    appName = "nvim-sealed";
   };
 }
