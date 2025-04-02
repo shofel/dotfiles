@@ -1,7 +1,5 @@
 local configs = require('nvim-treesitter.configs')
-vim.g.skip_ts_context_comment_string_module = true
 
----@diagnostic disable-next-line: missing-fields
 configs.setup {
   -- ensure_installed = 'all',
   -- auto_install = false, -- Do not automatically install missing parsers when entering buffer
@@ -28,9 +26,9 @@ configs.setup {
         ['aC'] = '@call.outer',
         ['iC'] = '@call.inner',
         ['a#'] = '@comment.outer',
-        ['i#'] = '@comment.outer',
+        ['i#'] = '@comment.inner',
         ['ai'] = '@conditional.outer',
-        ['ii'] = '@conditional.outer',
+        ['ii'] = '@conditional.inner',
         ['al'] = '@loop.outer',
         ['il'] = '@loop.inner',
         ['aP'] = '@parameter.outer',
@@ -71,7 +69,7 @@ configs.setup {
         ['[P'] = '@parameter.outer',
       },
     },
-    nsp_interop = {
+    lsp_interop = {
       enable = true,
       peek_definition_code = {
         ['df'] = '@function.outer',
