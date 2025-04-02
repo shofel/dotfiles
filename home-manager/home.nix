@@ -151,9 +151,9 @@
     cd ~/workspaces-one/25-dotfiles/25.01-dotfiles/
     launch fish -lc nvim
 
-    new_tab nvim
-    cd ~/workspaces-one/25-dotfiles/25.02-nvim-flake/
-    launch fish -lc nvim
+    new_tab notes
+    cd ~/workspaces-one/01-notes
+    launch fish -lc neorg
 
     new_tab cantor
     cd ~/workspaces-one/keyboards/
