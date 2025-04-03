@@ -132,6 +132,7 @@ with final.pkgs.lib; let
     nil # nix
     gopls # go
     basedpyright # python
+    fish-lsp
   ];
 
   immutableConfig = ./nvim;
