@@ -16,8 +16,8 @@ function toggle-unception
 
   if test -z "$NVIM_UNCEPTION_PIPE_PATH_HOST"
     set -ge NVIM_UNCEPTION_PIPE_PATH_HOST
-    echo unception disabled
+    echo unception is disabled
   else
-    echo unception enabled
+    echo unception is enabled
   end
 end
