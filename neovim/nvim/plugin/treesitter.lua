@@ -1,8 +1,13 @@
 local configs = require('nvim-treesitter.configs')
 
 configs.setup {
-  -- ensure_installed = 'all',
-  -- auto_install = false, -- Do not automatically install missing parsers when entering buffer
+  -- these options make no sense on nix. Keep them to seduce the linter.
+  ensure_installed = {},
+  ignore_install = {},
+  modules = {},
+  sync_install = false,
+  auto_install = false, -- Do not automatically install missing parsers when entering buffer
+
   highlight = {
     enable = true,
     disable = function(_, buf)
@@ -72,8 +77,8 @@ configs.setup {
     lsp_interop = {
       enable = true,
       peek_definition_code = {
-        ['df'] = '@function.outer',
-        ['dF'] = '@class.outer',
+        ['<space>df'] = '@function.outer',
+        ['<space>dc'] = '@class.outer',
       },
     },
   },
