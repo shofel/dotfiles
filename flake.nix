@@ -18,13 +18,6 @@
 
     catppuccin.url = "github:catppuccin/nix";
     
-    # TODO use catppuccin/nix
-    catppuccin-bat.url = "github:catppuccin/bat";
-    catppuccin-bat.flake = false;
-
-    catppuccin-kitty.url = "github:catppuccin/kitty";
-    catppuccin-kitty.flake = false;
-
     # for command-not-found
     programsdb.url = "github:wamserma/flake-programs-sqlite";
     programsdb.inputs.nixpkgs.follows = "nixpkgs";

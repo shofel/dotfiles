@@ -18,38 +18,6 @@
         "type": "github"
       }
     },
-    "catppuccin-bat": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1734996624,
-        "narHash": "sha256-6fWoCH90IGumAMc4buLRWL0N61op+AuMNN9CAR9/OdI=",
-        "owner": "catppuccin",
-        "repo": "bat",
-        "rev": "699f60fc8ec434574ca7451b444b880430319941",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "bat",
-        "type": "github"
-      }
-    },
-    "catppuccin-kitty": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1731214416,
-        "narHash": "sha256-59ON7CzVgfZUo7F81qQZQ1r6kpcjR3OPvTl99gzDP8E=",
-        "owner": "catppuccin",
-        "repo": "kitty",
-        "rev": "b14e8385c827f2d41660b71c7fec1e92bdcf2676",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "kitty",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -178,8 +146,6 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
-        "catppuccin-bat": "catppuccin-bat",
-        "catppuccin-kitty": "catppuccin-kitty",
         "home-manager": "home-manager",
         "neoclip": "neoclip",
         "nixpkgs": "nixpkgs_3",
