@@ -142,21 +142,23 @@ let
   # ```
   outOfStoreConfig = "/home/slava/.local/state/yjz6v-nvim-config";
 in {
-  # Uses config files directly from `configPath`
+  # This package uses config files directly from `configPath`
   # Restart nvim to apply changes in config
   nvim-shovel-mutable = mkNeovim {
     inherit plugins extraPackages;
     inherit outOfStoreConfig;
   };
 
+  # neorg adds a lot to startup time, and can't be lazy-loaded.
+  # Then let's make a separate `neorg` executable.
   nvim-shovel-neorg = mkNeovim {
     inherit plugins extraPackages;
     inherit outOfStoreConfig;
     appName = "neorg";
   };
 
-  # Uses config files saved in nix store
-  # Rebuild to apply changes in config. TODO: how exactly
+  # This package uses the config files saved in nix store
+  # Rebuild to apply changes in config: e.g. `nix run .#nvim-sealed`
   nvim-shovel-sealed = mkNeovim {
     inherit plugins extraPackages;
     inherit immutableConfig;
