@@ -39,7 +39,7 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+    homeModules = import ./modules/home-manager;
 
    packages = forAllSystems (system:
       let overlay = (import ./neovim/neovim-overlay.nix {inherit inputs;});
