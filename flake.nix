@@ -41,7 +41,7 @@
     nixosModules = import ./modules/nixos;
     homeModules = import ./modules/home-manager;
 
-   packages = forAllSystems (system:
+    packages = forAllSystems (system:
       let overlay = (import ./neovim/neovim-overlay.nix {inherit inputs;});
           x = nixpkgs.legacyPackages.${system}.extend overlay;
       in {
