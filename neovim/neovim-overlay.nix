@@ -1,23 +1,15 @@
 {inputs}:
-final: prev:
-with final.pkgs.lib; let
-  pkgs = final;
-
+final: {system, lib, callPackage, vimPlugins, vimUtils, ...}:
+let
   # Use this to create a plugin from a flake input
   mkNvimPlugin = src: pname:
-    pkgs.vimUtils.buildVimPlugin {
+    vimUtils.buildVimPlugin {
       inherit pname src;
       version = src.lastModifiedDate;
     };
 
-  # Make sure we use the pinned nixpkgs instance for wrapNeovimUnstable,
-  # otherwise it could have an incompatible signature when applying this overlay.
-  pkgs-wrapNeovim = inputs.nixpkgs.legacyPackages.${pkgs.system};
-
   # This is the helper function that builds the Neovim derivation.
-  mkNeovim = pkgs.callPackage ./mkNeovim.nix {
-    inherit (pkgs-wrapNeovim) wrapNeovimUnstable neovimUtils;
-  };
+  mkNeovim = callPackage ./mkNeovim.nix {};
 
   plugins =
     let
@@ -29,16 +21,16 @@ with final.pkgs.lib; let
        * - start with all grammars.
        * To fine-tune pick specific grammars.
        */
-      # treesitter = pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+      # treesitter = vimPlugins.nvim-treesitter.withAllGrammars
       /* @see supported languages: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages */
       listGrammars = p: pattern:
-                     (optional
+                     (lib.optional
                       (pattern != "")
-                      (trace (filter (x: isList (match pattern x))
+                      (lib.trace (lib.filter (x: lib.isList (lib.match pattern x))
                                      (builtins.attrNames p))
-                             p.c)); # p.c is anything; just to not brake
+                             p.c)); # p.c is any plugin; just to not brake the flow
       treesitter =
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins
+      (vimPlugins.nvim-treesitter.withPlugins
        (p: with p;
         /* To search for grammars, change "" to a regex and run the build. */
         (listGrammars p "") ++ [
@@ -52,11 +44,11 @@ with final.pkgs.lib; let
         python
         typescript
        ]));
-       neoclip = inputs.neoclip.packages.${pkgs.system}.default;
+       neoclip = inputs.neoclip.packages.${system}.default;
        # TODO group, map, and spread
        vim-kitty = mkNvimPlugin inputs.vim-kitty "vim-kitty";
      in
-     with pkgs.vimPlugins; [
+     with vimPlugins; [
 
      /**
       * Plugin can be a derivation or an attrset
@@ -126,7 +118,7 @@ with final.pkgs.lib; let
      nvim-unception # run nvim from nvim terminal
   ];
 
-  extraPackages = with pkgs; [
+  extraPackages = with final; [
     # language servers
     lua-language-server
     nil # nix
