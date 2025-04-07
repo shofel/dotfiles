@@ -19,12 +19,14 @@ let
       # The `opt` plugins are to be loaded with `packadd` command.
       # If you want to lazy-load a plugin, then make it `opt`.
       opt = x: {plugin = x; optional = true;};
-      /* Treesitter:
-       * - start with all grammars.
-       * To fine-tune pick specific grammars.
+      /**
+       * Treesitter with all grammars can add too much to startup time.
+       * That's why we pick only specific grammars.
+       *
+       * Sometimes you just find the plugin in the list of supported
+       * languages: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
+       * But sometimes you need to actually list them to find the right name.
        */
-      # treesitter = vimPlugins.nvim-treesitter.withAllGrammars
-      /* @see supported languages: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages */
       listGrammars = p: pattern:
                      (lib.optional
                       (pattern != "")
@@ -46,23 +48,29 @@ let
         python
         typescript
        ]));
+       # end of treesitter plugins
+       #
+       # To make it simple, just add all the grammars:
+       #   - uncomment the line below
+       #   - and delete `treesitter = ...`, and `listGrammars = ...` above.
+       # treesitter = vimPlugins.nvim-treesitter.withAllGrammars
        neoclip = inputs.neoclip.packages.${system}.default;
-       # TODO group, map, and spread
        vim-kitty = buildVimPlugin inputs.vim-kitty "vim-kitty";
      in
      with vimPlugins; [
 
-     # Although, it's technically possible to provide configuration for
-     # plugins here, in nix; in this template we prefer to config plugins in lua.
-     # There are two good reasons:
-     # 1. You've got an lsp assistance
-     # 2. It's possisble to apply configuration just by restarting nvim,
-     #    that is without rebuilding
+     # It's technically possible to provide lua configuration for
+     # plugins here, in nix, but in this template we prefer to config plugins in
+     # the actual lua files inside the `nvim` config directory.
+     # There are two good reasons for this decision:
+     #   1. You've got an lsp assistance
+     #   2. It's possisble to apply configuration just by restarting nvim,
+     #      that is without rebuilding
 
      # lazy-load plugins https://github.com/BirdeeHub/lze
      lze
 
-     (opt guess-indent-nvim) # it's lazy-loaded in lazy-loading.lua
+     (opt guess-indent-nvim) # it's lazy-loaded in `lazy-loading.lua`
 
      treesitter
      nvim-treesitter-context
