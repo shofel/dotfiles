@@ -68,8 +68,8 @@ let
       else runCommandLocal "kickstart-config-symlink" {}
                            ''ln -s ${lib.escapeShellArg outOfStoreConfig} $out'';
 
-    # Let it work as if `./nvim/` would be at `~/.config/nvim/`.
     initLua = ""
+      # run `PROF=1 nvim` to profile startup time
       + /* lua */ ''
         if vim.env.PROF then
           require("snacks.profiler").startup({
@@ -108,6 +108,7 @@ let
         end
         cleanupRuntime()
       ''
+      # Make it work as if `./nvim/` would be at `~/.config/nvim/`.
       + /* lua */ '';
         function appendConfig()
           vim.opt.rtp:prepend("${nvimConfig}")
