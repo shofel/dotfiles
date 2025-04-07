@@ -6,7 +6,6 @@
   stdenv,
   neovim-unwrapped,
   neovimUtils,
-  # TODO assert `wrapNeovimUnstable` is compatible
   wrapNeovimUnstable,
   runCommandLocal,
 }:
@@ -25,7 +24,7 @@ with lib;
     #
     # NVIM_APPNAME -- `:help $NVIM_APPNAME`
     # This will also rename the binary.
-    appName ? null,
+    appName ? "nvim",
     withSqlite ? true, # Add sqlite? This is a dependency for some plugins
     aliases ? [],
 
@@ -56,12 +55,7 @@ with lib;
 let
     externalPackages = extraPackages ++ (optionals withSqlite [sqlite]);
 
-    # This nixpkgs util function creates an attrset
-    # that pkgs.wrapNeovimUnstable uses to configure the Neovim build.
-    neovimConfig = neovimUtils.makeNeovimConfig {
-      inherit plugins extraPython3Packages withPython3 withRuby withNodeJs;
-    };
-
+    # Choose the way user config included in the generated config
     nvimConfig =
       if isPath immutableConfig
       then immutableConfig
@@ -80,7 +74,7 @@ let
           })
         end
       ''
-      + /* lua */ ''
+      + /* lua */ '';
         -- Cleanup rtp and packpath. Remove everything except for
         -- 1. `neovim-unwrapped` - files shipped with neovim
         -- 2. `vim-pack-dir` - plugins prepared by a nix neovim wrapper
@@ -121,7 +115,7 @@ let
     # Add arguments to the Neovim wrapper script
     extraMakeWrapperArgs = builtins.concatStringsSep " " (
       # Set the NVIM_APPNAME environment variable
-      (optional (appName != "nvim" && appName != null && appName != "")
+      (optional (appName != "nvim")
         ''--set NVIM_APPNAME "${appName}"'')
       # Add external packages to the PATH
       ++ (optional (externalPackages != [])
@@ -134,38 +128,27 @@ let
         ''--set LIBSQLITE "${sqlite.out}/lib/libsqlite3.so"'')
     );
 
-    luaPackages = neovim-unwrapped.lua.pkgs;
-    resolvedExtraLuaPackages = extraLuaPackages luaPackages;
+    # Prepare to wrap `neovim-unwrapped`
+    neovimConfig = neovimUtils.makeNeovimConfig {
+      inherit plugins
+              extraLuaPackages
+              extraPython3Packages withPython3 withRuby withNodeJs;
+      luaRcContent = initLua; wrapRc = true;
+    };
 
-    # Native Lua libraries
-    extraMakeWrapperLuaCArgs =
-      optionalString (resolvedExtraLuaPackages != [])
-      ''--suffix LUA_CPATH ";" "${concatMapStringsSep ";" luaPackages.getLuaCPath resolvedExtraLuaPackages}"'';
+    neovimConfig' = neovimConfig // {
+      wrapperArgs = escapeShellArgs neovimConfig.wrapperArgs + " " + extraMakeWrapperArgs;};
 
-    # Lua libraries
-    extraMakeWrapperLuaArgs =
-      optionalString (resolvedExtraLuaPackages != [])
-      ''--suffix LUA_PATH ";" "${concatMapStringsSep ";" luaPackages.getLuaPath resolvedExtraLuaPackages}"'';
+    # Make a neovim derivation
+    neovim = wrapNeovimUnstable neovim-unwrapped neovimConfig';
 
-    # wrapNeovimUnstable is the nixpkgs utility function for building a Neovim derivation.
-    neovim-wrapped = wrapNeovimUnstable neovim-unwrapped (neovimConfig
-      // {
-        luaRcContent = initLua;
-        wrapperArgs =
-          escapeShellArgs neovimConfig.wrapperArgs
-          + " " + extraMakeWrapperArgs
-          + " " + extraMakeWrapperLuaCArgs
-          + " " + extraMakeWrapperLuaArgs;
-        wrapRc = true;
-      });
-
-    isCustomAppName = appName != null && appName != "nvim";
   in
-    neovim-wrapped.overrideAttrs (oa: {
+    neovim.overrideAttrs (oa: {
+      meta.mainProgram = appName;
       buildPhase =
         oa.buildPhase
-        # If a custom NVIM_APPNAME has been set, rename the `nvim` binary
-        + lib.optionalString isCustomAppName ''
+        # Rename `nvim` binary to $NVIM_APPNAME
+        + lib.optionalString (appName != "nvim") ''
           mv $out/bin/nvim $out/bin/${lib.escapeShellArg appName}
         '' +
         # Add aliases
@@ -174,8 +157,4 @@ let
           alias = (x: "$out/bin/${lib.escapeShellArg x}");
           cmds = map (x: "ln -s ${orig} ${alias x}") aliases;
         in (concatStringsSep ";\n" cmds));
-      meta.mainProgram 
-        = if isCustomAppName 
-            then appName 
-            else oa.meta.mainProgram;
     })
