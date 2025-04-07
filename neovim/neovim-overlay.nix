@@ -2,7 +2,7 @@
 final: {system, lib, callPackage, vimPlugins, vimUtils, ...}:
 let
   # Use this to create a plugin from a flake input
-  mkNvimPlugin = src: pname:
+  buildVimPlugin = src: pname:
     vimUtils.buildVimPlugin {
       inherit pname src;
       version = src.lastModifiedDate;
@@ -13,10 +13,12 @@ let
 
   plugins =
     let
+      # The `start` plugins are loaded on nvim startup automatically.
+      # It is the default.
       start = x: {plugin = x; optional = false;};
+      # The `opt` plugins are to be loaded with `packadd` command.
+      # If you want to lazy-load a plugin, then make it `opt`.
       opt = x: {plugin = x; optional = true;};
-      mkLua = x: "lua <<EOF\n" + x + "\nEOF";
-      luaconfig = x: {config = mkLua x;};
       /* Treesitter:
        * - start with all grammars.
        * To fine-tune pick specific grammars.
@@ -46,46 +48,24 @@ let
        ]));
        neoclip = inputs.neoclip.packages.${system}.default;
        # TODO group, map, and spread
-       vim-kitty = mkNvimPlugin inputs.vim-kitty "vim-kitty";
+       vim-kitty = buildVimPlugin inputs.vim-kitty "vim-kitty";
      in
      with vimPlugins; [
 
-     /**
-      * Plugin can be a derivation or an attrset
-      *
-      * Here are the default options:
-      * Here are the default options: ```nix 
-      * {
-      *   plugin = null;
-      *   # Plugin config (string with vimScript code)
-      *   config = null;
-      *   # set optional=false, to load the plugin on startup
-      *   # set optional=true, to be able lazy-loading the plugin or to load it manually with `packadd` command
-      *   optional = false;
-      * };
-      * ```
-      */
+     # Although, it's technically possible to provide configuration for
+     # plugins here, in nix; in this template we prefer to config plugins in lua.
+     # There are two good reasons:
+     # 1. You've got an lsp assistance
+     # 2. It's possisble to apply configuration just by restarting nvim,
+     #    that is without rebuilding
 
-     # Example 1: just a derivation
-     lze # lazy-load plugins https://github.com/BirdeeHub/lze
+     # lazy-load plugins https://github.com/BirdeeHub/lze
+     lze
 
-     # Example 2: optional plugin with config
-     # When you place config in nix, then you need to rebuild when      
-     { # https://github.com/nmac427/guess-indent.nvim/
-       plugin = guess-indent-nvim;
-       optional = true; # default is `false`
-       config = mkLua /* lua */ '' -- default is no config
-         require('lze').load({
-           "guess-indent.nvim",
-           event = 'DeferredUIEnter',
-           after = function() require('guess-indent').setup() end
-         })
-       '';
-     }
+     (opt guess-indent-nvim) # it's lazy-loaded in lazy-loading.lua
 
-     # Example: an `optinal=false` plugin without config
-     (start treesitter)
-     (start nvim-treesitter-context)
+     treesitter
+     nvim-treesitter-context
      nvim-ts-context-commentstring
      nvim-treesitter-textobjects
 
@@ -149,7 +129,7 @@ in {
     inherit outOfStoreConfig;
   };
 
-  # neorg adds a lot to startup time, and can't be lazy-loaded.
+  # neorg adds a lot to startup time, and is not to be lazy-loaded
   # Then let's make a separate `neorg` executable.
   nvim-shovel-neorg = mkNeovim {
     inherit plugins extraPackages;
