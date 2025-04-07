@@ -54,22 +54,27 @@ let
       * Plugin can be a derivation or an attrset
       *
       * Here are the default options:
+      * Here are the default options: ```nix 
       * {
       *   plugin = null;
-      *   config = null; # Plugin config (string with vimScript code)
-      *   optional = false; # Put to `start/` or `opt/`. See `:h packages`
+      *   # Plugin config (string with vimScript code)
+      *   config = null;
+      *   # set optional=false, to load the plugin on startup
+      *   # set optional=true, to be able lazy-loading the plugin or to load it manually with `packadd` command
+      *   optional = false;
       * };
+      * ```
       */
 
      # Example 1: just a derivation
      lze # lazy-load plugins https://github.com/BirdeeHub/lze
 
      # Example 2: optional plugin with config
-     # https://github.com/nmac427/guess-indent.nvim/
-     {
+     # When you place config in nix, then you need to rebuild when      
+     { # https://github.com/nmac427/guess-indent.nvim/
        plugin = guess-indent-nvim;
-       optional = true;
-       config = mkLua /* lua */ ''
+       optional = true; # default is `false`
+       config = mkLua /* lua */ '' -- default is no config
          require('lze').load({
            "guess-indent.nvim",
            event = 'DeferredUIEnter',
@@ -78,7 +83,8 @@ let
        '';
      }
 
-     (start treesitter) # TODO treesitter config
+     # Example: an `optinal=false` plugin without config
+     (start treesitter)
      (start nvim-treesitter-context)
      nvim-ts-context-commentstring
      nvim-treesitter-textobjects
