@@ -123,12 +123,11 @@ let
 
   immutableConfig = ./nvim;
 
-  # A string with an absolute path. To bypass the nix store.
-  # Bootstrap the symlink: ``` sh
-  # cd neovim/nvim
-  # ln -vsfT (pwd) ~/.local/state/yjz6v-nvim-config
-  # ```
-  outOfStoreConfig = "/home/slava/.local/state/yjz6v-nvim-config";
+  # A string with an absolute path to config directory, to bypass the nix store.
+  # To bootstrap the symlink:
+  #   1. edit `./configLink.nix`
+  #   2. run `./scripts/bootstrapMutableConfig.sh`
+  outOfStoreConfig = import ./configLink.nix;
 in {
   # This package uses config files directly from `configPath`
   # Restart nvim to apply changes in config
