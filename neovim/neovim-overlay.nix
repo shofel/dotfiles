@@ -91,7 +91,7 @@ let
      #
      #
 
-     (start nvim-luadev) # nvim lua repl  https://github.com/bfredl/nvim-luadev
+     (opt nvim-luadev) # nvim lua repl  https://github.com/bfredl/nvim-luadev
      (start lazydev-nvim)
 
      (opt fzf-lua) # https://github.com/ibhagwan/fzf-lua
@@ -138,6 +138,7 @@ in {
 
   # neorg adds a lot to startup time, and is not to be lazy-loaded
   # Then let's make a separate `neorg` executable.
+  # @see `plugin/neorg.lua`: the file is executed only when NVIM_APPNAME==neorg
   nvim-shovel-neorg = mkNeovim {
     inherit plugins extraPackages;
     inherit outOfStoreConfig;

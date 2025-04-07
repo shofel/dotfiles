@@ -1,5 +1,7 @@
 vim.bo.comments = ':---,:--'
 
+vim.cmd.packadd 'nvim-luadev'
+
 -- nvim repl keys
 local opts = {buffer = true}
 vim.keymap.set('n', '<space>R',  '<cmd>Luadev<cr>',         opts)

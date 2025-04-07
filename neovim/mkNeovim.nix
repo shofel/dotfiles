@@ -64,6 +64,7 @@ let
 
     initLua = ""
       # run `PROF=1 nvim` to profile startup time
+      # https://github.com/folke/snacks.nvim/blob/main/docs/profiler.md#profiling-neovim-startup
       + /* lua */ ''
         if vim.env.PROF then
           require("snacks.profiler").startup({
