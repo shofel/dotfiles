@@ -1,110 +1,79 @@
 #
 
+TODO: the name: neovim-nix
+TODO: make template
+TODO: homeModule
+TODO: plugins with another overlay
+TODO: overlay: links for all plugins
+
 ## Motivation and Goals
 
 - keep easiness and dynamic nature of neovim
--- install plugins and LSP servers with nix
--- configure with .lua
-- Iterate on lua config without rebuild. Just restart nvim
+  - install plugins and LSP servers with nix
+  - configure with .lua
+  - Iterate on lua config without nix rebuild. Just restart neovim
 
-- nixCats-nvim is more customizable. Kickstart-nix.nvim is simpler
-- you still need to bring your plugins though
-
-
-TODO (nice to have): make in-nix plugin config consistent, and independent of `wrapRc`
-TODO : ?autorequire files from dir?
-TODO : explain plugins/ and their header
-TODO : cleanup rtp
-TODO : option for aliases (vi, vim, nvim, ksnvim)
-TODO : vim.loader both in nix and lua
-TODO : easier to install. Import function, and call it
-
-TODO : thread on kickstart about clean rtp
-TODO : check snacks.nvim profiler to troubleshoot startup time
-
-TODO : test the `outOfStoreConfig` option
-
-
-## Gotchas
-### Initialization Order
-- can't require from plugin/ directory
-
+- nixCats-nvim is more customizable
+- Kickstart-nix.nvim is simpler then nixCats-nvim
+- neovimOnNix does it's best to be even simpler
 
 ## Features
-- tweak the config as easy as without nix
+
+Changes are both instant and tracked by git.
+
+- tweak the config as easy and fast as without nix
 - run the same config as any user and on any machine with nix
-- works with both `wrapRc=true` and `wrapRc=false`
+- edit your config directory as if it were a `~/.config/nvim/`. Config is loaded only from the provided config directory. And from nowhere else.
 
-- edit your config directory as if it were a `~/.config/nvim/` (needs for homeManager)
+## Install and start
+1. Bootstrap the repository from the template
+To bootstrap the symlink:
+1. edit `./configLink.nix`
+2. run `./scripts/bootstrapMutableConfig.sh`
 
-## Done
-`vim.loader.enable()` in `init.lua`
+## Anatomy
 
+- `./nvim/` - behaves exactly as `~/.config/nvim/`
+; # TODO fix the name
+- `overlay.nix` - Describe your neovim packages. What plugins and extra programs to install
+- `mkNeovim.nix` - function which makes a neovim derivation
 
-## Questions
-- why `withSqlite`
-- why `after/` is not special, but not just `plugin/after/`
-- ftplugin ordering is sourced: https://github.com/neovim/neovim/pull/23801
+## Converting From non-nix
 
+I believe, it's the most complex task with this template.
 
-## Explanations
+1. update list of plugins in `overlay.nix`
+2. put your `nvim` config directory in place of `./nvim`
 
-### About `wrapRc`
-
-#### What it is about
-
-Nix loves reproducibility, and purity. That's why the nix way means the config files should be packed with the program and reside in the nix store. The program shouldn't be affected by any mutable files.
-
-Neovim loves tweaking the config. Which is typically stored in the home directory: `~/.config/nvim/`.
-
-The `wrapRc` option tells what side to choose. `wrapRc=true` means Neovim will use the config, which it was compiled with.
-- upside: no matters you run it as root or on another computer, the config is the same
-- downside: tweaking the config is a slooow pain. Every single change needs a rebuild. On my notebook rebuild takes about 40 seconds.
-
-Also, we can use `config` in a `plugin` object only with `wrapRc=true`.
-
-#### Can We Have Both?
-
-The easiest way is to make two packages, with and without wrapRc. The first is for everyday, the second is to run as root and on other machines.
-
-I do believe so. The idea is to 
-
-TODO: I want `wrapRc=false` and use `config` option at the same time.
-
-#### more files to load
-							*-S*
--S [file]	Executes Vimscript or Lua (".lua") [file] after the first file
-		has been read. See also |:source|. If [file] is not given,
-		defaults to "Session.vim". Equivalent to: >
-			-c "source {file}"
-<		Can be repeated like "-c", subject to the same limit of 10
-		"-c" arguments. {file} cannot start with a "-".
-
-TODO: use AI to query about nixpkgs code
-
+### What's Inside
 
 ## Sophistications
 
 ### :zap: Optimise Startup Time
 
-#### Measure
+#### Profile
 
 https://github.com/folke/snacks.nvim/blob/main/docs/profiler.md#profiling-neovim-startup
 
+To profile startup time, run your `nvim` with `PROF=1`
+```sh
+PROF=1 nvim
+```
+
 #### Lazy-load Plugins
+
+Look at `lze` or `lz.n` plugins.
 
 #### Pick Treesitter Grammars
 
 ### Develop Plugins
 
-### Filter-out files from config directory
+1. Make a directory with plugins you develop
+2. organize them as a package: `pack/{}/start/{}` or `pack/{}/opt/{}`
+3. add the directory to `packpath` in `init.lua`: `vim.opt.packpath:append('~/PACK-DIR')`
 
-### Ways to Configure Plugins
+#### `plugin/` vs `require()`
+One can choose how to manage files `neovim` loads for you. You can either put files
+in the `plugin/` directory or `require()` them from `init.lua`.
 
-- inline in nix
-- require file from nix
-- require directory
-
-#### files in plugin/ directory
-good: loaded automatically; just put the file
-bad: this way of loading is independend of `require`. And you can't require from a plugin/
+Files in `plugin/` are loaded automatically; just put the file, and vim will load it.
