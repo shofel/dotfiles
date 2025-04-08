@@ -60,14 +60,11 @@
 
   fonts.fontconfig.enable = true;
 
-  # {{{ fzf
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
   };
-  # }}} fzf
 
-  # {{{ bat
   programs.bat = {
     enable = true;
     config = {
@@ -76,9 +73,7 @@
     };
   };
   catppuccin.bat.enable = true;
-  # }}} bat
 
-  # git {{{
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -104,12 +99,10 @@
     ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
   };
   catppuccin.delta.enable = true;
-  # }}} git
 
   programs.lazygit.enable = true;
   catppuccin.lazygit.enable = true;
 
-  # ssh {{{
   programs.ssh = {
     enable = true;
     extraConfig = ''
@@ -123,18 +116,14 @@
         IdentityFile ~/.ssh/id_aeza_tropical
     '';
   };
-  # }}} ssh
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
-  # nvim {{{
 
-  # }}}
 
-  # kitty {{{
   programs.kitty = {
     enable = true;
     extraConfig = ""
@@ -172,16 +161,12 @@
     cd
     launch fish -lc nvim
   '';
-  # }}} kitty
 
-  # stumpwm {{{
   xdg.configFile."stumpwm" = {
     source = ./stumpwm;
     recursive = true;
   };
-  # }}} stumpwm
 
-  # fish {{{
   xdg.configFile."fish/functions" = {
     source = ./fish/functions;
     recursive = true;
@@ -197,7 +182,6 @@
     '';
     loginShellInit = '''';
 
-    # shellAbbrs {{{
     shellAbbrs = {
       dc = "docker-compose";
       lg = "lazygit";
@@ -241,11 +225,8 @@
       v = /* bash */ "nvim '+Term fish'";
       weather = /* bash */ "curl -s wttr.in/valencia";
     };
-    # }}} shellAbbrs
 
-  }; # }}} fish
-
-  # redshift {{{
+  };
   services.redshift = {
     enable = true;
     latitude = 41.0;
@@ -255,7 +236,6 @@
       night = 3000;
     };
   };
-  # }}} redshift
 
   #
   programs.home-manager.enable = true;
