@@ -52,7 +52,6 @@
     pkgs.nerd-fonts.droid-sans-mono
 
     pkgs.firefox
-    pkgs.onlyoffice-bin
 
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
