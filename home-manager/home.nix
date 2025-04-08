@@ -1,12 +1,9 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
-  config,
   pkgs,
   ...
 }: {
-  # You can import other home-manager modules here
+  # Other home-manager modules
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     # You can also split up your configuration and import pieces of it here:
@@ -14,13 +11,10 @@
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [
       (import ../neovim/neovim-overlay.nix {inherit inputs;}) 
     ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
