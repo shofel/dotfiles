@@ -136,15 +136,6 @@ in {
     inherit outOfStoreConfig;
   };
 
-  # neorg adds a lot to startup time, and is not to be lazy-loaded
-  # Then let's make a separate `neorg` executable.
-  # @see `plugin/neorg.lua`: the file is executed only when NVIM_APPNAME==neorg
-  nvim-shovel-neorg = mkNeovim {
-    inherit plugins extraPackages;
-    inherit outOfStoreConfig;
-    appName = "neorg";
-  };
-
   # This package uses the config files saved in nix store
   # Rebuild to apply changes in config: e.g. `nix run .#nvim-sealed`
   nvim-shovel-sealed = mkNeovim {
@@ -152,5 +143,14 @@ in {
     inherit immutableConfig;
     appName = "nvim-sealed";
     aliases = ["vi" "vim"];
+  };
+
+  # neorg adds a lot to startup time, and is not to be lazy-loaded
+  # Then let's make a separate `neorg` executable.
+  # @see `plugin/neorg.lua`: the file is executed only when NVIM_APPNAME==neorg
+  nvim-shovel-neorg = mkNeovim {
+    inherit plugins extraPackages;
+    inherit outOfStoreConfig;
+    appName = "neorg";
   };
 }
