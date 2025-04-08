@@ -25,13 +25,13 @@ with lib;
     # NVIM_APPNAME -- `:help $NVIM_APPNAME`
     # This will also rename the binary.
     appName ? "nvim",
-    withSqlite ? true, # Add sqlite? This is a dependency for some plugins
     aliases ? [],
+    withSqlite ? true, # Add sqlite? This is a dependency for some plugins
 
     # Args inherited from `wrapNeovimUnstable`
+    # They can typically be left as their defaults
     #
 
-    # The below arguments can typically be left as their defaults
     # Additional lua packages (not plugins), e.g. from luarocks.org.
     # e.g. p: [p.jsregexp]
     extraLuaPackages ? p: [],
