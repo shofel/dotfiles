@@ -116,8 +116,6 @@
     nix-direnv.enable = true;
   };
 
-
-
   programs.kitty = {
     enable = true;
     extraConfig = ""
@@ -155,11 +153,6 @@
     cd
     launch fish -lc nvim
   '';
-
-  xdg.configFile."stumpwm" = {
-    source = ./stumpwm;
-    recursive = true;
-  };
 
   xdg.configFile."fish/functions" = {
     source = ./fish/functions;
