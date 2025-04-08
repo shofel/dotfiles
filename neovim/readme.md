@@ -1,10 +1,14 @@
-#
+# Neovim on Nix
 
 TODO: the name: neovim-nix
 TODO: make template
 TODO: homeModule
 TODO: plugins with another overlay
 TODO: overlay: links for all plugins
+
+TODO: hint to edit `configLink.nix`
+
+TODO: test oos link with nix --impure and default package
 
 ## Motivation and Goals
 
@@ -15,11 +19,11 @@ TODO: overlay: links for all plugins
 
 - nixCats-nvim is more customizable
 - Kickstart-nix.nvim is simpler then nixCats-nvim
-- neovimOnNix does it's best to be even simpler
+- neovim-nix does it's best to be even simpler
 
 ## Features
 
-Changes are both instant and tracked by git.
+Changes in nvim config are both instant and tracked by git.
 
 - tweak the config as easy and fast as without nix
 - run the same config as any user and on any machine with nix

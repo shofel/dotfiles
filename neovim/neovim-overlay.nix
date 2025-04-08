@@ -14,7 +14,7 @@ let
   plugins =
     let
       # The `start` plugins are loaded on nvim startup automatically.
-      # It is the default.
+      # It is the default. `(start plugin)` is equivalent to `plugin`.
       start = x: {plugin = x; optional = false;};
       # The `opt` plugins are to be loaded with `packadd` command.
       # If you want to lazy-load a plugin, then make it `opt`.
