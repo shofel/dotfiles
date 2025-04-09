@@ -48,6 +48,8 @@ keymap.set('n', '<C-c>', toggle_qf_list, { desc = 'toggle quickfix list' })
 keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'switch to normal mode' })
 keymap.set('t', '<C-Esc>', '<Esc>', { desc = 'send Esc to terminal' })
 
+keymap.set('n', '<space>cd', ':cd %', {desc = 'cd %'})
+
 -- Shortcut for expanding to current buffer's directory in command mode
 keymap.set('c', '%%', function()
   if fn.getcmdtype() == ':' then
