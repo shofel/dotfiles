@@ -98,13 +98,6 @@ end
 
 keymap.set('n', '<space>tl', buf_toggle_diagnostics, {unique = true, desc = 'toggle diagnostics'})
 
-local function toggle_spell_check()
-  ---@diagnostic disable-next-line: param-type-mismatch
-  vim.opt.spell = not (vim.opt.spell:get())
-end
-
-keymap.set('n', '<space>S', toggle_spell_check, { noremap = true, silent = true, desc = 'toggle [S]pell' })
-
 --- Keymap-agnostic mappings in insert mode
 --- To make cyrillic a bit easier
 keymap.set('i', '<C-backspace>', '<c-w>')
@@ -115,11 +108,11 @@ function M.set_lsp_keymaps (bufnr, client)
   local function desc(description)
     return { unique = true, silent = true, buffer = bufnr, desc = description }
   end
-  keymap.set('n', 'gD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration'))
-  keymap.set('n', 'gd', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition'))
-  keymap.set('n', '<space>gt', vim.lsp.buf.type_definition, desc('lsp [g]o to [t]ype definition'))
-  keymap.set('n', '<space>gi', vim.lsp.buf.implementation, desc('lsp [g]o to [i]mplementation'))
-  keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, desc('[lsp] signature help'))
+  keymap.set('n', 'gD', vim.lsp.buf.declaration, desc('go to declaration'))
+  keymap.set('n', 'gd', vim.lsp.buf.definition, desc('go to definition'))
+  keymap.set('n', '<space>gt', vim.lsp.buf.type_definition, desc('go to type definition'))
+  keymap.set('n', '<space>gi', vim.lsp.buf.implementation, desc('go to implementation'))
+  keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, desc('signature help'))
 
   keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, desc('lsp add [w]orksp[a]ce folder'))
   keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, desc('lsp [w]orkspace folder [r]emove'))
