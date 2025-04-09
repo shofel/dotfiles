@@ -2,9 +2,7 @@
 
 M = {}
 
-local api = vim.api
-local fn = vim.fn
-local keymap = vim.keymap
+_G.keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
 -- Save file
@@ -28,7 +26,7 @@ vim.keymap.set('x', '<LeftRelease>', '"*ygv')
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
   local qf_exists = false
-  for _, win in pairs(fn.getwininfo() or {}) do
+  for _, win in pairs(vim.fn.getwininfo() or {}) do
     if win['quickfix'] == 1 then
       qf_exists = true
     end
@@ -52,8 +50,8 @@ keymap.set('n', '<space>cd', ':cd %', {desc = 'cd %'})
 
 -- Shortcut for expanding to current buffer's directory in command mode
 keymap.set('c', '%%', function()
-  if fn.getcmdtype() == ':' then
-    return fn.expand('%:h') .. '/'
+  if vim.fn.getcmdtype() == ':' then
+    return vim.fn.expand('%:h') .. '/'
   else
     return '%%'
   end
@@ -62,10 +60,10 @@ end, { expr = true, desc = "expand to current buffer's directory" })
 keymap.set('n', '<space>tn', vim.cmd.tabnew, { desc = '[t]ab: [n]ew' })
 keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
 
-local severity = diagnostic.severity
+local severity = vim.diagnostic.severity
 
 keymap.set('n', '<space>e', function()
-  local _, winid = diagnostic.open_float(nil, { scope = 'line' })
+  local _, winid = vim.diagnostic.open_float(nil, { scope = 'line' })
   if not winid then
     vim.notify('no diagnostics found', vim.log.levels.INFO)
     return
@@ -94,11 +92,11 @@ keymap.set('n', ']dh', function()
 end, { noremap = true, silent = true, desc = 'next [h]int diagnostic' })
 
 local function buf_toggle_diagnostics()
-  local filter = { bufnr = api.nvim_get_current_buf() }
+  local filter = { bufnr = vim.api.nvim_get_current_buf() }
   diagnostic.enable(not diagnostic.is_enabled(filter), filter)
 end
 
-keymap.set('n', '<space>dt', buf_toggle_diagnostics)
+keymap.set('n', '<space>tl', buf_toggle_diagnostics, {unique = true, desc = 'toggle diagnostics'})
 
 local function toggle_spell_check()
   ---@diagnostic disable-next-line: param-type-mismatch
