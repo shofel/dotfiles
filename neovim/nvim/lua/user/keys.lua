@@ -15,14 +15,15 @@ vim.keymap.set('n', '<space>bh', function() require('mini.bufremove').unshow() e
 vim.keymap.set('n', '<space>bd', function() require('mini.bufremove').delete() end)
 vim.keymap.set('n', '<space>bw', function() require('mini.bufremove').wipeout() end)
 
--- Copy with mouse
-keymap.set('x', '<LeftRelease>', '"*ygv')
+-- Arrows
+vim.keymap.set({'n','x','i', 'o'}, '<A-j>', '<Left>', {noremap = false})
+vim.keymap.set({'n','x','i', 'o'}, '<A-k>', '<Enter>', {noremap = false})
+vim.keymap.set({'n','x','i', 'o'}, '<A-l>', '<Right>', {noremap = false})
+vim.keymap.set({'n','x','i', 'o'}, '<A-i>', '<Up>', {noremap = false})
+vim.keymap.set({'n','x','i', 'o'}, '<A-,>', '<Down>', {noremap = false})
 
--- Buffer list navigation
-keymap.set('n', '[b', vim.cmd.bprevious, { silent = true, desc = 'previous [b]uffer' })
-keymap.set('n', ']b', vim.cmd.bnext, { silent = true, desc = 'next [b]uffer' })
-keymap.set('n', '[B', vim.cmd.bfirst, { silent = true, desc = 'first [B]uffer' })
-keymap.set('n', ']B', vim.cmd.blast, { silent = true, desc = 'last [B]uffer' })
+-- Copy with mouse
+vim.keymap.set('x', '<LeftRelease>', '"*ygv')
 
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
@@ -182,61 +183,38 @@ keymap.set('i', '<C-backspace>', '<c-w>')
 
 --- LSP keymaps
 
-local function preview_location_callback(_, result)
-  if result == nil or vim.tbl_isempty(result) then
-    return nil
-  end
-  local buf, _ = vim.lsp.util.preview_location(result[1], {})
-  if buf then
-    local cur_buf = vim.api.nvim_get_current_buf()
-    vim.bo[buf].filetype = vim.bo[cur_buf].filetype
-  end
-end
-
-local function peek_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-end
-
-local function peek_type_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/typeDefinition', params, preview_location_callback)
-end
-
 function M.set_lsp_keymaps (bufnr, client)
   local function desc(description)
-    return { noremap = true, silent = true, buffer = bufnr, desc = description }
+    return { unique = true, silent = true, buffer = bufnr, desc = description }
   end
   keymap.set('n', 'gD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration'))
   keymap.set('n', 'gd', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition'))
-  keymap.set('n', '<space>gt', vim.lsp.buf.type_definition, desc('lsp [g]o to [t]ype definition'))
-
   keymap.set('n', 'K', vim.lsp.buf.hover, desc('[lsp] hover'))
-  keymap.set('n', '<space>pd', peek_definition, desc('lsp [p]eek [d]efinition'))
-  keymap.set('n', '<space>pt', peek_type_definition, desc('lsp [p]eek [t]ype definition'))
+  keymap.set('n', '<space>gt', vim.lsp.buf.type_definition, desc('lsp [g]o to [t]ype definition'))
   keymap.set('n', '<space>gi', vim.lsp.buf.implementation, desc('lsp [g]o to [i]mplementation'))
   keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, desc('[lsp] signature help'))
+
   keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, desc('lsp add [w]orksp[a]ce folder'))
   keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, desc('lsp [w]orkspace folder [r]emove'))
-  keymap.set('n', '<space>wl', function()
-    vim.print(vim.lsp.buf.list_workspace_folders())
-  end, desc('[lsp] [w]orkspace folders [l]ist'))
-  keymap.set('n', '<space>rn', vim.lsp.buf.rename, desc('lsp [r]e[n]ame'))
-  keymap.set('n', '<space>wq', vim.lsp.buf.workspace_symbol, desc('lsp [w]orkspace symbol [q]'))
+  keymap.set('n', '<space>wl', -- list workspace folders
+    function() vim.print(vim.lsp.buf.list_workspace_folders()) end,
+    desc('[lsp] [w]orkspace folders [l]ist'))
+  keymap.set('n', '<space>ws', vim.lsp.buf.workspace_symbol, desc('lsp [w]orkspace symbol'))
+
   keymap.set('n', '<space>dd', vim.lsp.buf.document_symbol, desc('lsp [dd]ocument symbol'))
-  keymap.set('n', '<M-CR>', vim.lsp.buf.code_action, desc('[lsp] code action'))
-  keymap.set('n', '<M-l>', vim.lsp.codelens.run, desc('[lsp] run code lens'))
-  keymap.set('n', '<space>cr', vim.lsp.codelens.refresh, desc('lsp [c]ode lenses [r]efresh'))
-  keymap.set('n', 'gr', vim.lsp.buf.references, desc('lsp [g]et [r]eferences'))
-  keymap.set('n', '<space>rt', function()
-    vim.lsp.buf.format { async = true }
-  end, desc('[lsp] fo[r]ma[t] buffer'))
-  if client and client.server_capabilities.inlayHintProvider then
-    keymap.set('n', '<space>th', function()
-      local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
-      vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
-    end, desc('[lsp] [t]oggle inlay [h]ints'))
-  end
+  keymap.set('n', '<space>ca', vim.lsp.buf.code_action, desc('[lsp] code action'))
+  keymap.set('n', '<space>lr', vim.lsp.codelens.run, desc('[lsp] run code lens'))
+  keymap.set('n', '<space>ll', vim.lsp.codelens.refresh, desc('lsp [c]ode lenses [r]efresh'))
+
+  keymap.set('n', 'grf', -- lsp buf format
+    function() vim.lsp.buf.format { async = true } end,
+    desc('lsp buf format'))
+
+  keymap.set('n', '<space>th', -- toggle inlay hints
+  function() if client and client.server_capabilities.inlayHintProvider then
+    local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
+    vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
+  end end, desc('toggle inlay hints'))
 end
 
 return M
