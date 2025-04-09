@@ -97,25 +97,6 @@ keymap.set('n', ']l', lright, { silent = true, desc = 'cycle [l]oclist right' })
 keymap.set('n', '[L', vim.cmd.lfirst, { silent = true, desc = 'first [L]oclist entry' })
 keymap.set('n', ']L', vim.cmd.llast, { silent = true, desc = 'last [L]oclist entry' })
 
--- Resize vertical splits
-local toIntegral = math.ceil
-keymap.set('n', '<space>w+', function()
-  local curWinWidth = api.nvim_win_get_width(0)
-  api.nvim_win_set_width(0, toIntegral(curWinWidth * 3 / 2))
-end, { silent = true, desc = 'inc window [w]idth' })
-keymap.set('n', '<space>w-', function()
-  local curWinWidth = api.nvim_win_get_width(0)
-  api.nvim_win_set_width(0, toIntegral(curWinWidth * 2 / 3))
-end, { silent = true, desc = 'dec window [w]idth' })
-keymap.set('n', '<space>h+', function()
-  local curWinHeight = api.nvim_win_get_height(0)
-  api.nvim_win_set_height(0, toIntegral(curWinHeight * 3 / 2))
-end, { silent = true, desc = 'inc window [h]eight' })
-keymap.set('n', '<space>h-', function()
-  local curWinHeight = api.nvim_win_get_height(0)
-  api.nvim_win_set_height(0, toIntegral(curWinHeight * 2 / 3))
-end, { silent = true, desc = 'dec window [h]eight' })
-
 -- Remap Esc to switch to normal mode and Ctrl-Esc to pass Esc to terminal
 keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'switch to normal mode' })
 keymap.set('t', '<C-Esc>', '<Esc>', { desc = 'send Esc to terminal' })
@@ -189,7 +170,6 @@ function M.set_lsp_keymaps (bufnr, client)
   end
   keymap.set('n', 'gD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration'))
   keymap.set('n', 'gd', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition'))
-  keymap.set('n', 'K', vim.lsp.buf.hover, desc('[lsp] hover'))
   keymap.set('n', '<space>gt', vim.lsp.buf.type_definition, desc('lsp [g]o to [t]ype definition'))
   keymap.set('n', '<space>gi', vim.lsp.buf.implementation, desc('lsp [g]o to [i]mplementation'))
   keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, desc('[lsp] signature help'))
