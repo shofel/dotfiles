@@ -68,6 +68,10 @@ vim.o.foldenable = true
 -- Using ufo provider need remap `zR` and `zM`
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+vim.keymap.set('n', '<space>tf', -- toggle foldcolumn
+  function()
+    vim.opt.foldcolumn = tostring(1 - tonumber(vim.opt.foldcolumn:get()))
+  end, {desc = 'toggle foldcolumn'})
 
 require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
