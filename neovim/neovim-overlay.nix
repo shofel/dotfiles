@@ -83,7 +83,7 @@ let
      #
      # Gutter # plugin/gutter.lua
      #
-     statuscol-nvim # https://github.com/luukvbaal/statuscol.nvim 
+     statuscol-nvim # https://github.com/luukvbaal/statuscol.nvim
      gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
      nvim-ufo # https://github.com/kevinhwang91/nvim-ufo
 
@@ -104,12 +104,13 @@ let
      (start which-key-nvim)
 
      leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
- 
+
      (opt neorg) # https://github.com/nvim-neorg/neorg
      neoclip # https://github.com/matveyt/neoclip
      vim-kitty # https://github.com/fladson/vim-kitty
 
      nvim-unception # run nvim from nvim terminal
+     vim-unimpaired
   ];
 
   extraPackages = with final; [
