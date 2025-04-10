@@ -26,8 +26,10 @@ end)()
   vim.keymap.set({'n','x','i', 'o', 't'}, '<A-,>', '<Down>', {noremap = false})
 end)()
 
--- Copy with mouse
+-- Copy
 vim.keymap.set('x', '<LeftRelease>', '"*ygv')
+vim.keymap.set('x', '<space>yp', '"+y', {desc = 'yank to plus'})
+vim.keymap.set('x', '<space>ys', '"*y', {desc = 'yank to plus'})
 
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
