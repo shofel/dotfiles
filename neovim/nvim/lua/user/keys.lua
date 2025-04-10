@@ -9,16 +9,22 @@ local diagnostic = vim.diagnostic
 keymap.set('n', '<C-s>', '<cmd>w<cr>', { silent = true, desc = 'Save buffer'})
 
 -- Remove buffer
-vim.keymap.set('n', '<space>bh', function() require('mini.bufremove').unshow() end)
-vim.keymap.set('n', '<space>bd', function() require('mini.bufremove').delete() end)
-vim.keymap.set('n', '<space>bw', function() require('mini.bufremove').wipeout() end)
+;(function ()
+  local b = require('mini.bufremove')
+  b.setup()
+  vim.keymap.set('n', '<space>bh', function() require('mini.bufremove').unshow() end)
+  vim.keymap.set('n', '<space>bd', function() require('mini.bufremove').delete() end)
+  vim.keymap.set('n', '<space>bw', function() require('mini.bufremove').wipeout() end)
+end)()
 
 -- Arrows
-vim.keymap.set({'n','x','i', 'o'}, '<A-j>', '<Left>', {noremap = false})
-vim.keymap.set({'n','x','i', 'o'}, '<A-k>', '<Enter>', {noremap = false})
-vim.keymap.set({'n','x','i', 'o'}, '<A-l>', '<Right>', {noremap = false})
-vim.keymap.set({'n','x','i', 'o'}, '<A-i>', '<Up>', {noremap = false})
-vim.keymap.set({'n','x','i', 'o'}, '<A-,>', '<Down>', {noremap = false})
+;(function ()
+  vim.keymap.set({'n','x','i', 'o'}, '<A-j>', '<Left>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o'}, '<A-k>', '<Enter>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o'}, '<A-l>', '<Right>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o'}, '<A-i>', '<Up>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o'}, '<A-,>', '<Down>', {noremap = false})
+end)()
 
 -- Copy with mouse
 vim.keymap.set('x', '<LeftRelease>', '"*ygv')
@@ -47,16 +53,6 @@ keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'switch to normal mode' })
 keymap.set('t', '<C-Esc>', '<Esc>', { desc = 'send Esc to terminal' })
 
 keymap.set('n', '<space>cd', ':cd %', {desc = 'cd %'})
-
--- Shortcut for expanding to current buffer's directory in command mode
-keymap.set('c', '%%', function()
-  if vim.fn.getcmdtype() == ':' then
-    return vim.fn.expand('%:h') .. '/'
-  else
-    return '%%'
-  end
-end, { expr = true, desc = "expand to current buffer's directory" })
-
 keymap.set('n', '<space>tn', vim.cmd.tabnew, { desc = '[t]ab: [n]ew' })
 keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
 
