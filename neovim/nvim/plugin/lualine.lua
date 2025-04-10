@@ -1,5 +1,8 @@
 ---Indicators for special modes,
 ---@return string status
+
+vim.opt.showtabline = 0
+
 local function extra_mode_status()
   -- recording macros
   local reg_recording = vim.fn.reg_recording()
@@ -21,7 +24,16 @@ end
 
 require('lualine').setup {
   globalstatus = true,
-  tabline = {
+  tabline = {{}},
+  options = {
+    theme = 'auto',
+    component_separators = { left = ""; right = ""; };
+    section_separators   = { left = ""; right = ""; };
+    always_divide_middle = true;
+    globalstatus = true;
+  },
+  inactive_sections = {},
+  sections = {
     lualine_a = { {"mode", fmt = function (str) return str:sub(1, 1) end}, },
     lualine_b = {"branch", "diff", "diagnostics"},
     lualine_c = {
@@ -34,17 +46,18 @@ require('lualine').setup {
       { extra_mode_status },
     },
   },
-  options = {
-    theme = 'auto',
-    component_separators = { left = ""; right = ""; };
-    section_separators   = { left = ""; right = ""; };
-    always_divide_middle = true;
-    globalstatus = true;
-  },
-  sections = {},
 
   winbar = {},
   extensions = { 'fzf', 'toggleterm', 'quickfix' },
 }
 
-vim.opt.laststatus = 3
+vim.keymap.set('n', '<space>ts', -- toggle statusline
+  (function()
+    vim.opt.laststatus = 3
+    local other = 0
+    local get = function() return vim.opt.laststatus:get() end
+    return function() other, vim.opt.laststatus = get(), other; end
+  end)(),
+  {unique = true, desc = 'toggle statusline'})
+
+vim.keymap.set('n', '<space>tr', ':LualineRenameTab ', {desc = 'rename tab'})
