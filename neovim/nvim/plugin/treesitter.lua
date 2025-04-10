@@ -36,8 +36,8 @@ configs.setup {
         ['ii'] = '@conditional.inner',
         ['al'] = '@loop.outer',
         ['il'] = '@loop.inner',
-        ['aP'] = '@parameter.outer',
-        ['iP'] = '@parameter.inner',
+        ['ap'] = '@parameter.outer',
+        ['ip'] = '@parameter.inner',
       },
       selection_modes = {
         ['@parameter.outer'] = 'v', -- charwise
@@ -59,18 +59,18 @@ configs.setup {
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
         [']m'] = '@function.outer',
-        [']P'] = '@parameter.outer',
+        [']p'] = '@parameter.outer',
       },
       goto_next_end = {
-        [']m'] = '@function.outer',
+        [']M'] = '@function.outer',
         [']P'] = '@parameter.outer',
       },
       goto_previous_start = {
         ['[m'] = '@function.outer',
-        ['[P'] = '@parameter.outer',
+        ['[p'] = '@parameter.outer',
       },
       goto_previous_end = {
-        ['[m'] = '@function.outer',
+        ['[M'] = '@function.outer',
         ['[P'] = '@parameter.outer',
       },
     },
