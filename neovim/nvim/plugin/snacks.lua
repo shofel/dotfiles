@@ -31,3 +31,12 @@ vim.keymap.set('n', '<Plug>(snacks-terminal-toggle)', function () snacks.termina
 vim.keymap.set('n', '<space>ta', '1<Plug>(snacks-terminal-toggle)', {desc = 'toggle terminal 1'})
 vim.keymap.set('n', '<space>to', '2<Plug>(snacks-terminal-toggle)', {desc = 'toggle terminal 2'})
 vim.keymap.set('n', '<space>tv', '<cmd>vsp +term | startinsert<cr>', {desc = 'terminal in a vertial split'})
+
+
+_G.pp = function(...)
+  Snacks.debug.inspect(...)
+end
+_G.trace = function()
+  Snacks.debug.backtrace()
+end
+vim.print = Snacks.debug.inspect
