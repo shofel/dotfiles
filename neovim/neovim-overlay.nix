@@ -71,6 +71,7 @@ let
      lze
 
      (opt guess-indent-nvim) # it's lazy-loaded in `lazy-loading.lua`
+     (opt nvim-autopairs)
 
      treesitter
      nvim-treesitter-context
