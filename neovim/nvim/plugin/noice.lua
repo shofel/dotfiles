@@ -26,3 +26,5 @@ require('lze').load({
 })
 
 vim.opt.cmdheight = 0
+
+vim.cmd.cabbrev('n Noice')
