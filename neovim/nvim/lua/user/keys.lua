@@ -58,49 +58,6 @@ keymap.set('n', '<space>cd', ':cd %', {desc = 'cd %'})
 keymap.set('n', '<space>tn', vim.cmd.tabnew, { desc = '[t]ab: [n]ew' })
 keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
 
-
-;(function () -- keys to jump between diagnostics
-
-  local ERROR, WARN, HINT = vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN, vim.diagnostic.severity.HINT
-
-  -- @param severity vim.diagnostic.severity
-  -- @param count number
-  local function jump (severity, count)
-    local o = {count = count}
-    if severity ~= nil then o.severity = severity end
-    return function() vim.diagnostic.jump(o) end
-  end
-
-  local function opts (desc)
-    return { noremap = true, silent = true, desc = desc}
-  end
-
-
-  keymap.set('n', '<space>e', function() -- open float with diagnostic
-    local _, winid = vim.diagnostic.open_float(nil, { scope = 'line' })
-    if not winid then
-      vim.notify('no diagnostics found', vim.log.levels.INFO)
-      return
-    end
-    vim.api.nvim_win_set_config(winid or 0, { focusable = true })
-  end, { noremap = true, silent = true, desc = 'diagnostics floating window' })
-  keymap.set('n', '[dd', jump(nil, -1), opts('previous [d]iagnostic'))
-  keymap.set('n', ']dd', jump(nil, 1), opts('next [d]iagnostic'))
-  keymap.set('n', '[de', jump (ERROR, -1), opts('previous [e]rror diagnostic'))
-  keymap.set('n', ']de', jump (ERROR, 1), opts('next [e]rror diagnostic'))
-  keymap.set('n', '[dw', jump (WARN, -1), opts('previous [w]arning diagnostic'))
-  keymap.set('n', ']dw', jump (WARN, 1), opts('next [w]arning diagnostic'))
-  keymap.set('n', '[dh', jump (HINT, -1), opts('previous [h]int diagnostic'))
-  keymap.set('n', ']dh', jump (HINT, 1), opts( 'next [h]int diagnostic'))
-
-  local function buf_toggle_diagnostics()
-    local filter = { bufnr = vim.api.nvim_get_current_buf() }
-    diagnostic.enable(not diagnostic.is_enabled(filter), filter)
-  end
-
-  keymap.set('n', '<space>tl', buf_toggle_diagnostics, {unique = true, desc = 'toggle diagnostics'})
-end)()
-
 --- Keymap-agnostic mappings in insert mode
 --- To make cyrillic a bit easier
 keymap.set('i', '<C-backspace>', '<c-w>')
