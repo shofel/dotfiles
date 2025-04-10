@@ -1,41 +1,36 @@
 vim.loader.enable()
 
-local cmd = vim.cmd
-local opt = vim.o
-
 -- I suspect they are broken
 vim.g.mapleader = '<Space>'
 vim.g.localleader = ','
 
--- See :h <option> to see what the options do
-
 -- Search down into subfolders
-opt.path = vim.o.path .. '**'
+vim.opt.path = vim.o.path .. '**'
 
-opt.number = false
-opt.relativenumber = false
-opt.cursorline = true
-opt.showmatch = true -- Highlight matching parentheses, etc
-opt.incsearch = true
-opt.hlsearch = true
+vim.opt.number = false
+vim.opt.relativenumber = false
+vim.opt.cursorline = true
+vim.opt.showmatch = true -- Highlight matching parentheses, etc
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
 
-opt.spell = false
-opt.spelllang = 'en'
+vim.opt.spelllang = 'en'
 
-opt.expandtab = true
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
-opt.history = 2000
-opt.nrformats = 'bin,hex' -- 'octal'
-opt.undofile = true
-opt.splitright = true
-opt.splitbelow = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 
-opt.cmdheight = 0
-opt.laststatus = 0
+vim.opt.history = 2000
+vim.opt.nrformats = 'bin,hex' -- 'octal'
+vim.opt.undofile = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
-opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.colorcolumn = '100'
+
+
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Configure Neovim diagnostic messages
 
@@ -84,11 +79,6 @@ vim.diagnostic.config {
     prefix = '',
   },
 }
-
-vim.opt.colorcolumn = '100'
-
--- Native plugins
-cmd.packadd('cfilter') -- Allows filtering the quickfix list with :cfdo
 
 -- let sqlite.lua (which some plugins depend on) know where to find sqlite
 vim.g.sqlite_clib_path = require('luv').os_getenv('LIBSQLITE')

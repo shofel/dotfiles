@@ -24,3 +24,5 @@ require('lze').load({
   keys = {':', '/', '?'},
   after = f,
 })
+
+vim.opt.cmdheight = 0
