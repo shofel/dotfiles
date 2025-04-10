@@ -1,8 +1,6 @@
 ---Indicators for special modes,
 ---@return string status
 
-vim.opt.showtabline = 0
-
 local function extra_mode_status()
   -- recording macros
   local reg_recording = vim.fn.reg_recording()
@@ -24,7 +22,7 @@ end
 
 require('lualine').setup {
   globalstatus = true,
-  tabline = {{}},
+  tabline = nil,
   options = {
     theme = 'auto',
     component_separators = { left = ""; right = ""; };
