@@ -22,6 +22,7 @@ end
 require('lze').load({
   "noice.nvim",
   keys = {':', '/', '?'},
+  event = {'CmdlineEnter'},
   after = f,
 })
 
