@@ -5,8 +5,8 @@ M = {}
 _G.keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
--- Save file
-keymap.set('n', '<C-s>', '<cmd>w<cr>', { silent = true, desc = 'Save buffer'})
+keymap.set('n', '<c-s>', '<cmd>w<cr>', { silent = true, desc = 'Save buffer'})
+keymap.set('n', '<space>;', ':')
 
 -- Remove buffer
 ;(function ()
