@@ -19,11 +19,11 @@ end)()
 
 -- Arrows
 ;(function ()
-  vim.keymap.set({'n','x','i', 'o'}, '<A-j>', '<Left>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o'}, '<A-k>', '<Enter>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o'}, '<A-l>', '<Right>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o'}, '<A-i>', '<Up>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o'}, '<A-,>', '<Down>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-j>', '<Left>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-k>', '<Enter>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-l>', '<Right>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-i>', '<Up>', {noremap = false})
+  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-,>', '<Down>', {noremap = false})
 end)()
 
 -- Copy with mouse
