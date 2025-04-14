@@ -131,7 +131,7 @@ let
   #   2. run `./scripts/bootstrapMutableConfig.sh`
   outOfStoreConfig = import ./configLink.nix;
 in {
-  # This package uses config files directly from `configPath`
+  # This package uses config files directly from `./nvim`
   # Restart nvim to apply changes in config
   nvim-shovel-mutable = mkNeovim {
     inherit plugins extraPackages;
@@ -154,5 +154,20 @@ in {
     inherit plugins extraPackages;
     inherit outOfStoreConfig;
     appName = "neorg";
+  };
+
+  nvim-shovel-pager = mkNeovim {
+    plugins = with vimPlugins; [catppuccin-nvim leap-nvim fzf-lua];
+    extraPackages = [];
+    appName = "nvim-pager";
+    immutableConfig = builtins.toPath (final.writeTextDir "init.vim" /* vim */''
+      colorscheme catppuccin
+      set laststatus=0
+      set cmdheight=0
+
+      noremap <space>/ <cmd>FzfLua blines<cr>
+
+      lua vim.schedule(function() vim.cmd[[Man!]] end)
+    '').outPath;
   };
 }

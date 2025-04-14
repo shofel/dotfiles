@@ -68,7 +68,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   programs.fish.enable = true;
-  environment.variables.EDITOR = "${pkgs.nvim-shovel-sealed}/bin/nvim";
+  environment.variables = {
+    EDITOR = "${pkgs.nvim-shovel-sealed}/bin/nvim";
+    MANPAGER = "${pkgs.nvim-shovel-pager}/bin/nvim-pager";
+  };
 
   users.users = {
     slava = {

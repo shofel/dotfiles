@@ -46,8 +46,10 @@ with lib;
          && !(!(isNull immutableConfig) && !(isNull outOfStoreConfig))
   || throw "Either configPath or outOfStoreConfig must be passed. Exactly one of them";
 
-  assert (isNull immutableConfig || isPath immutableConfig)
-  || throw "configPath must be a path. Or not passed at all";
+  assert (isNull immutableConfig
+          || isPath immutableConfig
+          || builtins.substring 0 1 immutableConfig == "/")
+  || throw "immutableConfig must be a path. Or not passed at all";
 
   assert (isNull outOfStoreConfig || isString outOfStoreConfig)
   || throw "outOfStoreConfig must be a string. Or not passed at all";
@@ -57,7 +59,7 @@ let
 
     # Choose the way user config included in the generated config
     nvimConfig =
-      if isPath immutableConfig
+      if !isNull(immutableConfig)
       then immutableConfig
       else runCommandLocal "kickstart-config-symlink" {}
                            ''ln -s ${lib.escapeShellArg outOfStoreConfig} $out'';
@@ -110,7 +112,7 @@ let
           vim.opt.rtp:append("${nvimConfig}/after")
         end
         appendConfig()
-        dofile("${nvimConfig}/init.lua")
+        vim.cmd [[runtime init.lua init.vim]]
       '';
 
     # Add arguments to the Neovim wrapper script
