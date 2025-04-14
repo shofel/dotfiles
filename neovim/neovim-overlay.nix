@@ -121,6 +121,7 @@ let
     gopls # go
     basedpyright # python
     fish-lsp
+    bash-language-server
   ];
 
   # A string with an absolute path to a directory with configs,

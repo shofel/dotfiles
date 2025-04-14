@@ -1,5 +1,6 @@
 vim.lsp.enable({
   'luals',
   'nil_ls',
-  'fish-lsp'
+  'fish-lsp',
+  'bash-lsp',
 })
