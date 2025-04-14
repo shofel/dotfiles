@@ -123,26 +123,23 @@ let
     fish-lsp
   ];
 
-  immutableConfig = ./nvim;
-
-  # A string with an absolute path to config directory, to bypass the nix store.
-  # To bootstrap the symlink:
-  #   1. edit `./configLink.nix`
-  #   2. run `./scripts/bootstrapMutableConfig.sh`
-  outOfStoreConfig = import ./configLink.nix;
+  # A string with an absolute path to a directory with configs,
+  # to bypass the nix store.
+  # To bootstrap the symlink, run `./scripts/bootstrapMutableConfigs.sh`
+  mutableConfigs = import ./configLink.nix;
 in {
   # This package uses config files directly from `./nvim`
   # Restart nvim to apply changes in config
   nvim-shovel-mutable = mkNeovim {
     inherit plugins extraPackages;
-    inherit outOfStoreConfig;
+    outOfStoreConfig = "${mutableConfigs}/nvim";
   };
 
   # This package uses the config files saved in nix store
   # Rebuild to apply changes in config: e.g. `nix run .#nvim-sealed`
   nvim-shovel-sealed = mkNeovim {
     inherit plugins extraPackages;
-    inherit immutableConfig;
+    immutableConfig = ./configs/nvim;
     appName = "nvim-sealed";
     aliases = ["vi" "vim"];
   };
@@ -152,7 +149,7 @@ in {
   # @see `plugin/neorg.lua`: the file is executed only when NVIM_APPNAME==neorg
   nvim-shovel-neorg = mkNeovim {
     inherit plugins extraPackages;
-    inherit outOfStoreConfig;
+    outOfStoreConfig = "${mutableConfigs}/nvim";
     appName = "neorg";
   };
 
@@ -160,14 +157,6 @@ in {
     plugins = with vimPlugins; [catppuccin-nvim leap-nvim fzf-lua];
     extraPackages = [];
     appName = "nvim-pager";
-    immutableConfig = builtins.toPath (final.writeTextDir "init.vim" /* vim */''
-      colorscheme catppuccin
-      set laststatus=0
-      set cmdheight=0
-
-      noremap <space>/ <cmd>FzfLua blines<cr>
-
-      lua vim.schedule(function() vim.cmd[[Man!]] end)
-    '').outPath;
+    outOfStoreConfig = "${mutableConfigs}/nvim-pager";
   };
 }

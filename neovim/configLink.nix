@@ -1,1 +1,1 @@
-"/home/slava/.local/state/yjz6v-nvim-config"
+"/home/slava/.local/state/yjz6v-nvim-configs"

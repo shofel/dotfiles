@@ -32,8 +32,7 @@ Changes in nvim config are both instant and tracked by git.
 ## Install and start
 1. Bootstrap the repository from the template
 To bootstrap the symlink:
-1. edit `./configLink.nix`
-2. run `./scripts/bootstrapMutableConfig.sh`
+2. run `./scripts/bootstrapMutableConfigs.sh`
 
 ## Anatomy
 
