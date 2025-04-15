@@ -59,3 +59,5 @@ vim.keymap.set('n', '<space>ts', -- toggle statusline
   {unique = true, desc = 'toggle statusline'})
 
 vim.keymap.set('n', '<space>tr', ':LualineRenameTab ', {desc = 'rename tab'})
+
+vim.opt.showtabline = 0
