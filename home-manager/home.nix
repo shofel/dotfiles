@@ -172,6 +172,10 @@
     shellAbbrs = {
       dc = "docker-compose";
       lg = "lazygit";
+      nr = {
+        expansion = "nix run nixpkgs#%";
+        setCursor = true;
+      };
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
       gb = /* bash */ ''
