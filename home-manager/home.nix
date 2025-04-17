@@ -54,6 +54,10 @@
 
   fonts.fontconfig.enable = true;
 
+  # Better unicode input
+  i18n.inputMethod.enabled = "fcitx5";
+  catppuccin.fcitx5.enable = true;
+
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
