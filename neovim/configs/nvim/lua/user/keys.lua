@@ -18,13 +18,38 @@ keymap.set('n', '<space>;', ':')
 end)()
 
 -- Arrows
-;(function ()
-  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-j>', '<Left>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-k>', '<Enter>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-l>', '<Right>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-i>', '<Up>', {noremap = false})
-  vim.keymap.set({'n','x','i', 'o', 't'}, '<A-,>', '<Down>', {noremap = false})
+local alt_arrows = (function()
+  local modes = {'n','x','i', 'o', 't'}
+
+  local function enable()
+    vim.keymap.set(modes, '<A-j>', '<Left>', {noremap = false})
+    vim.keymap.set(modes, '<A-k>', '<Enter>', {noremap = false})
+    vim.keymap.set(modes, '<A-l>', '<Right>', {noremap = false})
+    vim.keymap.set(modes, '<A-i>', '<Up>', {noremap = false})
+    vim.keymap.set(modes, '<A-,>', '<Down>', {noremap = false})
+  end
+
+  local function disable()
+    vim.keymap.del(modes, '<Left>')
+    vim.keymap.del(modes, '<Enter>')
+    vim.keymap.del(modes, '<Right>')
+    vim.keymap.del(modes, '<Up>')
+    vim.keymap.del(modes, '<Down>')
+  end
+
+  -- default is enabled
+  local apply_state_this, apply_state_other = enable, disable
+  apply_state_this()
+
+  local function toggle()
+    apply_state_other()
+    apply_state_this, apply_state_other = apply_state_other, apply_state_this
+  end
+
+  return {toggle = toggle}
 end)()
+
+vim.keymap.set('n', '<space>ta', alt_arrows.toggle)
 
 -- Copy
 vim.keymap.set('x', '<LeftRelease>', '"*ygv')
