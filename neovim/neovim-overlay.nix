@@ -94,6 +94,7 @@ let
 
      (opt nvim-luadev) # nvim lua repl  https://github.com/bfredl/nvim-luadev
      (start lazydev-nvim)
+     (start nvim-lspconfig)
 
      (opt fzf-lua) # https://github.com/ibhagwan/fzf-lua
      (opt noice-nvim)
@@ -122,6 +123,7 @@ let
     basedpyright # python
     fish-lsp
     bash-language-server
+    clang-tools
   ];
 
   # A string with an absolute path to a directory with configs,
