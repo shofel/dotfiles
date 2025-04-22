@@ -5,7 +5,7 @@ M = {}
 _G.keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
-keymap.set('n', '<c-s>', '<cmd>w<cr>', { silent = true, desc = 'Save buffer'})
+keymap.set('n', '<c-s>', '<cmd>w!<cr>', { silent = true, desc = 'Save buffer'})
 keymap.set('n', '<space>;', ':')
 
 -- Remove buffer
@@ -20,7 +20,7 @@ end)()
 -- Copy
 vim.keymap.set('x', '<LeftRelease>', '"*ygv')
 vim.keymap.set('x', '<space>yp', '"+y', {desc = 'yank to plus'})
-vim.keymap.set('x', '<space>ys', '"*y', {desc = 'yank to plus'})
+vim.keymap.set('x', '<space>ys', '"*y', {desc = 'yank to star'})
 
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
