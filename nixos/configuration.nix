@@ -73,6 +73,8 @@
     MANPAGER = "${pkgs.nvim-shovel-pager}/bin/nvim-pager";
   };
 
+  hardware.keyboard.qmk.enable = true;
+
   users.users = {
     slava = {
       isNormalUser = true;
