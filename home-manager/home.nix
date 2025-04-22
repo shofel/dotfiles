@@ -56,7 +56,9 @@
 
   # Better unicode input
   i18n.inputMethod.enabled = "fcitx5";
-  catppuccin.fcitx5.enable = true;
+
+  catppuccin.enable = true;
+  catppuccin.fish.enable = false;
 
   programs.fzf = {
     enable = true;
@@ -70,7 +72,6 @@
       style = "numbers";
     };
   };
-  catppuccin.bat.enable = true;
 
   programs.git = {
     enable = true;
@@ -96,10 +97,8 @@
 
     ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
   };
-  catppuccin.delta.enable = true;
 
   programs.lazygit.enable = true;
-  catppuccin.lazygit.enable = true;
 
   programs.ssh = {
     enable = true;
@@ -126,8 +125,6 @@
      + builtins.readFile ./kitty/kitty.conf
      + "startup_session ./startup_session";
   };
-
-  catppuccin.kitty.enable = true;
 
   # fish -lc is to setup env
   xdg.configFile."kitty/startup_session".text = /* sh */ ''
