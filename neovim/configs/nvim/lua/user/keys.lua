@@ -6,7 +6,8 @@ _G.keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
 keymap.set('n', '<c-s>', '<cmd>w!<cr>', { silent = true, desc = 'Save buffer'})
-keymap.set('n', '<space>;', ':')
+keymap.set('n', '<space>;', ':') -- qwerty
+keymap.set('n', '<Home>', '^') -- cantor
 
 -- Remove buffer
 ;(function ()
