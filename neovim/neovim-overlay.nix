@@ -113,6 +113,9 @@ let
 
      nvim-unception # run nvim from nvim terminal
      vim-unimpaired
+
+     # languages
+     (opt typescript-tools-nvim)
   ];
 
   extraPackages = with final; [
