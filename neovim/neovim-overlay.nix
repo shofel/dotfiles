@@ -116,6 +116,9 @@ let
 
      # languages
      (opt typescript-tools-nvim)
+
+     # lsp utils
+     lsp_lines-nvim
   ];
 
   extraPackages = with final; [
