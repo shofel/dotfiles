@@ -54,6 +54,9 @@ with lib;
   assert (isNull outOfStoreConfig || isString outOfStoreConfig)
   || throw "outOfStoreConfig must be a string. Or not passed at all";
 
+  assert (isNull outOfStoreConfig || builtins.pathExists outOfStoreConfig)
+  || throw "outOfStoreConfig must be an existing path";
+
 let
     externalPackages = extraPackages ++ (optionals withSqlite [sqlite]);
 

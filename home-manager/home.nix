@@ -53,6 +53,7 @@
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
     pkgs.nvim-shovel-neorg
+    pkgs.nvim-shovel-pager
   ];
 
   fonts.fontconfig.enable = true;
