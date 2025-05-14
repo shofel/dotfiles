@@ -13,9 +13,10 @@ keymap.set('n', '<Home>', '^') -- cantor
 ;(function ()
   local b = require('mini.bufremove')
   b.setup()
-  vim.keymap.set('n', '<space>bh', function() require('mini.bufremove').unshow() end)
-  vim.keymap.set('n', '<space>bd', function() require('mini.bufremove').delete() end)
-  vim.keymap.set('n', '<space>bw', function() require('mini.bufremove').wipeout() end)
+  vim.keymap.set('n', '<space>b',  '<nop>', {desc = 'bufremove'})
+  vim.keymap.set('n', '<space>bh', function() require('mini.bufremove').unshow() end, {desc = 'unshow buffer'})
+  vim.keymap.set('n', '<space>bd', function() require('mini.bufremove').delete() end, {desc = 'delete buffer'})
+  vim.keymap.set('n', '<space>bw', function() require('mini.bufremove').wipeout() end, {desc = 'wipeout buffer'})
 end)()
 
 -- Copy
