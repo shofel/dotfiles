@@ -46,6 +46,9 @@
     pkgs.nerd-fonts.droid-sans-mono
 
     pkgs.firefox
+    pkgs.mixxx
+    pkgs.blender
+    pkgs.transmission_4-gtk
 
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
@@ -53,9 +56,6 @@
   ];
 
   fonts.fontconfig.enable = true;
-
-  # Better unicode input
-  i18n.inputMethod.enabled = "fcitx5";
 
   catppuccin.enable = true;
   catppuccin.fish.enable = false;
