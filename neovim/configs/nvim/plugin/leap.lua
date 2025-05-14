@@ -14,7 +14,7 @@ leap.opts.safe_labels = leap.opts.labels
 
 vim.keymap.set({'n', 'x', 'o'}, 'l',  '<Plug>(leap-forward)')
 vim.keymap.set({'n', 'x', 'o'}, 'h',  '<Plug>(leap-backward)')
-vim.keymap.set({'n', 'x', 'o'}, 'j', '<Plug>(leap-from-window)')
+vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-from-window)')
 
 vim.keymap.set({'n', 'x', 'o'}, 'f', '<Nop>')
 vim.keymap.set({'n', 'x', 'o'}, 'F', '<Nop>')
@@ -22,12 +22,22 @@ vim.keymap.set({'n', 'x', 'o'}, 't', '<Nop>')
 vim.keymap.set({'n', 'x', 'o'}, 'T', '<Nop>')
 vim.keymap.set({'n', 'x', 'o'}, ',', '<Nop>')
 vim.keymap.set({'n', 'x', 'o'}, ';', '<Nop>')
-vim.keymap.set({'n', 'x', 'o'}, 'k', '<Nop>')
 
--- disable ft motions
-vim.keymap.set({'n', 'x', ''}, 'f', '<Nop>')
-vim.keymap.set({'n', 'x', ''}, 'F', '<Nop>')
-vim.keymap.set({'n', 'x', ''}, 't', '<Nop>')
-vim.keymap.set({'n', 'x', ''}, 'T', '<Nop>')
-vim.keymap.set({'n', 'x', ''}, ',', '<Nop>')
-vim.keymap.set({'n', 'x', ''}, ';', '<Nop>')
+_G.Slava.leap_active = false
+_G.Slava.leap_augroup = vim.api.nvim_create_augroup('leap', {clear = true})
+
+-- Indicate in statusline when leap is active
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LeapEnter',
+  group = _G.Slava.leap_augroup,
+  callback = function()
+    _G.Slava.leap_active = true
+  end
+})
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LeapLeave',
+  group = _G.Slava.leap_augroup,
+  callback = function()
+    _G.Slava.leap_active = false
+  end
+})

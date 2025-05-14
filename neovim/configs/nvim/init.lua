@@ -1,5 +1,8 @@
 vim.loader.enable()
 
+-- Namespace for personal tweaks
+_G.Slava = {}
+
 -- I suspect they are broken
 vim.g.mapleader = '<Space>'
 vim.g.localleader = ','
