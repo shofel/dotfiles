@@ -47,7 +47,7 @@
       in {
         nvim-sealed = x.nvim-shovel-sealed;
         nvim-mutable = x.nvim-shovel-mutable;
-        nvim-pager = x.nvim-shovel-pager;
+        nvim-manpager = x.nvim-shovel-manpager;
       });
 
     # To apply a nixos configuration: 'nixos-rebuild --flake .#your-hostname'

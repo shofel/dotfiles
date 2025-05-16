@@ -132,16 +132,12 @@ let
     clang-tools
   ];
 
-  # A string with an absolute path to a directory with configs,
-  # to bypass the nix store.
-  # To bootstrap the symlink, run `./scripts/bootstrapMutableConfigs.sh`
-  mutableConfigs = import ./configLink.nix;
 in {
   # This package uses config files directly from `./nvim`
   # Restart nvim to apply changes in config
   nvim-shovel-mutable = mkNeovim {
     inherit plugins extraPackages;
-    outOfStoreConfig = "${mutableConfigs}/nvim";
+    mutableConfig = "nvim";
   };
 
   # This package uses the config files saved in nix store
@@ -158,14 +154,14 @@ in {
   # @see `plugin/neorg.lua`: the file is executed only when NVIM_APPNAME==neorg
   nvim-shovel-neorg = mkNeovim {
     inherit plugins extraPackages;
-    outOfStoreConfig = "${mutableConfigs}/nvim";
+    mutableConfig = "nvim";
     appName = "neorg";
   };
 
-  nvim-shovel-pager = mkNeovim {
-    plugins = with vimPlugins; [catppuccin-nvim leap-nvim fzf-lua];
+  nvim-shovel-manpager = mkNeovim {
+    plugins = with vimPlugins; [catppuccin-nvim fzf-lua snacks-nvim];
     extraPackages = [];
-    appName = "nvim-pager";
-    outOfStoreConfig = "${mutableConfigs}/nvim-pager";
+    appName = "nvim-manpager";
+    mutableConfig = "manpager";
   };
 }

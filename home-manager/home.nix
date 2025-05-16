@@ -53,7 +53,7 @@
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
     pkgs.nvim-shovel-neorg
-    pkgs.nvim-shovel-pager
+    pkgs.nvim-shovel-manpager
   ];
 
   fonts.fontconfig.enable = true;
@@ -167,7 +167,9 @@
     plugins = [ ];
 
     interactiveShellInit = ''
-      set -gx XCURSOR_THEME Adwaita
+      set -gx EDITOR "${pkgs.nvim-shovel-mutable}/bin/nvim";
+      set -gx VISUAL "${pkgs.nvim-shovel-mutable}/bin/nvim";
+      set -gx MANPAGER "${pkgs.nvim-shovel-manpager}/bin/nvim-manpager";
     '';
     loginShellInit = '''';
 

@@ -18,7 +18,7 @@ with lib;
     immutableConfig ? null,
     # When true, then nvim reads the config from ~/.config/nvim
     # When false, then nvim reads the config from the nix store
-    outOfStoreConfig ? null,
+    mutableConfig ? null,
 
     # Extra args, which are not defined in `wrapNeovimUnstable`
     #
@@ -42,30 +42,38 @@ with lib;
     autoconfigure ? false, # Include `plugin.passthru.initLua` to the config?
   }:
 
-  assert (isNull immutableConfig || isNull outOfStoreConfig)
-         && !(!(isNull immutableConfig) && !(isNull outOfStoreConfig))
-  || throw "Either configPath or outOfStoreConfig must be passed. Exactly one of them";
+
+  # A string with an absolute path to a directory with configs,
+  # to bypass the nix store.
+  # 0. check if the module contains a symlink
+  assert ((builtins.match ''".+"''
+                          (lib.strings.trim (builtins.readFile ./configsLink.nix)))
+          != null)
+  || throw "${(builtins.readFile ./configsLink.nix)}To bootstrap the symlink, run `./scripts/bootstrapMutableConfigs.sh`";
+
+  assert (isNull immutableConfig || isNull mutableConfig)
+         && !(!(isNull immutableConfig) && !(isNull mutableConfig))
+  || throw "Either configPath or mutableConfig must be passed. Exactly one of them";
 
   assert (isNull immutableConfig
           || isPath immutableConfig
           || builtins.substring 0 1 immutableConfig == "/")
   || throw "immutableConfig must be a path. Or not passed at all";
 
-  assert (isNull outOfStoreConfig || isString outOfStoreConfig)
-  || throw "outOfStoreConfig must be a string. Or not passed at all";
-
-  assert (isNull outOfStoreConfig || builtins.pathExists outOfStoreConfig)
-  || throw "outOfStoreConfig must be an existing path";
+  assert (isNull mutableConfig || isString mutableConfig)
+  || throw "mutableConfig must be a string. Or not passed at all";
 
 let
     externalPackages = extraPackages ++ (optionals withSqlite [sqlite]);
+
+    mutableConfigs = import ./configsLink.nix;
 
     # Choose the way user config included in the generated config
     nvimConfig =
       if !isNull(immutableConfig)
       then immutableConfig
       else runCommandLocal "kickstart-config-symlink" {}
-                           ''ln -s ${lib.escapeShellArg outOfStoreConfig} $out'';
+                           ''ln -s ${lib.escapeShellArg (mutableConfigs + "/" + mutableConfig)} $out'';
 
     initLua = ""
       # run `PROF=1 nvim` to profile startup time
@@ -111,8 +119,22 @@ let
       # Make it work as if `./nvim/` would be at `~/.config/nvim/`.
       + /* lua */ '';
         function appendConfig()
-          vim.opt.rtp:prepend("${nvimConfig}")
-          vim.opt.rtp:append("${nvimConfig}/after")
+          -- Prepare a useful error message
+          local linkdest = vim.uv.fs_readlink("${nvimConfig}")
+          if vim.fn.isdirectory(linkdest) == 0 then
+            local dirname = vim.fs.dirname(linkdest)
+            local err
+            if vim.uv.fs_readlink(dirname) == 0 then
+              err = string.format([["looks like you need to run ./scripts/bootstrapMutableConfigs.sh, since %s doesn't exist"]], dirname)
+            else
+              err = string.format([["%s doesn't exist"]], linkdest)
+            end
+            vim.cmd.echoerr(err)
+          end
+          -- Resolve a proxy from nix store
+          local realpath = vim.uv.fs_realpath(linkdest)
+          vim.opt.rtp:prepend(realpath)
+          vim.opt.rtp:append(vim.fs.joinpath(realpath, 'after'))
         end
         appendConfig()
         vim.cmd [[runtime init.lua init.vim]]
