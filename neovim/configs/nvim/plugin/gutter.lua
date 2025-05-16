@@ -25,7 +25,7 @@ vim.schedule(function()
       local blame_line = function() gs.blame_line { full = true } end
       map({'n'     }, '<space>h' , '<nop>'                        , {desc = 'git'})
       map({'n', 'v'}, '<space>ha', stage_hunk                     , {desc = 'git hunk add'})
-      map({'n', 'v'}, '<space>hd', reset_hunk                     , {desc = 'git hunk discard'})
+      map({'n', 'v'}, '<space>hr', reset_hunk                     , {desc = 'git hunk discard'})
       map({'n',    }, '<space>hA', gs.stage_buffer                , {desc = 'git stage buffer'})
       map({'n',    }, '<space>hu', gs.undo_stage_hunk             , {desc = 'git hunk undo stage'})
       map({'n',    }, '<space>hR', gs.reset_buffer                , {desc = 'git buffer Reset'})
