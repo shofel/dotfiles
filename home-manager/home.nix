@@ -172,6 +172,7 @@
       set -gx VISUAL "${pkgs.nvim-shovel-mutable}/bin/nvim"
       set -gx MANPAGER "${pkgs.nvim-shovel-manpager}/bin/nvim-manpager"
 
+      set -U fish_color_command blue
     '';
 
     shellAbbrs = {
