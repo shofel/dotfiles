@@ -44,7 +44,8 @@ let
         lua luadoc luap luau
         markdown markdown_inline
         nix
-        norg
+        tree-sitter-norg
+        tree-sitter-norg-meta
         python
         typescript
        ]));
