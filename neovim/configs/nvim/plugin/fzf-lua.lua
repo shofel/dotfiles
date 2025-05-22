@@ -28,6 +28,8 @@ vim.keymap.set('n', '<space>fr', fzf.git_branches,     {desc = 'git branches'})
 vim.keymap.set('n', '<space>fs', fzf.git_status,       {desc = 'git status'})
 vim.keymap.set('n', '<space>ft', fzf.tabs,             {desc = 'tabs'})
 vim.keymap.set('n', '<space>fu', fzf.buffers,          {desc = 'buffers'})
+vim.keymap.set('n', '<space>fw', fzf.grep_cword,       {desc = 'cword'})
+vim.keymap.set('n', '<space>fW', fzf.grep_cWORD,       {desc = 'cWORD'})
 
 vim.keymap.set('n', '<space>/', fzf.blines,      {desc = 'blines'})
 vim.keymap.set('v', '<space>f', fzf.grep_visual, {desc = 'grep visual'})
