@@ -68,12 +68,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   programs.fish.enable = true;
-  # These could be overriden for easier updates in home.nix.
-  # Here are kinda safe fallbacks
   environment.variables = {
-    XCURSOR_THEME = "Adwaita";
-    EDITOR = "${pkgs.nvim-shovel-sealed}/bin/nvim";
-    MANPAGER = "${pkgs.nvim-shovel-manpager}/bin/nvim-manpager";
   };
 
   hardware.keyboard.qmk.enable = true;

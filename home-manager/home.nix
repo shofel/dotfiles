@@ -12,7 +12,7 @@
 
   nixpkgs = {
     overlays = [
-      (import ../neovim/neovim-overlay.nix {inherit inputs;}) 
+      (import ../neovim/neovim-overlay.nix {inherit inputs;})
     ];
     config = {
       allowUnfree = true;
@@ -123,32 +123,30 @@
   programs.kitty = {
     enable = true;
     extraConfig = ""
-     + builtins.readFile ./kitty/kitty.conf
-     + "startup_session ./startup_session";
+      + builtins.readFile ./kitty/kitty.conf
+      + "startup_session ${pkgs.writeText "kitty_startup_session" /* sh */ ''
+          new_tab dotfiles
+          cd ~/workspaces-one/25-dotfiles/25.01-dotfiles/
+          launch fish -lc nvim
+
+          new_tab notes
+          cd ~/workspaces-one/01-notes
+          launch fish -lc neorg
+
+          new_tab cantor
+          cd ~/workspaces-one/keyboards/
+          launch fish -lc nvim
+
+          new_tab go
+          cd ~/workspaces-one/34-courses/34.01-practicum-go/
+          launch fish -lc nvim
+
+         new_tab forks
+          cd ~/workspaces-one/forks/
+          launch fish -lc nvim
+        ''
+      }";
   };
-
-  # fish -lc is to setup env
-  xdg.configFile."kitty/startup_session".text = /* sh */ ''
-    new_tab dotfiles
-    cd ~/workspaces-one/25-dotfiles/25.01-dotfiles/
-    launch fish -lc nvim
-
-    new_tab notes
-    cd ~/workspaces-one/01-notes
-    launch fish -lc neorg
-
-    new_tab cantor
-    cd ~/workspaces-one/keyboards/
-    launch fish -lc nvim
-
-    new_tab go
-    cd ~/workspaces-one/34-courses/34.01-practicum-go/
-    launch fish -lc nvim
-
-    new_tab forks
-    cd ~/workspaces-one/forks/
-    launch fish -lc nvim
-  '';
 
   xdg.configFile."kitty/empty_session".text = /* bash */ ''
     new_tab tab
@@ -166,12 +164,19 @@
 
     plugins = [ ];
 
-    interactiveShellInit = ''
-      set -gx EDITOR "${pkgs.nvim-shovel-mutable}/bin/nvim";
-      set -gx VISUAL "${pkgs.nvim-shovel-mutable}/bin/nvim";
-      set -gx MANPAGER "${pkgs.nvim-shovel-manpager}/bin/nvim-manpager";
+    interactiveShellInit = /* sh */ ''
+      set -gx XCURSOR_THEME "Adwaita"
+      set -gx EDITOR "${pkgs.nvim-shovel-mutable}/bin/nvim"
+      set -gx VISUAL "${pkgs.nvim-shovel-mutable}/bin/nvim"
+      set -gx MANPAGER "${pkgs.nvim-shovel-manpager}/bin/nvim-manpager"
+      set -gx SSH_ASKPASS "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass"
     '';
-    loginShellInit = '''';
+
+    loginShellInit = /* sh */ ''
+      ssh-agent -c \
+      | sed -e 's/setenv/set --global --export/' \
+      | source
+    '';
 
     shellAbbrs = {
       dc = "docker-compose";
@@ -180,6 +185,7 @@
         expansion = "nix run nixpkgs#%";
         setCursor = true;
       };
+      ns = "nix search";
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
       gb = /* bash */ ''
