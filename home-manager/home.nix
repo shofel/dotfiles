@@ -105,7 +105,6 @@
     enable = true;
     extraConfig = ''
       Host *
-        AddKeysToAgent yes
         IdentityFile ~/.ssh/id_ed25519
 
       Host tropical
@@ -165,17 +164,14 @@
     plugins = [ ];
 
     interactiveShellInit = /* sh */ ''
+    '';
+
+    loginShellInit = /* sh */ ''
       set -gx XCURSOR_THEME "Adwaita"
       set -gx EDITOR "${pkgs.nvim-shovel-mutable}/bin/nvim"
       set -gx VISUAL "${pkgs.nvim-shovel-mutable}/bin/nvim"
       set -gx MANPAGER "${pkgs.nvim-shovel-manpager}/bin/nvim-manpager"
-      set -gx SSH_ASKPASS "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass"
-    '';
 
-    loginShellInit = /* sh */ ''
-      ssh-agent -c \
-      | sed -e 's/setenv/set --global --export/' \
-      | source
     '';
 
     shellAbbrs = {
