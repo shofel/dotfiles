@@ -16,7 +16,7 @@ setmetatable(fzf, mt)
 
 vim.keymap.set('n', '<space>f',  '<nop>',              {desc = 'fzf'})
 vim.keymap.set('n', '<space>fc', fzf.command_history,  {desc = 'command history'})
-vim.keymap.set('n', '<space>fC', fzf.commands,         {desc = 'command history'})
+vim.keymap.set('n', '<space>fC', fzf.commands,         {desc = 'commands'})
 vim.keymap.set('n', '<space>fg', fzf.live_grep_native, {desc = 'live grep native'})
 vim.keymap.set('n', '<space>fh', fzf.helptags,         {desc = 'helptags'})
 vim.keymap.set('n', '<space>fi', fzf.git_files,        {desc = 'git files'})
