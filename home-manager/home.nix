@@ -40,6 +40,7 @@
     pkgs.xclip
     pkgs.scrot
 
+    pkgs.podman-compose
 
     pkgs.nerd-fonts.fira-code
     pkgs.nerd-fonts.droid-sans-mono
