@@ -109,6 +109,9 @@
       Host *
         IdentityFile ~/.ssh/id_ed25519
 
+      Host gitlab.com
+        IdentityFile ~/.ssh/id_marquiz
+
       Host tropical
         Hostname 138.124.103.185
         User root
