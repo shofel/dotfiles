@@ -182,6 +182,7 @@
 
     shellAbbrs = {
       dc = "docker-compose";
+      pc = "podman-compose";
       lg = "lazygit";
       nr = {
         expansion = "nix run nixpkgs#%";
