@@ -40,6 +40,7 @@
     pkgs.xclip
     pkgs.scrot
 
+    pkgs.devenv
     pkgs.podman-compose
 
     pkgs.nerd-fonts.fira-code
