@@ -41,7 +41,6 @@
     pkgs.scrot
 
     pkgs.devenv
-    pkgs.podman-compose
 
     pkgs.nerd-fonts.fira-code
     pkgs.nerd-fonts.droid-sans-mono
@@ -51,6 +50,7 @@
     pkgs.blender
     pkgs.transmission_4-gtk
     pkgs.telegram
+
 
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
@@ -182,7 +182,6 @@
 
     shellAbbrs = {
       dc = "docker-compose";
-      pc = "podman-compose";
       lg = "lazygit";
       nr = {
         expansion = "nix run nixpkgs#%";

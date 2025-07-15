@@ -185,9 +185,8 @@
   # '';
 
   virtualisation = {
-    podman = {
+    docker = {
       enable = true;
-      dockerCompat = true;
     };
   };
 
