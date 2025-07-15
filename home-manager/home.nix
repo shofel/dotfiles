@@ -41,6 +41,7 @@
     pkgs.scrot
 
     pkgs.devenv
+    pkgs.docker-compose
 
     pkgs.nerd-fonts.fira-code
     pkgs.nerd-fonts.droid-sans-mono
@@ -51,7 +52,6 @@
     pkgs.transmission_4-gtk
     pkgs.telegram-desktop
     pkgs.chromium
-
 
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
