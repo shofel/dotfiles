@@ -49,7 +49,8 @@
     pkgs.mixxx
     pkgs.blender
     pkgs.transmission_4-gtk
-    pkgs.telegram
+    pkgs.telegram-desktop
+    pkgs.chromium
 
 
     pkgs.nvim-shovel-mutable
