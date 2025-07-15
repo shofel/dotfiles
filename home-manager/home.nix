@@ -41,7 +41,6 @@
     pkgs.scrot
 
     pkgs.devenv
-    pkgs.docker-compose
 
     pkgs.nerd-fonts.fira-code
     pkgs.nerd-fonts.droid-sans-mono
@@ -182,7 +181,7 @@
     '';
 
     shellAbbrs = {
-      dc = "docker-compose";
+      dc = "docker compose";
       lg = "lazygit";
       nr = {
         expansion = "nix run nixpkgs#%";
