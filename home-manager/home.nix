@@ -51,6 +51,7 @@
     pkgs.transmission_4-gtk
     pkgs.telegram-desktop
     pkgs.chromium
+    pkgs.gimp
 
     pkgs.nvim-shovel-mutable
     pkgs.nvim-shovel-sealed
