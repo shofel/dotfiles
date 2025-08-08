@@ -120,6 +120,7 @@ let
 
      # lsp utils
      lsp_lines-nvim
+     nvim-lint
   ];
 
   extraPackages = with final; [

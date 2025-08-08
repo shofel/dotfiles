@@ -47,4 +47,7 @@ vim.diagnostic.config {
     header = '',
     prefix = '',
   },
+  jump = {
+    float = true,
+  },
 }
