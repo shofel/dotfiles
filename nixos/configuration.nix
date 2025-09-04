@@ -37,6 +37,7 @@
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
+      allowUnfreePredicate = _: true;
     };
   };
 
