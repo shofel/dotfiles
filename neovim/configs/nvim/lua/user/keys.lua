@@ -3,7 +3,6 @@
 M = {}
 
 _G.keymap = vim.keymap
-local diagnostic = vim.diagnostic
 
 keymap.set('n', '<c-s>', '<cmd>w!<cr>', { silent = true, desc = 'Save buffer'})
 keymap.set('n', '<space>;', ':') -- qwerty
@@ -87,6 +86,19 @@ function M.set_lsp_keymaps (bufnr, client)
     local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
     vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
   end end, opts('toggle inlay hints'))
+
+  keymap.set('n', '<space>td', -- toggle diagnostics
+    function()
+      local show = true
+      return function()
+        show = not show
+        if show
+          then vim.diagnostic.hide()
+          else vim.diagnostic.show()
+        end
+      end
+    end)
+
 end
 
 return M

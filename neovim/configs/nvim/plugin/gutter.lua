@@ -34,7 +34,7 @@ vim.schedule(function()
       map({'n',    }, '<space>hB', gs.toggle_current_line_blame   , {desc = 'git toggle current line blame'})
       map({'n',    }, '<space>hd', gs.diffthis                    , {desc = 'git diff this'})
       map({'n',    }, '<space>hD', function() gs.diffthis('~') end, {desc = 'git Diff ~'})
-      map({'n',    }, '<space>td', gs.toggle_deleted              , {desc = 'git toggle deleted'})
+      map({'n',    }, '<space>htd', gs.toggle_deleted             , {desc = 'git toggle deleted'})
 
       -- Text object
       map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'git hunk' })
