@@ -188,7 +188,7 @@
         expansion = "nix run nixpkgs#%";
         setCursor = true;
       };
-      ns = "nix search";
+      ns = "nix search nixpkgs";
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
       gb = /* bash */ ''
