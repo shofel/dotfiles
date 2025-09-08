@@ -109,8 +109,8 @@ let
      leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
 
      (opt neorg) # https://github.com/nvim-neorg/neorg
-     neoclip # https://github.com/matveyt/neoclip
-     vim-kitty # https://github.com/fladson/vim-kitty
+     (start neoclip) # https://github.com/matveyt/neoclip
+     (start vim-kitty) # https://github.com/fladson/vim-kitty
 
      nvim-unception # run nvim from nvim terminal
      vim-unimpaired
