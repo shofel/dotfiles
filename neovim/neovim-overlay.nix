@@ -110,6 +110,7 @@ let
 
      (opt neorg) # https://github.com/nvim-neorg/neorg
      (start neoclip) # https://github.com/matveyt/neoclip
+     (start neoterm) # https://github.com/kassio/neoterm
      (start vim-kitty) # https://github.com/fladson/vim-kitty
 
      nvim-unception # run nvim from nvim terminal
