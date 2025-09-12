@@ -149,6 +149,10 @@
          new_tab forks
           cd ~/workspaces-one/forks/
           launch fish -lc nvim
+
+          new_tab numlist
+          cd workspaces-one/30-portfolio/30.06-digsol.fullstack-list/
+          launch fish -lc nvim
         ''
       }";
   };
