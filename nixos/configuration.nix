@@ -32,7 +32,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      (import ../neovim/neovim-overlay.nix {inherit inputs;}) 
+      (import ../neovim/neovim-overlay.nix {inherit inputs;})
     ];
     # Configure your nixpkgs instance
     config = {
@@ -163,7 +163,7 @@
       user = "nixosvmtest";
     };
   };
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
