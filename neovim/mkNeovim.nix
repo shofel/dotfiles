@@ -161,7 +161,7 @@ let
       inherit plugins
               extraLuaPackages
               extraPython3Packages withPython3 withRuby withNodeJs;
-      luaRcContent = initLua; wrapRc = true;
+      customLuaRC = initLua; wrapRc = true;
     };
 
     neovimConfig' = neovimConfig // {
