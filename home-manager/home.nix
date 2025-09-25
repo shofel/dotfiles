@@ -131,27 +131,27 @@
       + "startup_session ${pkgs.writeText "kitty_startup_session" /* sh */ ''
           new_tab dotfiles
           cd ~/workspaces-one/25-dotfiles/25.01-dotfiles/
-          launch fish -lc nvim
+          launch fish
 
           new_tab notes
           cd ~/workspaces-one/01-notes
-          launch fish -lc neorg
+          launch fish
 
           new_tab cantor
           cd ~/workspaces-one/keyboards/
-          launch fish -lc nvim
+          launch fish
 
           new_tab go
           cd ~/workspaces-one/34-courses/34.01-practicum-go/
-          launch fish -lc nvim
+          launch fish
 
          new_tab forks
           cd ~/workspaces-one/forks/
-          launch fish -lc nvim
+          launch fish
 
           new_tab numlist
           cd workspaces-one/30-portfolio/30.06-digsol.fullstack-list/
-          launch fish -lc nvim
+          launch fish
         ''
       }";
   };
