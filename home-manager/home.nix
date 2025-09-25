@@ -106,18 +106,17 @@
 
   programs.ssh = {
     enable = true;
-    extraConfig = ''
-      Host *
-        IdentityFile ~/.ssh/id_ed25519
-
-      Host gitlab.com
-        IdentityFile ~/.ssh/id_marquiz
-
-      Host tropical
-        Hostname 138.124.103.185
-        User root
-        IdentityFile ~/.ssh/id_aeza_tropical
-    '';
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      "tropical" = {
+        hostname = "138.124.103.185";
+        user = "root";
+        identityFile = "~/.ssh/id_aeza_tropical";
+      };
+    };
   };
 
   programs.direnv = {
