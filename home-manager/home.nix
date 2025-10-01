@@ -111,6 +111,9 @@
       "*" = {
         identityFile = "~/.ssh/id_ed25519";
       };
+      "gitlab.com" = {
+        identityFile = "~/.ssh/id_gitlab_shovel";
+      };
       "tropical" = {
         hostname = "138.124.103.185";
         user = "root";
