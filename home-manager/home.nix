@@ -155,6 +155,10 @@
           new_tab numlist
           cd workspaces-one/30-portfolio/30.06-digsol.fullstack-list/
           launch fish
+
+          new_tab tapguss
+          cd ~/workspaces-one/30-portfolio/30.07-roundsquare/
+          launch fish
         ''
       }";
   };
