@@ -195,6 +195,7 @@
         setCursor = true;
       };
       ns = "nix search nixpkgs";
+      cursor = "NIXPKGS_ALLOW_UNFREE=1 nix run --impure nixpkgs#code-cursor .";
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
       gb = /* bash */ ''
