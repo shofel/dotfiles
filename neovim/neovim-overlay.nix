@@ -118,6 +118,7 @@ let
 
      # languages
      (opt typescript-tools-nvim)
+     (start iron-nvim)
 
      # lsp utils
      lsp_lines-nvim
