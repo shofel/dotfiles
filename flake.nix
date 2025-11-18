@@ -56,6 +56,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/configuration.nix
+          ./nixos/e15/hardware-configuration.nix
           inputs.sops-nix.nixosModules.sops
         ];
       };
