@@ -13,7 +13,7 @@ iron.setup({
       },
     },
     -- How the repl window will be displayed
-    repl_open_cmd = require("iron.view").bottom(40), -- Opens at the bottom, 40 lines high
+    repl_open_cmd = "vertical botright 80 split",
   },
   keymaps = {
     send_motion = "<space>rc",
