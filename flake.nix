@@ -57,7 +57,7 @@
         modules = [
           ./nixos/configuration.nix
           ./nixos/e15/hardware-configuration.nix
-          inputs.sops-nix.nixosModules.sops
+          ./nixos/modules/xray.nix
         ];
       };
       e16 = nixpkgs.lib.nixosSystem {
