@@ -22,8 +22,6 @@
 
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
-
-    inputs.sops-nix.nixosModules.sops
   ];
 
   nixpkgs = {
@@ -96,19 +94,6 @@
       # Import your home-manager configuration
       slava = import ../home-manager/home.nix;
     };
-  };
-
-  sops.age.keyFile = "/home/slava/.config/sops/age/keys.txt";
-  sops.secrets.xray_config = {
-    sopsFile = ../secrets/xray-client.json;
-    format = "json";
-    key = "";
-    restartUnits = ["xray.service"];
-  };
-
-  services.xray = {
-    enable = true;
-    settingsFile = config.sops.secrets.xray_config.path;
   };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
