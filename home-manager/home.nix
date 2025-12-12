@@ -57,6 +57,8 @@
     pkgs.nvim-shovel-sealed
     pkgs.nvim-shovel-neorg
     pkgs.nvim-shovel-manpager
+
+    pkgs.code-cursor
   ];
 
   fonts.fontconfig.enable = true;
@@ -199,7 +201,6 @@
         setCursor = true;
       };
       ns = "nix search nixpkgs";
-      cursor = "NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:nixos/nixpkgs/554be6495561ff#code-cursor .";
 
       # @from https://ploegert.gitbook.io/til/tools/git/switch-to-a-recent-branch-with-fzf
       gb = /* bash */ ''
