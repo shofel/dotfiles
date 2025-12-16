@@ -59,6 +59,7 @@
     pkgs.nvim-shovel-manpager
 
     pkgs.code-cursor
+    pkgs.throne
   ];
 
   fonts.fontconfig.enable = true;
