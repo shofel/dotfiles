@@ -55,6 +55,9 @@
     nix-path = config.nix.nixPath;
   };
 
+  # In hope for easier python
+  programs.nix-ld.enable = true;
+
   networking.hostName = "e15";
   networking.networkmanager.enable = true;
   networking.nameservers = ["9.9.9.9" "149.112.112.112"];
