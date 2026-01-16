@@ -138,7 +138,8 @@
     hwRender = true;
   };
 
-  # Enable the X11 windowing system.
+  # Enable X server (required for GDM, XWayland compatibility, and GNOME)
+  # GNOME uses Wayland by default, but X server infrastructure is still needed
   services.xserver.enable = true;
 
   services.displayManager.gdm.enable = true;
@@ -150,12 +151,6 @@
     };
   };
   services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us,ru";
-    xkb.variant = ",winkeys";
-  };
 
   environment.systemPackages = with pkgs; [
     neovim
