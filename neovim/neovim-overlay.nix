@@ -55,7 +55,7 @@ let
        #   - uncomment the line below
        #   - and delete `treesitter = ...`, and `listGrammars = ...` above.
        # treesitter = vimPlugins.nvim-treesitter.withAllGrammars
-       neoclip = inputs.neoclip.packages.${system}.default;
+       neoclip = inputs.neoclip.packages.${final.stdenv.hostPlatform.system}.default;
        vim-kitty = buildVimPlugin inputs.vim-kitty "vim-kitty";
      in
      with vimPlugins; [

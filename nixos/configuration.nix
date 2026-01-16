@@ -42,7 +42,7 @@
 
   # hack for command-not-found
   # @see https://blog.nobbz.dev/2023-02-27-nixos-flakes-command-not-found/
-  environment.etc."programs.sqlite".source = inputs.programsdb.packages.${pkgs.system}.programs-sqlite;
+  environment.etc."programs.sqlite".source = inputs.programsdb.packages.${pkgs.stdenv.hostPlatform.system}.programs-sqlite;
   programs.command-not-found.dbPath = "/etc/programs.sqlite";
 
   nix.settings = {
@@ -65,7 +65,7 @@
 
   programs.fish.enable = true;
   environment.sessionVariables = {
-    XDG_DATA_DIRS = [ 
+    XDG_DATA_DIRS = [
       "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
       "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
     ];

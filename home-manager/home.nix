@@ -84,12 +84,11 @@
     enable = true;
     lfs.enable = true;
 
-    userName = "Slava";
-    userEmail = "slava.istomin@tuta.io";
-
-    delta.enable = true;
-
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Slava";
+        email = "slava.istomin@tuta.io";
+      };
       init = { defaultBranch = "master"; };
       diff = { submodule = "log"; };
       submodule = { recurse = true; };
@@ -103,6 +102,11 @@
     };
 
     ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   programs.lazygit.enable = true;
