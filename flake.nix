@@ -70,6 +70,7 @@
           ./nixos/e16/hardware-configuration.nix
           {
             networking.hostName = "e16";
+            networking.firewall.allowedTCPPorts = [ 1882 ];
           }
         ];
       };
