@@ -58,6 +58,9 @@
           ./nixos/configuration.nix
           ./nixos/e15/hardware-configuration.nix
           ./nixos/modules/xray.nix
+          {
+            networking.hostName = "e15";
+          }
         ];
       };
       e16 = nixpkgs.lib.nixosSystem {
@@ -65,6 +68,9 @@
         modules = [
           ./nixos/configuration.nix
           ./nixos/e16/hardware-configuration.nix
+          {
+            networking.hostName = "e16";
+          }
         ];
       };
     };
