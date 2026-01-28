@@ -71,6 +71,7 @@
           {
             networking.hostName = "e16";
             networking.firewall.allowedTCPPorts = [ 1882 ];
+            networking.firewall.allowedUDPPorts = [ 6454 ];
           }
         ];
       };
