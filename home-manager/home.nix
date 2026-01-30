@@ -60,6 +60,7 @@
     pkgs.nvim-shovel-manpager
 
     pkgs.code-cursor
+    pkgs.cursor-cli
     pkgs.throne
   ];
 
