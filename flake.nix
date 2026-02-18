@@ -72,21 +72,6 @@
             networking.hostName = "e16";
             networking.firewall.allowedTCPPorts = [ 1882 ];
             networking.firewall.allowedUDPPorts = [ 6454 ];
-
-            boot.kernel.sysctl."vm.swappiness" = 10;
-
-            # 4GiB swap file (created on first boot if missing)
-            swapDevices = [{
-              device = "/swapfile";
-              size = 4096;
-            }];
-            system.activationScripts.createSwapfile = ''
-              if [ ! -e /swapfile ]; then
-                dd if=/dev/zero of=/swapfile bs=1M count=4096 status=none
-                chmod 600 /swapfile
-                mkswap /swapfile
-              fi
-            '';
           }
         ];
       };
