@@ -178,13 +178,9 @@
     options = "--delete-older-than 7d";
   };
 
-
-  # Enable 4GiB swap file (created on first boot if missing)
-
-  boot.kernel.sysctl."vm.swappiness" = 10;
-
   swapDevices = [{
     device = "/var/lib/swapfile";
     size = 4096;
   }];
+  boot.kernel.sysctl."vm.swappiness" = 10;
 }
