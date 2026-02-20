@@ -181,6 +181,8 @@
   swapDevices = [{
     device = "/var/lib/swapfile";
     size = 4096;
+    randomEncryption.enable = true;
+    options = ["discard"];
   }];
   boot.kernel.sysctl."vm.swappiness" = 10;
 }
