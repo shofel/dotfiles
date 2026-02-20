@@ -1,6 +1,8 @@
 vim.wo.foldlevel = 99
 vim.wo.conceallevel = 2
 
+vim.treesitter.start()
+
 -- @see https://github.com/nvim-neorg/neorg/wiki/Default-Keybinds#normal-mode-1
 
 vim.keymap.set('n', ',cm',
