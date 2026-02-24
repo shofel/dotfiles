@@ -143,8 +143,7 @@ let
     # Add arguments to the Neovim wrapper script
     extraMakeWrapperArgs = builtins.concatStringsSep " " (
       # Set the NVIM_APPNAME environment variable
-      (optional (appName != "nvim")
-        ''--set NVIM_APPNAME "${appName}"'')
+      [''--set NVIM_APPNAME "${appName}"'']
       # Add external packages to the PATH
       ++ (optional (externalPackages != [])
         ''--prefix PATH : "${makeBinPath externalPackages}"'')
