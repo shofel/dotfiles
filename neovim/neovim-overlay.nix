@@ -163,9 +163,9 @@ in {
   };
 
   nvim-shovel-manpager = mkNeovim {
-    plugins = with vimPlugins; [catppuccin-nvim fzf-lua snacks-nvim];
+    plugins = with vimPlugins; [catppuccin-nvim fzf-lua];
     extraPackages = [];
-    appName = "nvim-manpager";
     mutableConfig = "manpager";
+    appName = "nvim-manpager";
   };
 }
