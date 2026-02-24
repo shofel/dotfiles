@@ -76,9 +76,13 @@ let
                            ''ln -s ${lib.escapeShellArg (mutableConfigs + "/" + mutableConfig)} $out'';
 
     initLua = ""
-      # run `PROF=1 nvim` to profile startup time
-      # https://github.com/folke/snacks.nvim/blob/main/docs/profiler.md#profiling-neovim-startup
+      + /* lua */''
+        -- Prevent VIMINIT from interfering with nested nvim instances
+        vim.env.VIMINIT = nil
+      ''
       + /* lua */ ''
+        -- run `PROF=1 nvim` to profile startup time
+        -- https://github.com/folke/snacks.nvim/blob/main/docs/profiler.md#profiling-neovim-startup
         if vim.env.PROF then
           require("snacks.profiler").startup({
             startup = {
