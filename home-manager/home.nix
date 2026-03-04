@@ -248,16 +248,6 @@
       v = /* bash */ "nvim '+Term fish'";
       weather = /* bash */ "curl -s wttr.in/valencia";
     };
-
-  };
-  services.redshift = {
-    enable = true;
-    latitude = 41.0;
-    longitude = 29.0;
-    temperature = {
-      day = 6500;
-      night = 3000;
-    };
   };
 
   #
