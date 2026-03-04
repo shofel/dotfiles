@@ -62,6 +62,8 @@
     pkgs.code-cursor
     pkgs.cursor-cli
     pkgs.throne
+
+    pkgs.keepassxc
   ];
 
   fonts.fontconfig.enable = true;
