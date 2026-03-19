@@ -126,11 +126,6 @@
         identityFile = "~/.ssh/id_gitlab_shovel";
         kexAlgorithms = ["curve25519-sha256"];
       };
-      "tropical" = {
-        hostname = "138.124.103.185";
-        user = "root";
-        identityFile = "~/.ssh/id_aeza_tropical";
-      };
     };
   };
 
