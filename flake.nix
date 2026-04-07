@@ -18,6 +18,8 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    nur.url = "github:nix-community/NUR";
+
     # for command-not-found
     programsdb.url = "github:wamserma/flake-programs-sqlite";
     programsdb.inputs.nixpkgs.follows = "nixpkgs";

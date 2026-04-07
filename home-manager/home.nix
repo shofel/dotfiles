@@ -13,6 +13,7 @@
   nixpkgs = {
     overlays = [
       (import ../neovim/neovim-overlay.nix {inherit inputs;})
+      inputs.nur.overlays.default
     ];
     config = {
       allowUnfree = true;
@@ -62,8 +63,6 @@
     pkgs.code-cursor
     pkgs.cursor-cli
     pkgs.throne
-
-    pkgs.keepassxc
   ];
 
   fonts.fontconfig.enable = true;
@@ -249,6 +248,44 @@
       suspend = /* bash */ "systemctl suspend";
       v = /* bash */ "nvim '+Term fish'";
       weather = /* bash */ "curl -s wttr.in/valencia";
+    };
+  };
+
+  #
+  services.syncthing.enable = true;
+
+  #
+  programs.keepassxc.enable = true;
+  programs.keepassxc.settings = {
+    # @see all config keys:
+    # https://github.com/keepassxreboot/keepassxc/blob/ada379fd/src/core/Config.h
+    Browser.Enabled = true;
+    Browser.CustomBrowserType = "Firefox";
+    Browser.CustomBrowserLocation = "/home/slava/.librewolf/native-messaging-hosts/";
+    SSHAgent.Enabled = true;
+  };
+
+  #
+  programs.librewolf.enable = true;
+  programs.librewolf.profiles.default.settings = {
+    "sidebar.verticalTabs" = true;
+    "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
+  };
+  programs.librewolf.profiles.default.extensions = {
+    force = true;
+    packages = with pkgs.nur.repos.rycee.firefox-addons; [
+      ublock-origin
+      darkreader
+      keepassxc-browser
+    ];
+    settings."uBlock0@raymondhill.net".settings = {
+      selectedFilterLists = [
+        "ublock-filters"
+        "ublock-badware"
+        "ublock-privacy"
+        "ublock-unbreak"
+        "ublock-quick-fixes"
+      ];
     };
   };
 
