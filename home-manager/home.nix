@@ -52,7 +52,6 @@
     pkgs.blender
     pkgs.transmission_4-gtk
     pkgs.telegram-desktop
-    pkgs.chromium
     pkgs.gimp
 
     pkgs.nvim-shovel-mutable
@@ -62,7 +61,6 @@
 
     pkgs.code-cursor
     pkgs.cursor-cli
-    pkgs.throne
     pkgs.claude-code
   ];
 
