@@ -63,6 +63,7 @@
     pkgs.code-cursor
     pkgs.cursor-cli
     pkgs.throne
+    pkgs.claude-code
   ];
 
   fonts.fontconfig.enable = true;
