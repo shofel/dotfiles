@@ -65,18 +65,6 @@
           }
         ];
       };
-      e16 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/configuration.nix
-          ./nixos/e16/hardware-configuration.nix
-          {
-            networking.hostName = "e16";
-            networking.firewall.allowedTCPPorts = [ 1882 ];
-            networking.firewall.allowedUDPPorts = [ 6454 ];
-          }
-        ];
-      };
     };
   };
 }
