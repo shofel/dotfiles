@@ -83,7 +83,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["networkmanager" "wheel" "docker" "dialout"];
+      extraGroups = ["networkmanager" "wheel" "dialout"];
     };
     nixosvmtest = {
       isSystemUser = true;
@@ -166,10 +166,6 @@
   #   [defaults]
   #   ntfs_defaults=uid=$UID,gid=$GID,prealloc
   # '';
-
-  virtualisation = {
-    docker.enable = true;
-  };
 
   nix.gc = {
     automatic = true;

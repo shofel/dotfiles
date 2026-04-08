@@ -189,7 +189,6 @@
     '';
 
     shellAbbrs = {
-      dc = "docker compose";
       lg = "lazygit";
       nr = {
         expansion = "nix run nixpkgs#%";
