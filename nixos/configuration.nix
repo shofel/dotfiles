@@ -117,8 +117,7 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 
-  # Set your time zone.
-  services.automatic-timezoned.enable = true;
+  time.timeZone = "UTC";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "C.UTF-8";
