@@ -154,20 +154,8 @@
           cd ~/workspaces-one/keyboards/
           launch fish
 
-          new_tab go
-          cd ~/workspaces-one/34-courses/34.01-practicum-go/
-          launch fish
-
          new_tab forks
           cd ~/workspaces-one/forks/
-          launch fish
-
-          new_tab numlist
-          cd workspaces-one/30-portfolio/30.06-digsol.fullstack-list/
-          launch fish
-
-          new_tab tapguss
-          cd ~/workspaces-one/30-portfolio/30.07-roundsquare/
           launch fish
         ''
       }";
