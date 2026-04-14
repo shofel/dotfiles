@@ -48,6 +48,7 @@
     pkgs.nerd-fonts.droid-sans-mono
 
     pkgs.firefox
+    pkgs.throne
     pkgs.mixxx
     pkgs.blender
     pkgs.transmission_4-gtk
