@@ -60,9 +60,9 @@
     pkgs.nvim-shovel-neorg
     pkgs.nvim-shovel-manpager
 
-    pkgs.code-cursor
     pkgs.cursor-cli
     pkgs.claude-code
+    pkgs.sox
   ];
 
   fonts.fontconfig.enable = true;
