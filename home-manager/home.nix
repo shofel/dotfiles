@@ -63,6 +63,7 @@
     pkgs.cursor-cli
     pkgs.claude-code
     pkgs.sox
+    pkgs.bun
   ];
 
   fonts.fontconfig.enable = true;
