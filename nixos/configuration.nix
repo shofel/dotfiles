@@ -83,7 +83,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["networkmanager" "wheel" "dialout"];
+      extraGroups = ["networkmanager" "wheel" "dialout" "docker"];
     };
     nixosvmtest = {
       isSystemUser = true;
@@ -176,6 +176,8 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  virtualisation.docker.enable = true;
 
   swapDevices = [{
     device = "/var/lib/swapfile";
