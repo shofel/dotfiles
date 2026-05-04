@@ -10,3 +10,10 @@
 
 ## nixos
 result
+
+## ai tooling
+.claude/
+.cursor/
+
+## misc
+scratchpad
