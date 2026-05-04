@@ -2,10 +2,6 @@
 ---@return string status
 
 function _G.Slava.extra_mode_status()
-  -- Leap
-  if _G.Slava.leap_active then
-    return 'LEAP'
-  end
   -- recording macros
   local reg_recording = vim.fn.reg_recording()
   if reg_recording ~= '' then

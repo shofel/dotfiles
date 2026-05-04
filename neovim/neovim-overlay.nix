@@ -106,8 +106,6 @@ let
      (start snacks-nvim) # https://github.com/folke/snacks.nvim
      (start which-key-nvim)
 
-     leap-nvim vim-repeat # https://github.com/ggandor/leap.nvim
-
      (opt neorg) # https://github.com/nvim-neorg/neorg
      (start neoclip) # https://github.com/matveyt/neoclip
      (start neoterm) # https://github.com/kassio/neoterm
