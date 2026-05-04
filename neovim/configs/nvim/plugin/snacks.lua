@@ -18,14 +18,16 @@ snacks.setup({
   statuscolumn = { enabled = false },
   terminal = {enabled = false},
   words = { enabled = true },
+  lazygit = { enabled = true },
   styles = {
+    lazygit = { width = 0, height = 0, border = "none" },
     notification = {
       -- wo = { wrap = true } -- Wrap notifications
     }
   }
 })
 
-vim.keymap.set('n', '<space>ht', snacks.lazygit.open, {desc = 'lazygit'})
+vim.keymap.set('n', '<space>ht', Snacks.lazygit.open, {desc = 'lazygit'})
 
 _G.pp = function(...)
   Snacks.debug.inspect(...)
