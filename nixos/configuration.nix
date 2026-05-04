@@ -160,6 +160,14 @@
   };
   services.desktopManager.gnome.enable = true;
 
+  # Disable LDAC: fatally fails to initialize on some TWS earbuds
+  # (e.g., Redmi Buds 6 Pro), leaving the sink silent.
+  services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
+    "monitor.bluez.properties" = {
+      "bluez5.codecs" = [ "sbc" "sbc_xq" "aac" "aptx" "aptx_hd" ];
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     neovim
     git
