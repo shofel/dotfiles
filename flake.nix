@@ -59,7 +59,6 @@
         modules = [
           ./nixos/configuration.nix
           ./nixos/e15/hardware-configuration.nix
-          ./nixos/modules/xray.nix
           {
             networking.hostName = "e15";
           }
