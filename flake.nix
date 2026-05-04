@@ -17,8 +17,8 @@
     nur.url = "github:nix-community/NUR";
 
     # for command-not-found
-    programsdb.url = "github:wamserma/flake-programs-sqlite";
-    programsdb.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # Vim plugins from outside the nixpkgs
     vim-kitty = {url = "github:fladson/vim-kitty"; flake = false; };

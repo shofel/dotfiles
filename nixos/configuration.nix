@@ -22,6 +22,9 @@
 
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
+
+    # command-not-found replacement (with `,` to run without installing)
+    inputs.nix-index-database.nixosModules.nix-index
   ];
 
   nixpkgs = {
@@ -40,10 +43,10 @@
   # To make nix3 commands consistent with your flake
   nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
-  # hack for command-not-found
-  # @see https://blog.nobbz.dev/2023-02-27-nixos-flakes-command-not-found/
-  environment.etc."programs.sqlite".source = inputs.programsdb.packages.${pkgs.stdenv.hostPlatform.system}.programs-sqlite;
-  programs.command-not-found.dbPath = "/etc/programs.sqlite";
+  # command-not-found replacement
+  programs.command-not-found.enable = false;
+  programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
 
   nix.settings = {
     # Enable flakes and new 'nix' command
