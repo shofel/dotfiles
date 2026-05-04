@@ -49,9 +49,9 @@
 
     pkgs.firefox
     pkgs.throne
-    pkgs.mixxx
-    pkgs.blender
-    pkgs.transmission_4-gtk
+    # pkgs.mixxx
+    # pkgs.blender
+    # pkgs.transmission_4-gtk
     pkgs.telegram-desktop
     pkgs.gimp
 
