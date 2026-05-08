@@ -63,6 +63,7 @@
     pkgs.cursor-cli
     pkgs.claude-code
     pkgs.codex
+    pkgs.bubblewrap
     pkgs.sox
     pkgs.bun
   ];
