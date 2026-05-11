@@ -60,13 +60,13 @@
     pkgs.nvim-shovel-neorg
     pkgs.nvim-shovel-manpager
 
-    pkgs.cursor-cli
     pkgs.claude-code
     pkgs.codex
     pkgs.bubblewrap
     pkgs.sox
     pkgs.bun
     pkgs.nodejs_24
+    pkgs.python3
   ];
 
   fonts.fontconfig.enable = true;
