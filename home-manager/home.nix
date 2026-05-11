@@ -243,7 +243,7 @@
       suspend = /* bash */ "systemctl suspend";
       v = /* bash */ "nvim '+Term fish'";
       weather = /* bash */ "curl -s wttr.in/valencia";
-      cld = /* bash */ "cd (mktemp -dt claude-tmp-XXX); nvim +'term claude'";
+      cld = /* bash */ "cd (mktemp -dt claude-tmp-XXX) ;and claude";
     };
   };
 
