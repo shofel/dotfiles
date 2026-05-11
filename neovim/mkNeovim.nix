@@ -5,7 +5,6 @@
   lib,
   stdenv,
   neovim-unwrapped,
-  neovimUtils,
   wrapNeovimUnstable,
   runCommandLocal,
 }:
@@ -159,19 +158,15 @@ let
         ''--set LIBSQLITE "${sqlite.out}/lib/libsqlite3.so"'')
     );
 
-    # Prepare to wrap `neovim-unwrapped`
-    neovimConfig = neovimUtils.makeNeovimConfig {
+    # Make a neovim derivation
+    neovim = wrapNeovimUnstable neovim-unwrapped {
       inherit plugins
               extraLuaPackages
               extraPython3Packages withPython3 withRuby withNodeJs;
-      customLuaRC = initLua; wrapRc = true;
+      luaRcContent = initLua;
+      wrapRc = true;
+      wrapperArgs = extraMakeWrapperArgs;
     };
-
-    neovimConfig' = neovimConfig // {
-      wrapperArgs = escapeShellArgs neovimConfig.wrapperArgs + " " + extraMakeWrapperArgs;};
-
-    # Make a neovim derivation
-    neovim = wrapNeovimUnstable neovim-unwrapped neovimConfig';
 
   in
     neovim.overrideAttrs (oa: {
