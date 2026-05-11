@@ -109,6 +109,7 @@
     };
 
     ignores = [ ".DS_Store" "*.sw?" "__pycache__" ];
+    signing.format = null;
   };
 
   programs.delta = {
