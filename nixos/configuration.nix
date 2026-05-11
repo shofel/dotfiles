@@ -64,6 +64,24 @@
   networking.networkmanager.enable = true;
   networking.nameservers = ["9.9.9.9" "149.112.112.112"];
 
+  programs.captive-browser = {
+    enable = true;
+    interface = "wlp3s0";
+    # Captive portals often withhold DNS until login, causing fgrep to exit 1.
+    # Fall back to the gateway IP, which serves as the portal's DNS.
+    dhcp-dns = "${pkgs.networkmanager}/bin/nmcli dev show wlp3s0 | ${pkgs.gnugrep}/bin/fgrep IP4.DNS || ${pkgs.networkmanager}/bin/nmcli dev show wlp3s0 | ${pkgs.gnugrep}/bin/fgrep IP4.GATEWAY";
+    browser = let
+      script = pkgs.writeShellScript "captive-firefox" ''
+        TMPPROFILE=$(mktemp -d)
+        IFS=: read -r SOCKS_HOST SOCKS_PORT <<< "$PROXY"
+        printf \
+          'user_pref("network.proxy.type", 1);\nuser_pref("network.proxy.socks", "%s");\nuser_pref("network.proxy.socks_port", %s);\nuser_pref("network.proxy.socks_remote_dns", true);\n' \
+          "$SOCKS_HOST" "$SOCKS_PORT" > "$TMPPROFILE/user.js"
+        exec firefox --no-remote --profile "$TMPPROFILE" http://neverssl.com
+      '';
+    in "${script}";
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
