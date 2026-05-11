@@ -66,6 +66,7 @@
     pkgs.bubblewrap
     pkgs.sox
     pkgs.bun
+    pkgs.nodejs_24
   ];
 
   fonts.fontconfig.enable = true;
