@@ -161,6 +161,10 @@
          new_tab forks
           cd ~/workspaces-one/forks/
           launch fish
+
+          new_tab 8hats
+          cd ~/workspaces-one/08-8hats/
+          launch fish
         ''
       }";
   };
