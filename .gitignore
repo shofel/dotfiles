@@ -14,6 +14,7 @@ result
 ## ai tooling
 .claude/
 .cursor/
+.omc/
 
 ## misc
 scratchpad
