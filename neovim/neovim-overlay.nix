@@ -104,6 +104,7 @@ let
 
      (start mini-nvim) # https://github.com/echasnovski/mini.nvim
      (start snacks-nvim) # https://github.com/folke/snacks.nvim
+     (start flash-nvim) # https://github.com/folke/flash.nvim
      (start which-key-nvim)
 
      (opt neorg) # https://github.com/nvim-neorg/neorg
