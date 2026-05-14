@@ -58,7 +58,11 @@ keymap.set('n', '<space>', '<nop>', { desc = '' })
 
 --- LSP keymaps
 
+local _lsp_keymaps_attached = {}
+
 function M.set_lsp_keymaps (bufnr, client)
+  if _lsp_keymaps_attached[bufnr] then return end
+  _lsp_keymaps_attached[bufnr] = true
   local function opts(description)
     return { unique = true, silent = true, buffer = bufnr, desc = description }
   end
