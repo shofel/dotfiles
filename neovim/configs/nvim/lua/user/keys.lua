@@ -54,6 +54,8 @@ keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
 --- To make cyrillic a bit easier
 keymap.set('i', '<C-backspace>', '<c-w>')
 
+keymap.set('n', '<space>', '<nop>', { desc = '' })
+
 --- LSP keymaps
 
 function M.set_lsp_keymaps (bufnr, client)
