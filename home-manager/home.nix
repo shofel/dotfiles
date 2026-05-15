@@ -6,6 +6,7 @@
   # Other home-manager modules
   imports = [
     inputs.catppuccin.homeModules.catppuccin
+    ./claude.nix
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
   ];
@@ -60,13 +61,6 @@
     pkgs.nvim-shovel-neorg
     pkgs.nvim-shovel-manpager
 
-    pkgs.claude-code
-    pkgs.codex
-    pkgs.bubblewrap
-    pkgs.sox
-    pkgs.bun
-    pkgs.nodejs_24
-    pkgs.python3
   ];
 
   fonts.fontconfig.enable = true;
